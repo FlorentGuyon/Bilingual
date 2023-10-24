@@ -487,9 +487,9 @@
 		},
 		"french": {
 			"sentence": "les voitures sont bordeaux",
+			"hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
 			"last_success": null
-		},
-		"hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+		}
 	},
 	{
 		"english": {
@@ -538,10 +538,10 @@
 		},
 		"french": {
 			"sentence": "l'oiseau est argenté",
+			"hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
 			"last_success": null
-		},
-		"hints": "ive",
-		},
+		}
+	},
 	{
 		"english": {
 			"sentence": "the car is silver",
@@ -639,9 +639,9 @@
 		},
 		"french": {
 			"sentence": "les oiseaux sont magenta",
+			"hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), , etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",		
 			"last_success": null
-		},
-		"hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), , etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+		}
 	},
 	{
 		"english": {
@@ -650,9 +650,9 @@
 		},
 		"french": {
 			"sentence": "les voitures sont magenta",
+			"hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
 			"last_success": null
-		},
-		"hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+		}
 	},
 	{
 		"english": {
@@ -692,7 +692,6 @@
 		"french": {
 			"sentence": "les voitures sont beiges",
 			"last_success": null
-		},
-		"last_success": null
+		}
 	}
 ]
