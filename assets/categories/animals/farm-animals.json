@@ -1,0 +1,839 @@
+[
+	{
+		"english": {
+			"sentence": "the cat meows",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le chat miaule",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the cat meows",
+			"hints": "The cat is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la chatte miaule",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the kitten meows",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le chatton miaule",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the kitten meows",
+			"hints": "The kitten is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le chatton miaule",
+			"hints": "le chatton est une femelle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the cats meow",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les chats miaulent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the cats meow",
+			"hints": "The cat is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les chattes miaulent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the kittens meow",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les chattons miaulent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the kittens meow",
+			"hints": "The kittens are female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les chattons miaulent",
+			"hints": "les chattons sont des females",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the bull moos",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le taureau meugle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the cow moos",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la vache meugle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the calf moos",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le veau meugle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the calf moos",
+			"hints": "The calf is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la génisse meugle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the bulls moo",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les taueaux meuglent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the cows moo",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les vaches meuglent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the calves moo",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les veaux meuglent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the calves moo",
+			"hints": "The calves are female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les génisses meuglent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the pig oinks",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le cochon grogne",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the pig oinks",
+			"hints": "The pig is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la truie grogne",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the piglet oinks",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le porcelet grogne",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the piglet oinks",
+			"hints": "The piglet is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la porcelette grogne",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the pigs oink",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les cochons grognent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the pigs oink",
+			"hints": "The pigs are female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les truies grognent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the piglets oink",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les porcelets grognent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the piglets oink",
+			"hints": "The piglets are female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les porcelettes grognent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the rooster crows",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le coq chante",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the hen crows",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la poule chante",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the chick peeps",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le poussin pépie",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the chick peeps",
+			"hints": "The chick is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la poussine pépie",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the roosters crow",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les coqs chantent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the hens crow",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les poules chantent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the chicks peep",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les poussins pépient",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the chicks peep",
+			"hints": "The chicks are female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les poussines pépient",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the dog barks",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le chien aboie",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the dog barks",
+			"hints": "The dog is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la chienne aboie",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the puppy barks",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le chiot aboie",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the puppy barks",
+			"hints": "The puppy is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le chiot aboie",
+			"hints": "le chiot est une femelle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the dogs bark",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les chiens aboient",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the dogs bark",
+			"hints": "The dogs are female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les chiennes aboient",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the puppies bark",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les chiots aboient",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the puppies bark",
+			"hints": "The puppies are female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les chiots aboient",
+			"hints": "les chiots sont des femelles",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the duck quacks",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le canard cancane",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the duck quacks",
+			"hints": "The duck is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la cane cancane",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the duckling peeps",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le caneton pépie",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the duckling peeps",
+			"hints": "The duckling is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la canette pépie",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the ducks quack",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les canards cancanent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the ducks quack",
+			"hints": "The ducks are female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les canes cancanent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the ducklings peep",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les canetons pépient",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the ducklings peep",
+			"hints": "The ducklings are female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les canettes pépient",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the billy goat bleats",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le bouc bêle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the nanny goat bleats",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la chèvre bêle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the kid bleats",
+			"hints": "A kid is a baby goat",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le chevreau bêle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the kid bleats",
+			"hints": "A kid is a baby goat. The kid is female.",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la chevrette bêle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the billy goats bleat",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les boucs bêlent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the nanny goats bleat",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les chèvres bêlent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the kids bleat",
+			"hints": "A kid is a baby goat.",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les chevreaux bêlent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the kids bleat",
+			"hints": "A kid is a baby goat. The kids are female.",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les chevrettes bêlent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the buck rabbit thumps",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le lapin tape du pied",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the doe rabbit thumps",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la lapine tape du pied",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the kit rabbit thumps",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le lapereau tape du pied",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the kit rabbit thumps",
+			"hints": "The kit is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le lapereau tape du pied",
+			"hints": "le lapearau est une femelle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the buck rabbits thump",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les lapins tapent du pied",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the doe rabbits thump",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les lapines tapent du pied",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the kit rabbits thump",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les lapereaux tapent du pied",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the kit rabbits thump",
+			"hints": "The kits are female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les lapereaux tapent du pied",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the stallion neighs",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "l'étalon hennit",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the mare neighs",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la jument hennit",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the foal neighs",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le poulain hennit",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the foal neighs",
+			"hints": "The foal is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la pouliche hennit",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the stallions neigh",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les étalons hennissent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the mares neigh",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les juments hennissent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the foals neigh",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les poulains hennissent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the foals neigh",
+			"hints": "The foals are female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les pouliches hennissent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the ram bleats",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "le bélier bêle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the ewe bleats",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "la brebis bêle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the lamb bleats",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "l'agneau bêle",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the lamb bleats",
+			"hints": "The lamb is female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "l'agneau bêle",
+			"hints": "l'agneau est une femelle.",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the rams bleat",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les béliers bêlent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the ewes bleat",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les brebis bêlent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the lambs bleat",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les agneaux bêlent",
+			"last_success": null
+		}
+	},
+	{
+		"english": {
+			"sentence": "the lambs bleat",
+			"hints": "The lambs are female",
+			"last_success": null
+		},
+		"french": {
+			"sentence": "les agneaux bêlent",
+			"hints": "les agneaux sont des femelles",
+			"last_success": null
+		}
+	}
+]
