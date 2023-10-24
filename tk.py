@@ -7,171 +7,32 @@ from math import ceil
 from tkinter import ttk
 from PIL import Image, ImageTk
 from functools import partial
-
-spoken_language = "english"
-learned_language = "french"
-
-def resize_image(path, width, height):
-    image = Image.open(path)
-    resize_img = image.resize((width, height))
-    img = ImageTk.PhotoImage(resize_img)
-    return img
-
-
-class Questions:
-    def __init__(self, parent, categories):
-        self.parent = parent
-        self.categories = categories
-        self.icons = {}
-
-    def select_category(self, category):
-        self.questions = []
-        for question_list in self.categories[category].values():
-            self.questions += question_list
-        random.shuffle(self.questions)
-
-    def choose_question(self):
-        # Select a random question
-        choice = self.questions.pop()
-        self.question = choice[spoken_language]["sentence"]
-        self.answer = choice[learned_language]["sentence"]
-        self.hints = None
-        self.explaination = None
-
-        if "hints" in choice[spoken_language].keys():
-            self.hints = choice[spoken_language]["hints"]
-        
-        if "explaination" in choice[learned_language].keys():
-            self.explaination = choice[learned_language]["explaination"]
-
-    def validate_response(self, response):
-        response = response.lower().strip()
-        answer = self.answer.lower().strip()
-
-        if response == answer:
-            self.display_page()
-        else:
-            self.question_label.text = self.hints
-            self.show = self.answer
-
-    def display_page(self):
-        self.choose_question()
-
-        container = ttk.Frame(self.parent)
-        container.grid(column=0, row=0, padx=30, pady=20)
-
-        self.question_text = f"Translate from {spoken_language.capitalize()} to {learned_language.capitalize()}:\n\n{self.question.capitalize()}"
-        self.question_label = ttk.Label(container, text=self.question_text, font=("Roboto", 14), justify=tk.CENTER)
-        self.question_label.grid(column=0, row=0, pady=10, ipadx=5)
-
-        if self.hints:
-            self.hints_text = f"Hints: {self.hints.capitalize()}"
-            self.hints_label = ttk.Label(container, text=self.hints_text, justify=tk.CENTER)
-            self.hints_label.grid(column=0, row=1, pady=10, ipadx=5)
-        
-        response_var = tk.StringVar()
-        self.entry = ttk.Entry(container, width=50, textvariable=response_var)
-        self.entry.focus()
-        self.entry.grid(column=0, row=2, pady=10, ipadx=5)
-
-        self.icons["leave"] = resize_image('./assets/icons/leave.png', 20, 20)
-        leave_button = ttk.Button(container, width=10, image=self.icons["leave"], text="   Leave", compound="left", command=lambda: self.parent.master.display_categories_page())
-        leave_button.grid(column=0, row=3, pady=10, ipadx=5, sticky=tk.W)
-
-        self.icons["check"] = resize_image('./assets/icons/check.png', 20, 20)
-        check_button = ttk.Button(container, width=10, image=self.icons["check"], text="  Validate", compound="left", command=lambda: self.validate_response(response_var.get()))
-        check_button.grid(column=0, row=3, pady=10, ipadx=5, sticky=tk.E)
-
-
-class CategoriesPage(ttk.Frame):
-
-    def __init__(self, parent, data):
-        super().__init__(parent)
-        self.parent = parent
-        self.data = data
-        self.tiles_by_line = 4
-        self.lines_by_page = 3
-        self.tiles_by_page = self.tiles_by_line * self.lines_by_page
-        self.total_pages = ceil(len(self.data) / self.tiles_by_page)
-        self.current_page = 1
-        self.icons = {}
-
-    def previous_page(self):
-        if self.current_page > 1:
-            self.current_page -= 1
-            #self.parent.master.clear_window()
-            self.display_page()
-
-    def next_page(self):
-        if self.current_page < self.total_pages:
-            self.current_page += 1
-            #self.parent.master.clear_window()
-            self.display_page()
-
-    def display_page(self):
-        self.grid(column=0, row=0)
-        self.columnconfigure(0, weight=1)
-        self.rowconfigure(0, weight=4)
-        self.rowconfigure(1, weight=1)
-
-        # Create a sub-container for tiles
-        tiles_container = ttk.Frame(self)
-        tiles_container.grid(column=0, row=0)
-
-        # Get category titles and initialize variables
-        categories_title = list(self.data.keys())
-        start_index = (self.current_page - 1) * self.tiles_by_page
-        tile_column, tile_row = 0, 0
-
-        # Iterate through categories
-        for category in categories_title[start_index:]:
-            self.icons[category] = resize_image(f'./assets/icons/{category}.png', width=50, height=50)
-
-            new_tile = ttk.Button(tiles_container, image=self.icons[category], text=category.capitalize(), compound="top", command=partial(self.parent.master.display_questions_page, category))
-            new_tile.grid(column=tile_column, row=tile_row, padx=15, pady=10, ipadx=2, ipady=2)
-
-            # Define the position of the next tile if any
-            tile_column += 1
-            if tile_column >= self.tiles_by_line:
-                tile_column = 0
-                tile_row += 1
-                if tile_row >= self.lines_by_page:
-                    break
-
-        buttons_container = ttk.Frame(self)
-        buttons_container.grid(column=0, row=1)
-        buttons_container.columnconfigure(0, weight=1)
-        buttons_container.columnconfigure(1, weight=1)
-
-        buttons_state = "disabled" if self.total_pages != 1 else "!disabled"
-
-        self.icons["previous"] = resize_image(f'./assets/icons/previous.png', width=20, height=20)
-        previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.icons["previous"], compound="left", text="Previous", command=self.previous_page)
-        previous_button.grid(column=0, row=0, padx=30, pady=20)
-
-        self.icons["next"] = resize_image(f'./assets/icons/next.png', width=20, height=20)
-        next_button = ttk.Button(buttons_container, state=buttons_state, image=self.icons["next"], compound="right", text="Next", command=self.next_page)
-        next_button.grid(column=1, row=0, padx=30, pady=20)
+from datetime import datetime
 
 
 class Bilingual(tk.Tk):
 
     def __init__(self):
         super().__init__()
+        
+        self.icons = {}
+        self.spoken_language = "english"
+        self.learned_language = "french"
         self.load_data()
-        self.define_styles()
+        self.configure_style()
         self.create_window()
-        self.pages = {}
-        self.pages["categories"] = CategoriesPage(self.window_container, self.data)
-        self.pages["questions"] = Questions(self.window_container, self.data)
-        self.display_categories_page()
+        self.display_categories()
 
-    def define_styles(self):
-        self.style = ttk.Style(self)
-        self.style.configure("TButton", font=('Calibri', 12))
-        self.style.configure("TFrame", font=('Calibri', 12))
-        self.style.configure("TLabel", font=('Calibri', 12))
-        self.style.configure("TEntry", font=('Calibri', 12))
+    def save_data(self):
+        for folder_name in self.data.keys():
+            for file_name in self.data[folder_name].keys():
+                file_path = f"./assets/{folder_name}/{file_name}.json"
+                with open(file_path, 'w', encoding='utf-8') as json_file:
+                    try:
+                        json_data = json.dumps(self.data, indent=4)
+                        json_file.write(json_data)
+                    except json.JSONDecodeError:
+                        print(f"Error decoding JSON in {file_path}")
 
     def load_data(self):
         self.data = {}  # Dictionary to store the result
@@ -195,12 +56,25 @@ class Bilingual(tk.Tk):
                             print(f"Error decoding JSON in {file_path}")
                             exit()
 
+    def resize_image(self, path, width, height):
+        raw_image = Image.open(path)
+        resize_img = raw_image.resize((width, height))
+        image = ImageTk.PhotoImage(resize_img)
+        return image
+
+    def configure_style(self):
+        self.style = ttk.Style(self)
+        self.style.configure("TButton", font=('Calibri', 12))
+        self.style.configure("TFrame", font=('Calibri', 12))
+        self.style.configure("TLabel", font=('Calibri', 12))
+        self.style.configure("TEntry", font=('Calibri', 12))
+
     def create_window(self):
         self.title("Train Me...")
         self.iconbitmap('./assets/icons/icon.ico')
 
-        window_width = 600
-        window_height = 400
+        window_width = 800
+        window_height = 600
 
         # get the screen dimension
         screen_width = self.winfo_screenwidth()
@@ -219,27 +93,167 @@ class Bilingual(tk.Tk):
         
         # configure the grid
         self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=8)
+        self.columnconfigure(2, weight=1)
         self.rowconfigure(0, weight=1)
+        self.rowconfigure(1, weight=8)
+        self.rowconfigure(2, weight=1)
 
         self.window_container = ttk.Frame(self)
         self.window_container.grid(column=0, row=0)
         self.window_container.columnconfigure(0, weight=1)
         self.window_container.rowconfigure(0, weight=1)
 
-    def clear_window(self):
-        # Destroy all widgets in the window
-        for widget in self.window_container.winfo_children():
-            widget.destroy()
+    def get_categories(self):
+        return list(self.data.keys())
 
-    def display_categories_page(self):
-        #self.clear_window()
-        self.pages["categories"].display_page()
+    def get_questions_by_category(self, category):
+        questions = []
+        folder_name = category
+        for file_name in self.data[folder_name]:
+            for question in self.data[folder_name][file_name]:
+                if not self.is_remembered(question):
+                    questions.append(question)
+        random.shuffle(questions)
+        return questions
 
-    def display_questions_page(self, category):
-        #self.clear_window()
-        self.pages["questions"].select_category(category)
-        self.pages["questions"].display_page()
+    def is_remembered(self, question):
+        # The longer the user last without failing to answer the question correctly, 
+        # the less chances it gets to answer to the question again.
+        # But it won't get the same questions within a day, if it answered them correctly.
+        memory_steps = []
+        memory_steps.append((60 * 60 * 24 *  1, 0.0))    # <  1 day  :   0%
+        memory_steps.append((60 * 60 * 24 *  3, 1.0))    # <  3 days : 100%
+        memory_steps.append((60 * 60 * 24 *  7, 0.8))    # <  7 days :  80%
+        memory_steps.append((60 * 60 * 24 * 15, 0.6))    # < 15 days :  60%
+        memory_steps.append((60 * 60 * 24 * 30, 0.4))    # < 30 days :  40%
+        memory_steps.append((60 * 60 * 24 * 60, 0.2))    # < 60 days :  20%
+        memory_steps.append((60 * 60 * 24 * 90, 0.1))    # < 90 days :  10%
 
+        # Get the dates to compare
+        last_success = question[self.learned_language]["last_success"]
+        now = datetime.now()
+        
+        # If the question has never been successfuly answered
+        if last_success is None:
+            return False
+
+        for delay, chances in memory_steps:
+            if now < (last_success + delay):
+                if random.random() < chances:
+                    return False
+                else:
+                    return True
+
+        return True
+
+    def display_categories(self, page=1):
+
+        tiles_by_line = 4
+        lines_by_page = 3
+        tiles_by_page = tiles_by_line * lines_by_page
+        total_pages = ceil(len(self.get_categories()) / tiles_by_page)
+        current_page = 1 if (page < 1) or (page > total_pages) else page
+
+        # Configure page grid
+        self.window_container = ttk.Frame(self)
+        self.window_container.grid(column=1, row=1)
+        self.window_container.columnconfigure(0, weight=1)
+        self.window_container.rowconfigure(0, weight=4)
+        self.window_container.rowconfigure(1, weight=1)
+
+        # Create a sub-container for tiles
+        tiles_container = ttk.Frame(self.window_container)
+        tiles_container.grid(column=0, row=0)
+
+        # Get category titles and initialize variables
+        categories = self.get_categories()
+        start_index = (current_page - 1) * tiles_by_page
+        tile_column, tile_row = 0, 0
+
+        # Iterate through categories
+        for category in categories[start_index:]:
+            self.icons[category] = self.resize_image(f'./assets/icons/{category}.png', 50, 50)
+
+            new_tile = ttk.Button(tiles_container, image=self.icons[category], text=category.capitalize(), compound="top", command=partial(self.display_questions, category))
+            new_tile.grid(column=tile_column, row=tile_row, padx=15, pady=10, ipadx=2, ipady=2)
+
+            # Define the position of the next tile if any
+            tile_column += 1
+            if tile_column >= tiles_by_line:
+                tile_column = 0
+                tile_row += 1
+                if tile_row >= lines_by_page:
+                    break
+
+        buttons_container = ttk.Frame(self.window_container)
+        buttons_container.grid(column=0, row=1)
+        buttons_container.columnconfigure(0, weight=1)
+        buttons_container.columnconfigure(1, weight=1)
+
+        buttons_state = "disabled" if total_pages != 1 else "!disabled"
+
+        self.icons["previous"] = self.resize_image(f'./assets/icons/previous.png', 20, 20)
+        previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.icons["previous"], compound="left", text="Previous", command=partial(self.display_categories, current_page -1))
+        previous_button.grid(column=0, row=0, padx=30, pady=20)
+
+        self.icons["next"] = self.resize_image(f'./assets/icons/next.png', 20, 20)
+        next_button = ttk.Button(buttons_container, state=buttons_state, image=self.icons["next"], compound="right", text="Next", command=partial(self.display_categories, current_page +1))
+        next_button.grid(column=1, row=0, padx=30, pady=20)
+
+    def get_random_question_by_category(self, category):
+        questions = self.get_questions_by_category(category)
+        return random.choice(questions)
+
+    def display_questions(self, category):
+
+        question_data = self.get_random_question_by_category(category)
+        question = question_data[self.spoken_language]["sentence"]
+        answer = question_data[self.learned_language]["sentence"]
+        hints = None
+        explaination = None
+
+        if "hints" in question_data[self.spoken_language].keys():
+            hints = question_data[self.spoken_language]["hints"]
+        
+        if "explaination" in question_data[self.learned_language].keys():
+            explaination = question_data[self.learned_language]["explaination"]
+
+        # Configure page grid
+        self.window_container = ttk.Frame(self)
+        self.window_container.grid(column=1, row=1)
+        self.window_container.columnconfigure(0, weight=1)
+        self.window_container.rowconfigure(0, weight=4)
+        self.window_container.rowconfigure(1, weight=1)
+        self.window_container.rowconfigure(2, weight=1)
+        self.window_container.rowconfigure(3, weight=1)
+
+        question_text = f"Translate from {self.spoken_language.capitalize()} to {self.learned_language.capitalize()}:\n\n{question.capitalize()}"
+        question_label = ttk.Label(self.window_container, text=question_text, justify=tk.CENTER)
+        question_label.grid(column=0, row=0, pady=10, ipadx=5)
+
+        if hints:
+            hints_text = f"Hints: {hints.capitalize()}"
+            hints_label = ttk.Label(self.window_container, text=hints_text, justify=tk.CENTER)
+            hints_label.grid(column=0, row=1, pady=10, ipadx=5)
+        
+        response_var = tk.StringVar()
+        entry = ttk.Entry(self.window_container, width=50, textvariable=response_var)
+        entry.focus()
+        entry.grid(column=0, row=2, pady=10, ipadx=5)
+
+        self.icons["leave"] = self.resize_image('./assets/icons/leave.png', 20, 20)
+        leave_button = ttk.Button(self.window_container, width=7, image=self.icons["leave"], text="Leave", compound="left", command=lambda: self.display_categories())
+        leave_button.grid(column=0, row=3, pady=10, sticky=tk.W)
+
+        self.icons["check"] = self.resize_image('./assets/icons/check.png', 20, 20)
+        check_button = ttk.Button(self.window_container, width=8, image=self.icons["check"], text="Validate", compound="left")
+        check_button.grid(column=0, row=3, pady=10, sticky=tk.N)
+
+        next_button = ttk.Button(self.window_container, width=5, image=self.icons["next"], text="Next", compound="left", command=lambda: self.display_questions(category))
+        next_button.grid(column=0, row=3, pady=10, sticky=tk.E)
+
+        #if (response.get().lower().strip() == answer.lower().strip())
 
 if __name__ == "__main__":
     app = Bilingual()
