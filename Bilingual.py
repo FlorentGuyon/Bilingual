@@ -293,8 +293,18 @@ class Bilingual(tk.Tk):
 
         # Iterate through categories
         for category in categories[start_index:]:
-            new_tile = ttk.Button(tiles_container, image=self.load_image(category, 50, 50), text=category.capitalize(), compound="top", command=partial(self.select_category, category))
-            new_tile.grid(column=tile_column, row=tile_row, padx=15, pady=10, ipadx=2, ipady=2)
+
+            tile_frame = ttk.Frame(tiles_container, width=100)
+            tile_frame.grid(column=tile_column, row=tile_row, padx=15, pady=10, ipadx=2, ipady=2)
+            tile_frame.columnconfigure(0, weight=1)
+            tile_frame.rowconfigure(0, weight=1)
+            tile_frame.rowconfigure(1, weight=1)
+
+            new_tile = ttk.Button(tile_frame, image=self.load_image(category, 50, 50), text=category.capitalize(), compound="top", command=partial(self.select_category, category))
+            new_tile.grid(column=0, row=0, ipadx=2, ipady=2)
+
+            progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=50)
+            progressbar.grid(column=0, row=1)
 
             # Define the position of the next tile if any
             tile_column += 1
