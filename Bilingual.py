@@ -9,6 +9,7 @@ from tkinter.scrolledtext import ScrolledText
 from PIL import Image, ImageTk
 from functools import partial
 from datetime import datetime
+from copy import deepcopy
 
 
 class Bilingual(tk.Tk):
@@ -70,6 +71,11 @@ class Bilingual(tk.Tk):
 
     @log_calls
     def load_image(self, name, width, height):
+        if name in self.icons.keys():
+            if width in self.icons[name].keys():
+                if height in self.icons[name][width].keys():
+                    return self.icons[name][width][height]
+
         resized_image = self.resize_image(f'./assets/icons/{name}.png', width, height)
         
         if not resized_image:
@@ -151,7 +157,7 @@ class Bilingual(tk.Tk):
 
         # Get the dates to compare
         last_success = question[self.learned_language]["last_success"]
-        now = datetime.timestamp(datetime.now())
+        now = int(datetime.timestamp(datetime.now()))
         
         # If the question has never been successfuly answered
         if last_success is None:
@@ -182,8 +188,8 @@ class Bilingual(tk.Tk):
         return list(self.data.keys())
 
     @log_calls
-    def get_random_question_by_category(self):
-        date_copy = self.data
+    def choose_random_question_by_category(self):
+        date_copy = deepcopy(self.data)
         random.shuffle(date_copy[self.current_category])
         for file_name in date_copy[self.current_category]:
             random.shuffle(date_copy[self.current_category][file_name])
@@ -194,8 +200,6 @@ class Bilingual(tk.Tk):
 
     @log_calls
     def validate_languages(self, spoken_language, learned_language):
-        print(spoken_language == "")
-        print(learned_language == "")
         if (spoken_language == "") or (learned_language == ""):
             self.display_languages()
         elif spoken_language == learned_language:
@@ -212,7 +216,7 @@ class Bilingual(tk.Tk):
         if response.lower().strip() == answer.lower().strip():
             for question in self.data[self.current_category][self.current_file]:
                 if question == self.current_question:
-                    question[self.learned_language]["last_success"] = datetime.timestamp(datetime.now())
+                    question[self.learned_language]["last_success"] = int(datetime.timestamp(datetime.now()))
             self.save_data()
             self.display_questions()
         else:
@@ -244,7 +248,6 @@ class Bilingual(tk.Tk):
         spoken_language_label.grid(column=0, row=0, pady=10)
 
         for index, language in enumerate(languages):
-            #self.icons[language] = self.resize_image(f'./assets/icons/{language}.png', 50, 50)
             radio_button = ttk.Radiobutton(self.window_container, text=language.capitalize(), value=language, variable=spoken_language)
             radio_button.grid(column=0, row=index +1)
 
@@ -255,8 +258,7 @@ class Bilingual(tk.Tk):
             radio_button = ttk.Radiobutton(self.window_container, text=language.capitalize(), value=language, variable=learned_language)
             radio_button.grid(column=0, row=index + len(languages) +2)
 
-        self.icons["check"] = self.resize_image(f'./assets/icons/check.png', 20, 20)
-        validate_button = ttk.Button(self.window_container, text="Show categories", image=self.icons["check"], compound="left", command=lambda: self.validate_languages(spoken_language.get(), learned_language.get()))
+        validate_button = ttk.Button(self.window_container, text="Show categories", image=self.load_image('check', 20, 20), compound="left", command=lambda: self.validate_languages(spoken_language.get(), learned_language.get()))
         validate_button.grid(row=row_count-1, column=0, pady=10, ipadx=2, ipady=2)
 
     @log_calls
@@ -291,9 +293,7 @@ class Bilingual(tk.Tk):
 
         # Iterate through categories
         for category in categories[start_index:]:
-            self.icons[category] = self.resize_image(f'./assets/icons/{category}.png', 50, 50)
-
-            new_tile = ttk.Button(tiles_container, image=self.icons[category], text=category.capitalize(), compound="top", command=partial(self.select_category, category))
+            new_tile = ttk.Button(tiles_container, image=self.load_image(category, 50, 50), text=category.capitalize(), compound="top", command=partial(self.select_category, category))
             new_tile.grid(column=tile_column, row=tile_row, padx=15, pady=10, ipadx=2, ipady=2)
 
             # Define the position of the next tile if any
@@ -310,12 +310,10 @@ class Bilingual(tk.Tk):
             buttons_container.columnconfigure(0, weight=1)
             buttons_container.columnconfigure(1, weight=1)
 
-            self.icons["previous"] = self.resize_image(f'./assets/icons/previous.png', 20, 20)
-            previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.icons["previous"], compound="left", text="Previous", command=partial(self.display_categories, current_page -1))
+            previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('previous', 20, 20), compound="left", text="Previous", command=partial(self.display_categories, current_page -1))
             previous_button.grid(column=0, row=0, padx=30, pady=20)
 
-            self.icons["next"] = self.resize_image(f'./assets/icons/next.png', 20, 20)
-            next_button = ttk.Button(buttons_container, state=buttons_state, image=self.icons["next"], compound="right", text="Next", command=partial(self.display_categories, current_page +1))
+            next_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('next', 20, 20), compound="right", text="Next", command=partial(self.display_categories, current_page +1))
             next_button.grid(column=1, row=0, padx=30, pady=20)
 
     @log_calls
@@ -345,18 +343,16 @@ class Bilingual(tk.Tk):
             explaination_label = ttk.Label(self.window_container, width=50, wraplength=400, text=explaination_text, justify=tk.CENTER)
             explaination_label.grid(column=0, row=2, pady=10, ipadx=5)
 
-        self.icons["leave"] = self.resize_image('./assets/icons/leave.png', 20, 20)
-        leave_button = ttk.Button(self.window_container, width=8, image=self.icons["leave"], text="Leave", compound="left", command=lambda: self.display_categories())
+        leave_button = ttk.Button(self.window_container, width=8, image=self.load_image('leave', 20, 20), text="Leave", compound="left", command=lambda: self.display_categories())
         leave_button.grid(column=0, row=3, padx=2, pady=10, sticky=tk.W)
 
-        self.icons["next"] = self.resize_image('./assets/icons/next.png', 20, 20)
-        next_button = ttk.Button(self.window_container, width=8, image=self.icons["next"], text="Next", compound="left", command=lambda: self.display_questions())
+        next_button = ttk.Button(self.window_container, width=8, image=self.load_image('next', 20, 20), text="Next", compound="left", command=lambda: self.display_questions())
         next_button.grid(column=0, row=3, padx=2, pady=10, sticky=tk.E)
     
     @log_calls
     def display_questions(self):
 
-        self.get_random_question_by_category()
+        self.choose_random_question_by_category()
         question = self.current_question[self.spoken_language]["sentence"]
         hints = None
 
@@ -384,12 +380,10 @@ class Bilingual(tk.Tk):
         entry.focus()
         entry.grid(column=0, row=2, pady=10, ipadx=5)
 
-        self.icons["leave"] = self.resize_image('./assets/icons/leave.png', 20, 20)
-        leave_button = ttk.Button(self.window_container, width=8, image=self.icons["leave"], text="Leave", compound="left", command=lambda: self.display_categories())
+        leave_button = ttk.Button(self.window_container, width=8, image=self.load_image('leave', 20, 20), text="Leave", compound="left", command=lambda: self.display_categories())
         leave_button.grid(column=0, row=3, pady=10, sticky=tk.W)
 
-        self.icons["check"] = self.resize_image('./assets/icons/check.png', 20, 20)
-        check_button = ttk.Button(self.window_container, width=8, image=self.icons["check"], text="Validate", compound="left", command=lambda: self.validate_response(response_var.get()))
+        check_button = ttk.Button(self.window_container, width=8, image=self.load_image('check', 20, 20), text="Validate", compound="left", command=lambda: self.validate_response(response_var.get()))
         check_button.grid(column=0, row=3, pady=10, sticky=tk.E)
 
 if __name__ == "__main__":
