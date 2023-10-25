@@ -1,697 +1,697 @@
 [
-	{
-		"english": {
-			"sentence": "the bird is red",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est rouge",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is red",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est rouge",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are red",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont rouges",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are red",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont rouges",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is blue",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est bleu",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is blue",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est bleue",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are blue",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont bleus",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are blue",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont bleues",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is green",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est vert",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is green",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est verte",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are green",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont verts",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are green",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont vertes",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is yellow",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est jaune",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is yellow",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est jaune",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are yellow",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont jaunes",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are yellow",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont jaunes",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is orange",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est orange",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is orange",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est orange",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are orange",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont orange",
-			"explaination" : "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are orange",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont orange",
-			"explaination" : "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is pink",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est rose",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is pink",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est rose",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are pink",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont rose",
-			"explaination" : "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are pink",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont roses",
-			"explaination" : "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is purple",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est violet",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is purple",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est violette",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are purple",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont violets",
-			"explaination" : "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are purple",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont violette",
-			"explaination" : "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is brown",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est marron",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is brown",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est marron",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are brown",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont marron",
-			"explaination" : "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are brown",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont marron",
-			"explaination" : "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is black",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est noir",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is black",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est noire",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are black",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont noirs",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are black",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont noires",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is white",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est blanc",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is white",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est blanche",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are white",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont blancs",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are white",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont blanches",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is gray",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est gris",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is gray",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est grise",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are gray",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont gris",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are gray",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont grises",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is maroon",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est bordeaux",
-			"explaination" : "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is maroon",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est bordeaux",
-			"explaination" : "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are maroon",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont bordeaux",
-			"explaination" : "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are maroon",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont bordeaux",
-			"hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is cyan",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est cyan",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is cyan",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est cyan",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are cyan",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont cyans",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are cyan",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont cyans",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is silver",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est argenté",
-			"hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is silver",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est argentée",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are silver",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont argentés",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are silver",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont argentées",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is gold",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est doré",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is gold",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est dorée",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are gold",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont dorés",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are gold",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont dorées",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is magenta",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est magenta",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is magenta",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est magenta",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are magenta",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont magenta",
-			"hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), , etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",		
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are magenta",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont magenta",
-			"hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"écarlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the bird is beige",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "l'oiseau est beige",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the car is beige",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "la voiture est beige",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the birds are beige",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les oiseaux sont beiges",
-			"last_success": null
-		}
-	},
-	{
-		"english": {
-			"sentence": "the cars are beige",
-			"last_success": null
-		},
-		"french": {
-			"sentence": "les voitures sont beiges",
-			"last_success": null
-		}
-	}
+    {
+        "english": {
+            "sentence": "the cars are brown",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont marron",
+            "explaination": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is gold",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est dor\u00e9e",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are green",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont vertes",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are gold",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont dor\u00e9es",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are magenta",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont magenta",
+            "hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), , etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is brown",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est marron",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are brown",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont marron",
+            "explaination": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is magenta",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est magenta",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is silver",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est argent\u00e9",
+            "hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is pink",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est rose",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is green",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est verte",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are orange",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont orange",
+            "explaination": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are pink",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont roses",
+            "explaination": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are green",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont verts",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are yellow",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont jaunes",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is pink",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est rose",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are white",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont blancs",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is red",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est rouge",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are purple",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont violette",
+            "explaination": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is white",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est blanc",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are maroon",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont bordeaux",
+            "hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are purple",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont violets",
+            "explaination": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are black",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont noirs",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is black",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est noire",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are magenta",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont magenta",
+            "hints": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is purple",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est violette",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is yellow",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est jaune",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are orange",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont orange",
+            "explaination": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is maroon",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est bordeaux",
+            "explaination": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is green",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est vert",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are white",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont blanches",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is black",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est noir",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is blue",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est bleue",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is brown",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est marron",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is gold",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est dor\u00e9",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are beige",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont beiges",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is silver",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est argent\u00e9e",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are gold",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont dor\u00e9s",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are black",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont noires",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is magenta",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est magenta",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is beige",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est beige",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are silver",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont argent\u00e9es",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are gray",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont grises",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is beige",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est beige",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is yellow",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est jaune",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is gray",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est grise",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is cyan",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est cyan",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is white",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est blanche",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is red",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est rouge",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are blue",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont bleus",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the car is orange",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "la voiture est orange",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are cyan",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont cyans",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are red",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont rouges",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are maroon",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont bordeaux",
+            "explaination": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are blue",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont bleues",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are cyan",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont cyans",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is cyan",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est cyan",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is gray",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est gris",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are red",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont rouges",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are gray",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont gris",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is blue",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est bleu",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is orange",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est orange",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are silver",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont argent\u00e9s",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are yellow",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont jaunes",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the cars are beige",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les voitures sont beiges",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is purple",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est violet",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the birds are pink",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "les oiseaux sont rose",
+            "explaination": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    },
+    {
+        "english": {
+            "sentence": "the bird is maroon",
+            "last_success": null
+        },
+        "french": {
+            "sentence": "l'oiseau est bordeaux",
+            "explaination": "In French, the spelling of color adjectives depends on gender (+e) and number (+s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city), etc. However, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number.",
+            "last_success": null
+        }
+    }
 ]
