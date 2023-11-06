@@ -21,7 +21,7 @@ class Bilingual(tk.Tk):
         self.spoken_language = "english"
         self.learned_language = "french"
         self.current_category = None
-        self.current_file = None
+        self.current_lesson = None
         self.current_question = None
         self.load_data()
         self.configure_style()
@@ -143,34 +143,7 @@ class Bilingual(tk.Tk):
    
     @log_calls
     def is_remembered(self, question):
-        # The longer the user last without failing to answer the question correctly, 
-        # the less chances it gets to answer to the question again.
-        # But it won't get the same questions within a day, if it answered them correctly.
-        memory_steps = []
-        memory_steps.append((60 * 60 * 24 *  1, 0.0))    # <  1 day  :   0%
-        memory_steps.append((60 * 60 * 24 *  3, 1.0))    # <  3 days : 100%
-        memory_steps.append((60 * 60 * 24 *  7, 0.8))    # <  7 days :  80%
-        memory_steps.append((60 * 60 * 24 * 15, 0.6))    # < 15 days :  60%
-        memory_steps.append((60 * 60 * 24 * 30, 0.4))    # < 30 days :  40%
-        memory_steps.append((60 * 60 * 24 * 60, 0.2))    # < 60 days :  20%
-        memory_steps.append((60 * 60 * 24 * 90, 0.1))    # < 90 days :  10%
-
-        # Get the dates to compare
-        last_success = question[self.learned_language]["last_success"]
-        now = int(datetime.timestamp(datetime.now()))
-        
-        # If the question has never been successfuly answered
-        if last_success is None:
-            return False
-
-        for delay, chances in memory_steps:
-            if now < (last_success + delay):
-                if random.random() < chances:
-                    return False
-                else:
-                    return True
-
-        return True
+        return random.random() < question[self.learned_language]["success_rate"] - 0.
 
     @log_calls
     def get_all_languages(self):
@@ -188,15 +161,16 @@ class Bilingual(tk.Tk):
         return list(self.data.keys())
 
     @log_calls
-    def choose_random_question_by_category(self):
-        date_copy = deepcopy(self.data)
-        random.shuffle(date_copy[self.current_category])
-        for file_name in date_copy[self.current_category]:
-            random.shuffle(date_copy[self.current_category][file_name])
-            for question in date_copy[self.current_category][file_name]:
-                if not self.is_remembered(question):
-                    self.current_file = file_name
-                    self.current_question = question
+    def get_all_lessons(self):
+        return list(self.data[self.current_category].keys())
+
+    @log_calls
+    def choose_random_question(self):
+        deep_copy = deepcopy(self.data)
+        random.shuffle(deep_copy[self.current_category][self.current_lesson])
+        for self.current_question in deep_copy[self.current_category][self.current_lesson]:
+            if not self.is_remembered(self.current_question):
+                break
 
     @log_calls
     def validate_languages(self, spoken_language, learned_language):
@@ -212,14 +186,21 @@ class Bilingual(tk.Tk):
     @log_calls
     def validate_response(self, response):
         answer = self.current_question[self.learned_language]["sentence"]
+        question = None
 
+        for question in self.data[self.current_category][self.current_lesson]:
+            if question == self.current_question:
+                question[self.learned_language]["tries"] += 1
+                break
+
+        # If the response is right
         if response.lower().strip() == answer.lower().strip():
-            for question in self.data[self.current_category][self.current_file]:
-                if question == self.current_question:
-                    question[self.learned_language]["last_success"] = int(datetime.timestamp(datetime.now()))
+            question[self.learned_language]["success_rate"] = ((question[self.learned_language]["success_rate"] * (question[self.learned_language]["tries"] -1)) +1) / question[self.learned_language]["tries"]
             self.save_data()
             self.display_questions()
+        # If the response is wrong
         else:
+            question[self.learned_language]["success_rate"] = (question[self.learned_language]["success_rate"] * (question[self.learned_language]["tries"] -1)) / question[self.learned_language]["tries"]
             self.display_answer(response)
 
     @log_calls
@@ -264,15 +245,21 @@ class Bilingual(tk.Tk):
     @log_calls
     def select_category(self, category):
         self.current_category = category
+        self.display_lessons()
+
+    @log_calls
+    def select_lesson(self, lesson):
+        self.current_lesson = lesson
         self.display_questions()
 
     @log_calls
     def display_categories(self, page=1):
 
+        categories = self.get_all_categories()
         tiles_by_line = 4
         lines_by_page = 3
         tiles_by_page = tiles_by_line * lines_by_page
-        total_pages = ceil(len(self.get_all_categories()) / tiles_by_page)
+        total_pages = ceil(len(categories) / tiles_by_page)
         current_page = 1 if (page < 1) or (page > total_pages) else page
 
         # Configure page grid
@@ -286,8 +273,7 @@ class Bilingual(tk.Tk):
         tiles_container = ttk.Frame(self.window_container)
         tiles_container.grid(column=0, row=0)
 
-        # Get category titles and initialize variables
-        categories = self.get_all_categories()
+        # Initialize variables
         start_index = (current_page - 1) * tiles_by_page
         tile_column, tile_row = 0, 0
 
@@ -327,6 +313,66 @@ class Bilingual(tk.Tk):
             next_button.grid(column=1, row=0, padx=30, pady=20)
 
     @log_calls
+    def display_lessons(self, page=1):
+
+        lessons = self.get_all_lessons()
+        tiles_by_line = 4
+        lines_by_page = 3
+        tiles_by_page = tiles_by_line * lines_by_page
+        total_pages = ceil(len(lessons) / tiles_by_page)
+        current_page = 1 if (page < 1) or (page > total_pages) else page
+
+        # Configure page grid
+        self.clear_window()
+        self.window_container.grid(column=1, row=1)
+        self.window_container.columnconfigure(0, weight=1)
+        self.window_container.rowconfigure(0, weight=4)
+        self.window_container.rowconfigure(1, weight=1)
+
+        # Create a sub-container for tiles
+        tiles_container = ttk.Frame(self.window_container)
+        tiles_container.grid(column=0, row=0)
+
+        # initialize variables
+        start_index = (current_page - 1) * tiles_by_page
+        tile_column, tile_row = 0, 0
+
+        # Iterate through lessons
+        for lesson in lessons[start_index:]:
+
+            tile_frame = ttk.Frame(tiles_container, width=100)
+            tile_frame.grid(column=tile_column, row=tile_row, padx=15, pady=10, ipadx=2, ipady=2)
+            tile_frame.columnconfigure(0, weight=1)
+            tile_frame.rowconfigure(0, weight=1)
+            tile_frame.rowconfigure(1, weight=1)
+
+            new_tile = ttk.Button(tile_frame, image=self.load_image(lesson, 50, 50), text=lesson.capitalize(), compound="top", command=partial(self.select_lesson, lesson))
+            new_tile.grid(column=0, row=0, ipadx=2, ipady=2)
+
+            progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=50)
+            progressbar.grid(column=0, row=1)
+
+            # Define the position of the next tile if any
+            tile_column += 1
+            if tile_column >= tiles_by_line:
+                tile_column = 0
+                tile_row += 1
+                if tile_row >= lines_by_page:
+                    break
+
+        if total_pages > 1:
+            buttons_container = ttk.Frame(self.window_container)
+            buttons_container.grid(column=0, row=1)
+            buttons_container.columnconfigure(0, weight=1)
+            buttons_container.columnconfigure(1, weight=1)
+
+            previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('previous', 20, 20), compound="left", text="Previous", command=partial(self.display_lessons, current_page -1))
+            previous_button.grid(column=0, row=0, padx=30, pady=20)
+
+            next_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('next', 20, 20), compound="right", text="Next", command=partial(self.display_lessons, current_page +1))
+            next_button.grid(column=1, row=0, padx=30, pady=20)
+
+    @log_calls
     def display_answer(self, response):
         # Configure page grid
         self.clear_window()
@@ -362,7 +408,7 @@ class Bilingual(tk.Tk):
     @log_calls
     def display_questions(self):
 
-        self.choose_random_question_by_category()
+        self.choose_random_question()
         question = self.current_question[self.spoken_language]["sentence"]
         hints = None
 
