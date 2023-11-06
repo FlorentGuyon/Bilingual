@@ -489,7 +489,7 @@
     },
     {
         "english": {
-            "sentence": "the bird is gray",
+            "sentence": "the bird is grey",
             "success_rate": 0,
             "tries": 0
         },
@@ -501,7 +501,7 @@
     },
     {
         "english": {
-            "sentence": "the car is gray",
+            "sentence": "the car is grey",
             "success_rate": 0,
             "tries": 0
         },
@@ -513,7 +513,7 @@
     },
     {
         "english": {
-            "sentence": "the birds are gray",
+            "sentence": "the birds are grey",
             "success_rate": 0,
             "tries": 0
         },
@@ -525,7 +525,7 @@
     },
     {
         "english": {
-            "sentence": "the cars are gray",
+            "sentence": "the cars are grey",
             "success_rate": 0,
             "tries": 0
         },
@@ -686,7 +686,7 @@
     },
     {
         "english": {
-            "sentence": "the bird is gold",
+            "sentence": "the bird is golden",
             "success_rate": 0,
             "tries": 0
         },
@@ -698,7 +698,7 @@
     },
     {
         "english": {
-            "sentence": "the car is gold",
+            "sentence": "the car is golden",
             "success_rate": 0,
             "tries": 0
         },
@@ -710,7 +710,7 @@
     },
     {
         "english": {
-            "sentence": "the birds are gold",
+            "sentence": "the birds are golden",
             "success_rate": 0,
             "tries": 0
         },
@@ -722,7 +722,7 @@
     },
     {
         "english": {
-            "sentence": "the cars are gold",
+            "sentence": "the cars are golden",
             "success_rate": 0,
             "tries": 0
         },

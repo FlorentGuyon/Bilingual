@@ -108,7 +108,7 @@ class Bilingual(tk.Tk):
 
     @log_calls
     def create_window(self):
-        self.title("Bilingual...")
+        self.title("Go Bilingo")
         self.iconbitmap('./assets/icons/icon.ico')
 
         window_width = 800
@@ -144,7 +144,7 @@ class Bilingual(tk.Tk):
    
     @log_calls
     def is_remembered(self, question):
-        return random.random() < question[self.learned_language]["success_rate"] - 0.
+        return random.random() < question[self.learned_language]["success_rate"]
 
     @log_calls
     def get_all_profiles(self):
@@ -194,7 +194,8 @@ class Bilingual(tk.Tk):
         for question in deep_copy[self.current_category][self.current_lesson]:
             if not self.is_remembered(question):
                 self.current_question = question
-                break
+                return
+        self.current_question = random.choice(deep_copy[self.current_category][self.current_lesson])
 
     @log_calls
     def validate_languages(self, spoken_language, learned_language):
@@ -371,12 +372,18 @@ class Bilingual(tk.Tk):
             tile_frame.columnconfigure(0, weight=1)
             tile_frame.rowconfigure(0, weight=1)
             tile_frame.rowconfigure(1, weight=1)
+            tile_frame.rowconfigure(2, weight=1)
 
             new_tile = ttk.Button(tile_frame, image=self.load_image(category, 50, 50), text=category.capitalize(), compound="top", command=partial(self.select_category, category))
             new_tile.grid(column=0, row=0, ipadx=2, ipady=2)
 
-            progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=self.get_category_progress(category=category) * 100)
-            progressbar.grid(column=0, row=1)
+            progress_value = ceil(self.get_category_progress(category=category) * 100)
+
+            progress = ttk.Label(tile_frame, text=f'{progress_value}%')
+            progress.grid(column=0, row=1)
+
+            progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=progress_value)
+            progressbar.grid(column=0, row=2)
 
             # Define the position of the next tile if any
             tile_column += 1
@@ -438,12 +445,18 @@ class Bilingual(tk.Tk):
             tile_frame.columnconfigure(0, weight=1)
             tile_frame.rowconfigure(0, weight=1)
             tile_frame.rowconfigure(1, weight=1)
+            tile_frame.rowconfigure(2, weight=1)
 
             new_tile = ttk.Button(tile_frame, image=self.load_image(lesson, 50, 50), text=lesson.replace('-', ' ').capitalize(), compound="top", command=partial(self.select_lesson, lesson))
             new_tile.grid(column=0, row=0, ipadx=2, ipady=2)
 
-            progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=self.get_lesson_progress(lesson=lesson) * 100)
-            progressbar.grid(column=0, row=1)
+            progress_value = ceil(self.get_lesson_progress(lesson=lesson) * 100)
+
+            progress = ttk.Label(tile_frame, text=f'{progress_value}%')
+            progress.grid(column=0, row=1)
+            
+            progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=progress_value)
+            progressbar.grid(column=0, row=2)
 
             # Define the position of the next tile if any
             tile_column += 1
