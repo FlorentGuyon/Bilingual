@@ -18,15 +18,15 @@ class Bilingual(tk.Tk):
         super().__init__()
         
         self.icons = {}
-        self.spoken_language = "english"
-        self.learned_language = "french"
+        self.spoken_language = None
+        self.learned_language = None
+        self.current_profile = None
         self.current_category = None
         self.current_lesson = None
         self.current_question = None
-        self.load_data()
         self.configure_style()
         self.create_window()
-        self.display_languages()
+        self.display_profiles()
 
     def log_calls(method):
         def wrapper(*args, **kwargs):
@@ -35,10 +35,10 @@ class Bilingual(tk.Tk):
         return wrapper
 
     @log_calls
-    def save_data(self):
+    def save_profile(self):
         for folder_name in self.data.keys():
             for file_name in self.data[folder_name].keys():
-                file_path = f"./assets/categories/{folder_name}/{file_name}.json"
+                file_path = f"./assets/profiles/{self.current_profile}/{folder_name}/{file_name}.json"
                 with open(file_path, 'w', encoding='utf-8') as json_file:
                     try:
                         json_data = json.dumps(self.data[folder_name][file_name], indent=4)
@@ -47,10 +47,10 @@ class Bilingual(tk.Tk):
                         print(f"Error decoding JSON in {file_path}")
 
     @log_calls
-    def load_data(self):
+    def load_profile(self):
         self.data = {}  # Dictionary to store the result
 
-        for subdir, _, files in os.walk("./assets/categories"):
+        for subdir, _, files in os.walk(f"./assets/profiles/{self.current_profile}"):
             folder_name = os.path.basename(subdir)
             json_files = [f for f in files if f.endswith('.json')]
 
@@ -146,6 +146,10 @@ class Bilingual(tk.Tk):
         return random.random() < question[self.learned_language]["success_rate"] - 0.
 
     @log_calls
+    def get_all_profiles(self):
+        return [profile for profile in os.listdir("./assets/profiles") if os.path.isdir(os.path.join("./assets/profiles", profile))]
+
+    @log_calls
     def get_all_languages(self):
         languages = []
         for folder_name in self.data.keys():
@@ -196,7 +200,7 @@ class Bilingual(tk.Tk):
         # If the response is right
         if response.lower().strip() == answer.lower().strip():
             question[self.learned_language]["success_rate"] = ((question[self.learned_language]["success_rate"] * (question[self.learned_language]["tries"] -1)) +1) / question[self.learned_language]["tries"]
-            self.save_data()
+            self.save_profile()
             self.display_questions()
         # If the response is wrong
         else:
@@ -243,6 +247,12 @@ class Bilingual(tk.Tk):
         validate_button.grid(row=row_count-1, column=0, pady=10, ipadx=2, ipady=2)
 
     @log_calls
+    def select_profile(self, profile):
+        self.current_profile = profile
+        self.load_profile()
+        self.display_languages()
+    
+    @log_calls
     def select_category(self, category):
         self.current_category = category
         self.display_lessons()
@@ -251,6 +261,66 @@ class Bilingual(tk.Tk):
     def select_lesson(self, lesson):
         self.current_lesson = lesson
         self.display_questions()
+    
+    @log_calls
+    def display_profiles(self, page=1):
+
+        profiles = self.get_all_profiles()
+        tiles_by_line = 4
+        lines_by_page = 3
+        tiles_by_page = tiles_by_line * lines_by_page
+        total_pages = ceil(len(profiles) / tiles_by_page)
+        current_page = 1 if (page < 1) or (page > total_pages) else page
+
+        # Configure page grid
+        self.clear_window()
+        self.window_container.grid(column=1, row=1)
+        self.window_container.columnconfigure(0, weight=1)
+        self.window_container.rowconfigure(0, weight=4)
+        self.window_container.rowconfigure(1, weight=1)
+
+        # Create a sub-container for tiles
+        tiles_container = ttk.Frame(self.window_container)
+        tiles_container.grid(column=0, row=0)
+
+        # Initialize variables
+        start_index = (current_page - 1) * tiles_by_page
+        tile_column, tile_row = 0, 0
+
+        # Iterate through profiles
+        for profile in profiles[start_index:]:
+
+            tile_frame = ttk.Frame(tiles_container, width=100)
+            tile_frame.grid(column=tile_column, row=tile_row, padx=15, pady=10, ipadx=2, ipady=2)
+            tile_frame.columnconfigure(0, weight=1)
+            tile_frame.rowconfigure(0, weight=1)
+            tile_frame.rowconfigure(1, weight=1)
+
+            new_tile = ttk.Button(tile_frame, image=self.load_image(profile, 50, 50), text=profile.capitalize(), compound="top", command=partial(self.select_profile, profile))
+            new_tile.grid(column=0, row=0, ipadx=2, ipady=2)
+
+            progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=50)
+            progressbar.grid(column=0, row=1)
+
+            # Define the position of the next tile if any
+            tile_column += 1
+            if tile_column >= tiles_by_line:
+                tile_column = 0
+                tile_row += 1
+                if tile_row >= lines_by_page:
+                    break
+
+        if total_pages > 1:
+            buttons_container = ttk.Frame(self.window_container)
+            buttons_container.grid(column=0, row=1)
+            buttons_container.columnconfigure(0, weight=1)
+            buttons_container.columnconfigure(1, weight=1)
+
+            previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('previous', 20, 20), compound="left", text="Previous", command=partial(self.display_profiles, current_page -1))
+            previous_button.grid(column=0, row=0, padx=30, pady=20)
+
+            next_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('next', 20, 20), compound="right", text="Next", command=partial(self.display_profiles, current_page +1))
+            next_button.grid(column=1, row=0, padx=30, pady=20)
 
     @log_calls
     def display_categories(self, page=1):
