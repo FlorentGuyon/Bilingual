@@ -78,7 +78,7 @@ class Bilingual(tk.Tk):
         resized_image = self.resize_image(f'./assets/icons/{name}.png', width, height)
         
         if not resized_image:
-            return self.load_image("missing", width, height)
+            return self.load_image("missing", 10, 10)
         
         self.icons[name] = {}
         self.icons[name][width] = {}
@@ -199,6 +199,8 @@ class Bilingual(tk.Tk):
 
     @log_calls
     def validate_languages(self, spoken_language, learned_language):
+        print(spoken_language)
+        print(learned_language)
         if (spoken_language == "") or (learned_language == ""):
             self.display_languages()
         elif spoken_language == learned_language:
@@ -234,40 +236,6 @@ class Bilingual(tk.Tk):
             widget.destroy()
 
     @log_calls
-    def display_languages(self):
-        languages = self.get_all_languages()
-
-        # Configure page grid
-        self.clear_window()
-        self.window_container.grid(column=1, row=1)
-        self.window_container.columnconfigure(0, weight=1)
-
-        row_count = (len(languages) *2) +3
-
-        for index in range(0, row_count):
-            self.window_container.rowconfigure(index, weight=1)
-
-        spoken_language = tk.StringVar()
-        learned_language = tk.StringVar()
-
-        spoken_language_label = ttk.Label(self.window_container, text="Language you speak:")
-        spoken_language_label.grid(column=0, row=0, pady=10)
-
-        for index, language in enumerate(languages):
-            radio_button = ttk.Radiobutton(self.window_container, text=language.capitalize(), value=language, variable=spoken_language)
-            radio_button.grid(column=0, row=index +1)
-
-        learned_language_label = ttk.Label(self.window_container, text="Language you learn:")
-        learned_language_label.grid(column=0, row=len(languages) +1, pady=10)
-
-        for index, language in enumerate(languages):
-            radio_button = ttk.Radiobutton(self.window_container, text=language.capitalize(), value=language, variable=learned_language)
-            radio_button.grid(column=0, row=index + len(languages) +2)
-
-        validate_button = ttk.Button(self.window_container, text="Show categories", image=self.load_image('check', 20, 20), compound="left", command=lambda: self.validate_languages(spoken_language.get(), learned_language.get()))
-        validate_button.grid(row=row_count-1, column=0, pady=10, ipadx=2, ipady=2)
-
-    @log_calls
     def select_profile(self, profile):
         self.current_profile = profile
         self.load_profile()
@@ -282,6 +250,40 @@ class Bilingual(tk.Tk):
     def select_lesson(self, lesson):
         self.current_lesson = lesson
         self.display_questions()
+
+    @log_calls
+    def display_languages(self):
+        languages = self.get_all_languages()
+
+        # Configure page grid
+        self.clear_window()
+        self.window_container.grid(column=1, row=1)
+        self.window_container.columnconfigure(0, weight=1)
+        self.window_container.columnconfigure(1, weight=1)
+        self.window_container.columnconfigure(3, weight=1)
+
+        row_count = (len(languages) *2) +2
+
+        for index in range(0, row_count):
+            self.window_container.rowconfigure(index, weight=1)
+
+        languages_variable = tk.StringVar() 
+
+        for spoken_language_index, spoken_language in enumerate(languages):
+            for learned_language_index, learned_language in enumerate(languages):
+                if spoken_language == learned_language:
+                    continue
+                new_radio_button = ttk.Radiobutton(self.window_container, text="", value=[spoken_language, learned_language], variable=languages_variable) 
+                new_radio_button.grid(column=0, row=spoken_language_index)
+
+                new_label = tk.Label(self.window_container, text="        ->", image=self.load_image(spoken_language, 50, 50), compound="left")
+                new_label.grid(column=1, row=spoken_language_index)
+                
+                new_label = tk.Label(self.window_container, image=self.load_image(learned_language, 50, 50))
+                new_label.grid(column=2, row=spoken_language_index)
+
+        validate_button = ttk.Button(self.window_container, text="Show categories", image=self.load_image('check', 20, 20), compound="left", command=lambda: self.validate_languages(languages_variable.get().split()[0], languages_variable.get().split()[1]))
+        validate_button.grid(row=row_count-1, column=1, pady=10, ipadx=2, ipady=2)
     
     @log_calls
     def display_profiles(self, page=1):
