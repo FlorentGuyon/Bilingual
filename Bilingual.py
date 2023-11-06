@@ -527,33 +527,63 @@ class Bilingual(tk.Tk):
 
         if "hints" in self.current_question[self.spoken_language].keys():
             hints = self.current_question[self.spoken_language]["hints"]
+        else:
+            hints = "x"
 
         # Configure page grid
         self.clear_window()
         self.window_container.grid(column=1, row=1)
         self.window_container.columnconfigure(0, weight=1)
-        for index in range(0, 4):
-            self.window_container.rowconfigure(index, weight=1)
+        self.window_container.columnconfigure(1, weight=3)
+        self.window_container.rowconfigure(0, weight=3)
+        self.window_container.rowconfigure(1, weight=1)
+        self.window_container.rowconfigure(2, weight=1)
+        self.window_container.rowconfigure(3, weight=1)
+        self.window_container.rowconfigure(4, weight=1)
+        self.window_container.rowconfigure(5, weight=3)
 
-        question_text = f"Translate from {self.spoken_language.capitalize()} to {self.learned_language.capitalize()}:\n\n{question.capitalize()}"
-        question_label = ttk.Label(self.window_container, text=question_text, justify=tk.CENTER)
-        question_label.grid(column=0, row=0, pady=10, ipadx=5)
+        new_label_text = f"Category : {self.current_category.capitalize()}"
+        new_label = ttk.Label(self.window_container, text=new_label_text, justify=tk.CENTER)
+        new_label.grid(column=0, row=0, padx=10, pady=10, ipadx=5, ipady=5)
 
-        if hints:
-            hints_text = f"Hints: {hints.capitalize()}"
-            hints_label = ttk.Label(self.window_container, text=hints_text, justify=tk.CENTER)
-            hints_label.grid(column=0, row=1, pady=10, ipadx=5)
+        new_label_text = f"Lesson : {self.current_lesson.replace('-', ' ').capitalize()}"
+        new_label = ttk.Label(self.window_container, text=new_label_text, justify=tk.CENTER)
+        new_label.grid(column=1, row=0, padx=10, pady=10, ipadx=5, ipady=5)
+
+        new_label = ttk.Label(self.window_container, text="Task", justify=tk.LEFT)
+        new_label.grid(column=0, row=1, padx=10, pady=10, ipadx=5, ipady=5)
+
+        new_label_text = f"Translate the following sentence from {self.spoken_language.capitalize()} to {self.learned_language.capitalize()}:"
+        new_label = ttk.Label(self.window_container, text=new_label_text, justify=tk.LEFT)
+        new_label.grid(column=1, row=1, padx=10, pady=10, ipadx=5, ipady=5)
+
+        new_label = ttk.Label(self.window_container, text="Sentence", justify=tk.LEFT)
+        new_label.grid(column=0, row=2, padx=10, pady=10, ipadx=5, ipady=5)
+
+        new_label_text = question.capitalize()
+        new_label = ttk.Label(self.window_container, text=new_label_text, justify=tk.LEFT)
+        new_label.grid(column=1, row=2, padx=10, pady=10, ipadx=5, ipady=5)
+
+        new_label = ttk.Label(self.window_container, text="Context", justify=tk.LEFT)
+        new_label.grid(column=0, row=3, padx=10, pady=10, ipadx=5, ipady=5)
+
+        new_label_text = hints.capitalize()
+        new_label = ttk.Label(self.window_container, text=new_label_text, justify=tk.LEFT)
+        new_label.grid(column=1, row=3, padx=10, pady=10, ipadx=5, ipady=5)
+
+        new_label = ttk.Label(self.window_container, text="Answer", justify=tk.LEFT)
+        new_label.grid(column=0, row=4, padx=10, pady=10, ipadx=5, ipady=5)
         
         response_var = tk.StringVar()
         entry = ttk.Entry(self.window_container, width=50, textvariable=response_var)
         entry.focus()
-        entry.grid(column=0, row=2, pady=10, ipadx=5)
+        entry.grid(column=1, row=4, padx=10, pady=10, ipadx=5, ipady=5)
 
         leave_button = ttk.Button(self.window_container, width=8, image=self.load_image('leave', 20, 20), text="Leave", compound="left", command=lambda: self.display_lessons())
-        leave_button.grid(column=0, row=3, pady=10, sticky=tk.W)
+        leave_button.grid(column=1, row=5, padx=10, pady=10, ipadx=5, ipady=5, sticky=tk.W)
 
         check_button = ttk.Button(self.window_container, width=8, image=self.load_image('check', 20, 20), text="Validate", compound="left", command=lambda: self.validate_response(response_var.get()))
-        check_button.grid(column=0, row=3, pady=10, sticky=tk.E)
+        check_button.grid(column=1, row=5, padx=10, pady=10, ipadx=5, ipady=5, sticky=tk.E)
 
 if __name__ == "__main__":
     app = Bilingual()
