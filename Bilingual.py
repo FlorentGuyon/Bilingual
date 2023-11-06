@@ -18,6 +18,7 @@ class Bilingual(tk.Tk):
         super().__init__()
         
         self.icons = {}
+        self.data = None
         self.spoken_language = None
         self.learned_language = None
         self.current_profile = None
@@ -165,15 +166,34 @@ class Bilingual(tk.Tk):
         return list(self.data.keys())
 
     @log_calls
-    def get_all_lessons(self):
-        return list(self.data[self.current_category].keys())
+    def get_all_lessons(self, category=None):
+        if category is None:
+            category = self.current_category
+        return list(self.data[category].keys())
+
+    @log_calls
+    def get_category_progress(self, category=None):
+        if category is None:
+            category = self.current_category
+        progressions = [self.get_lesson_progress(category=category, lesson=lesson) for lesson in self.get_all_lessons(category=category)]
+        return sum(progressions) / len(progressions)
+
+    @log_calls
+    def get_lesson_progress(self, category=None, lesson=None):
+        if category is None:
+            category = self.current_category
+        if lesson is None:
+            lesson = self.current_lesson
+        progressions = [question[self.learned_language]["success_rate"] for question in self.data[category][lesson]]
+        return sum(progressions) / len(progressions)
 
     @log_calls
     def choose_random_question(self):
         deep_copy = deepcopy(self.data)
         random.shuffle(deep_copy[self.current_category][self.current_lesson])
-        for self.current_question in deep_copy[self.current_category][self.current_lesson]:
-            if not self.is_remembered(self.current_question):
+        for question in deep_copy[self.current_category][self.current_lesson]:
+            if not self.is_remembered(question):
+                self.current_question = question
                 break
 
     @log_calls
@@ -276,8 +296,7 @@ class Bilingual(tk.Tk):
         self.clear_window()
         self.window_container.grid(column=1, row=1)
         self.window_container.columnconfigure(0, weight=1)
-        self.window_container.rowconfigure(0, weight=4)
-        self.window_container.rowconfigure(1, weight=1)
+        self.window_container.rowconfigure(0, weight=1)
 
         # Create a sub-container for tiles
         tiles_container = ttk.Frame(self.window_container)
@@ -298,9 +317,6 @@ class Bilingual(tk.Tk):
 
             new_tile = ttk.Button(tile_frame, image=self.load_image(profile, 50, 50), text=profile.capitalize(), compound="top", command=partial(self.select_profile, profile))
             new_tile.grid(column=0, row=0, ipadx=2, ipady=2)
-
-            progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=50)
-            progressbar.grid(column=0, row=1)
 
             # Define the position of the next tile if any
             tile_column += 1
@@ -359,7 +375,7 @@ class Bilingual(tk.Tk):
             new_tile = ttk.Button(tile_frame, image=self.load_image(category, 50, 50), text=category.capitalize(), compound="top", command=partial(self.select_category, category))
             new_tile.grid(column=0, row=0, ipadx=2, ipady=2)
 
-            progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=50)
+            progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=self.get_category_progress(category=category) * 100)
             progressbar.grid(column=0, row=1)
 
             # Define the position of the next tile if any
@@ -370,17 +386,24 @@ class Bilingual(tk.Tk):
                 if tile_row >= lines_by_page:
                     break
 
-        if total_pages > 1:
-            buttons_container = ttk.Frame(self.window_container)
-            buttons_container.grid(column=0, row=1)
-            buttons_container.columnconfigure(0, weight=1)
-            buttons_container.columnconfigure(1, weight=1)
+        buttons_container = ttk.Frame(self.window_container)
+        buttons_container.grid(column=0, row=1)
+        buttons_container.columnconfigure(0, weight=1)
+        buttons_container.columnconfigure(1, weight=1)
+        buttons_container.columnconfigure(2, weight=1)
 
-            previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('previous', 20, 20), compound="left", text="Previous", command=partial(self.display_categories, current_page -1))
-            previous_button.grid(column=0, row=0, padx=30, pady=20)
+        leave_button = ttk.Button(buttons_container, image=self.load_image('leave', 20, 20), compound="left", text="Leave", command=self.display_profiles)
+        leave_button.grid(column=0, row=0, padx=30, pady=20)
 
-            next_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('next', 20, 20), compound="right", text="Next", command=partial(self.display_categories, current_page +1))
-            next_button.grid(column=1, row=0, padx=30, pady=20)
+        buttons_state = "enabled" if current_page > 1 else "disabled"
+
+        previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('previous', 20, 20), compound="left", text="Previous", command=partial(self.display_categories, current_page -1))
+        previous_button.grid(column=1, row=0, padx=30, pady=20)
+
+        buttons_state = "enabled" if current_page < total_pages else "disabled"
+
+        next_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('next', 20, 20), compound="right", text="Next", command=partial(self.display_categories, current_page +1))
+        next_button.grid(column=2, row=0, padx=30, pady=20)
 
     @log_calls
     def display_lessons(self, page=1):
@@ -416,10 +439,10 @@ class Bilingual(tk.Tk):
             tile_frame.rowconfigure(0, weight=1)
             tile_frame.rowconfigure(1, weight=1)
 
-            new_tile = ttk.Button(tile_frame, image=self.load_image(lesson, 50, 50), text=lesson.capitalize(), compound="top", command=partial(self.select_lesson, lesson))
+            new_tile = ttk.Button(tile_frame, image=self.load_image(lesson, 50, 50), text=lesson.replace('-', ' ').capitalize(), compound="top", command=partial(self.select_lesson, lesson))
             new_tile.grid(column=0, row=0, ipadx=2, ipady=2)
 
-            progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=50)
+            progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=self.get_lesson_progress(lesson=lesson) * 100)
             progressbar.grid(column=0, row=1)
 
             # Define the position of the next tile if any
@@ -430,17 +453,24 @@ class Bilingual(tk.Tk):
                 if tile_row >= lines_by_page:
                     break
 
-        if total_pages > 1:
-            buttons_container = ttk.Frame(self.window_container)
-            buttons_container.grid(column=0, row=1)
-            buttons_container.columnconfigure(0, weight=1)
-            buttons_container.columnconfigure(1, weight=1)
+        buttons_container = ttk.Frame(self.window_container)
+        buttons_container.grid(column=0, row=1)
+        buttons_container.columnconfigure(0, weight=1)
+        buttons_container.columnconfigure(1, weight=1)
+        buttons_container.columnconfigure(2, weight=1)
 
-            previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('previous', 20, 20), compound="left", text="Previous", command=partial(self.display_lessons, current_page -1))
-            previous_button.grid(column=0, row=0, padx=30, pady=20)
+        leave_button = ttk.Button(buttons_container, image=self.load_image('leave', 20, 20), compound="left", text="Leave", command=self.display_categories)
+        leave_button.grid(column=0, row=0, padx=30, pady=20)
 
-            next_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('next', 20, 20), compound="right", text="Next", command=partial(self.display_lessons, current_page +1))
-            next_button.grid(column=1, row=0, padx=30, pady=20)
+        buttons_state = "enabled" if current_page > 1 else "disabled"
+
+        previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('previous', 20, 20), compound="left", text="Previous", command=partial(self.display_lessons, current_page -1))
+        previous_button.grid(column=1, row=0, padx=30, pady=20)
+
+        buttons_state = "enabled" if current_page < total_pages else "disabled"
+
+        next_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('next', 20, 20), compound="right", text="Next", command=partial(self.display_lessons, current_page +1))
+        next_button.grid(column=2, row=0, padx=30, pady=20)
 
     @log_calls
     def display_answer(self, response):
