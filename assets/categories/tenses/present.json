@@ -1,0 +1,296 @@
+[
+    {
+        "english": {
+            "sentence": "I speak French",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je parle français",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "You speak well",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Tu parles bien",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "He speaks English",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Il parle anglais",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "She speaks English",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Elle parle anglais",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "We speak Spanish",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Nous parlons espagnol",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "You speak German",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Vous parlez allemand",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "They speak Italian",
+            "hints": "they are males",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Ils parlent italien",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "They speak Italian",
+            "hints": "they are females",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Elles parlent italien",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I finish my work",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je finis mon travail",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "You finish quickly",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Tu finis rapidement",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "He finishes the book",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Il finit le livre",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "She finishes the book",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Elle finit le livre",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "We finish our homework",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Nous finissons nos devoirs",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "You finish early",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Vous finissez tôt",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "They finish the race",
+            "hints": "they are males",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Ils finissent la course",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "They finish the race",
+            "hints": "they are females",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Elles finissent la course",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I take a coffee",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je prends un café",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "You take the bus",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Tu prends le bus",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "He takes the subway",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Il prend le métro",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "She takes the subway",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Elle prend le métro",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "We have breakfast",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Nous prenons le petit-déjeuner",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "You take the train",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Vous prenez le train",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "They take photos",
+            "hints": "they are males",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Ils prennent des photos",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "They take photos",
+            "hints": "they are females",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Elles prennent des photos",
+            "success_rate": 0,
+            "tries": 0
+        }
+    }
+]

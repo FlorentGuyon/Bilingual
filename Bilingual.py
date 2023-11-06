@@ -5,10 +5,8 @@ import os
 
 from math import ceil
 from tkinter import ttk
-from tkinter.scrolledtext import ScrolledText
 from PIL import Image, ImageTk
 from functools import partial
-from datetime import datetime
 from copy import deepcopy
 
 
@@ -192,6 +190,8 @@ class Bilingual(tk.Tk):
         deep_copy = deepcopy(self.data)
         random.shuffle(deep_copy[self.current_category][self.current_lesson])
         for question in deep_copy[self.current_category][self.current_lesson]:
+            if question == self.current_question:
+                continue
             if not self.is_remembered(question):
                 self.current_question = question
                 return
@@ -549,7 +549,7 @@ class Bilingual(tk.Tk):
         entry.focus()
         entry.grid(column=0, row=2, pady=10, ipadx=5)
 
-        leave_button = ttk.Button(self.window_container, width=8, image=self.load_image('leave', 20, 20), text="Leave", compound="left", command=lambda: self.display_categories())
+        leave_button = ttk.Button(self.window_container, width=8, image=self.load_image('leave', 20, 20), text="Leave", compound="left", command=lambda: self.display_lessons())
         leave_button.grid(column=0, row=3, pady=10, sticky=tk.W)
 
         check_button = ttk.Button(self.window_container, width=8, image=self.load_image('check', 20, 20), text="Validate", compound="left", command=lambda: self.validate_response(response_var.get()))

@@ -1,0 +1,296 @@
+[
+    {
+        "english": {
+            "sentence": "I would speak French",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je parlerais français",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "You would speak well",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Tu parlerais bien",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "He would speak English",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Il parlerait anglais",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "She would speak English",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Elle parlerait anglais",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "We would speak Spanish",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Nous parlerions espagnol",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "You would speak German",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Vous parleriez allemand",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "They would speak Italian",
+            "hints": "they are males",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Ils parleraient italien",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "They would speak Italian",
+            "hints": "they are females",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Elles parleraient italien",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I would finish my work",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je finirais mon travail",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "You would finish quickly",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Tu finirais rapidement",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "He would finish the book",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Il finirait le livre",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "She would finish the book",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Elle finirait le livre",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "We would finish our homework",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Nous finirions nos devoirs",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "You would finish early",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Vous finiriez tôt",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "They would finish the race",
+            "hints": "they are males",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Ils finiraient la course",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "They would finish the race",
+            "hints": "they are females",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Elles finiraient la course",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I would take a coffee",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je prendrais un café",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "You would take the bus",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Tu prendrais le bus",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "He would take the subway",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Il prendrait le métro",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "She would take the subway",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Elle prendrait le métro",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "We would have breakfast",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Nous prendrions le petit-déjeuner",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "You would take the train",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Vous prendriez le train",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "They would take photos",
+            "hints": "they are males",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Ils prendraient des photos",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "They would take photos",
+            "hints": "they are females",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Elles prendraient des photos",
+            "success_rate": 0,
+            "tries": 0
+        }
+    }
+]

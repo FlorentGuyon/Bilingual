@@ -1,0 +1,296 @@
+[
+    {
+        "english": {
+            "sentence": "I hope that I speak French",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "J'espère que je parle français",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I wish that you speak well",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je souhaite que tu parles bien",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "It's important that he speak English",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Il est important qu'il parle anglais",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I hope that she speak English",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "J'espère qu'elle parle anglais",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "We need you to speak Spanish",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Nous avons besoin que tu parles espagnol",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "It's necessary that you speak German",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Il est nécessaire que vous parliez allemand",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I want them to speak Italian",
+            "hints": "they are males",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je veux qu'ils parlent italien",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I want them to speak Italian",
+            "hints": "they are females",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je veux qu'elles parlent italien",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I hope that I finish my work",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "J'espère que je finisse mon travail",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I wish that you finish quickly",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je souhaite que tu finisses rapidement",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "It's important that he finish the book",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Il est important qu'il finisse le livre",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I hope that she finish the book",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "J'espère qu'elle finisse le livre",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "We need you to finish our homework",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Nous avons besoin que tu finisses nos devoirs",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "It's necessary that you finish early",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Il est nécessaire que vous finissiez tôt",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I want them to finish the race",
+            "hints": "they are males",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je veux qu'ils finissent la course",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I want them to finish the race",
+            "hints": "they are females",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je veux qu'elles finissent la course",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I hope that I take a coffee",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "J'espère que je prenne un café",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I wish that you take the bus",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je souhaite que tu prennes le bus",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "It's important that he take the subway",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Il est important qu'il prenne le métro",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I hope that she take the subway",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "J'espère qu'elle prenne le métro",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "We need you to have breakfast",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Nous avons besoin que tu prennes le petit-déjeuner",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "It's necessary that you take the train",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Il est nécessaire que vous preniez le train",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I want them to take photos",
+            "hints": "they are males",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je veux qu'ils prennent des photos",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "I want them to take photos",
+            "hints": "they are females",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Je veux qu'elles prennent des photos",
+            "success_rate": 0,
+            "tries": 0
+        }
+    }
+]
