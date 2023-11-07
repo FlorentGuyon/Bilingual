@@ -137,6 +137,8 @@ class Bilingual(tk.Tk):
         self.style.configure("LanguagesLabel.TLabel", background=COLOR_DARK_PINK)
 
         self.style.configure("CategoriesFrame.TFrame", background=COLOR_DARK_PINK)
+        self.style.configure("CategoriesProgressBar.TFrame", background="#e1a99f")
+        self.style.configure("CategoriesProgressBarBackground.TFrame", background="#edcbc5")
         self.style.configure("CategoriesLabel.TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE, font=('Calibri', 14))
 
         self.style.configure("NavigationFrame.TFrame", background=COLOR_DARK_PINK)
@@ -240,7 +242,7 @@ class Bilingual(tk.Tk):
     def bind_widget(self, widget, command, event=EVENT_LEFT_CLICK):
         widget.bind(event, command)
         for child in widget.winfo_children():
-            child.bind(event, command)
+            self.bind_widget(child, command, event)
 
     @log_calls
     def validate_languages(self, spoken_language, learned_language, event=None):
@@ -406,21 +408,28 @@ class Bilingual(tk.Tk):
             frame = ttk.Frame(self.window_container, style="CategoriesFrame.TFrame")
             frame.pack(pady=5, expand=True, fill=tk.X)
 
-            frame_picture = ttk.Label(frame, image=self.load_image(category, 45, 45), style="CategoriesLabel.TLabel")
-            frame_picture.pack(padx=15, pady=5, side=tk.LEFT)
+            title_frame = ttk.Frame(frame, style="CategoriesFrame.TFrame")
+            title_frame.pack(expand=True, fill=tk.BOTH)
 
-            frame_text = ttk.Label(frame, text=category.capitalize(), style="CategoriesLabel.TLabel")
-            frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
+            title_frame_picture = ttk.Label(title_frame, image=self.load_image(category, 35, 35), style="CategoriesLabel.TLabel")
+            title_frame_picture.pack(padx=15, pady=5, side=tk.LEFT)
+
+            title_frame_text = ttk.Label(title_frame, text=category.capitalize(), style="CategoriesLabel.TLabel")
+            title_frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
+
+            progressbar_frame = ttk.Frame(frame, style="CategoriesFrame.TFrame")
+            progressbar_frame.pack(expand=True, fill=tk.X)
+
+            self.update()
+
+            progressbar_frame_left_width = frame.winfo_width() * self.get_category_progress(category=category)
+            progressbar_frame_left = ttk.Frame(progressbar_frame, height=5, width=progressbar_frame_left_width, style="CategoriesProgressBar.TFrame")
+            progressbar_frame_left.pack(side=tk.LEFT)
+            
+            progressbar_frame_right = ttk.Frame(progressbar_frame, height=5, style="CategoriesProgressBarBackground.TFrame")
+            progressbar_frame_right.pack(expand=True, fill=tk.X, side=tk.LEFT)
 
             self.bind_widget(frame, partial(self.select_category, category))
-
-            #progress_value = ceil(self.get_category_progress(category=category) * 100)
-
-            #progress = ttk.Label(tile_frame, text=f'{progress_value}%')
-            #progress.grid(column=0, row=1)
-
-            #progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=progress_value)
-            #progressbar.grid(column=0, row=2)
 
             # Define the position of the next tile if any
             tile_column += 1
