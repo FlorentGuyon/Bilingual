@@ -14,7 +14,6 @@ class Bilingual(tk.Tk):
 
     def __init__(self):
         super().__init__()
-        
         self.icons = {}
         self.data = None
         self.explainations = None
@@ -232,6 +231,7 @@ class Bilingual(tk.Tk):
 
     @log_calls
     def validate_response(self, response):
+        response_is_right = None
         answer = self.current_question[self.learned_language]["sentence"]
         question = None
 
@@ -240,11 +240,15 @@ class Bilingual(tk.Tk):
                 question[self.learned_language]["tries"] += 1
                 break
 
+        if (response != "") and (response[-1] == "."):
+            response = response[:-1]
+
         # If the response is right
         if response.lower().strip() == answer.lower().strip():
             question[self.learned_language]["success_rate"] = ((question[self.learned_language]["success_rate"] * (question[self.learned_language]["tries"] -1)) +1) / question[self.learned_language]["tries"]
             self.save_profile()
             self.display_questions()
+
         # If the response is wrong
         else:
             question[self.learned_language]["success_rate"] = (question[self.learned_language]["success_rate"] * (question[self.learned_language]["tries"] -1)) / question[self.learned_language]["tries"]
@@ -509,38 +513,39 @@ class Bilingual(tk.Tk):
         next_button.grid(column=2, row=0, padx=30, pady=20)
 
     @log_calls
+    def scroll_widget(self, widget, event):
+        widget.configure(scrollregion=widget.bbox("all"))
+
+    @log_calls
+    def get_random_color(self):
+        return random.choice(["red", "blue", "yellow", "green", "magenta", "orange"]) if self.debug_color else None
+
+    @log_calls
     def display_answer(self, response):
         # Configure page grid
         self.clear_window()
         self.window_container.grid(column=1, row=1)
-        self.window_container.columnconfigure(0, weight=1)
-        self.window_container.columnconfigure(1, weight=1)
-        self.window_container.grid_columnconfigure(1, minsize=200)
-        self.window_container.rowconfigure(0, weight=1)
-        self.window_container.rowconfigure(1, weight=1)
-        self.window_container.rowconfigure(2, weight=1)
-        self.window_container.rowconfigure(3, weight=1)
         
-        response_title_text = "Your response"
-        response_title_label = ttk.Label(self.window_container, text=response_title_text, anchor="w", justify=tk.LEFT)
-        response_title_label.grid(column=0, row=0, padx=10, pady=10, ipadx=5, ipady=5)
+        sentence_LabelFrame = ttk.LabelFrame(self.window_container, text="Sentence")
+        sentence_LabelFrame.pack(pady=10)
         
-        response_text = response.capitalize()
-        response_label = ttk.Label(self.window_container, text=response_text, anchor="w", justify=tk.LEFT)
-        response_label.grid(column=1, row=0, padx=10, pady=10, ipadx=5, ipady=5)
+        sentence_text = self.current_question[self.spoken_language]["sentence"].capitalize()
+        sentence = ttk.Label(sentence_LabelFrame, text=sentence_text, width=50)
+        sentence.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
         
-        answer_title_text = "Answer"
-        answer_title_label = ttk.Label(self.window_container, text=answer_title_text, anchor="w", justify=tk.LEFT)
-        answer_title_label.grid(column=0, row=1, padx=10, pady=10, ipadx=5, ipady=5)
+        response_LabelFrame = ttk.LabelFrame(self.window_container, text="Your answer")
+        response_LabelFrame.pack(pady=10)
         
-        answer_text = self.current_question[self.learned_language]["sentence"].capitalize()
-        answer_label = ttk.Label(self.window_container, text=answer_text, anchor="w", justify=tk.LEFT)
-        answer_label.grid(column=1, row=1, padx=10, pady=10, ipadx=5, ipady=5)
+        response = ttk.Label(response_LabelFrame, text=response.capitalize(), width=50)
+        response.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
         
-        explaination_title_text = "Explainations"
-        explaination_title_label = ttk.Label(self.window_container, text=explaination_title_text, anchor="w", justify=tk.LEFT)
-        explaination_title_label.grid(column=0, row=2, padx=10, pady=10, ipadx=5, ipady=5)
+        answer_labelFrame = ttk.LabelFrame(self.window_container, text="Right answer")
+        answer_labelFrame.pack(pady=10)
         
+        answer_label_text = self.current_question[self.learned_language]["sentence"].capitalize()
+        answer_label = ttk.Label(answer_labelFrame, text=answer_label_text, width=50)
+        answer_label.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+
         explaination_text = []
  
         if self.learned_language in self.explainations.keys():
@@ -550,14 +555,35 @@ class Bilingual(tk.Tk):
                         if self.spoken_language in item["explainations"].keys():
                             explaination_text.append(item["explainations"][self.spoken_language])
 
-        explaination_label = ttk.Label(self.window_container, width=50, wraplength=400, text="\n\n".join(explaination_text), anchor="w", justify=tk.LEFT)
-        explaination_label.grid(column=1, row=2, padx=10, pady=10, ipadx=5, ipady=5)
+        if len(explaination_text) > 0 :
+            explaination_LabelFrame = ttk.LabelFrame(self.window_container, text="Explainations")
+            explaination_LabelFrame.pack(pady=10)
+            
+            explaination_canvas = tk.Canvas(explaination_LabelFrame, width=400)
+            explaination_canvas.pack(side="left", expand=True, fill=tk.BOTH)
+
+            scrollbar_frame = ttk.Frame(explaination_LabelFrame)
+            scrollbar_frame.pack(side="right", expand=True, fill=tk.Y)
+
+            explaination_scrollbar = ttk.Scrollbar(scrollbar_frame, orient='vertical', command=explaination_canvas.yview)
+            explaination_scrollbar.pack(expand=True, fill=tk.Y)
+
+            explaination_frame = tk.Frame(explaination_canvas, width=400)
+            explaination_frame.pack(expand=True, fill=tk.BOTH)
+
+            explaination_canvas.configure(yscrollcommand=explaination_scrollbar.set)
+            explaination_canvas.create_window((4, 4), window=explaination_frame, anchor="nw", tags="frame")
+            explaination_frame.bind("<Configure>", partial(self.scroll_widget, explaination_canvas))
+
+            explaination_label_text = "\n\n".join(explaination_text)
+            explaination_label = ttk.Label(explaination_frame, wraplength=400, text=explaination_label_text, anchor=tk.W, justify=tk.LEFT)
+            explaination_label.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
 
         leave_button = ttk.Button(self.window_container, width=8, image=self.load_image('leave', 20, 20), text="Leave", compound="left", command=lambda: self.display_categories())
-        leave_button.grid(column=1, row=3, padx=10, pady=10, ipady=5, sticky=tk.W)
+        leave_button.pack(pady=10, ipadx=5, side="left")
 
         next_button = ttk.Button(self.window_container, width=8, image=self.load_image('next', 20, 20), text="Next", compound="left", command=lambda: self.display_questions())
-        next_button.grid(column=1, row=3, padx=10, pady=10, ipady=5, sticky=tk.E)
+        next_button.pack(pady=10, ipadx=5, side="right")
     
     @log_calls
     def display_questions(self):
