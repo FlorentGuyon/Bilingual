@@ -136,6 +136,12 @@ class Bilingual(tk.Tk):
         self.style.configure("LanguagesFrame.TFrame", background=COLOR_DARK_PINK)
         self.style.configure("LanguagesLabel.TLabel", background=COLOR_DARK_PINK)
 
+        self.style.configure("CategoriesFrame.TFrame", background=COLOR_DARK_PINK)
+        self.style.configure("CategoriesLabel.TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE, font=('Calibri', 14))
+
+        self.style.configure("NavigationFrame.TFrame", background=COLOR_DARK_PINK)
+        self.style.configure("NavigationLabel.TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE)
+
     @log_calls
     def create_window(self):
         self.title("Go Bilingo")
@@ -237,7 +243,7 @@ class Bilingual(tk.Tk):
             child.bind(event, command)
 
     @log_calls
-    def validate_languages(self, spoken_language, learned_language, event):
+    def validate_languages(self, spoken_language, learned_language, event=None):
         print(spoken_language)
         print(learned_language)
         if (spoken_language == "") or (learned_language == ""):
@@ -280,24 +286,24 @@ class Bilingual(tk.Tk):
             widget.destroy()
 
     @log_calls
-    def select_profile(self, profile, event):
+    def select_profile(self, profile, event=None):
         self.current_profile = profile
         self.load_profile()
         self.load_explainations()
         self.display_languages()
     
     @log_calls
-    def select_category(self, category):
+    def select_category(self, category, event=None):
         self.current_category = category
         self.display_lessons()
 
     @log_calls
-    def select_lesson(self, lesson):
+    def select_lesson(self, lesson, event=None):
         self.current_lesson = lesson
         self.display_questions()
 
     @log_calls
-    def display_languages(self):
+    def display_languages(self, event=None):
         languages = self.get_all_languages()
 
         # Configure page grid
@@ -313,13 +319,13 @@ class Bilingual(tk.Tk):
                 frame = ttk.Frame(self.window_container, style="LanguagesFrame.TFrame")
                 frame.pack(pady=10, expand=True, fill=tk.X)
 
-                spoken_language_picture = ttk.Label(frame, image=self.load_image(spoken_language, 50, 50), style="LanguagesLabel.TLabel")
+                spoken_language_picture = ttk.Label(frame, image=self.load_image(spoken_language, 45, 45), style="LanguagesLabel.TLabel")
                 spoken_language_picture.pack(padx=15, pady=10, side=tk.LEFT)
 
-                arrow_picture = ttk.Label(frame, image=self.load_image("arrow", 50, 50), style="LanguagesLabel.TLabel")
+                arrow_picture = ttk.Label(frame, image=self.load_image("arrow_right", 45, 45), style="LanguagesLabel.TLabel")
                 arrow_picture.pack(padx=15, pady=10, side=tk.LEFT)
 
-                learned_language_picture = ttk.Label(frame, image=self.load_image(learned_language, 50, 50), style="LanguagesLabel.TLabel")
+                learned_language_picture = ttk.Label(frame, image=self.load_image(learned_language, 45, 45), style="LanguagesLabel.TLabel")
                 learned_language_picture.pack(padx=15, pady=10, side=tk.LEFT)
 
                 self.bind_widget(frame, partial(self.validate_languages, spoken_language, learned_language))
@@ -389,13 +395,6 @@ class Bilingual(tk.Tk):
         # Configure page grid
         self.clear_window()
         self.window_container.grid(column=1, row=1)
-        self.window_container.columnconfigure(0, weight=1)
-        self.window_container.rowconfigure(0, weight=4)
-        self.window_container.rowconfigure(1, weight=1)
-
-        # Create a sub-container for tiles
-        tiles_container = ttk.Frame(self.window_container)
-        tiles_container.grid(column=0, row=0)
 
         # Initialize variables
         start_index = (current_page - 1) * tiles_by_page
@@ -404,23 +403,24 @@ class Bilingual(tk.Tk):
         # Iterate through categories
         for category in categories[start_index:]:
 
-            tile_frame = ttk.Frame(tiles_container, width=100)
-            tile_frame.grid(column=tile_column, row=tile_row, padx=15, pady=10, ipadx=2, ipady=2)
-            tile_frame.columnconfigure(0, weight=1)
-            tile_frame.rowconfigure(0, weight=1)
-            tile_frame.rowconfigure(1, weight=1)
-            tile_frame.rowconfigure(2, weight=1)
+            frame = ttk.Frame(self.window_container, style="CategoriesFrame.TFrame")
+            frame.pack(pady=5, expand=True, fill=tk.X)
 
-            new_tile = ttk.Button(tile_frame, image=self.load_image(category, 50, 50), text=category.capitalize(), compound="top", command=partial(self.select_category, category))
-            new_tile.grid(column=0, row=0, ipadx=2, ipady=2)
+            frame_picture = ttk.Label(frame, image=self.load_image(category, 45, 45), style="CategoriesLabel.TLabel")
+            frame_picture.pack(padx=15, pady=5, side=tk.LEFT)
 
-            progress_value = ceil(self.get_category_progress(category=category) * 100)
+            frame_text = ttk.Label(frame, text=category.capitalize(), style="CategoriesLabel.TLabel")
+            frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
-            progress = ttk.Label(tile_frame, text=f'{progress_value}%')
-            progress.grid(column=0, row=1)
+            self.bind_widget(frame, partial(self.select_category, category))
 
-            progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=progress_value)
-            progressbar.grid(column=0, row=2)
+            #progress_value = ceil(self.get_category_progress(category=category) * 100)
+
+            #progress = ttk.Label(tile_frame, text=f'{progress_value}%')
+            #progress.grid(column=0, row=1)
+
+            #progressbar = ttk.Progressbar(tile_frame, orient="horizontal", length=100, mode="determinate", value=progress_value)
+            #progressbar.grid(column=0, row=2)
 
             # Define the position of the next tile if any
             tile_column += 1
@@ -430,24 +430,26 @@ class Bilingual(tk.Tk):
                 if tile_row >= lines_by_page:
                     break
 
-        buttons_container = ttk.Frame(self.window_container)
-        buttons_container.grid(column=0, row=1)
-        buttons_container.columnconfigure(0, weight=1)
-        buttons_container.columnconfigure(1, weight=1)
-        buttons_container.columnconfigure(2, weight=1)
+        return_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        return_frame.pack(pady=10)
 
-        leave_button = ttk.Button(buttons_container, image=self.load_image('leave', 20, 20), compound="left", text="Leave", command=self.display_profiles)
-        leave_button.grid(column=0, row=0, padx=30, pady=20)
+        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25), style="NavigationLabel.TLabel")
+        return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
 
-        buttons_state = "enabled" if current_page > 1 else "disabled"
+        return_frame_text = ttk.Label(return_frame, text="Languages", style="NavigationLabel.TLabel")
+        return_frame_text.pack(ipadx=5, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
+        
+        self.bind_widget(return_frame, self.display_languages)
 
-        previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('previous', 20, 20), compound="left", text="Previous", command=partial(self.display_categories, current_page -1))
-        previous_button.grid(column=1, row=0, padx=30, pady=20)
+        #buttons_state = "enabled" if current_page > 1 else "disabled"
 
-        buttons_state = "enabled" if current_page < total_pages else "disabled"
+        #previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('previous', 20, 20), compound="left", text="Previous", command=partial(self.display_categories, current_page -1))
+        #previous_button.grid(column=1, row=0, padx=30, pady=20)
 
-        next_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('next', 20, 20), compound="right", text="Next", command=partial(self.display_categories, current_page +1))
-        next_button.grid(column=2, row=0, padx=30, pady=20)
+        #buttons_state = "enabled" if current_page < total_pages else "disabled"
+
+        #next_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('next', 20, 20), compound="right", text="Next", command=partial(self.display_categories, current_page +1))
+        #next_button.grid(column=2, row=0, padx=30, pady=20)
 
     @log_calls
     def display_lessons(self, page=1):
