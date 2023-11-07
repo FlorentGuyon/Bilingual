@@ -1,0 +1,30 @@
+[
+	{
+		"paterns": [
+			"'"
+		],
+		"explainations": {
+			"english": "In French, the apostrophe character (') is used to create contractions when a word ends with a vowel (a, e, i, o, u, y) and the following word begins with a vowel or a silent \"h\". In this case, the first vowel is replaced by an apostrophe, and the two words are no longer separated.\n\nExamples: \"ce est\" becomes \"c'est\", \"je ai\" becomes \"j'ai\", \"le animal\" becomes \"l'animal\", \"si il\" becomes \"s'il\", \"Lorsque on\" becomes \"lorsqu'on\"...\n\nWith the exception of verbs conjugated in the second person singular (tu), which retain their vowel.\n\nExamples: \"Tu es\", \"tu as\", \"tu imagines\"..."
+		}
+	},
+	{
+		"paterns": [
+			"indigo",
+			"marron",
+			"argent",
+			"corail",
+			"magenta",
+			"orange",
+			"rose",
+			"vermeille",
+			"pourpre",
+			"mauve",
+			"fauve",
+			"écarlate",
+			"incarnat"
+		],
+		"explainations": {
+			"english": "In French, the spelling of color adjectives depends on gender (female : +e) and number (multiple : +s), with exceptions for colors originating from nouns, such as \"indigo\" (the flower), \"marron\" (the fruit, chestnut), \"argent\" (the metal, silver), \"corail\" (the animal, coral), \"magenta\" (the city)...\n\nHowever, there are exceptions for color adjectives like \"rose\", \"vermeille\", \"pourpre\", \"mauve\", \"fauve\", \"\u00e9carlate\", and \"incarnat\" which also originate from nouns but still follow gender and number."
+		}
+	}
+]

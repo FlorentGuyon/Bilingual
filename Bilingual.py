@@ -17,6 +17,7 @@ class Bilingual(tk.Tk):
         
         self.icons = {}
         self.data = None
+        self.explainations = None
         self.spoken_language = None
         self.learned_language = None
         self.current_profile = None
@@ -44,6 +45,25 @@ class Bilingual(tk.Tk):
                         json_file.write(json_data)
                     except json.JSONDecodeError:
                         print(f"Error decoding JSON in {file_path}")
+
+    @log_calls
+    def load_explainations(self):
+        self.explainations = {}  # Dictionary to store the result
+
+        for subdir, _, files in os.walk(f"./assets/explainations/"):
+            json_files = [f for f in files if f.endswith('.json')]
+
+            for json_file in json_files:
+                file_name = os.path.splitext(json_file)[0]  # Remove the .json extension
+                file_path = os.path.join(subdir, json_file)
+
+                with open(file_path, 'r', encoding='utf-8') as json_file:
+                    try:
+                        file_content = json.load(json_file)
+                        self.explainations[file_name] = file_content
+                    except json.JSONDecodeError:
+                        print(f"Error decoding JSON in {file_path}")
+                        exit()                
 
     @log_calls
     def load_profile(self):
@@ -78,7 +98,7 @@ class Bilingual(tk.Tk):
         resized_image = self.resize_image(f'./assets/icons/{name}.png', width, height)
         
         if not resized_image:
-            return self.load_image("missing", 10, 10)
+            return self.load_image("missing", width, height)
         
         self.icons[name] = {}
         self.icons[name][width] = {}
@@ -239,6 +259,7 @@ class Bilingual(tk.Tk):
     def select_profile(self, profile):
         self.current_profile = profile
         self.load_profile()
+        self.load_explainations()
         self.display_languages()
     
     @log_calls
@@ -493,32 +514,49 @@ class Bilingual(tk.Tk):
         self.clear_window()
         self.window_container.grid(column=1, row=1)
         self.window_container.columnconfigure(0, weight=1)
-        self.window_container.grid_columnconfigure(0, minsize=200)
+        self.window_container.columnconfigure(1, weight=1)
+        self.window_container.grid_columnconfigure(1, minsize=200)
         self.window_container.rowconfigure(0, weight=1)
         self.window_container.rowconfigure(1, weight=1)
         self.window_container.rowconfigure(2, weight=1)
         self.window_container.rowconfigure(3, weight=1)
         
-        response_text = f"Your response: {response.capitalize()}"
-        response_label = ttk.Label(self.window_container, text=response_text, justify=tk.CENTER)
-        response_label.grid(column=0, row=0, pady=10, ipadx=5)
+        response_title_text = "Your response"
+        response_title_label = ttk.Label(self.window_container, text=response_title_text, anchor="w", justify=tk.LEFT)
+        response_title_label.grid(column=0, row=0, padx=10, pady=10, ipadx=5, ipady=5)
         
-        answer = self.current_question[self.learned_language]["sentence"]
-        answer_text = f"Answer: {answer.capitalize()}"
-        answer_label = ttk.Label(self.window_container, text=answer_text, justify=tk.CENTER)
-        answer_label.grid(column=0, row=1, pady=10, ipadx=5)
+        response_text = response.capitalize()
+        response_label = ttk.Label(self.window_container, text=response_text, anchor="w", justify=tk.LEFT)
+        response_label.grid(column=1, row=0, padx=10, pady=10, ipadx=5, ipady=5)
         
-        if "explaination" in self.current_question[self.learned_language].keys():
-            explaination = self.current_question[self.learned_language]["explaination"]
-            explaination_text = f"Explaination: {explaination.capitalize()}"
-            explaination_label = ttk.Label(self.window_container, width=50, wraplength=400, text=explaination_text, justify=tk.CENTER)
-            explaination_label.grid(column=0, row=2, pady=10, ipadx=5)
+        answer_title_text = "Answer"
+        answer_title_label = ttk.Label(self.window_container, text=answer_title_text, anchor="w", justify=tk.LEFT)
+        answer_title_label.grid(column=0, row=1, padx=10, pady=10, ipadx=5, ipady=5)
+        
+        answer_text = self.current_question[self.learned_language]["sentence"].capitalize()
+        answer_label = ttk.Label(self.window_container, text=answer_text, anchor="w", justify=tk.LEFT)
+        answer_label.grid(column=1, row=1, padx=10, pady=10, ipadx=5, ipady=5)
+        
+        explaination_title_text = "Explainations"
+        explaination_title_label = ttk.Label(self.window_container, text=explaination_title_text, anchor="w", justify=tk.LEFT)
+        explaination_title_label.grid(column=0, row=2, padx=10, pady=10, ipadx=5, ipady=5)
+        
+        explaination_text = []
+ 
+        for item in self.explainations[self.learned_language]:
+            for patern in item["paterns"]:
+                if patern in self.current_question[self.learned_language]["sentence"]:
+                    if self.spoken_language in item["explainations"].keys():
+                        explaination_text.append(item["explainations"][self.spoken_language])
+
+        explaination_label = ttk.Label(self.window_container, width=50, wraplength=400, text="\n\n".join(explaination_text), anchor="w", justify=tk.LEFT)
+        explaination_label.grid(column=1, row=2, padx=10, pady=10, ipadx=5, ipady=5)
 
         leave_button = ttk.Button(self.window_container, width=8, image=self.load_image('leave', 20, 20), text="Leave", compound="left", command=lambda: self.display_categories())
-        leave_button.grid(column=0, row=3, padx=2, pady=10, sticky=tk.W)
+        leave_button.grid(column=1, row=3, padx=10, pady=10, ipady=5, sticky=tk.W)
 
         next_button = ttk.Button(self.window_container, width=8, image=self.load_image('next', 20, 20), text="Next", compound="left", command=lambda: self.display_questions())
-        next_button.grid(column=0, row=3, padx=2, pady=10, sticky=tk.E)
+        next_button.grid(column=1, row=3, padx=10, pady=10, ipady=5, sticky=tk.E)
     
     @log_calls
     def display_questions(self):
