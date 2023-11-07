@@ -1,0 +1,302 @@
+[
+    {
+        "english": {
+            "sentence": "The painter sells his canvas",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Le peintre vend sa toile",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The painter sells his canvas",
+            "hints": "The painter is female",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "La peintre vend sa toile",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The painters sell their canvases",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Les peintres vendent leur toiles",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The painters sell their canvases",
+            "hints": "The painters are female",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Les peintres vendent leur toiles",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The musician plays the guitar",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Le musicien joue de la guitare",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The musician plays the guitar",
+            "hints": "The musician is female",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "La musicienne joue de la guitare",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The musicians play their instruments",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Les musiciens jouent de leurs instruments",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The musicians play their instruments",
+            "hints": "The musicians are female",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Les musiciennes jouent de leurs instruments",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The carver crafts a sculpture",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Le sculpteur crée une sculpture",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The carver crafts a sculpture",
+            "hints": "The carver is female",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "La sculptrice crée une sculpture",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The carvers carve into wood",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Les sculpteurs gravent dans du bois",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The carvers carve into wood",
+            "hints": "The carvers are female",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Les sculptrices gravent dans du bois",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The sewer is sewing a new dress",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Le couturier coud une nouvelle robe",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The sewer is sewing a new dress",
+            "hints": "The sewer is female",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "La couturière coud une nouvelle robe",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The sewers are creating unique designs",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Les couturiers créent des designs uniques",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The sewers are creating unique designs",
+            "hints": "The sewers are female",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Les couturières créent des designs uniques",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The baker makes fresh bread",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Le boulanger fait du pain frais",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The baker makes fresh bread",
+            "hints": "The baker is female",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "La boulangère fait du pain frais",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The bakers are kneading the dough",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Les boulangers pétrissent la pâte",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The bakers are kneading the dough",
+            "hints": "The bakers are female",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Les boulangères pétrissent la pâte",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The writer is working on a new novel",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "L'écrivain travaille sur un nouveau roman",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The writer is working on a new book",
+            "hints": "The writer is female",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "L'écrivaine travaille sur un nouveau livre",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The writers are collaborating on a new book",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Les écrivains collaborent sur un nouveau livre",
+            "success_rate": 0,
+            "tries": 0
+        }
+    },
+    {
+        "english": {
+            "sentence": "The writers are collaborating on a new book",
+            "hints": "The writers are female",
+            "success_rate": 0,
+            "tries": 0
+        },
+        "french": {
+            "sentence": "Les écrivaines collaborent sur un nouveau livre",
+            "success_rate": 0,
+            "tries": 0
+        }
+    }
+]

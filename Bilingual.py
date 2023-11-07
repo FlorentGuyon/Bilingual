@@ -543,11 +543,12 @@ class Bilingual(tk.Tk):
         
         explaination_text = []
  
-        for item in self.explainations[self.learned_language]:
-            for patern in item["paterns"]:
-                if patern in self.current_question[self.learned_language]["sentence"]:
-                    if self.spoken_language in item["explainations"].keys():
-                        explaination_text.append(item["explainations"][self.spoken_language])
+        if self.learned_language in self.explainations.keys():
+            for item in self.explainations[self.learned_language]:
+                for patern in item["paterns"]:
+                    if patern in self.current_question[self.learned_language]["sentence"]:
+                        if self.spoken_language in item["explainations"].keys():
+                            explaination_text.append(item["explainations"][self.spoken_language])
 
         explaination_label = ttk.Label(self.window_container, width=50, wraplength=400, text="\n\n".join(explaination_text), anchor="w", justify=tk.LEFT)
         explaination_label.grid(column=1, row=2, padx=10, pady=10, ipadx=5, ipady=5)
