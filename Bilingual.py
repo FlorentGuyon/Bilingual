@@ -587,70 +587,52 @@ class Bilingual(tk.Tk):
     
     @log_calls
     def display_questions(self):
-
         self.choose_random_question()
-        question = self.current_question[self.spoken_language]["sentence"]
-        hints = None
-
-        if "hints" in self.current_question[self.spoken_language].keys():
-            hints = self.current_question[self.spoken_language]["hints"]
-        else:
-            hints = "x"
 
         # Configure page grid
         self.clear_window()
         self.window_container.grid(column=1, row=1)
-        self.window_container.columnconfigure(0, weight=1)
-        self.window_container.columnconfigure(1, weight=3)
-        self.window_container.rowconfigure(0, weight=3)
-        self.window_container.rowconfigure(1, weight=1)
-        self.window_container.rowconfigure(2, weight=1)
-        self.window_container.rowconfigure(3, weight=1)
-        self.window_container.rowconfigure(4, weight=1)
-        self.window_container.rowconfigure(5, weight=3)
 
-        new_label_text = f"Category : {self.current_category.capitalize()}"
-        new_label = ttk.Label(self.window_container, text=new_label_text, justify=tk.CENTER)
-        new_label.grid(column=0, row=0, padx=10, pady=10, ipadx=5, ipady=5)
+        # LESSON
+        lesson_labelFrame = ttk.LabelFrame(self.window_container, text="Lesson")
+        lesson_labelFrame.pack(expand=True, fill=tk.X, pady=10)
 
-        new_label_text = f"Lesson : {self.current_lesson.replace('-', ' ').capitalize()}"
-        new_label = ttk.Label(self.window_container, text=new_label_text, justify=tk.CENTER)
-        new_label.grid(column=1, row=0, padx=10, pady=10, ipadx=5, ipady=5)
+        lesson_label_text = f"{self.current_category.title()} - {self.current_lesson.replace('-', ' ').title()}"
+        lesson_label = ttk.Label(lesson_labelFrame, text=lesson_label_text, justify=tk.LEFT)
+        lesson_label.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
 
-        new_label = ttk.Label(self.window_container, text="Task", justify=tk.LEFT)
-        new_label.grid(column=0, row=1, padx=10, pady=10, ipadx=5, ipady=5)
+        # SENTENCE
+        sentence_labelFrame = ttk.LabelFrame(self.window_container, text="Sentence")
+        sentence_labelFrame.pack(expand=True, fill=tk.X, pady=10)
 
-        new_label_text = f"Translate the following sentence from {self.spoken_language.capitalize()} to {self.learned_language.capitalize()}:"
-        new_label = ttk.Label(self.window_container, text=new_label_text, justify=tk.LEFT)
-        new_label.grid(column=1, row=1, padx=10, pady=10, ipadx=5, ipady=5)
+        sentence_label_text = self.current_question[self.spoken_language]["sentence"].capitalize()
+        sentence_label = ttk.Label(sentence_labelFrame, text=sentence_label_text, justify=tk.LEFT)
+        sentence_label.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
 
-        new_label = ttk.Label(self.window_container, text="Sentence", justify=tk.LEFT)
-        new_label.grid(column=0, row=2, padx=10, pady=10, ipadx=5, ipady=5)
+        # HINTS
+        if "hints" in self.current_question[self.spoken_language].keys() :
+            hints_labelFrame = ttk.LabelFrame(self.window_container, text="Hints")
+            hints_labelFrame.pack(expand=True, fill=tk.X, pady=10)
+            
+            hints_label_text = self.current_question[self.spoken_language]["hints"].capitalize()
+            hints_label = ttk.Label(hints_labelFrame, text="Hints", justify=tk.LEFT)
+            hints_label.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
 
-        new_label_text = question.capitalize()
-        new_label = ttk.Label(self.window_container, text=new_label_text, justify=tk.LEFT)
-        new_label.grid(column=1, row=2, padx=10, pady=10, ipadx=5, ipady=5)
-
-        new_label = ttk.Label(self.window_container, text="Context", justify=tk.LEFT)
-        new_label.grid(column=0, row=3, padx=10, pady=10, ipadx=5, ipady=5)
-
-        new_label_text = hints.capitalize()
-        new_label = ttk.Label(self.window_container, text=new_label_text, justify=tk.LEFT)
-        new_label.grid(column=1, row=3, padx=10, pady=10, ipadx=5, ipady=5)
-
-        new_label = ttk.Label(self.window_container, text="Answer", justify=tk.LEFT)
-        new_label.grid(column=0, row=4, padx=10, pady=10, ipadx=5, ipady=5)
+        # ANSWER
+        resonse_labelFrame = ttk.LabelFrame(self.window_container, text="Answer")
+        resonse_labelFrame.pack(expand=True, fill=tk.X, pady=10)
         
-        response_var = tk.StringVar()
-        entry = ttk.Entry(self.window_container, width=50, textvariable=response_var)
-        entry.focus()
-        entry.grid(column=1, row=4, padx=10, pady=10, ipadx=5, ipady=5)
+        response_Stringvar = tk.StringVar()
+        response_entry = ttk.Entry(resonse_labelFrame, textvariable=response_Stringvar)
+        response_entry.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
+        response_entry.focus()
 
+        # BUTTONS
         leave_button = ttk.Button(self.window_container, width=8, image=self.load_image('leave', 20, 20), text="Leave", compound="left", command=lambda: self.display_lessons())
-        leave_button.grid(column=1, row=5, padx=10, pady=10, ipadx=5, ipady=5, sticky=tk.W)
+        leave_button.pack(pady=10, ipadx=5, side="left")
 
-        check_button = ttk.Button(self.window_container, width=8, image=self.load_image('check', 20, 20), text="Validate", compound="left", command=lambda: self.validate_response(response_var.get()))
-        check_button.grid(column=1, row=5, padx=10, pady=10, ipadx=5, ipady=5, sticky=tk.E)
+        check_button = ttk.Button(self.window_container, width=8, image=self.load_image('check', 20, 20), text="Validate", compound="left", command=lambda: self.validate_response(response_Stringvar.get()))
+        check_button.pack(pady=10, ipadx=5, side="right")
 
 if __name__ == "__main__":
     app = Bilingual()
