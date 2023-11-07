@@ -258,7 +258,7 @@ class Bilingual(tk.Tk):
             self.display_categories()
 
     @log_calls
-    def validate_response(self, response):
+    def validate_response(self, response, event=None):
         response_is_right = None
         answer = self.current_question[self.learned_language]["sentence"]
         question = None
@@ -310,6 +310,7 @@ class Bilingual(tk.Tk):
 
         # Configure page grid
         self.clear_window()
+        self.title("Pick a language to learn !")
         self.window_container.grid(column=1, row=1)
 
         for spoken_language_index, spoken_language in enumerate(languages):
@@ -355,6 +356,7 @@ class Bilingual(tk.Tk):
 
         # Configure page grid
         self.clear_window()
+        self.title("Pick your profile !")
         self.window_container.grid(column=1, row=1)
 
         # Initialize variables
@@ -383,6 +385,17 @@ class Bilingual(tk.Tk):
                 if tile_row >= lines_by_page:
                     break
 
+        return_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        return_frame.pack(pady=10)
+
+        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25), style="NavigationLabel.TLabel")
+        return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
+
+        return_frame_text = ttk.Label(return_frame, text="Quit", style="NavigationLabel.TLabel")
+        return_frame_text.pack(ipadx=5, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
+        
+        self.bind_widget(return_frame, partial(exit))
+
         #if total_pages > 1:
         #    buttons_container = ttk.Frame(self.window_container)
         #    buttons_container.grid(column=0, row=1)
@@ -407,6 +420,7 @@ class Bilingual(tk.Tk):
 
         # Configure page grid
         self.clear_window()
+        self.title("Pick a category !")
         self.window_container.grid(column=1, row=1)
 
         # Initialize variables
@@ -473,7 +487,7 @@ class Bilingual(tk.Tk):
         #next_button.grid(column=2, row=0, padx=30, pady=20)
 
     @log_calls
-    def display_lessons(self, page=1):
+    def display_lessons(self, page=1, event=None):
 
         lessons = self.get_all_lessons()
         tiles_by_line = 4
@@ -484,6 +498,7 @@ class Bilingual(tk.Tk):
 
         # Configure page grid
         self.clear_window()
+        self.title("Pick a lesson !")
         self.window_container.grid(column=1, row=1)
 
         # Initialize variables
@@ -564,6 +579,7 @@ class Bilingual(tk.Tk):
     def display_answer(self, response):
         # Configure page grid
         self.clear_window()
+        self.title("Nice Try !")
         self.window_container.grid(column=1, row=1)
         
         sentence_LabelFrame = ttk.LabelFrame(self.window_container, text="Sentence")
@@ -619,11 +635,28 @@ class Bilingual(tk.Tk):
             explaination_label = ttk.Label(explaination_frame, wraplength=400, text=explaination_label_text, anchor=tk.W, justify=tk.LEFT)
             explaination_label.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
 
-        leave_button = ttk.Button(self.window_container, width=8, image=self.load_image('leave', 20, 20), text="Leave", compound="left", command=lambda: self.display_categories())
-        leave_button.pack(pady=10, ipadx=5, side="left")
+        # BUTTONS
+        return_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        return_frame.pack(padx=5, pady=10, side=tk.LEFT)
 
-        next_button = ttk.Button(self.window_container, width=8, image=self.load_image('next', 20, 20), text="Next", compound="left", command=lambda: self.display_questions())
-        next_button.pack(pady=10, ipadx=5, side="right")
+        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25), style="NavigationLabel.TLabel")
+        return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
+
+        return_frame_text = ttk.Label(return_frame, text="Lessons", style="NavigationLabel.TLabel")
+        return_frame_text.pack(ipadx=10, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
+        
+        self.bind_widget(return_frame, partial(self.display_lessons, 1))
+
+        validate_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        validate_frame.pack(padx=5, pady=10, side=tk.RIGHT)
+
+        validate_frame_picture = ttk.Label(validate_frame, image=self.load_image("arrow_right", 25, 25), style="NavigationLabel.TLabel")
+        validate_frame_picture.pack(padx=10, pady=5, side=tk.RIGHT)
+
+        validate_frame_text = ttk.Label(validate_frame, text="Next Question", style="NavigationLabel.TLabel")
+        validate_frame_text.pack(padx=10, pady=5, side=tk.RIGHT, expand=True, fill=tk.X)
+        
+        self.bind_widget(validate_frame, self.display_questions)
     
     @log_calls
     def display_questions(self):
@@ -631,15 +664,8 @@ class Bilingual(tk.Tk):
 
         # Configure page grid
         self.clear_window()
+        self.title("Translate this sentence !")
         self.window_container.grid(column=1, row=1)
-
-        # LESSON
-        lesson_labelFrame = ttk.LabelFrame(self.window_container, text="Lesson")
-        lesson_labelFrame.pack(expand=True, fill=tk.X, pady=10)
-
-        lesson_label_text = f"{self.current_lesson.replace('-', ' ').title()} - {ceil(self.get_lesson_progress() * 100)}%"
-        lesson_label = ttk.Label(lesson_labelFrame, text=lesson_label_text, justify=tk.LEFT)
-        lesson_label.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
 
         # SENTENCE
         sentence_labelFrame = ttk.LabelFrame(self.window_container, text="Sentence")
@@ -668,12 +694,44 @@ class Bilingual(tk.Tk):
         response_entry.focus()
 
         # BUTTONS
-        leave_button = ttk.Button(self.window_container, width=8, image=self.load_image('leave', 20, 20), text="Leave", compound="left", command=lambda: self.display_lessons())
-        leave_button.pack(pady=10, ipadx=5, side="left")
+        return_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        return_frame.pack(padx=5, pady=10, side=tk.LEFT)
 
-        check_button = ttk.Button(self.window_container, width=8, image=self.load_image('check', 20, 20), text="Validate", compound="left", command=lambda: self.validate_response(response_Stringvar.get()))
-        check_button.pack(pady=10, ipadx=5, side="right")
+        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25), style="NavigationLabel.TLabel")
+        return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
+
+        return_frame_text = ttk.Label(return_frame, text="Lessons", style="NavigationLabel.TLabel")
+        return_frame_text.pack(ipadx=10, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
+        
+        self.bind_widget(return_frame, partial(self.display_lessons, 1))
+
+        validate_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        validate_frame.pack(padx=5, pady=10, side=tk.RIGHT)
+
+        validate_frame_picture = ttk.Label(validate_frame, image=self.load_image("arrow_right", 25, 25), style="NavigationLabel.TLabel")
+        validate_frame_picture.pack(padx=10, pady=5, side=tk.RIGHT)
+
+        validate_frame_text = ttk.Label(validate_frame, text="Validate", style="NavigationLabel.TLabel")
+        validate_frame_text.pack(padx=10, pady=5, side=tk.RIGHT, expand=True, fill=tk.X)
+        
+        self.bind_widget(validate_frame, partial(self.validate_response, response_Stringvar.get()))
 
 if __name__ == "__main__":
     app = Bilingual()
     app.mainloop()
+
+
+#from gtts import gTTS
+#import os
+
+# Text you want to convert to speech
+#text_to_speak = "Hello, this is a test of text-to-speech conversion in Python."
+
+# Create a gTTS object
+#tts = gTTS(text=text_to_speak, lang='en')
+
+# Save the speech to an audio file (e.g., "output.mp3")
+#tts.save("output.mp3")
+
+# Play the audio file
+#os.system("start output.mp3")
