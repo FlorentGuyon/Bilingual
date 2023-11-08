@@ -24,13 +24,23 @@ COLOR_DARK_PINK = "#c39792"
 
 EVENT_LEFT_CLICK = "<Button-1>"
 
+DEBUG_MODE = True
+
 CURRENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
+
+def log_calls(method):
+    def wrapper(*args, **kwargs):
+        if DEBUG_MODE:
+            print(f'{method.__name__}({str(args[1:])}, {str(kwargs)})')
+        return method(*args, **kwargs)
+    return wrapper
 
 class Bilingual(tk.Tk):
 
     def __init__(self):
         super().__init__()
         self.protocol("WM_DELETE_WINDOW", self.close_app)
+        self.debug_mode = True
         self.icons = {}
         self.data = None
         self.explainations = None
@@ -43,12 +53,6 @@ class Bilingual(tk.Tk):
         self.configure_style()
         self.create_window()
         self.display_profiles()
-
-    def log_calls(method):
-        def wrapper(*args, **kwargs):
-            print(method.__name__)
-            return method(*args, **kwargs)
-        return wrapper
 
     @log_calls
     def close_app(self, event=None):
@@ -200,6 +204,11 @@ class Bilingual(tk.Tk):
         self.window_container.grid(column=0, row=0)
         self.window_container.columnconfigure(0, weight=1)
         self.window_container.rowconfigure(0, weight=1)
+    
+    @log_calls
+    def clear_window(self):
+        for widget in self.window_container.winfo_children():
+            widget.destroy()
    
     @log_calls
     def is_remembered(self, question):
@@ -259,10 +268,69 @@ class Bilingual(tk.Tk):
         self.current_question = random.choice(deep_copy[self.current_category][self.current_lesson])
 
     @log_calls
+    def get_random_color(self):
+        return random.choice(["red", "blue", "yellow", "green", "magenta", "orange"]) if self.debug_color else None
+    
+    @log_calls
+    def scroll_widget(self, widget, event):
+        widget.configure(scrollregion=widget.bbox("all"))
+
+    @log_calls
+    def playsound(self, sound, wait=False):
+        file_path = CURRENT_DIRECTORY + f"/assets/sounds/{sound}.wav"
+
+        if os.path.isfile(file_path):
+            playsound(file_path, wait)
+    
+    @log_calls
+    def tell_text(self, text, language, event=None):
+        file_path = CURRENT_DIRECTORY + "/assets/temp/tts.mp3"
+        languages = {
+            "english": {
+                "language_code": "en",
+                "accent_code": "co.uk"
+            },
+            "french": {
+                "language_code": "fr",
+                "accent_code": "fr"
+            }
+        }
+
+        tts = gTTS(text=text, lang=languages[language]["language_code"], tld=languages[language]["accent_code"])
+
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+
+        tts.save(file_path)
+
+        while not os.path.isfile(file_path):
+            sleep(0.1)
+
+        playsound(file_path, False)
+
+    @log_calls
     def bind_widget(self, widget, command, event=EVENT_LEFT_CLICK):
         widget.bind(event, command)
         for child in widget.winfo_children():
             self.bind_widget(child, command, event)
+
+    @log_calls
+    def click_button(self, action, args=[], sound="write", event=None):
+        if isinstance(args, tk.Event):
+            event = args
+            args = []
+
+        elif isinstance(sound, tk.Event):
+            event = sound
+            sound = "write"
+
+        if sound:
+            self.playsound(sound)
+
+        if type(args) != list:
+            args = [args]
+
+        action(*args)
 
     @log_calls
     def validate_languages(self, spoken_language, learned_language, event=None):
@@ -279,8 +347,8 @@ class Bilingual(tk.Tk):
 
     @log_calls
     def validate_response(self, response, event=None):
-        print("response: " + response)
         response_is_right = None
+        response = response.get()
         answer = self.current_question[self.learned_language]["sentence"]
         question = None
 
@@ -306,38 +374,6 @@ class Bilingual(tk.Tk):
             self.display_answer(response)
 
     @log_calls
-    def clear_window(self):
-        for widget in self.window_container.winfo_children():
-            widget.destroy()
-
-    @log_calls
-    def playsound(self, sound, wait=False):
-        file_path = CURRENT_DIRECTORY + f"/assets/sounds/{sound}.wav"
-
-        if os.path.isfile(file_path):
-            playsound(file_path, wait)
-
-    @log_calls
-    def click_button(self, action, args=[], sound="write", event=None):
-        if isinstance(args, tk.Event):
-            event = args
-            args = []
-
-        elif isinstance(sound, tk.Event):
-            event = sound
-            sound = "write"
-
-        if sound:
-            self.playsound(sound)
-
-        if type(args) != list:
-            args = [args]
-
-        print("args: " + str(args))
-
-        action(*args)
-
-    @log_calls
     def select_profile(self, profile, event=None):
         self.current_profile = profile
         self.load_profile()
@@ -353,46 +389,6 @@ class Bilingual(tk.Tk):
     def select_lesson(self, lesson, event=None):
         self.current_lesson = lesson
         self.display_questions()
-
-    @log_calls
-    def display_languages(self, page=1, event=None):
-        languages = self.get_all_languages()
-
-        # Configure page grid
-        self.clear_window()
-        self.title("Pick a language to learn !")
-        self.window_container.grid(column=1, row=1)
-
-        for spoken_language_index, spoken_language in enumerate(languages):
-            for learned_language_index, learned_language in enumerate(languages):
-               
-                if spoken_language == learned_language:
-                    continue
-
-                frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
-                frame.pack(pady=10, expand=True, fill=tk.X)
-
-                spoken_language_picture = ttk.Label(frame, image=self.load_image(spoken_language, 45, 45), style="CustomBigLabel.TLabel")
-                spoken_language_picture.pack(padx=15, pady=10, side=tk.LEFT)
-
-                arrow_picture = ttk.Label(frame, image=self.load_image("arrow_right", 45, 45), style="CustomBigLabel.TLabel")
-                arrow_picture.pack(padx=15, pady=10, side=tk.LEFT)
-
-                learned_language_picture = ttk.Label(frame, image=self.load_image(learned_language, 45, 45), style="CustomBigLabel.TLabel")
-                learned_language_picture.pack(padx=15, pady=10, side=tk.LEFT)
-
-                self.bind_widget(frame, partial(self.click_button, self.validate_languages, [spoken_language, learned_language]))
-
-        return_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
-        return_frame.pack(pady=10)
-
-        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25))
-        return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
-
-        return_frame_text = ttk.Label(return_frame, text="Profiles")
-        return_frame_text.pack(ipadx=5, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
-        
-        self.bind_widget(return_frame, partial(self.click_button, self.display_profiles, 1, "page"))
     
     @log_calls
     def display_profiles(self, page=1, event=None):
@@ -457,6 +453,46 @@ class Bilingual(tk.Tk):
 
         #    next_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('next', 20, 20), compound="right", text="Next", command=partial(self.display_profiles, current_page +1))
         #    next_button.grid(column=1, row=0, padx=30, pady=20)
+
+    @log_calls
+    def display_languages(self, page=1, event=None):
+        languages = self.get_all_languages()
+
+        # Configure page grid
+        self.clear_window()
+        self.title("Pick a language to learn !")
+        self.window_container.grid(column=1, row=1)
+
+        for spoken_language_index, spoken_language in enumerate(languages):
+            for learned_language_index, learned_language in enumerate(languages):
+               
+                if spoken_language == learned_language:
+                    continue
+
+                frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
+                frame.pack(pady=10, expand=True, fill=tk.X)
+
+                spoken_language_picture = ttk.Label(frame, image=self.load_image(spoken_language, 45, 45), style="CustomBigLabel.TLabel")
+                spoken_language_picture.pack(padx=15, pady=10, side=tk.LEFT)
+
+                arrow_picture = ttk.Label(frame, image=self.load_image("arrow_right", 45, 45), style="CustomBigLabel.TLabel")
+                arrow_picture.pack(padx=15, pady=10, side=tk.LEFT)
+
+                learned_language_picture = ttk.Label(frame, image=self.load_image(learned_language, 45, 45), style="CustomBigLabel.TLabel")
+                learned_language_picture.pack(padx=15, pady=10, side=tk.LEFT)
+
+                self.bind_widget(frame, partial(self.click_button, self.validate_languages, [spoken_language, learned_language]))
+
+        return_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
+        return_frame.pack(pady=10)
+
+        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25))
+        return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
+
+        return_frame_text = ttk.Label(return_frame, text="Profiles")
+        return_frame_text.pack(ipadx=5, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
+        
+        self.bind_widget(return_frame, partial(self.click_button, self.display_profiles, 1, "page"))
 
     @log_calls
     def display_categories(self, page=1, event=None):
@@ -618,12 +654,68 @@ class Bilingual(tk.Tk):
         #next_button.grid(column=2, row=0, padx=30, pady=20)
 
     @log_calls
-    def scroll_widget(self, widget, event):
-        widget.configure(scrollregion=widget.bbox("all"))
+    def display_questions(self):
+        self.choose_random_question()
 
-    @log_calls
-    def get_random_color(self):
-        return random.choice(["red", "blue", "yellow", "green", "magenta", "orange"]) if self.debug_color else None
+        # Configure page grid
+        self.clear_window()
+        self.title("Translate this sentence !")
+        self.window_container.grid(column=1, row=1)
+
+        # SENTENCE
+        sentence_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
+        sentence_frame.pack(pady=10, fill=tk.X)
+
+        sentence_label_text = self.current_question[self.spoken_language]["sentence"].capitalize()
+        sentence_label = ttk.Label(sentence_frame, text=sentence_label_text)
+        sentence_label.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
+
+        if self.spoken_language in ["english", "french"]:
+            sentence_tts = ttk.Label(sentence_frame, image=self.load_image("speak", 25, 25))
+            sentence_tts.pack(side=tk.LEFT, padx=5, pady=5)
+
+            self.bind_widget(sentence_tts, partial(self.click_button, self.tell_text, [sentence_label_text, self.spoken_language], None))
+
+        # HINTS
+        if "hints" in self.current_question[self.spoken_language].keys() :
+            hints_labelFrame = ttk.LabelFrame(self.window_container, text="Hints")
+            hints_labelFrame.pack(expand=True, fill=tk.X, pady=10)
+            
+            hints_label_text = self.current_question[self.spoken_language]["hints"].capitalize()
+            hints_label = ttk.Label(hints_labelFrame, text=hints_label_text, justify=tk.LEFT)
+            hints_label.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
+
+        # ANSWER
+        resonse_labelFrame = ttk.LabelFrame(self.window_container, text="Answer")
+        resonse_labelFrame.pack(expand=True, fill=tk.X, pady=10)
+        
+        response_Stringvar = tk.StringVar()
+        response_entry = ttk.Entry(resonse_labelFrame, textvariable=response_Stringvar)
+        response_entry.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
+        response_entry.focus()
+
+        # BUTTONS
+        return_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
+        return_frame.pack(padx=5, pady=10, side=tk.LEFT)
+
+        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25))
+        return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
+
+        return_frame_text = ttk.Label(return_frame, text="Lessons")
+        return_frame_text.pack(ipadx=10, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
+        
+        self.bind_widget(return_frame, partial(self.click_button, self.display_lessons, 1, "page"))
+
+        validate_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
+        validate_frame.pack(padx=5, pady=10, side=tk.RIGHT)
+
+        validate_frame_picture = ttk.Label(validate_frame, image=self.load_image("arrow_right", 25, 25))
+        validate_frame_picture.pack(padx=10, pady=5, side=tk.RIGHT)
+
+        validate_frame_text = ttk.Label(validate_frame, text="Validate")
+        validate_frame_text.pack(padx=10, pady=5, side=tk.RIGHT, expand=True, fill=tk.X)
+        
+        self.bind_widget(validate_frame, partial(self.validate_response, response_Stringvar))
 
     @log_calls
     def display_answer(self, response):
@@ -707,96 +799,6 @@ class Bilingual(tk.Tk):
         validate_frame_text.pack(padx=10, pady=5, side=tk.RIGHT, expand=True, fill=tk.X)
         
         self.bind_widget(validate_frame, partial(self.click_button, self.display_questions))
-    
-    @log_calls
-    def tell_text(self, text, language, event=None):
-        file_path = CURRENT_DIRECTORY + "/assets/temp/tts.mp3"
-        languages = {
-            "english": {
-                "language_code": "en",
-                "accent_code": "co.uk"
-            },
-            "french": {
-                "language_code": "fr",
-                "accent_code": "fr"
-            }
-        }
-
-        tts = gTTS(text=text, lang=languages[language]["language_code"], tld=languages[language]["accent_code"])
-
-        if os.path.isfile(file_path):
-            os.remove(file_path)
-
-        tts.save(file_path)
-
-        while not os.path.isfile(file_path):
-            sleep(0.1)
-
-        playsound(file_path, False)
-
-    @log_calls
-    def display_questions(self):
-        self.choose_random_question()
-
-        # Configure page grid
-        self.clear_window()
-        self.title("Translate this sentence !")
-        self.window_container.grid(column=1, row=1)
-
-        # SENTENCE
-        sentence_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
-        sentence_frame.pack(pady=10, fill=tk.X)
-
-        sentence_label_text = self.current_question[self.spoken_language]["sentence"].capitalize()
-        sentence_label = ttk.Label(sentence_frame, text=sentence_label_text)
-        sentence_label.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
-
-        if self.spoken_language in ["english", "french"]:
-            sentence_tts = ttk.Label(sentence_frame, image=self.load_image("speak", 25, 25))
-            sentence_tts.pack(side=tk.LEFT, padx=5, pady=5)
-
-            self.bind_widget(sentence_tts, partial(self.click_button, self.tell_text, [sentence_label_text, self.spoken_language], None))
-
-        # HINTS
-        if "hints" in self.current_question[self.spoken_language].keys() :
-            hints_labelFrame = ttk.LabelFrame(self.window_container, text="Hints")
-            hints_labelFrame.pack(expand=True, fill=tk.X, pady=10)
-            
-            hints_label_text = self.current_question[self.spoken_language]["hints"].capitalize()
-            hints_label = ttk.Label(hints_labelFrame, text=hints_label_text, justify=tk.LEFT)
-            hints_label.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
-
-        # ANSWER
-        resonse_labelFrame = ttk.LabelFrame(self.window_container, text="Answer")
-        resonse_labelFrame.pack(expand=True, fill=tk.X, pady=10)
-        
-        response_Stringvar = tk.StringVar()
-        response_entry = ttk.Entry(resonse_labelFrame, textvariable=response_Stringvar)
-        response_entry.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
-        response_entry.focus()
-
-        # BUTTONS
-        return_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
-        return_frame.pack(padx=5, pady=10, side=tk.LEFT)
-
-        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25))
-        return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
-
-        return_frame_text = ttk.Label(return_frame, text="Lessons")
-        return_frame_text.pack(ipadx=10, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
-        
-        self.bind_widget(return_frame, partial(self.click_button, self.display_lessons, 1, "page"))
-
-        validate_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
-        validate_frame.pack(padx=5, pady=10, side=tk.RIGHT)
-
-        validate_frame_picture = ttk.Label(validate_frame, image=self.load_image("arrow_right", 25, 25))
-        validate_frame_picture.pack(padx=10, pady=5, side=tk.RIGHT)
-
-        validate_frame_text = ttk.Label(validate_frame, text="Validate")
-        validate_frame_text.pack(padx=10, pady=5, side=tk.RIGHT, expand=True, fill=tk.X)
-        
-        self.bind_widget(validate_frame, partial(self.validate_response, response_Stringvar.get()))
 
 if __name__ == "__main__":
     app = Bilingual()

@@ -1,2 +1,2 @@
-gtts
+gtts==2.4.0
 playsound==1.2.2
