@@ -5,6 +5,7 @@ import os
 
 from math import ceil
 from tkinter import ttk
+from tkinter.scrolledtext import ScrolledText
 from PIL import Image, ImageTk
 from functools import partial
 from copy import deepcopy
@@ -344,6 +345,17 @@ class Bilingual(tk.Tk):
         new_label.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
 
     @log_calls
+    def create_scrollable_frame(self, parent, text):
+        frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
+        frame.pack(pady=10)
+
+        scrolledtext = ScrolledText(frame, width=45, height=10, background=COLOR_DARK_PINK, foreground=COLOR_WHITE, font=('Calibri', 12), relief=tk.FLAT)
+        scrolledtext.pack(fill=tk.BOTH, expand=True)
+        scrolledtext.insert(tk.INSERT, text)
+        scrolledtext.configure(state="disabled")
+        scrolledtext.vbar.configure(width=0)
+
+    @log_calls
     def create_speakable_frame(self, parent, text, language):
         new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
         new_frame.pack(expand=True, fill=tk.X, pady=10)
@@ -364,7 +376,7 @@ class Bilingual(tk.Tk):
         
         new_Stringvar = tk.StringVar()
         # The Entry widget from ttk does not support the "background" argument
-        new_entry = tk.Entry(new_frame, textvariable=new_Stringvar, background=COLOR_DARK_PINK, foreground=COLOR_WHITE, relief="flat", insertbackground=COLOR_WHITE, font=('Calibri', 12))
+        new_entry = tk.Entry(new_frame, width=45, textvariable=new_Stringvar, background=COLOR_DARK_PINK, foreground=COLOR_WHITE, relief="flat", insertbackground=COLOR_WHITE, font=('Calibri', 12))
         new_entry.pack(side=tk.LEFT, expand=True, fill=tk.BOTH, padx=5, pady=5)
         new_entry.focus()
 
@@ -377,23 +389,39 @@ class Bilingual(tk.Tk):
         return new_Stringvar
 
     @log_calls
-    def create_navigation_button(self, parent, image, text, action, arguments=None, sound=None, image_first=True, alone_in_row=True):
+    def create_button(self, parent, image, text, action, arguments=[], sound=None, image_first=True, alone_in_row=True):
+        side = tk.TOP if alone_in_row else tk.LEFT
         new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
-
-        if alone_in_row:
-            new_frame.pack(pady=10)
-        else:
-            new_frame.pack(padx=5, pady=10, side=tk.LEFT)
+        new_frame.pack(padx=10, pady=10, expand=True, fill=tk.X, side=side)
 
         side = tk.LEFT if image_first else tk.RIGHT
+        
+        anchor = tk.E if image_first else tk.W
+        new_image = ttk.Label(new_frame, image=self.load_image(image, 25, 25), anchor=anchor)
+        new_image.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
 
-        new_image = ttk.Label(new_frame, image=self.load_image(image, 25, 25))
-        new_image.pack(padx=10, pady=5, side=side)
-
-        new_label = ttk.Label(new_frame, text=text)
-        new_label.pack(padx=10, pady=5, side=side, expand=True, fill=tk.X)
+        anchor = tk.W if image_first else tk.E
+        new_label = ttk.Label(new_frame, text=text, anchor=anchor)
+        new_label.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
         
         self.bind_widget(new_frame, partial(self.click_button, action, arguments, sound))
+
+    @log_calls
+    def create_image_frame(self, parent, image, text, action, arguments, sound=None):
+        new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
+        new_frame.pack(pady=5, expand=True, fill=tk.X)
+
+        title_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
+        title_frame.pack(expand=True, fill=tk.BOTH)
+
+        title_frame_picture = ttk.Label(title_frame, image=self.load_image(image, 35, 35), style="CustomAverageLabel.TLabel")
+        title_frame_picture.pack(padx=15, pady=5, side=tk.LEFT)
+
+        title_frame_text_text = text.replace("-", " ").title()
+        title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="CustomAverageLabel.TLabel")
+        title_frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
+
+        self.bind_widget(new_frame, partial(self.click_button, action, arguments))
 
     @log_calls
     def create_progress_frame(self, parent, image, text, progress, action, arguments, sound=None):
@@ -498,19 +526,10 @@ class Bilingual(tk.Tk):
 
         # Iterate through profiles
         for profile in profiles[start_index:]:
-            frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
-            frame.pack(pady=10, expand=True, fill=tk.X)
-
-            frame_picture = ttk.Label(frame, image=self.load_image(profile, 40, 40), style="CustomBigLabel.TLabel")
-            frame_picture.pack(padx=15, pady=10, side=tk.LEFT)
-
-            frame_text = ttk.Label(frame, text=profile.capitalize(), style="CustomBigLabel.TLabel")
-            frame_text.pack(ipadx=15, ipady=10, side=tk.LEFT, expand=True, fill=tk.X)
-
-            self.bind_widget(frame, partial(self.click_button, self.select_profile, profile))
+            self.create_image_frame(self.window_container, profile, profile, self.select_profile, profile)
 
         # QUIT BUTTON
-        self.create_navigation_button(self.window_container, "arrow_left", "Quit", self.close_app)
+        self.create_button(self.window_container, "arrow_left", "Quit", self.close_app)
 
         #if total_pages > 1:
         #    buttons_container = ttk.Frame(self.window_container)
@@ -539,21 +558,21 @@ class Bilingual(tk.Tk):
                     continue
 
                 frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
-                frame.pack(pady=10, expand=True, fill=tk.X)
+                frame.pack(pady=5, expand=True, fill=tk.X)
 
-                spoken_language_picture = ttk.Label(frame, image=self.load_image(spoken_language, 45, 45), style="CustomBigLabel.TLabel")
-                spoken_language_picture.pack(padx=15, pady=10, side=tk.LEFT)
+                spoken_language_picture = ttk.Label(frame, image=self.load_image(spoken_language, 35, 35), style="CustomBigLabel.TLabel", anchor=tk.CENTER)
+                spoken_language_picture.pack(padx=10, pady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
-                arrow_picture = ttk.Label(frame, image=self.load_image("arrow_right", 45, 45), style="CustomBigLabel.TLabel")
-                arrow_picture.pack(padx=15, pady=10, side=tk.LEFT)
+                arrow_picture = ttk.Label(frame, image=self.load_image("next", 35, 35), style="CustomBigLabel.TLabel", anchor=tk.CENTER)
+                arrow_picture.pack(padx=10, pady=5, side=tk.LEFT)
 
-                learned_language_picture = ttk.Label(frame, image=self.load_image(learned_language, 45, 45), style="CustomBigLabel.TLabel")
-                learned_language_picture.pack(padx=15, pady=10, side=tk.LEFT)
+                learned_language_picture = ttk.Label(frame, image=self.load_image(learned_language, 35, 35), style="CustomBigLabel.TLabel", anchor=tk.CENTER)
+                learned_language_picture.pack(padx=10, pady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
                 self.bind_widget(frame, partial(self.click_button, self.validate_languages, [spoken_language, learned_language]))
 
         # RETURN BUTTON
-        self.create_navigation_button(self.window_container, "arrow_left", "Profiles", self.display_profiles, arguments=1, sound="page")
+        self.create_button(self.window_container, "arrow_left", "Profiles", self.display_profiles, arguments=1, sound="page")
 
     @log_calls
     def display_categories(self, page=1, event=None):
@@ -576,7 +595,7 @@ class Bilingual(tk.Tk):
             self.create_progress_frame(self.window_container, category, category, self.get_category_progress(category=category), self.select_category, category)
 
         # RETURN BUTTON
-        self.create_navigation_button(self.window_container, "arrow_left", "Languages", self.display_languages, arguments=1, sound="page")
+        self.create_button(self.window_container, "arrow_left", "Languages", self.display_languages, arguments=1, sound="page")
 
         #buttons_state = "enabled" if current_page > 1 else "disabled"
 
@@ -609,7 +628,7 @@ class Bilingual(tk.Tk):
             self.create_progress_frame(self.window_container, lesson, lesson, self.get_lesson_progress(lesson=lesson), self.select_lesson, lesson)
 
         # RETURN BUTTON
-        self.create_navigation_button(self.window_container, "arrow_left", "Categories", self.display_categories, arguments=1, sound="page")
+        self.create_button(self.window_container, "arrow_left", "Categories", self.display_categories, arguments=1, sound="page")
         
         #leave_button = ttk.Button(buttons_container, image=self.load_image('leave', 20, 20), compound="left", text="Leave", command=self.display_categories)
         #leave_button.grid(column=0, row=0, padx=30, pady=20)
@@ -638,17 +657,16 @@ class Bilingual(tk.Tk):
 
         # HINTS
         if "hints" in self.current_question[self.spoken_language].keys() :
-            self.create_frame(self.window_container, self.current_question[self.spoken_language]["hints"].capitalize())
+            self.create_frame(self.window_container, f'PS : {self.current_question[self.spoken_language]["hints"].capitalize()}')
 
         # ANSWER
         response_Stringvar = self.create_speakable_entry(self.window_container, self.learned_language)
 
         # RETURN BUTTON
-        self.create_navigation_button(self.window_container, "arrow_left", "Lessons", self.display_lessons, arguments=1, sound="page", alone_in_row=False)
+        self.create_button(self.window_container, "arrow_left", "Lessons", self.display_lessons, arguments=1, sound="page", alone_in_row=False)
         
         # VALIDATE BUTTON
-        self.create_navigation_button(self.window_container, "arrow_right", "Validate", self.validate_response, arguments=response_Stringvar, image_first=False, alone_in_row=False)
-
+        self.create_button(self.window_container, "arrow_right", "Validate", self.validate_response, arguments=response_Stringvar, image_first=False, alone_in_row=False)
 
     @log_calls
     def display_answer(self, response):
@@ -676,34 +694,13 @@ class Bilingual(tk.Tk):
                             explaination_text.append(item["explainations"][self.spoken_language])
 
         if len(explaination_text) > 0 :
-            explaination_LabelFrame = ttk.LabelFrame(self.window_container, text="Explainations")
-            explaination_LabelFrame.pack(pady=10)
-            
-            explaination_canvas = tk.Canvas(explaination_LabelFrame, width=400)
-            explaination_canvas.pack(side="left", expand=True, fill=tk.BOTH)
-
-            scrollbar_frame = ttk.Frame(explaination_LabelFrame)
-            scrollbar_frame.pack(side="right", expand=True, fill=tk.Y)
-
-            explaination_scrollbar = ttk.Scrollbar(scrollbar_frame, orient='vertical', command=explaination_canvas.yview)
-            explaination_scrollbar.pack(expand=True, fill=tk.Y)
-
-            explaination_frame = tk.Frame(explaination_canvas, width=400)
-            explaination_frame.pack(expand=True, fill=tk.BOTH)
-
-            explaination_canvas.configure(yscrollcommand=explaination_scrollbar.set)
-            explaination_canvas.create_window((4, 4), window=explaination_frame, anchor="nw", tags="frame")
-            explaination_frame.bind("<Configure>", partial(self.scroll_widget, explaination_canvas))
-
-            explaination_label_text = "\n\n".join(explaination_text)
-            explaination_label = ttk.Label(explaination_frame, wraplength=400, text=explaination_label_text, anchor=tk.W, justify=tk.LEFT)
-            explaination_label.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
+            self.create_scrollable_frame(self.window_container, "\n\n".join(explaination_text))
 
         # RETURN BUTTON
-        self.create_navigation_button(self.window_container, "arrow_left", "Lessons", self.display_lessons, arguments=1, sound="page", alone_in_row=False)
+        self.create_button(self.window_container, "arrow_left", "Lessons", self.display_lessons, arguments=1, sound="page", alone_in_row=False)
         
         # VALIDATE BUTTON
-        self.create_navigation_button(self.window_container, "arrow_right", "Next Question", self.display_questions, image_first=False, alone_in_row=False)
+        self.create_button(self.window_container, "arrow_right", "Next Question", self.display_questions, image_first=False, alone_in_row=False)
 
 if __name__ == "__main__":
     app = Bilingual()
