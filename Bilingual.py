@@ -8,22 +8,29 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 from functools import partial
 from copy import deepcopy
+from gtts import gTTS
+from playsound import playsound
+from time import sleep
 
 COLOR_WHITE = "#FFFFFF"
-
 COLOR_LIGHT_GREY = "#eae5e5"
-COLOR_LIGHT_BLUE = "#c9c5be"
-COLOR_LIGHT_PINK = "#e7bab2"
 
-COLOR_DARK_BLUE = "#394a62"
+#COLOR_LIGHT_BLUE = "#c9c5be"
+#COLOR_DARK_BLUE = "#394a62"
+
+COLOR_LIGHT_PINK = "#edcbc5"
+COLOR_MID_PINK = "#e1a99f"
 COLOR_DARK_PINK = "#c39792"
 
 EVENT_LEFT_CLICK = "<Button-1>"
+
+CURRENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
 class Bilingual(tk.Tk):
 
     def __init__(self):
         super().__init__()
+        self.protocol("WM_DELETE_WINDOW", self.close_app)
         self.icons = {}
         self.data = None
         self.explainations = None
@@ -44,10 +51,29 @@ class Bilingual(tk.Tk):
         return wrapper
 
     @log_calls
+    def close_app(self, event=None):
+        self.remove_temp_files()
+        self.destroy()
+
+    @log_calls
+    def remove_temp_files(self):
+        folder_path = CURRENT_DIRECTORY + "/assets/temp"
+
+        # Check if the folder exists
+        if os.path.exists(folder_path) and os.path.isdir(folder_path):
+            # List all files and subdirectories in the folder
+            for filename in os.listdir(folder_path):
+                file_path = os.path.join(folder_path, filename)
+
+                # Check if it's a file (not a subdirectory) and delete it
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+
+    @log_calls
     def save_profile(self):
         for folder_name in self.data.keys():
             for file_name in self.data[folder_name].keys():
-                file_path = f"./assets/profiles/{self.current_profile}/{folder_name}/{file_name}.json"
+                file_path = f"{CURRENT_DIRECTORY}/assets/profiles/{self.current_profile}/{folder_name}/{file_name}.json"
                 with open(file_path, 'w', encoding='utf-8') as json_file:
                     try:
                         json_data = json.dumps(self.data[folder_name][file_name], indent=4)
@@ -59,7 +85,7 @@ class Bilingual(tk.Tk):
     def load_explainations(self):
         self.explainations = {}  # Dictionary to store the result
 
-        for subdir, _, files in os.walk(f"./assets/explainations/"):
+        for subdir, _, files in os.walk(CURRENT_DIRECTORY + "/assets/explainations/"):
             json_files = [f for f in files if f.endswith('.json')]
 
             for json_file in json_files:
@@ -78,7 +104,7 @@ class Bilingual(tk.Tk):
     def load_profile(self):
         self.data = {}  # Dictionary to store the result
 
-        for subdir, _, files in os.walk(f"./assets/profiles/{self.current_profile}"):
+        for subdir, _, files in os.walk(CURRENT_DIRECTORY + f"/assets/profiles/{self.current_profile}"):
             folder_name = os.path.basename(subdir)
             json_files = [f for f in files if f.endswith('.json')]
 
@@ -130,19 +156,13 @@ class Bilingual(tk.Tk):
         self.style = ttk.Style(self) 
         self.style.configure(".", background=COLOR_LIGHT_GREY, font=('Calibri', 12))
 
-        self.style.configure("ProfileFrame.TFrame", background=COLOR_DARK_PINK)
-        self.style.configure("ProfileLabel.TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE, font=('Calibri', 16))
+        self.style.configure("CustomLightFrame.TFrame", background=COLOR_LIGHT_PINK)
+        self.style.configure("CustomMidFrame.TFrame", background=COLOR_MID_PINK)
+        self.style.configure("CustomDarkFrame.TFrame", background=COLOR_DARK_PINK)
 
-        self.style.configure("LanguagesFrame.TFrame", background=COLOR_DARK_PINK)
-        self.style.configure("LanguagesLabel.TLabel", background=COLOR_DARK_PINK)
-
-        self.style.configure("CategoriesFrame.TFrame", background=COLOR_DARK_PINK)
-        self.style.configure("CategoriesProgressBar.TFrame", background="#e1a99f")
-        self.style.configure("CategoriesProgressBarBackground.TFrame", background="#edcbc5")
-        self.style.configure("CategoriesLabel.TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE, font=('Calibri', 14))
-
-        self.style.configure("NavigationFrame.TFrame", background=COLOR_DARK_PINK)
-        self.style.configure("NavigationLabel.TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE)
+        self.style.configure("TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE)
+        self.style.configure("CustomAverageLabel.TLabel", font=('Calibri', 14))
+        self.style.configure("CustomBigLabel.TLabel", font=('Calibri', 16))
 
     @log_calls
     def create_window(self):
@@ -187,7 +207,7 @@ class Bilingual(tk.Tk):
 
     @log_calls
     def get_all_profiles(self):
-        return [profile for profile in os.listdir("./assets/profiles") if os.path.isdir(os.path.join("./assets/profiles", profile))]
+        return [profile for profile in os.listdir(CURRENT_DIRECTORY + "/assets/profiles") if os.path.isdir(os.path.join(CURRENT_DIRECTORY + "/assets/profiles", profile))]
 
     @log_calls
     def get_all_languages(self):
@@ -259,6 +279,7 @@ class Bilingual(tk.Tk):
 
     @log_calls
     def validate_response(self, response, event=None):
+        print("response: " + response)
         response_is_right = None
         answer = self.current_question[self.learned_language]["sentence"]
         question = None
@@ -273,12 +294,14 @@ class Bilingual(tk.Tk):
 
         # If the response is right
         if response.lower().strip() == answer.lower().strip():
+            self.playsound("correct")
             question[self.learned_language]["success_rate"] = ((question[self.learned_language]["success_rate"] * (question[self.learned_language]["tries"] -1)) +1) / question[self.learned_language]["tries"]
             self.save_profile()
             self.display_questions()
 
         # If the response is wrong
         else:
+            self.playsound("incorrect")
             question[self.learned_language]["success_rate"] = (question[self.learned_language]["success_rate"] * (question[self.learned_language]["tries"] -1)) / question[self.learned_language]["tries"]
             self.display_answer(response)
 
@@ -286,6 +309,33 @@ class Bilingual(tk.Tk):
     def clear_window(self):
         for widget in self.window_container.winfo_children():
             widget.destroy()
+
+    @log_calls
+    def playsound(self, sound, wait=False):
+        file_path = CURRENT_DIRECTORY + f"/assets/sounds/{sound}.wav"
+
+        if os.path.isfile(file_path):
+            playsound(file_path, wait)
+
+    @log_calls
+    def click_button(self, action, args=[], sound="write", event=None):
+        if isinstance(args, tk.Event):
+            event = args
+            args = []
+
+        elif isinstance(sound, tk.Event):
+            event = sound
+            sound = "write"
+
+        if sound:
+            self.playsound(sound)
+
+        if type(args) != list:
+            args = [args]
+
+        print("args: " + str(args))
+
+        action(*args)
 
     @log_calls
     def select_profile(self, profile, event=None):
@@ -319,30 +369,30 @@ class Bilingual(tk.Tk):
                 if spoken_language == learned_language:
                     continue
 
-                frame = ttk.Frame(self.window_container, style="LanguagesFrame.TFrame")
+                frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
                 frame.pack(pady=10, expand=True, fill=tk.X)
 
-                spoken_language_picture = ttk.Label(frame, image=self.load_image(spoken_language, 45, 45), style="LanguagesLabel.TLabel")
+                spoken_language_picture = ttk.Label(frame, image=self.load_image(spoken_language, 45, 45), style="CustomBigLabel.TLabel")
                 spoken_language_picture.pack(padx=15, pady=10, side=tk.LEFT)
 
-                arrow_picture = ttk.Label(frame, image=self.load_image("arrow_right", 45, 45), style="LanguagesLabel.TLabel")
+                arrow_picture = ttk.Label(frame, image=self.load_image("arrow_right", 45, 45), style="CustomBigLabel.TLabel")
                 arrow_picture.pack(padx=15, pady=10, side=tk.LEFT)
 
-                learned_language_picture = ttk.Label(frame, image=self.load_image(learned_language, 45, 45), style="LanguagesLabel.TLabel")
+                learned_language_picture = ttk.Label(frame, image=self.load_image(learned_language, 45, 45), style="CustomBigLabel.TLabel")
                 learned_language_picture.pack(padx=15, pady=10, side=tk.LEFT)
 
-                self.bind_widget(frame, partial(self.validate_languages, spoken_language, learned_language))
+                self.bind_widget(frame, partial(self.click_button, self.validate_languages, [spoken_language, learned_language]))
 
-        return_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        return_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
         return_frame.pack(pady=10)
 
-        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25), style="NavigationLabel.TLabel")
+        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25))
         return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
 
-        return_frame_text = ttk.Label(return_frame, text="Profiles", style="NavigationLabel.TLabel")
+        return_frame_text = ttk.Label(return_frame, text="Profiles")
         return_frame_text.pack(ipadx=5, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
         
-        self.bind_widget(return_frame, partial(self.display_profiles, 1))
+        self.bind_widget(return_frame, partial(self.click_button, self.display_profiles, 1, "page"))
     
     @log_calls
     def display_profiles(self, page=1, event=None):
@@ -366,16 +416,16 @@ class Bilingual(tk.Tk):
         # Iterate through profiles
         for profile in profiles[start_index:]:
 
-            frame = ttk.Frame(self.window_container, style="ProfileFrame.TFrame")
+            frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
             frame.pack(pady=10, expand=True, fill=tk.X)
 
-            frame_picture = ttk.Label(frame, image=self.load_image(profile, 40, 40), style="ProfileLabel.TLabel")
+            frame_picture = ttk.Label(frame, image=self.load_image(profile, 40, 40), style="CustomBigLabel.TLabel")
             frame_picture.pack(padx=15, pady=10, side=tk.LEFT)
 
-            frame_text = ttk.Label(frame, text=profile.capitalize(), style="ProfileLabel.TLabel")
+            frame_text = ttk.Label(frame, text=profile.capitalize(), style="CustomBigLabel.TLabel")
             frame_text.pack(ipadx=15, ipady=10, side=tk.LEFT, expand=True, fill=tk.X)
 
-            self.bind_widget(frame, partial(self.select_profile, profile))
+            self.bind_widget(frame, partial(self.click_button, self.select_profile, profile))
             
             # Define the position of the next tile if any
             tile_column += 1
@@ -385,16 +435,16 @@ class Bilingual(tk.Tk):
                 if tile_row >= lines_by_page:
                     break
 
-        return_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        return_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
         return_frame.pack(pady=10)
 
-        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25), style="NavigationLabel.TLabel")
+        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25))
         return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
 
-        return_frame_text = ttk.Label(return_frame, text="Quit", style="NavigationLabel.TLabel")
+        return_frame_text = ttk.Label(return_frame, text="Quit")
         return_frame_text.pack(ipadx=5, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
         
-        self.bind_widget(return_frame, partial(exit))
+        self.bind_widget(return_frame, partial(self.click_button, self.close_app))
 
         #if total_pages > 1:
         #    buttons_container = ttk.Frame(self.window_container)
@@ -430,32 +480,32 @@ class Bilingual(tk.Tk):
         # Iterate through categories
         for category in categories[start_index:]:
 
-            frame = ttk.Frame(self.window_container, style="CategoriesFrame.TFrame")
+            frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
             frame.pack(pady=5, expand=True, fill=tk.X)
 
-            title_frame = ttk.Frame(frame, style="CategoriesFrame.TFrame")
+            title_frame = ttk.Frame(frame, style="CustomDarkFrame.TFrame")
             title_frame.pack(expand=True, fill=tk.BOTH)
 
-            title_frame_picture = ttk.Label(title_frame, image=self.load_image(category, 35, 35), style="CategoriesLabel.TLabel")
+            title_frame_picture = ttk.Label(title_frame, image=self.load_image(category, 35, 35), style="CustomAverageLabel.TLabel")
             title_frame_picture.pack(padx=15, pady=5, side=tk.LEFT)
 
             title_frame_text_text = category.replace("-", " ").title()
-            title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="CategoriesLabel.TLabel")
+            title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="CustomAverageLabel.TLabel")
             title_frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
-            progressbar_frame = ttk.Frame(frame, style="CategoriesFrame.TFrame")
+            progressbar_frame = ttk.Frame(frame, style="CustomDarkFrame.TFrame")
             progressbar_frame.pack(expand=True, fill=tk.X)
 
             self.update()
 
             progressbar_frame_left_width = frame.winfo_width() * self.get_category_progress(category=category)
-            progressbar_frame_left = ttk.Frame(progressbar_frame, height=5, width=progressbar_frame_left_width, style="CategoriesProgressBar.TFrame")
+            progressbar_frame_left = ttk.Frame(progressbar_frame, height=5, width=progressbar_frame_left_width, style="CustomMidFrame.TFrame")
             progressbar_frame_left.pack(side=tk.LEFT)
             
-            progressbar_frame_right = ttk.Frame(progressbar_frame, height=5, style="CategoriesProgressBarBackground.TFrame")
+            progressbar_frame_right = ttk.Frame(progressbar_frame, height=5, style="CustomLightFrame.TFrame")
             progressbar_frame_right.pack(expand=True, fill=tk.X, side=tk.LEFT)
 
-            self.bind_widget(frame, partial(self.select_category, category))
+            self.bind_widget(frame, partial(self.click_button, self.select_category, category))
 
             # Define the position of the next tile if any
             tile_column += 1
@@ -465,16 +515,16 @@ class Bilingual(tk.Tk):
                 if tile_row >= lines_by_page:
                     break
 
-        return_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        return_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
         return_frame.pack(pady=10)
 
-        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25), style="NavigationLabel.TLabel")
+        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25))
         return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
 
-        return_frame_text = ttk.Label(return_frame, text="Languages", style="NavigationLabel.TLabel")
+        return_frame_text = ttk.Label(return_frame, text="Languages")
         return_frame_text.pack(ipadx=5, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
         
-        self.bind_widget(return_frame, partial(self.display_languages, 1))
+        self.bind_widget(return_frame, partial(self.click_button, self.display_languages, 1, "page"))
 
         #buttons_state = "enabled" if current_page > 1 else "disabled"
 
@@ -508,32 +558,32 @@ class Bilingual(tk.Tk):
         # Iterate through lessons
         for lesson in lessons[start_index:]:
 
-            frame = ttk.Frame(self.window_container, style="CategoriesFrame.TFrame")
+            frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
             frame.pack(pady=5, expand=True, fill=tk.X)
 
-            title_frame = ttk.Frame(frame, style="CategoriesFrame.TFrame")
+            title_frame = ttk.Frame(frame, style="CustomDarkFrame.TFrame")
             title_frame.pack(expand=True, fill=tk.BOTH)
 
-            title_frame_picture = ttk.Label(title_frame, image=self.load_image(lesson, 35, 35), style="CategoriesLabel.TLabel")
+            title_frame_picture = ttk.Label(title_frame, image=self.load_image(lesson, 35, 35), style="CustomAverageLabel.TLabel")
             title_frame_picture.pack(padx=15, pady=5, side=tk.LEFT)
 
             title_frame_text_text = lesson.replace("-", " ").title()
-            title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="CategoriesLabel.TLabel")
+            title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="CustomAverageLabel.TLabel")
             title_frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
-            progressbar_frame = ttk.Frame(frame, style="CategoriesFrame.TFrame")
+            progressbar_frame = ttk.Frame(frame, style="CustomDarkFrame.TFrame")
             progressbar_frame.pack(expand=True, fill=tk.X)
 
             self.update()
 
             progressbar_frame_left_width = frame.winfo_width() * self.get_lesson_progress(lesson=lesson)
-            progressbar_frame_left = ttk.Frame(progressbar_frame, height=5, width=progressbar_frame_left_width, style="CategoriesProgressBar.TFrame")
+            progressbar_frame_left = ttk.Frame(progressbar_frame, height=5, width=progressbar_frame_left_width, style="CustomMidFrame.TFrame")
             progressbar_frame_left.pack(side=tk.LEFT)
             
-            progressbar_frame_right = ttk.Frame(progressbar_frame, height=5, style="CategoriesProgressBarBackground.TFrame")
+            progressbar_frame_right = ttk.Frame(progressbar_frame, height=5, style="CustomLightFrame.TFrame")
             progressbar_frame_right.pack(expand=True, fill=tk.X, side=tk.LEFT)
 
-            self.bind_widget(frame, partial(self.select_lesson, lesson))
+            self.bind_widget(frame, partial(self.click_button, self.select_lesson, lesson))
 
             # Define the position of the next tile if any
             tile_column += 1
@@ -543,16 +593,16 @@ class Bilingual(tk.Tk):
                 if tile_row >= lines_by_page:
                     break
 
-        return_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        return_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
         return_frame.pack(pady=10)
 
-        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25), style="NavigationLabel.TLabel")
+        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25))
         return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
 
-        return_frame_text = ttk.Label(return_frame, text="Categories", style="NavigationLabel.TLabel")
+        return_frame_text = ttk.Label(return_frame, text="Categories")
         return_frame_text.pack(ipadx=5, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
         
-        self.bind_widget(return_frame, partial(self.display_categories, 1))
+        self.bind_widget(return_frame, partial(self.click_button, self.display_categories, 1, "page"))
 
         #leave_button = ttk.Button(buttons_container, image=self.load_image('leave', 20, 20), compound="left", text="Leave", command=self.display_categories)
         #leave_button.grid(column=0, row=0, padx=30, pady=20)
@@ -636,28 +686,54 @@ class Bilingual(tk.Tk):
             explaination_label.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
 
         # BUTTONS
-        return_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        return_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
         return_frame.pack(padx=5, pady=10, side=tk.LEFT)
 
-        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25), style="NavigationLabel.TLabel")
+        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25))
         return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
 
-        return_frame_text = ttk.Label(return_frame, text="Lessons", style="NavigationLabel.TLabel")
+        return_frame_text = ttk.Label(return_frame, text="Lessons")
         return_frame_text.pack(ipadx=10, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
         
-        self.bind_widget(return_frame, partial(self.display_lessons, 1))
+        self.bind_widget(return_frame, partial(self.click_button, self.display_lessons, 1, "page"))
 
-        validate_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        validate_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
         validate_frame.pack(padx=5, pady=10, side=tk.RIGHT)
 
-        validate_frame_picture = ttk.Label(validate_frame, image=self.load_image("arrow_right", 25, 25), style="NavigationLabel.TLabel")
+        validate_frame_picture = ttk.Label(validate_frame, image=self.load_image("arrow_right", 25, 25))
         validate_frame_picture.pack(padx=10, pady=5, side=tk.RIGHT)
 
-        validate_frame_text = ttk.Label(validate_frame, text="Next Question", style="NavigationLabel.TLabel")
+        validate_frame_text = ttk.Label(validate_frame, text="Next Question")
         validate_frame_text.pack(padx=10, pady=5, side=tk.RIGHT, expand=True, fill=tk.X)
         
-        self.bind_widget(validate_frame, self.display_questions)
+        self.bind_widget(validate_frame, partial(self.click_button, self.display_questions))
     
+    @log_calls
+    def tell_text(self, text, language, event=None):
+        file_path = CURRENT_DIRECTORY + "/assets/temp/tts.mp3"
+        languages = {
+            "english": {
+                "language_code": "en",
+                "accent_code": "co.uk"
+            },
+            "french": {
+                "language_code": "fr",
+                "accent_code": "fr"
+            }
+        }
+
+        tts = gTTS(text=text, lang=languages[language]["language_code"], tld=languages[language]["accent_code"])
+
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+
+        tts.save(file_path)
+
+        while not os.path.isfile(file_path):
+            sleep(0.1)
+
+        playsound(file_path, False)
+
     @log_calls
     def display_questions(self):
         self.choose_random_question()
@@ -668,12 +744,18 @@ class Bilingual(tk.Tk):
         self.window_container.grid(column=1, row=1)
 
         # SENTENCE
-        sentence_labelFrame = ttk.LabelFrame(self.window_container, text="Sentence")
-        sentence_labelFrame.pack(expand=True, fill=tk.X, pady=10)
+        sentence_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
+        sentence_frame.pack(pady=10, fill=tk.X)
 
         sentence_label_text = self.current_question[self.spoken_language]["sentence"].capitalize()
-        sentence_label = ttk.Label(sentence_labelFrame, text=sentence_label_text, justify=tk.LEFT)
-        sentence_label.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
+        sentence_label = ttk.Label(sentence_frame, text=sentence_label_text)
+        sentence_label.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
+
+        if self.spoken_language in ["english", "french"]:
+            sentence_tts = ttk.Label(sentence_frame, image=self.load_image("speak", 25, 25))
+            sentence_tts.pack(side=tk.LEFT, padx=5, pady=5)
+
+            self.bind_widget(sentence_tts, partial(self.click_button, self.tell_text, [sentence_label_text, self.spoken_language], None))
 
         # HINTS
         if "hints" in self.current_question[self.spoken_language].keys() :
@@ -694,24 +776,24 @@ class Bilingual(tk.Tk):
         response_entry.focus()
 
         # BUTTONS
-        return_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        return_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
         return_frame.pack(padx=5, pady=10, side=tk.LEFT)
 
-        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25), style="NavigationLabel.TLabel")
+        return_frame_picture = ttk.Label(return_frame, image=self.load_image("arrow_left", 25, 25))
         return_frame_picture.pack(padx=10, pady=5, side=tk.LEFT)
 
-        return_frame_text = ttk.Label(return_frame, text="Lessons", style="NavigationLabel.TLabel")
+        return_frame_text = ttk.Label(return_frame, text="Lessons")
         return_frame_text.pack(ipadx=10, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
         
-        self.bind_widget(return_frame, partial(self.display_lessons, 1))
+        self.bind_widget(return_frame, partial(self.click_button, self.display_lessons, 1, "page"))
 
-        validate_frame = ttk.Frame(self.window_container, style="NavigationFrame.TFrame")
+        validate_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
         validate_frame.pack(padx=5, pady=10, side=tk.RIGHT)
 
-        validate_frame_picture = ttk.Label(validate_frame, image=self.load_image("arrow_right", 25, 25), style="NavigationLabel.TLabel")
+        validate_frame_picture = ttk.Label(validate_frame, image=self.load_image("arrow_right", 25, 25))
         validate_frame_picture.pack(padx=10, pady=5, side=tk.RIGHT)
 
-        validate_frame_text = ttk.Label(validate_frame, text="Validate", style="NavigationLabel.TLabel")
+        validate_frame_text = ttk.Label(validate_frame, text="Validate")
         validate_frame_text.pack(padx=10, pady=5, side=tk.RIGHT, expand=True, fill=tk.X)
         
         self.bind_widget(validate_frame, partial(self.validate_response, response_Stringvar.get()))
@@ -719,19 +801,3 @@ class Bilingual(tk.Tk):
 if __name__ == "__main__":
     app = Bilingual()
     app.mainloop()
-
-
-#from gtts import gTTS
-#import os
-
-# Text you want to convert to speech
-#text_to_speak = "Hello, this is a test of text-to-speech conversion in Python."
-
-# Create a gTTS object
-#tts = gTTS(text=text_to_speak, lang='en')
-
-# Save the speech to an audio file (e.g., "output.mp3")
-#tts.save("output.mp3")
-
-# Play the audio file
-#os.system("start output.mp3")
