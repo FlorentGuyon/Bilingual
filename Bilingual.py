@@ -667,6 +667,7 @@ class Bilingual(tk.Tk):
         sentence_frame.pack(expand=True, fill=tk.X, pady=10)
 
         sentence_label_text = self.current_question[self.spoken_language]["sentence"].capitalize()
+        
         sentence_label = ttk.Label(sentence_frame, text=sentence_label_text)
         sentence_label.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
 
@@ -678,12 +679,12 @@ class Bilingual(tk.Tk):
 
         # HINTS
         if "hints" in self.current_question[self.spoken_language].keys() :
-            hints_labelFrame = ttk.LabelFrame(self.window_container, text="Hints")
-            hints_labelFrame.pack(expand=True, fill=tk.X, pady=10)
-            
-            hints_label_text = self.current_question[self.spoken_language]["hints"].capitalize()
-            hints_label = ttk.Label(hints_labelFrame, text=hints_label_text, justify=tk.LEFT)
-            hints_label.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
+            hints_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
+            hints_frame.pack(expand=True, fill=tk.X, pady=10)
+
+            hints_label_text = "PS : " + self.current_question[self.spoken_language]["hints"].capitalize()
+            hints_label_text = ttk.Label(hints_frame, text=hints_label_text)
+            hints_label_text.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
 
         # ANSWER
         resonse_Frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
