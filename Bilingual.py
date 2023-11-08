@@ -664,7 +664,7 @@ class Bilingual(tk.Tk):
 
         # SENTENCE
         sentence_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
-        sentence_frame.pack(pady=10, fill=tk.X)
+        sentence_frame.pack(expand=True, fill=tk.X, pady=10)
 
         sentence_label_text = self.current_question[self.spoken_language]["sentence"].capitalize()
         sentence_label = ttk.Label(sentence_frame, text=sentence_label_text)
@@ -686,11 +686,12 @@ class Bilingual(tk.Tk):
             hints_label.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
 
         # ANSWER
-        resonse_labelFrame = ttk.LabelFrame(self.window_container, text="Answer")
-        resonse_labelFrame.pack(expand=True, fill=tk.X, pady=10)
+        resonse_Frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
+        resonse_Frame.pack(expand=True, fill=tk.X, pady=10)
         
         response_Stringvar = tk.StringVar()
-        response_entry = ttk.Entry(resonse_labelFrame, textvariable=response_Stringvar)
+        # The Entry widget from ttk does not support the "background" argument
+        response_entry = tk.Entry(resonse_Frame, textvariable=response_Stringvar, background=COLOR_DARK_PINK, foreground=COLOR_WHITE, relief="flat", insertbackground=COLOR_WHITE, font=('Calibri', 12))
         response_entry.pack(expand=True, fill=tk.BOTH, padx=5, pady=5)
         response_entry.focus()
 
