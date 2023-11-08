@@ -12,6 +12,7 @@ from copy import deepcopy
 from gtts import gTTS
 from playsound import playsound
 from time import sleep
+from diff_match_patch import diff_match_patch
 
 COLOR_WHITE = "#FFFFFF"
 COLOR_LIGHT_GREY = "#eae5e5"
@@ -337,6 +338,14 @@ class Bilingual(tk.Tk):
         action(*args)
 
     @log_calls
+    def find_differences(self, reference, text, missing_letters=True):
+        color_mapping = {-1: "red", 0: COLOR_WHITE, 1: "blue"}
+        dmp = diff_match_patch()
+        differences = dmp.diff_main(reference, text)
+        dmp.diff_cleanupSemantic(differences)
+        return differences
+
+    @log_calls
     def create_frame(self, parent, text):
         new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
         new_frame.pack(expand=True, fill=tk.X, pady=10)
@@ -365,7 +374,7 @@ class Bilingual(tk.Tk):
 
         if language in ["english", "french"]:
             new_tts = ttk.Label(new_frame, image=self.load_image("speak", 25, 25))
-            new_tts.pack(side=tk.LEFT, padx=5, pady=5)
+            new_tts.pack(side=tk.LEFT, padx=10, pady=5)
 
             self.bind_widget(new_tts, partial(self.click_button, self.tell_text, [text, language], None))
 
@@ -674,12 +683,32 @@ class Bilingual(tk.Tk):
         self.clear_window()
         self.title("Nice Try !")
         self.window_container.grid(column=1, row=1)
+        differences = self.find_differences(self.current_question[self.learned_language]["sentence"].capitalize(), response.capitalize())
 
         # SENTENCE
         self.create_speakable_frame(self.window_container, self.current_question[self.spoken_language]["sentence"].capitalize(), self.spoken_language)
-        
+
         # RESONSE
-        self.create_speakable_frame(self.window_container, response.capitalize(), self.learned_language)
+        new_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
+        new_frame.pack(expand=True, fill=tk.X, pady=10)
+
+        new_text = tk.Text(new_frame, width=40, height=1, relief="flat", background=COLOR_DARK_PINK, foreground=COLOR_WHITE, font=('Calibri', 12))
+        new_text.insert("1.0", response.capitalize())
+        new_text.tag_configure("red", background="#b30000")
+        new_text.tag_configure("green", background="#009900")
+
+        char_index = 0
+
+        for difference in differences:
+            if difference[0] == 1:
+                new_text.tag_add("red", f"1.{char_index}", f"1.{char_index + len(difference[1])}")
+            if difference[0] == -1:
+                new_text.insert(f"1.{char_index}", difference[1])
+                new_text.tag_add("green", f"1.{char_index}", f"1.{char_index + len(difference[1])}")
+            char_index += len(difference[1])
+
+        new_text.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
+        new_text.configure(state="disabled")
 
         # ANSWER
         self.create_speakable_frame(self.window_container, self.current_question[self.learned_language]["sentence"].capitalize(), self.learned_language)        
@@ -694,7 +723,7 @@ class Bilingual(tk.Tk):
                             explaination_text.append(item["explainations"][self.spoken_language])
 
         if len(explaination_text) > 0 :
-            self.create_scrollable_frame(self.window_container, "\n\n".join(explaination_text))
+            self.create_scrollable_frame(self.window_container, f"\n\n{'-' * 72}\n\n".join(explaination_text))
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Lessons", self.display_lessons, arguments=1, sound="page", alone_in_row=False)
