@@ -186,7 +186,7 @@ class Bilingual(tk.Tk):
 
         style.configure("CustomLightFrame.TFrame", background=COLOR_LIGHT_PINK)
         style.configure("CustomMidFrame.TFrame", background=COLOR_MID_PINK)
-        
+
         style.configure("CustomDarkFrame.TFrame", background=COLOR_DARK_PINK)
         style.configure("Active.CustomDarkFrame.TFrame", background=COLOR_MID_PINK)
 
@@ -370,10 +370,12 @@ class Bilingual(tk.Tk):
         return differences
 
     @log_calls
-    def enter_widget(self, widget, event=None):
+    def enter_widget(self, widget, sound=True, event=None):
+        if sound:
+            self.playsound("pop")
         widget.configure(style=f'Active.{widget["style"]}')
         for child in widget.winfo_children():
-            self.enter_widget(child)
+            self.enter_widget(child, False)
 
     @log_calls
     def leave_widget(self, widget, event=None):
