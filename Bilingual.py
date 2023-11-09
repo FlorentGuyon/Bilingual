@@ -45,6 +45,14 @@ EVENT_FADE_WIDGET = "<Visibility>"
 EVENT_CONTROL_KEY = "<Control-KeyPress>"
 EVENT_SHIFT_KEY = "<Shift-KeyPress>"
 
+# SOUNDS
+SOUND_PAGE_FORWARDS = "page.wav"
+SOUND_PAGE_BACKWARDS = "reverse-page.mp3"
+SOUND_POP = "pop.wav"
+SOUND_WRITING = "write.wav"
+SOUND_CORRECT = "correct.wav"
+SOUND_INCORRECT = "incorrect.wav"
+
 # ENVIRONMENT
 DEBUG_MODE = True
 CURRENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
@@ -303,7 +311,7 @@ class Bilingual(tk.Tk):
 
     @log_calls
     def playsound(self, sound, wait=False):
-        file_path = CURRENT_DIRECTORY + f"/assets/sounds/{sound}.wav"
+        file_path = CURRENT_DIRECTORY + f"/assets/sounds/{sound}"
 
         if os.path.isfile(file_path):
             Thread(target=playsound, args=(file_path, wait), daemon=True).start()
@@ -345,14 +353,14 @@ class Bilingual(tk.Tk):
                 self.bind_widget(child, command, event)
 
     @log_calls
-    def click_button(self, action, args=[], sound="write", event=None):
+    def click_button(self, action, args=[], sound=SOUND_PAGE_FORWARDS, event=None):
         if isinstance(args, tk.Event):
             event = args
             args = []
 
         elif isinstance(sound, tk.Event):
             event = sound
-            sound = "write"
+            sound = SOUND_PAGE_FORWARDS
 
         if sound:
             self.playsound(sound)
@@ -373,7 +381,7 @@ class Bilingual(tk.Tk):
     @log_calls
     def enter_widget(self, widget, sound=True, event=None):
         if sound:
-            self.playsound("pop")
+            self.playsound(SOUND_POP)
         widget.configure(style=f'Active.{widget["style"]}')
         for child in widget.winfo_children():
             self.enter_widget(child, False)
@@ -404,7 +412,7 @@ class Bilingual(tk.Tk):
         scrolledtext.vbar.configure(width=0)
 
     @log_calls
-    def create_speakable_frame(self, parent, text, language):
+    def create_speakable_frame(self, parent, text, language, animate=True):
         new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
         new_frame.pack(expand=True, fill=tk.X, pady=10)
 
@@ -412,13 +420,20 @@ class Bilingual(tk.Tk):
         new_label.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
 
         if language in ["english", "french"]:
-            new_tts = ttk.Label(new_frame, image=self.load_image("speak", 25, 25))
-            new_tts.pack(side=tk.LEFT, padx=10, pady=5)
+            tts_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
+            tts_frame.pack(side=tk.LEFT)
 
-            self.bind_widget(new_tts, partial(self.click_button, self.tell_text, [text, language], None))
+            tts = ttk.Label(tts_frame, image=self.load_image("speak", 25, 25), style="TLabel")
+            tts.pack(padx=10, pady=5)
+
+            self.bind_widget(tts, partial(self.click_button, self.tell_text, [text, language], None))
+
+            if animate:
+                self.bind_widget(tts_frame, partial(self.enter_widget, tts_frame), EVENT_ENTER_WIDGET, recursive=False)
+                self.bind_widget(tts_frame, partial(self.leave_widget, tts_frame), EVENT_LEAVE_WIDGET, recursive=False)
 
     @log_calls
-    def create_speakable_entry(self, parent, language):
+    def create_speakable_entry(self, parent, language, animate=True):
         new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
         new_frame.pack(expand=True, fill=tk.X, pady=10)
         
@@ -429,10 +444,17 @@ class Bilingual(tk.Tk):
         new_entry.focus()
 
         if language in ["english", "french"]:
-            new_tts = ttk.Label(new_frame, image=self.load_image("speak", 25, 25))
-            new_tts.pack(side=tk.LEFT, padx=5, pady=5)
+            tts_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
+            tts_frame.pack(side=tk.LEFT)
 
-            self.bind_widget(new_tts, partial(self.click_button, self.tell_text, [new_Stringvar, language], None))
+            tts = ttk.Label(tts_frame, image=self.load_image("speak", 25, 25), style="TLabel")
+            tts.pack(padx=10, pady=5)
+
+            self.bind_widget(tts, partial(self.click_button, self.tell_text, [new_Stringvar, language], None))
+
+            if animate:
+                self.bind_widget(tts_frame, partial(self.enter_widget, tts_frame), EVENT_ENTER_WIDGET, recursive=False)
+                self.bind_widget(tts_frame, partial(self.leave_widget, tts_frame), EVENT_LEAVE_WIDGET, recursive=False)
 
         return new_frame, new_Stringvar
 
@@ -540,14 +562,14 @@ class Bilingual(tk.Tk):
 
         # If the response is right
         if response.lower().strip() == answer.lower().strip():
-            self.playsound("correct")
+            self.playsound(SOUND_CORRECT)
             question[self.learned_language]["success_rate"] = ((question[self.learned_language]["success_rate"] * (question[self.learned_language]["tries"] -1)) +1) / question[self.learned_language]["tries"]
             self.save_profile()
             self.display_questions()
 
         # If the response is wrong
         else:
-            self.playsound("incorrect")
+            self.playsound(SOUND_INCORRECT)
             question[self.learned_language]["success_rate"] = (question[self.learned_language]["success_rate"] * (question[self.learned_language]["tries"] -1)) / question[self.learned_language]["tries"]
             self.display_answer(response)
 
@@ -634,7 +656,7 @@ class Bilingual(tk.Tk):
                 self.bind_widget(frame, partial(self.leave_widget, frame), EVENT_LEAVE_WIDGET, recursive=False)
 
         # RETURN BUTTON
-        self.create_button(self.window_container, "arrow_left", "Profiles", self.display_profiles, arguments=1, sound="page")
+        self.create_button(self.window_container, "arrow_left", "Profiles", self.display_profiles, arguments=1, sound=SOUND_PAGE_BACKWARDS)
 
     @log_calls
     def display_categories(self, page=1, event=None):
@@ -657,7 +679,7 @@ class Bilingual(tk.Tk):
             self.create_progress_frame(self.window_container, category, category, self.get_category_progress(category=category), self.select_category, category)
 
         # RETURN BUTTON
-        self.create_button(self.window_container, "arrow_left", "Languages", self.display_languages, arguments=1, sound="page")
+        self.create_button(self.window_container, "arrow_left", "Languages", self.display_languages, arguments=1, sound=SOUND_PAGE_BACKWARDS)
 
         #buttons_state = "enabled" if current_page > 1 else "disabled"
 
@@ -690,7 +712,7 @@ class Bilingual(tk.Tk):
             self.create_progress_frame(self.window_container, lesson, lesson, self.get_lesson_progress(lesson=lesson), self.select_lesson, lesson)
 
         # RETURN BUTTON
-        self.create_button(self.window_container, "arrow_left", "Categories", self.display_categories, arguments=1, sound="page")
+        self.create_button(self.window_container, "arrow_left", "Categories", self.display_categories, arguments=1, sound=SOUND_PAGE_BACKWARDS)
         
         #leave_button = ttk.Button(buttons_container, image=self.load_image('leave', 20, 20), compound="left", text="Leave", command=self.display_categories)
         #leave_button.grid(column=0, row=0, padx=30, pady=20)
@@ -728,7 +750,7 @@ class Bilingual(tk.Tk):
         self.bind_widget(speakable_entry, lambda EVENT_KEY_PRESS: self.validate_response(response_Stringvar.get()) if (EVENT_KEY_PRESS.char == "\r") else None, EVENT_KEY_PRESS)
 
         # RETURN BUTTON
-        self.create_button(self.window_container, "arrow_left", "Lessons", self.display_lessons, arguments=1, sound="page", alone_in_row=False)
+        self.create_button(self.window_container, "arrow_left", "Lessons", self.display_lessons, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=False)
         
         # VALIDATE BUTTON
         self.create_button(self.window_container, "arrow_right", "Validate", lambda: self.validate_response(response_Stringvar.get()), image_first=False, alone_in_row=False)
@@ -782,7 +804,7 @@ class Bilingual(tk.Tk):
             self.create_scrollable_frame(self.window_container, f"\n\n{'-' * 72}\n\n".join(explaination_text))
 
         # RETURN BUTTON
-        self.create_button(self.window_container, "arrow_left", "Lessons", self.display_lessons, arguments=1, sound="page", alone_in_row=False)
+        self.create_button(self.window_container, "arrow_left", "Lessons", self.display_lessons, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=False)
         
         # VALIDATE BUTTON
         self.create_button(self.window_container, "arrow_right", "Next Question", self.display_questions, image_first=False, alone_in_row=False)
