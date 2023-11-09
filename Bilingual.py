@@ -277,39 +277,39 @@ class Bilingual(tk.Tk):
         return list(self.data[category].keys())
 
     @log_calls
-    def get_category_performance(self, category=None):
+    def get_category_success(self, category=None):
         if category is None:
             category = self.current_category
-        performance = [self.get_lesson_performance(category=category, lesson=lesson) for lesson in self.get_all_lessons(category=category)]
-        return sum(performance) / len(performance)
+        success = [self.get_lesson_success(category=category, lesson=lesson) for lesson in self.get_all_lessons(category=category)]
+        return sum(success) / len(success)
 
     @log_calls
-    def get_category_progress(self, category=None):
+    def get_category_overview(self, category=None):
         if category is None:
             category = self.current_category
-        progressions = [self.get_lesson_progress(category=category, lesson=lesson) for lesson in self.get_all_lessons(category=category)]
-        return sum(progressions) / len(progressions)
+        overview = [self.get_lesson_overview(category=category, lesson=lesson) for lesson in self.get_all_lessons(category=category)]
+        return sum(overview) / len(overview)
 
     @log_calls
-    def get_lesson_performance(self, category=None, lesson=None):
+    def get_lesson_success(self, category=None, lesson=None):
         if category is None:
             category = self.current_category
         if lesson is None:
             lesson = self.current_lesson
-        performance = [question[self.learned_language]["success_rate"] for question in self.data[category][lesson]]
-        return sum(performance) / len(performance) * self.get_lesson_progress(category, lesson)
+        success = [question[self.learned_language]["success_rate"] for question in self.data[category][lesson]]
+        return sum(success) / len(success) * self.get_lesson_overview(category, lesson)
 
     @log_calls
-    def get_lesson_progress(self, category=None, lesson=None):
+    def get_lesson_overview(self, category=None, lesson=None):
         if category is None:
             category = self.current_category
         if lesson is None:
             lesson = self.current_lesson
-        progressions = 0
+        overview = 0
         for question in self.data[category][lesson]:
             if (question[self.learned_language]["tries"] > 0):
-                progressions += 1
-        return progressions / len(self.data[category][lesson])
+                overview += 1
+        return overview / len(self.data[category][lesson])
 
     @log_calls
     def choose_random_question(self):
@@ -413,12 +413,12 @@ class Bilingual(tk.Tk):
     @log_calls
     def get_stars(self, category=None, lesson=None):
         if (category) and (not lesson):
-            performance = self.get_category_performance(category)
+            success = self.get_category_success(category)
         else:
-            performance = self.get_lesson_performance(category, lesson)
+            success = self.get_lesson_success(category, lesson)
         # % of success to achieve to earn each start
-        stars = [0.3, 0.6, 0.9]
-        return len([i for i, value in enumerate(stars) if value <= performance])
+        stars = [0.6, 0.8, 0.9]
+        return len([i for i, value in enumerate(stars) if value <= success])
 
     @log_calls
     def create_stat_frame(self, parent, text, stat, alone_in_row=True):
@@ -429,7 +429,7 @@ class Bilingual(tk.Tk):
         stat_label = ttk.Label(frame, text=stat, style="Big.Default.TLabel", anchor="center")
         stat_label.pack(expand=True, fill=tk.Y, padx=5, pady=5)
 
-        text_label = ttk.Label(frame, text=text, wraplength=80 ,style="Small.Default.TLabel", anchor="center")
+        text_label = ttk.Label(frame, text=text, wraplength=650, style="Small.Default.TLabel", anchor="center")
         text_label.pack(expand=True, fill=tk.X, padx=5, pady=5)
 
     @log_calls
@@ -437,7 +437,7 @@ class Bilingual(tk.Tk):
         new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
         new_frame.pack(expand=True, fill=tk.X, pady=10)
 
-        new_label = ttk.Label(new_frame, text=text)
+        new_label = ttk.Label(new_frame, text=text, style="Default.TLabel")
         new_label.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
 
     @log_calls
@@ -614,6 +614,7 @@ class Bilingual(tk.Tk):
         else:
             self.playsound(SOUND_INCORRECT)
             question[self.learned_language]["success_rate"] = (question[self.learned_language]["success_rate"] * (question[self.learned_language]["tries"] -1)) / question[self.learned_language]["tries"]
+            self.save_profile()
             self.display_answer(response)
 
     @log_calls
@@ -710,7 +711,7 @@ class Bilingual(tk.Tk):
 
         # Iterate through categories
         for category in categories[start_index:end_index]:
-            self.create_progress_frame(self.window_container, category, category, self.get_category_progress(category), self.get_stars(category), self.select_category, category)
+            self.create_progress_frame(self.window_container, category, category, self.get_category_overview(category), self.get_stars(category), self.select_category, category)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Languages", self.display_languages, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
@@ -742,7 +743,7 @@ class Bilingual(tk.Tk):
 
         # Iterate through lessons
         for lesson in lessons[start_index:end_index]:
-            self.create_progress_frame(self.window_container, lesson, lesson, self.get_lesson_progress(lesson=lesson), self.get_stars(self.current_category, lesson), self.select_lesson, lesson)
+            self.create_progress_frame(self.window_container, lesson, lesson, self.get_lesson_overview(lesson=lesson), self.get_stars(self.current_category, lesson), self.select_lesson, lesson)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Categories", self.display_categories, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
@@ -791,17 +792,17 @@ class Bilingual(tk.Tk):
         stat_frame = ttk.Frame(self.window_container)
         stat_frame.pack(expand=True, fill=tk.X, pady=10) 
 
-        lesson_progress = f'{ceil(self.get_lesson_progress() * 100)}%'
-        self.create_stat_frame(stat_frame, text="Lesson Progression", stat=lesson_progress, alone_in_row=False)
+        lesson_overview = f'{ceil(self.get_lesson_overview() * 100)}%'
+        self.create_stat_frame(stat_frame, text="Lesson Overview", stat=lesson_overview, alone_in_row=False)
 
-        lesson_performance_text = f'{ceil(self.get_lesson_performance() * 100)}%'
-        self.create_stat_frame(stat_frame, text="Lesson Performance", stat=lesson_performance_text, alone_in_row=False)
+        lesson_success_text = f'{ceil(self.get_lesson_success() * 100)}%'
+        self.create_stat_frame(stat_frame, text="Lesson Success", stat=lesson_success_text, alone_in_row=False)
 
         question_tries = self.current_question[self.learned_language]["tries"]
         self.create_stat_frame(stat_frame, text="Question Attempts", stat=question_tries, alone_in_row=False)
 
-        question_performance = f'{ceil(self.current_question[self.learned_language]["success_rate"] * 100)}%'
-        self.create_stat_frame(stat_frame, text="Question Performance", stat=question_performance, alone_in_row=False)
+        question_success = f'{ceil(self.current_question[self.learned_language]["success_rate"] * 100)}%'
+        self.create_stat_frame(stat_frame, text="Question Success", stat=question_success, alone_in_row=False)
 
         # SENTENCE
         self.create_speakable_frame(self.window_container, self.current_question[self.spoken_language]["sentence"].capitalize(), self.spoken_language)

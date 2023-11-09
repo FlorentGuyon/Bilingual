@@ -25,7 +25,7 @@
     },
     {
         "english": {
-            "sentence": "It's important that he speak English",
+            "sentence": "It is important that he speak English",
             "success_rate": 0,
             "tries": 0
         },
@@ -61,7 +61,7 @@
     },
     {
         "english": {
-            "sentence": "It's necessary that you speak German",
+            "sentence": "It is necessary that you speak German",
             "success_rate": 0,
             "tries": 0
         },
@@ -123,7 +123,7 @@
     },
     {
         "english": {
-            "sentence": "It's important that he finish the book",
+            "sentence": "It is important that he finish the book",
             "success_rate": 0,
             "tries": 0
         },
@@ -159,7 +159,7 @@
     },
     {
         "english": {
-            "sentence": "It's necessary that you finish early",
+            "sentence": "It is necessary that you finish early",
             "success_rate": 0,
             "tries": 0
         },
@@ -221,7 +221,7 @@
     },
     {
         "english": {
-            "sentence": "It's important that he take the subway",
+            "sentence": "It is important that he take the subway",
             "success_rate": 0,
             "tries": 0
         },
@@ -257,7 +257,7 @@
     },
     {
         "english": {
-            "sentence": "It's necessary that you take the train",
+            "sentence": "It is necessary that you take the train",
             "success_rate": 0,
             "tries": 0
         },
