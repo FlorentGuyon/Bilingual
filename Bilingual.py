@@ -14,21 +14,41 @@ from playsound import playsound
 from time import sleep
 from diff_match_patch import diff_match_patch
 
+##################################################################### CONSTANTS
+
+# COLORS
 COLOR_WHITE = "#FFFFFF"
 COLOR_LIGHT_GREY = "#eae5e5"
-
-#COLOR_LIGHT_BLUE = "#c9c5be"
-#COLOR_DARK_BLUE = "#394a62"
-
 COLOR_LIGHT_PINK = "#edcbc5"
 COLOR_MID_PINK = "#e1a99f"
 COLOR_DARK_PINK = "#c39792"
 
+# EVENTS
 EVENT_LEFT_CLICK = "<Button-1>"
+EVENT_MIDDLE_CLICK = "<Button-2>"
+EVENT_RIGHT_CLICK = "<Button-3>"
+EVENT_LEFT_RELEASE = "<ButtonRelease-1>"
+EVENT_MIDDLE_RELEASE = "<ButtonRelease-2>"
+EVENT_RIGHT_RELEASE = "<ButtonRelease-3>"
+EVENT_IN_WIDGET = "<Motion>"
+EVENT_ENTER_WIDGET = "<Enter>"
+EVENT_LEAVE_WIDGET = "<Leave>"
+EVENT_KEY_PRESS = "<KeyPress>"
+EVENT_KEY_RELEASE = "<KeyRelease>"
+EVENT_FOCUS_WIDGET = "<FocusIn>"
+EVENT_UNFOCUS_WIDGET = "<FocusOut>"
+EVENT_MOVE_RESIZE_WIDGET = "<Configure>"
+EVENT_SHOW_WIDGET = "<Map>"
+EVENT_HIDE_WIDGET = "<Unmap>"
+EVENT_FADE_WIDGET = "<Visibility>"
+EVENT_CONTROL_KEY = "<Control-KeyPress>"
+EVENT_SHIFT_KEY = "<Shift-KeyPress>"
 
-DEBUG_MODE = False
-
+# ENVIRONMENT
+DEBUG_MODE = True
 CURRENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
+
+###################################################################### WRAPPERS
 
 def log_calls(method):
     def wrapper(*args, **kwargs):
@@ -36,6 +56,8 @@ def log_calls(method):
             print(f'{method.__name__}({str(args[1:])}, {str(kwargs)})')
         return method(*args, **kwargs)
     return wrapper
+
+####################################################################### CLASSES
 
 class Bilingual(tk.Tk):
 
@@ -159,16 +181,17 @@ class Bilingual(tk.Tk):
 
     @log_calls
     def configure_style(self):
-        self.style = ttk.Style(self) 
-        self.style.configure(".", background=COLOR_LIGHT_GREY, font=('Calibri', 12))
+        style = ttk.Style(self) 
+        style.configure(".", background=COLOR_LIGHT_GREY, font=('Calibri', 12))
 
-        self.style.configure("CustomLightFrame.TFrame", background=COLOR_LIGHT_PINK)
-        self.style.configure("CustomMidFrame.TFrame", background=COLOR_MID_PINK)
-        self.style.configure("CustomDarkFrame.TFrame", background=COLOR_DARK_PINK)
+        style.configure("CustomLightFrame.TFrame", background=COLOR_LIGHT_PINK)
+        style.configure("CustomMidFrame.TFrame", background=COLOR_MID_PINK)
+        
+        style.configure("CustomDarkFrame.TFrame", background=COLOR_DARK_PINK)
+        style.configure("Active.CustomDarkFrame.TFrame", background=COLOR_MID_PINK)
 
-        self.style.configure("TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE)
-        self.style.configure("CustomAverageLabel.TLabel", font=('Calibri', 14))
-        self.style.configure("CustomBigLabel.TLabel", font=('Calibri', 16))
+        style.configure("TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE)
+        style.configure("Active.TLabel", background=COLOR_MID_PINK)
 
     @log_calls
     def create_window(self):
@@ -314,10 +337,11 @@ class Bilingual(tk.Tk):
         playsound(file_path, False)
 
     @log_calls
-    def bind_widget(self, widget, command, event=EVENT_LEFT_CLICK):
+    def bind_widget(self, widget, command, event=EVENT_LEFT_CLICK, recursive=True):
         widget.bind(event, command)
-        for child in widget.winfo_children():
-            self.bind_widget(child, command, event)
+        if recursive:
+            for child in widget.winfo_children():
+                self.bind_widget(child, command, event)
 
     @log_calls
     def click_button(self, action, args=[], sound="write", event=None):
@@ -344,6 +368,18 @@ class Bilingual(tk.Tk):
         differences = dmp.diff_main(reference, text)
         dmp.diff_cleanupSemantic(differences)
         return differences
+
+    @log_calls
+    def enter_widget(self, widget, event=None):
+        widget.configure(style=f'Active.{widget["style"]}')
+        for child in widget.winfo_children():
+            self.enter_widget(child)
+
+    @log_calls
+    def leave_widget(self, widget, event=None):
+        widget.configure(style=widget["style"].replace("Active.", ""))
+        for child in widget.winfo_children():
+            self.leave_widget(child)
 
     @log_calls
     def create_frame(self, parent, text):
@@ -395,10 +431,10 @@ class Bilingual(tk.Tk):
 
             self.bind_widget(new_tts, partial(self.click_button, self.tell_text, [new_Stringvar, language], None))
 
-        return new_Stringvar
+        return new_frame, new_Stringvar
 
     @log_calls
-    def create_button(self, parent, image, text, action, arguments=[], sound=None, image_first=True, alone_in_row=True):
+    def create_button(self, parent, image, text, action, arguments=[], sound=None, image_first=True, alone_in_row=True, animate=True):
         side = tk.TOP if alone_in_row else tk.LEFT
         new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
         new_frame.pack(padx=10, pady=10, expand=True, fill=tk.X, side=side)
@@ -406,45 +442,53 @@ class Bilingual(tk.Tk):
         side = tk.LEFT if image_first else tk.RIGHT
         
         anchor = tk.E if image_first else tk.W
-        new_image = ttk.Label(new_frame, image=self.load_image(image, 25, 25), anchor=anchor)
+        new_image = ttk.Label(new_frame, image=self.load_image(image, 25, 25), anchor=anchor, style="TLabel")
         new_image.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
 
         anchor = tk.W if image_first else tk.E
-        new_label = ttk.Label(new_frame, text=text, anchor=anchor)
+        new_label = ttk.Label(new_frame, text=text, anchor=anchor, style="TLabel")
         new_label.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
         
         self.bind_widget(new_frame, partial(self.click_button, action, arguments, sound))
 
+        if animate:
+            self.bind_widget(new_frame, partial(self.enter_widget, new_frame), EVENT_ENTER_WIDGET, recursive=False)
+            self.bind_widget(new_frame, partial(self.leave_widget, new_frame), EVENT_LEAVE_WIDGET, recursive=False)
+
     @log_calls
-    def create_image_frame(self, parent, image, text, action, arguments, sound=None):
+    def create_image_frame(self, parent, image, text, action, arguments, sound=None, animate=True):
         new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
         new_frame.pack(pady=5, expand=True, fill=tk.X)
 
         title_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
         title_frame.pack(expand=True, fill=tk.BOTH)
 
-        title_frame_picture = ttk.Label(title_frame, image=self.load_image(image, 35, 35), style="CustomAverageLabel.TLabel")
+        title_frame_picture = ttk.Label(title_frame, image=self.load_image(image, 35, 35), style="TLabel")
         title_frame_picture.pack(padx=15, pady=5, side=tk.LEFT)
 
         title_frame_text_text = text.replace("-", " ").title()
-        title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="CustomAverageLabel.TLabel")
+        title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="TLabel")
         title_frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
         self.bind_widget(new_frame, partial(self.click_button, action, arguments))
 
+        if animate:
+            self.bind_widget(new_frame, partial(self.enter_widget, new_frame), EVENT_ENTER_WIDGET, recursive=False)
+            self.bind_widget(new_frame, partial(self.leave_widget, new_frame), EVENT_LEAVE_WIDGET, recursive=False)
+
     @log_calls
-    def create_progress_frame(self, parent, image, text, progress, action, arguments, sound=None):
+    def create_progress_frame(self, parent, image, text, progress, action, arguments, sound=None, animate=True):
         new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
         new_frame.pack(pady=5, expand=True, fill=tk.X)
 
         title_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
         title_frame.pack(expand=True, fill=tk.BOTH)
 
-        title_frame_picture = ttk.Label(title_frame, image=self.load_image(image, 35, 35), style="CustomAverageLabel.TLabel")
+        title_frame_picture = ttk.Label(title_frame, image=self.load_image(image, 35, 35), style="TLabel")
         title_frame_picture.pack(padx=15, pady=5, side=tk.LEFT)
 
         title_frame_text_text = text.replace("-", " ").title()
-        title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="CustomAverageLabel.TLabel")
+        title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="TLabel")
         title_frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
         progressbar_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
@@ -461,6 +505,10 @@ class Bilingual(tk.Tk):
 
         self.bind_widget(new_frame, partial(self.click_button, action, arguments))
 
+        if animate:
+            self.bind_widget(new_frame, partial(self.enter_widget, new_frame), EVENT_ENTER_WIDGET, recursive=False)
+            self.bind_widget(new_frame, partial(self.leave_widget, new_frame), EVENT_LEAVE_WIDGET, recursive=False)
+
     @log_calls
     def validate_languages(self, spoken_language, learned_language, event=None):
         if (spoken_language == "") or (learned_language == ""):
@@ -475,7 +523,7 @@ class Bilingual(tk.Tk):
     @log_calls
     def validate_response(self, response, event=None):
         response_is_right = None
-        response = response.get()
+        response = response
         answer = self.current_question[self.learned_language]["sentence"]
         question = None
 
@@ -569,16 +617,18 @@ class Bilingual(tk.Tk):
                 frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
                 frame.pack(pady=5, expand=True, fill=tk.X)
 
-                spoken_language_picture = ttk.Label(frame, image=self.load_image(spoken_language, 35, 35), style="CustomBigLabel.TLabel", anchor=tk.CENTER)
+                spoken_language_picture = ttk.Label(frame, image=self.load_image(spoken_language, 35, 35), style="TLabel", anchor=tk.CENTER)
                 spoken_language_picture.pack(padx=10, pady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
-                arrow_picture = ttk.Label(frame, image=self.load_image("next", 35, 35), style="CustomBigLabel.TLabel", anchor=tk.CENTER)
+                arrow_picture = ttk.Label(frame, image=self.load_image("next", 35, 35), style="TLabel", anchor=tk.CENTER)
                 arrow_picture.pack(padx=10, pady=5, side=tk.LEFT)
 
-                learned_language_picture = ttk.Label(frame, image=self.load_image(learned_language, 35, 35), style="CustomBigLabel.TLabel", anchor=tk.CENTER)
+                learned_language_picture = ttk.Label(frame, image=self.load_image(learned_language, 35, 35), style="TLabel", anchor=tk.CENTER)
                 learned_language_picture.pack(padx=10, pady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
                 self.bind_widget(frame, partial(self.click_button, self.validate_languages, [spoken_language, learned_language]))
+                self.bind_widget(frame, partial(self.enter_widget, frame), EVENT_ENTER_WIDGET, recursive=False)
+                self.bind_widget(frame, partial(self.leave_widget, frame), EVENT_LEAVE_WIDGET, recursive=False)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Profiles", self.display_profiles, arguments=1, sound="page")
@@ -669,13 +719,16 @@ class Bilingual(tk.Tk):
             self.create_frame(self.window_container, f'PS : {self.current_question[self.spoken_language]["hints"].capitalize()}')
 
         # ANSWER
-        response_Stringvar = self.create_speakable_entry(self.window_container, self.learned_language)
+        speakable_entry, response_Stringvar = self.create_speakable_entry(self.window_container, self.learned_language)
+
+        # ENTER KEY
+        self.bind_widget(speakable_entry, lambda EVENT_KEY_PRESS: self.validate_response(response_Stringvar.get()) if (EVENT_KEY_PRESS.char == "\r") else None, EVENT_KEY_PRESS)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Lessons", self.display_lessons, arguments=1, sound="page", alone_in_row=False)
         
         # VALIDATE BUTTON
-        self.create_button(self.window_container, "arrow_right", "Validate", self.validate_response, arguments=response_Stringvar, image_first=False, alone_in_row=False)
+        self.create_button(self.window_container, "arrow_right", "Validate", lambda: self.validate_response(response_Stringvar.get()), image_first=False, alone_in_row=False)
 
     @log_calls
     def display_answer(self, response):
@@ -730,6 +783,8 @@ class Bilingual(tk.Tk):
         
         # VALIDATE BUTTON
         self.create_button(self.window_container, "arrow_right", "Next Question", self.display_questions, image_first=False, alone_in_row=False)
+
+##################################################################### MAIN CODE
 
 if __name__ == "__main__":
     app = Bilingual()
