@@ -54,7 +54,7 @@ SOUND_CORRECT = "correct.wav"
 SOUND_INCORRECT = "incorrect.wav"
 
 # ENVIRONMENT
-DEBUG_MODE = True
+DEBUG_MODE = False
 CURRENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
 ###################################################################### WRAPPERS
@@ -246,7 +246,7 @@ class Bilingual(tk.Tk):
    
     @log_calls
     def is_remembered(self, question):
-        return random.random() < question[self.learned_language]["success_rate"]
+        return random.random() >= question[self.learned_language]["success_rate"] * 0.95
 
     @log_calls
     def get_all_profiles(self):
@@ -313,8 +313,8 @@ class Bilingual(tk.Tk):
         deep_copy = deepcopy(self.data)
         random.shuffle(deep_copy[self.current_category][self.current_lesson])
         for question in deep_copy[self.current_category][self.current_lesson]:
-            if question == self.current_question:
-                continue
+            if (self.current_question) and (self.current_question[self.learned_language]["sentence"] == question[self.learned_language]["sentence"]):
+                    continue
             if not self.is_remembered(question):
                 self.current_question = question
                 return
@@ -536,7 +536,7 @@ class Bilingual(tk.Tk):
         title_frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
         # % of success to achieve to earn each start
-        stars = [0.4, 0.6, 0.8]
+        stars = [0.2, 0.5, 0.9]
         earned = len([i for i, value in enumerate(stars) if value <= results])
 
         stars_image = ttk.Label(title_frame, image=self.load_image(f'{earned}-star', 53, 25), style="TLabel")
@@ -547,7 +547,7 @@ class Bilingual(tk.Tk):
 
         self.update()
 
-        progressbar_frame_left_width = new_frame.winfo_width() * results
+        progressbar_frame_left_width = new_frame.winfo_width() * progress
         progressbar_frame_left = ttk.Frame(progressbar_frame, height=5, width=progressbar_frame_left_width, style="CustomMidFrame.TFrame")
         progressbar_frame_left.pack(side=tk.LEFT)
         
