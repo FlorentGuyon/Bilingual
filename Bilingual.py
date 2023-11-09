@@ -52,6 +52,7 @@ SOUND_POP = "pop.wav"
 SOUND_WRITING = "write.wav"
 SOUND_CORRECT = "correct.wav"
 SOUND_INCORRECT = "incorrect.wav"
+SOUND_NEW_STAR = "new-star.wav"
 
 # ENVIRONMENT
 DEBUG_MODE = False
@@ -199,10 +200,10 @@ class Bilingual(tk.Tk):
         style.configure("CustomDarkFrame.TFrame", background=COLOR_DARK_PINK)
         style.configure("Active.CustomDarkFrame.TFrame", background=COLOR_MID_PINK)
 
-        style.configure("TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE)
-        style.configure("Active.TLabel", background=COLOR_MID_PINK)
-        style.configure("Small.TLabel", font=('Calibri', 8))
-        style.configure("Big.TLabel", font=('Calibri', 16))
+        style.configure("Default.TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE)
+        style.configure("Active.Default.TLabel", background=COLOR_MID_PINK)
+        style.configure("Small.Default.TLabel", font=('Calibri', 8))
+        style.configure("Big.Default.TLabel", font=('Calibri', 16))
 
     @log_calls
     def create_window(self):
@@ -276,11 +277,11 @@ class Bilingual(tk.Tk):
         return list(self.data[category].keys())
 
     @log_calls
-    def get_category_results(self, category=None):
+    def get_category_performance(self, category=None):
         if category is None:
             category = self.current_category
-        results = [self.get_lesson_results(category=category, lesson=lesson) for lesson in self.get_all_lessons(category=category)]
-        return sum(results) / len(results)
+        performance = [self.get_lesson_performance(category=category, lesson=lesson) for lesson in self.get_all_lessons(category=category)]
+        return sum(performance) / len(performance)
 
     @log_calls
     def get_category_progress(self, category=None):
@@ -290,13 +291,13 @@ class Bilingual(tk.Tk):
         return sum(progressions) / len(progressions)
 
     @log_calls
-    def get_lesson_results(self, category=None, lesson=None):
+    def get_lesson_performance(self, category=None, lesson=None):
         if category is None:
             category = self.current_category
         if lesson is None:
             lesson = self.current_lesson
-        results = [question[self.learned_language]["success_rate"] for question in self.data[category][lesson]]
-        return sum(results) / len(results) * self.get_lesson_progress(category, lesson)
+        performance = [question[self.learned_language]["success_rate"] for question in self.data[category][lesson]]
+        return sum(performance) / len(performance) * self.get_lesson_progress(category, lesson)
 
     @log_calls
     def get_lesson_progress(self, category=None, lesson=None):
@@ -410,15 +411,25 @@ class Bilingual(tk.Tk):
             self.leave_widget(child)
 
     @log_calls
+    def get_stars(self, category=None, lesson=None):
+        if (category) and (not lesson):
+            performance = self.get_category_performance(category)
+        else:
+            performance = self.get_lesson_performance(category, lesson)
+        # % of success to achieve to earn each start
+        stars = [0.3, 0.6, 0.9]
+        return len([i for i, value in enumerate(stars) if value <= performance])
+
+    @log_calls
     def create_stat_frame(self, parent, text, stat, alone_in_row=True):
         side = tk.TOP if alone_in_row else tk.LEFT
         frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
         frame.pack(expand=True, fill=tk.BOTH, padx=5, pady=10, side=side)
 
-        stat_label = ttk.Label(frame, text=stat, style="Big.TLabel", anchor="center")
+        stat_label = ttk.Label(frame, text=stat, style="Big.Default.TLabel", anchor="center")
         stat_label.pack(expand=True, fill=tk.Y, padx=5, pady=5)
 
-        text_label = ttk.Label(frame, text=text, wraplength=80 ,style="Small.TLabel", anchor="center")
+        text_label = ttk.Label(frame, text=text, wraplength=80 ,style="Small.Default.TLabel", anchor="center")
         text_label.pack(expand=True, fill=tk.X, padx=5, pady=5)
 
     @log_calls
@@ -445,14 +456,14 @@ class Bilingual(tk.Tk):
         new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
         new_frame.pack(expand=True, fill=tk.X, pady=10)
 
-        new_label = ttk.Label(new_frame, text=text)
+        new_label = ttk.Label(new_frame, text=text, style="Default.TLabel")
         new_label.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
 
         if language in ["english", "french"]:
             tts_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
             tts_frame.pack(side=tk.LEFT)
 
-            tts = ttk.Label(tts_frame, image=self.load_image("speak", 25, 25), style="TLabel")
+            tts = ttk.Label(tts_frame, image=self.load_image("speak", 25, 25), style="Default.TLabel")
             tts.pack(padx=10, pady=5)
 
             self.bind_widget(tts, partial(self.click_button, self.tell_text, [text, language], None))
@@ -476,7 +487,7 @@ class Bilingual(tk.Tk):
             tts_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
             tts_frame.pack(side=tk.LEFT)
 
-            tts = ttk.Label(tts_frame, image=self.load_image("speak", 25, 25), style="TLabel")
+            tts = ttk.Label(tts_frame, image=self.load_image("speak", 25, 25), style="Default.TLabel")
             tts.pack(padx=10, pady=5)
 
             self.bind_widget(tts, partial(self.click_button, self.tell_text, [new_Stringvar, language], None))
@@ -496,11 +507,11 @@ class Bilingual(tk.Tk):
         side = tk.LEFT if image_first else tk.RIGHT
         
         anchor = tk.E if image_first else tk.W
-        new_image = ttk.Label(new_frame, image=self.load_image(image, 25, 25), anchor=anchor, style="TLabel")
+        new_image = ttk.Label(new_frame, image=self.load_image(image, 25, 25), anchor=anchor, style="Default.TLabel")
         new_image.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
 
         anchor = tk.W if image_first else tk.E
-        new_label = ttk.Label(new_frame, text=text, anchor=anchor, style="TLabel")
+        new_label = ttk.Label(new_frame, text=text, anchor=anchor, style="Default.TLabel")
         new_label.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
         
         self.bind_widget(new_frame, partial(self.click_button, action, arguments, sound))
@@ -517,11 +528,11 @@ class Bilingual(tk.Tk):
         title_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
         title_frame.pack(expand=True, fill=tk.BOTH)
 
-        title_frame_picture = ttk.Label(title_frame, image=self.load_image(image, 35, 35), style="TLabel")
+        title_frame_picture = ttk.Label(title_frame, image=self.load_image(image, 35, 35), style="Default.TLabel")
         title_frame_picture.pack(padx=15, pady=5, side=tk.LEFT)
 
         title_frame_text_text = text.replace("-", " ").title()
-        title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="TLabel")
+        title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="Default.TLabel")
         title_frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
         self.bind_widget(new_frame, partial(self.click_button, action, arguments))
@@ -531,25 +542,21 @@ class Bilingual(tk.Tk):
             self.bind_widget(new_frame, partial(self.leave_widget, new_frame), EVENT_LEAVE_WIDGET, recursive=False)
 
     @log_calls
-    def create_progress_frame(self, parent, image, text, progress, results, action, arguments, sound=None, animate=True):
+    def create_progress_frame(self, parent, image, text, progress, stars, action, arguments, sound=None, animate=True):
         new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
         new_frame.pack(pady=5, expand=True, fill=tk.X)
 
         title_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
         title_frame.pack(expand=True, fill=tk.BOTH)
 
-        title_frame_picture = ttk.Label(title_frame, image=self.load_image(image, 35, 35), style="TLabel")
+        title_frame_picture = ttk.Label(title_frame, image=self.load_image(image, 35, 35), style="Default.TLabel")
         title_frame_picture.pack(padx=15, pady=5, side=tk.LEFT)
 
         title_frame_text_text = text.replace("-", " ").title()
-        title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="TLabel")
+        title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="Default.TLabel")
         title_frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
-        # % of success to achieve to earn each start
-        stars = [0.2, 0.5, 0.9]
-        earned = len([i for i, value in enumerate(stars) if value <= results])
-
-        stars_image = ttk.Label(title_frame, image=self.load_image(f'{earned}-star', 53, 25), style="TLabel")
+        stars_image = ttk.Label(title_frame, image=self.load_image(f'{stars}-star', 53, 25), style="Default.TLabel")
         stars_image.pack(padx=15, pady=5, side=tk.LEFT)
 
         progressbar_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
@@ -625,6 +632,7 @@ class Bilingual(tk.Tk):
     @log_calls
     def select_lesson(self, lesson, event=None):
         self.current_lesson = lesson
+        self.current_lesson_stars = self.get_stars()
         self.display_questions()
     
     @log_calls
@@ -667,13 +675,13 @@ class Bilingual(tk.Tk):
                 frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
                 frame.pack(pady=5, expand=True, fill=tk.X)
 
-                spoken_language_picture = ttk.Label(frame, image=self.load_image(spoken_language, 35, 35), style="TLabel", anchor=tk.CENTER)
+                spoken_language_picture = ttk.Label(frame, image=self.load_image(spoken_language, 35, 35), style="Default.TLabel", anchor=tk.CENTER)
                 spoken_language_picture.pack(padx=10, pady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
-                arrow_picture = ttk.Label(frame, image=self.load_image("next", 35, 35), style="TLabel", anchor=tk.CENTER)
+                arrow_picture = ttk.Label(frame, image=self.load_image("next", 35, 35), style="Default.TLabel", anchor=tk.CENTER)
                 arrow_picture.pack(padx=10, pady=5, side=tk.LEFT)
 
-                learned_language_picture = ttk.Label(frame, image=self.load_image(learned_language, 35, 35), style="TLabel", anchor=tk.CENTER)
+                learned_language_picture = ttk.Label(frame, image=self.load_image(learned_language, 35, 35), style="Default.TLabel", anchor=tk.CENTER)
                 learned_language_picture.pack(padx=10, pady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
                 self.bind_widget(frame, partial(self.click_button, self.validate_languages, [spoken_language, learned_language]))
@@ -702,7 +710,7 @@ class Bilingual(tk.Tk):
 
         # Iterate through categories
         for category in categories[start_index:end_index]:
-            self.create_progress_frame(self.window_container, category, category, self.get_category_progress(category=category), self.get_category_results(category=category), self.select_category, category)
+            self.create_progress_frame(self.window_container, category, category, self.get_category_progress(category), self.get_stars(category), self.select_category, category)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Languages", self.display_languages, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
@@ -734,7 +742,7 @@ class Bilingual(tk.Tk):
 
         # Iterate through lessons
         for lesson in lessons[start_index:end_index]:
-            self.create_progress_frame(self.window_container, lesson, lesson, self.get_lesson_progress(lesson=lesson), self.get_lesson_results(lesson=lesson), self.select_lesson, lesson)
+            self.create_progress_frame(self.window_container, lesson, lesson, self.get_lesson_progress(lesson=lesson), self.get_stars(self.current_category, lesson), self.select_lesson, lesson)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Categories", self.display_categories, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
@@ -748,6 +756,15 @@ class Bilingual(tk.Tk):
             self.create_button(self.window_container, "next", "Next", self.display_lessons, arguments=current_page +1, sound=SOUND_PAGE_FORWARDS, alone_in_row=False)
 
     @log_calls
+    def display_new_star(self, parent, max_height, height=1):
+        for child in parent.winfo_children()[1:]:
+            child.destroy()
+        ttk.Label(parent, image=self.load_image(f'{self.get_stars()}-star', int(height * 2.09), height), anchor="center").pack(side="left", expand=True, fill=tk.X)
+        ttk.Label(parent, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=tk.X)
+        if height < max_height:
+            self.after(15, partial(self.display_new_star, parent, max_height, height+7))
+
+    @log_calls
     def display_questions(self):
         self.choose_random_question()
 
@@ -756,6 +773,20 @@ class Bilingual(tk.Tk):
         self.title("Translate this sentence !")
         self.window_container.grid(column=1, row=1)
 
+        # STARS
+        stars_frame = ttk.Frame(self.window_container)
+        stars_frame.pack(expand=True, fill=tk.BOTH, pady=10) 
+
+        ttk.Label(stars_frame, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=tk.X)
+        
+        if self.get_stars() > self.current_lesson_stars:
+            self.current_lesson_stars = self.get_stars()
+            self.after(350, partial(self.playsound, SOUND_NEW_STAR))
+            self.after(250, partial(self.display_new_star, stars_frame, 50))
+        else:
+            ttk.Label(stars_frame, image=self.load_image(f'{self.current_lesson_stars}-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=tk.X)
+            ttk.Label(stars_frame, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=tk.X)
+
         # STATS
         stat_frame = ttk.Frame(self.window_container)
         stat_frame.pack(expand=True, fill=tk.X, pady=10) 
@@ -763,8 +794,8 @@ class Bilingual(tk.Tk):
         lesson_progress = f'{ceil(self.get_lesson_progress() * 100)}%'
         self.create_stat_frame(stat_frame, text="Lesson Progression", stat=lesson_progress, alone_in_row=False)
 
-        lesson_performance = f'{ceil(self.get_lesson_results() * 100)}%'
-        self.create_stat_frame(stat_frame, text="Lesson Performance", stat=lesson_performance, alone_in_row=False)
+        lesson_performance_text = f'{ceil(self.get_lesson_performance() * 100)}%'
+        self.create_stat_frame(stat_frame, text="Lesson Performance", stat=lesson_performance_text, alone_in_row=False)
 
         question_tries = self.current_question[self.learned_language]["tries"]
         self.create_stat_frame(stat_frame, text="Question Attempts", stat=question_tries, alone_in_row=False)

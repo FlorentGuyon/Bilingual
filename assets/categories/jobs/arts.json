@@ -13,7 +13,7 @@
     },
     {
         "english": {
-            "sentence": "The painter sells his canvas",
+            "sentence": "The painter sells her canvas",
             "hints": "The painter is female",
             "success_rate": 0,
             "tries": 0
