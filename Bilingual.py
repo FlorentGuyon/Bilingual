@@ -54,7 +54,7 @@ SOUND_CORRECT = "correct.wav"
 SOUND_INCORRECT = "incorrect.wav"
 
 # ENVIRONMENT
-DEBUG_MODE = True
+DEBUG_MODE = False
 CURRENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
 ###################################################################### WRAPPERS
@@ -613,18 +613,6 @@ class Bilingual(tk.Tk):
         # QUIT BUTTON
         self.create_button(self.window_container, "arrow_left", "Quit", self.close_app)
 
-        #if total_pages > 1:
-        #    buttons_container = ttk.Frame(self.window_container)
-        #    buttons_container.grid(column=0, row=1)
-        #    buttons_container.columnconfigure(0, weight=1)
-        #    buttons_container.columnconfigure(1, weight=1)
-
-        #    previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('previous', 20, 20), compound="left", text="Previous", command=partial(self.display_profiles, current_page -1))
-        #    previous_button.grid(column=0, row=0, padx=30, pady=20)
-
-        #    next_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('next', 20, 20), compound="right", text="Next", command=partial(self.display_profiles, current_page +1))
-        #    next_button.grid(column=1, row=0, padx=30, pady=20)
-
     @log_calls
     def display_languages(self, page=1, event=None):
         languages = self.get_all_languages()
@@ -662,7 +650,7 @@ class Bilingual(tk.Tk):
     def display_categories(self, page=1, event=None):
 
         categories = self.get_all_categories()
-        item_by_page = 5
+        item_by_page = 4
         total_pages = ceil(len(categories) / item_by_page)
         current_page = 1 if (page < 1) or (page > total_pages) else page
 
@@ -673,29 +661,28 @@ class Bilingual(tk.Tk):
 
         # Initialize variables
         start_index = (current_page - 1) * item_by_page
+        end_index = (start_index + item_by_page) if (len(categories) >= (start_index + item_by_page)) else len(categories)
 
         # Iterate through categories
-        for category in categories[start_index:]:
+        for category in categories[start_index:end_index]:
             self.create_progress_frame(self.window_container, category, category, self.get_category_progress(category=category), self.select_category, category)
 
         # RETURN BUTTON
-        self.create_button(self.window_container, "arrow_left", "Languages", self.display_languages, arguments=1, sound=SOUND_PAGE_BACKWARDS)
-
-        #buttons_state = "enabled" if current_page > 1 else "disabled"
-
-        #previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('previous', 20, 20), compound="left", text="Previous", command=partial(self.display_categories, current_page -1))
-        #previous_button.grid(column=1, row=0, padx=30, pady=20)
-
-        #buttons_state = "enabled" if current_page < total_pages else "disabled"
-
-        #next_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('next', 20, 20), compound="right", text="Next", command=partial(self.display_categories, current_page +1))
-        #next_button.grid(column=2, row=0, padx=30, pady=20)
+        self.create_button(self.window_container, "arrow_left", "Languages", self.display_languages, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
+        
+        # PREVIOUS BUTTON
+        if current_page > 1:
+            self.create_button(self.window_container, "previous", "Previous", self.display_categories, arguments=current_page -1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=False)
+        
+        # NEXT BUTTON
+        if current_page < total_pages:
+            self.create_button(self.window_container, "next", "Next", self.display_categories, arguments=current_page +1, sound=SOUND_PAGE_FORWARDS, alone_in_row=False)
 
     @log_calls
     def display_lessons(self, page=1, event=None):
 
         lessons = self.get_all_lessons()
-        item_by_page = 5
+        item_by_page = 4
         total_pages = ceil(len(lessons) / item_by_page)
         current_page = 1 if (page < 1) or (page > total_pages) else page
 
@@ -706,26 +693,22 @@ class Bilingual(tk.Tk):
 
         # Initialize variables
         start_index = (current_page - 1) * item_by_page
+        end_index = (start_index + item_by_page) if (len(lessons) >= (start_index + item_by_page)) else len(lessons)
 
         # Iterate through lessons
-        for lesson in lessons[start_index:]:
+        for lesson in lessons[start_index:end_index]:
             self.create_progress_frame(self.window_container, lesson, lesson, self.get_lesson_progress(lesson=lesson), self.select_lesson, lesson)
 
         # RETURN BUTTON
-        self.create_button(self.window_container, "arrow_left", "Categories", self.display_categories, arguments=1, sound=SOUND_PAGE_BACKWARDS)
+        self.create_button(self.window_container, "arrow_left", "Categories", self.display_categories, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
         
-        #leave_button = ttk.Button(buttons_container, image=self.load_image('leave', 20, 20), compound="left", text="Leave", command=self.display_categories)
-        #leave_button.grid(column=0, row=0, padx=30, pady=20)
-
-        #buttons_state = "enabled" if current_page > 1 else "disabled"
-
-        #previous_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('previous', 20, 20), compound="left", text="Previous", command=partial(self.display_lessons, current_page -1))
-        #previous_button.grid(column=1, row=0, padx=30, pady=20)
-
-        #buttons_state = "enabled" if current_page < total_pages else "disabled"
-
-        #next_button = ttk.Button(buttons_container, state=buttons_state, image=self.load_image('next', 20, 20), compound="right", text="Next", command=partial(self.display_lessons, current_page +1))
-        #next_button.grid(column=2, row=0, padx=30, pady=20)
+        # PREVIOUS BUTTON
+        if current_page > 1:
+            self.create_button(self.window_container, "previous", "Previous", self.display_lessons, arguments=current_page -1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=False)
+        
+        # NEXT BUTTON
+        if current_page < total_pages:
+            self.create_button(self.window_container, "next", "Next", self.display_lessons, arguments=current_page +1, sound=SOUND_PAGE_FORWARDS, alone_in_row=False)
 
     @log_calls
     def display_questions(self):
