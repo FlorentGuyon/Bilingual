@@ -201,6 +201,8 @@ class Bilingual(tk.Tk):
 
         style.configure("TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE)
         style.configure("Active.TLabel", background=COLOR_MID_PINK)
+        style.configure("Small.TLabel", font=('Calibri', 8))
+        style.configure("Big.TLabel", font=('Calibri', 16))
 
     @log_calls
     def create_window(self):
@@ -246,7 +248,7 @@ class Bilingual(tk.Tk):
    
     @log_calls
     def is_remembered(self, question):
-        return random.random() >= question[self.learned_language]["success_rate"] * 0.95
+        return random.random() < question[self.learned_language]["success_rate"] * 0.95
 
     @log_calls
     def get_all_profiles(self):
@@ -319,10 +321,6 @@ class Bilingual(tk.Tk):
                 self.current_question = question
                 return
         self.current_question = random.choice(deep_copy[self.current_category][self.current_lesson])
-
-    @log_calls
-    def get_random_color(self):
-        return random.choice(["red", "blue", "yellow", "green", "magenta", "orange"]) if self.debug_color else None
     
     @log_calls
     def scroll_widget(self, widget, event):
@@ -410,6 +408,18 @@ class Bilingual(tk.Tk):
         widget.configure(style=widget["style"].replace("Active.", ""))
         for child in widget.winfo_children():
             self.leave_widget(child)
+
+    @log_calls
+    def create_stat_frame(self, parent, text, stat, alone_in_row=True):
+        side = tk.TOP if alone_in_row else tk.LEFT
+        frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
+        frame.pack(expand=True, fill=tk.BOTH, padx=5, pady=10, side=side)
+
+        stat_label = ttk.Label(frame, text=stat, style="Big.TLabel", anchor="center")
+        stat_label.pack(expand=True, fill=tk.Y, padx=5, pady=5)
+
+        text_label = ttk.Label(frame, text=text, wraplength=80 ,style="Small.TLabel", anchor="center")
+        text_label.pack(expand=True, fill=tk.X, padx=5, pady=5)
 
     @log_calls
     def create_frame(self, parent, text):
@@ -745,6 +755,22 @@ class Bilingual(tk.Tk):
         self.clear_window()
         self.title("Translate this sentence !")
         self.window_container.grid(column=1, row=1)
+
+        # STATS
+        stat_frame = ttk.Frame(self.window_container)
+        stat_frame.pack(expand=True, fill=tk.X, pady=10) 
+
+        lesson_progress = f'{ceil(self.get_lesson_progress() * 100)}%'
+        self.create_stat_frame(stat_frame, text="Lesson Progression", stat=lesson_progress, alone_in_row=False)
+
+        lesson_performance = f'{ceil(self.get_lesson_results() * 100)}%'
+        self.create_stat_frame(stat_frame, text="Lesson Performance", stat=lesson_performance, alone_in_row=False)
+
+        question_tries = self.current_question[self.learned_language]["tries"]
+        self.create_stat_frame(stat_frame, text="Question Attempts", stat=question_tries, alone_in_row=False)
+
+        question_performance = f'{ceil(self.current_question[self.learned_language]["success_rate"] * 100)}%'
+        self.create_stat_frame(stat_frame, text="Question Performance", stat=question_performance, alone_in_row=False)
 
         # SENTENCE
         self.create_speakable_frame(self.window_container, self.current_question[self.spoken_language]["sentence"].capitalize(), self.spoken_language)
