@@ -13,6 +13,7 @@ from gtts import gTTS
 from playsound import playsound
 from time import sleep
 from diff_match_patch import diff_match_patch
+from threading import Thread
 
 ##################################################################### CONSTANTS
 
@@ -305,7 +306,7 @@ class Bilingual(tk.Tk):
         file_path = CURRENT_DIRECTORY + f"/assets/sounds/{sound}.wav"
 
         if os.path.isfile(file_path):
-            playsound(file_path, wait)
+            Thread(target=playsound, args=(file_path, wait), daemon=True).start()
     
     @log_calls
     def tell_text(self, text, language, event=None):
