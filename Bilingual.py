@@ -54,7 +54,7 @@ SOUND_CORRECT = "correct.wav"
 SOUND_INCORRECT = "incorrect.wav"
 
 # ENVIRONMENT
-DEBUG_MODE = False
+DEBUG_MODE = True
 CURRENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
 ###################################################################### WRAPPERS
@@ -274,6 +274,13 @@ class Bilingual(tk.Tk):
         return list(self.data[category].keys())
 
     @log_calls
+    def get_category_results(self, category=None):
+        if category is None:
+            category = self.current_category
+        results = [self.get_lesson_results(category=category, lesson=lesson) for lesson in self.get_all_lessons(category=category)]
+        return sum(results) / len(results)
+
+    @log_calls
     def get_category_progress(self, category=None):
         if category is None:
             category = self.current_category
@@ -281,13 +288,25 @@ class Bilingual(tk.Tk):
         return sum(progressions) / len(progressions)
 
     @log_calls
+    def get_lesson_results(self, category=None, lesson=None):
+        if category is None:
+            category = self.current_category
+        if lesson is None:
+            lesson = self.current_lesson
+        results = [question[self.learned_language]["success_rate"] for question in self.data[category][lesson]]
+        return sum(results) / len(results) * self.get_lesson_progress(category, lesson)
+
+    @log_calls
     def get_lesson_progress(self, category=None, lesson=None):
         if category is None:
             category = self.current_category
         if lesson is None:
             lesson = self.current_lesson
-        progressions = [question[self.learned_language]["success_rate"] for question in self.data[category][lesson]]
-        return sum(progressions) / len(progressions)
+        progressions = 0
+        for question in self.data[category][lesson]:
+            if (question[self.learned_language]["tries"] > 0):
+                progressions += 1
+        return progressions / len(self.data[category][lesson])
 
     @log_calls
     def choose_random_question(self):
@@ -502,7 +521,7 @@ class Bilingual(tk.Tk):
             self.bind_widget(new_frame, partial(self.leave_widget, new_frame), EVENT_LEAVE_WIDGET, recursive=False)
 
     @log_calls
-    def create_progress_frame(self, parent, image, text, progress, action, arguments, sound=None, animate=True):
+    def create_progress_frame(self, parent, image, text, progress, results, action, arguments, sound=None, animate=True):
         new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
         new_frame.pack(pady=5, expand=True, fill=tk.X)
 
@@ -516,12 +535,19 @@ class Bilingual(tk.Tk):
         title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="TLabel")
         title_frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
+        # % of success to achieve to earn each start
+        stars = [0.4, 0.6, 0.8]
+        earned = len([i for i, value in enumerate(stars) if value <= results])
+
+        stars_image = ttk.Label(title_frame, image=self.load_image(f'{earned}-star', 53, 25), style="TLabel")
+        stars_image.pack(padx=15, pady=5, side=tk.LEFT)
+
         progressbar_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
         progressbar_frame.pack(expand=True, fill=tk.X)
 
         self.update()
 
-        progressbar_frame_left_width = new_frame.winfo_width() * progress
+        progressbar_frame_left_width = new_frame.winfo_width() * results
         progressbar_frame_left = ttk.Frame(progressbar_frame, height=5, width=progressbar_frame_left_width, style="CustomMidFrame.TFrame")
         progressbar_frame_left.pack(side=tk.LEFT)
         
@@ -666,7 +692,7 @@ class Bilingual(tk.Tk):
 
         # Iterate through categories
         for category in categories[start_index:end_index]:
-            self.create_progress_frame(self.window_container, category, category, self.get_category_progress(category=category), self.select_category, category)
+            self.create_progress_frame(self.window_container, category, category, self.get_category_progress(category=category), self.get_category_results(category=category), self.select_category, category)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Languages", self.display_languages, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
@@ -698,7 +724,7 @@ class Bilingual(tk.Tk):
 
         # Iterate through lessons
         for lesson in lessons[start_index:end_index]:
-            self.create_progress_frame(self.window_container, lesson, lesson, self.get_lesson_progress(lesson=lesson), self.select_lesson, lesson)
+            self.create_progress_frame(self.window_container, lesson, lesson, self.get_lesson_progress(lesson=lesson), self.get_lesson_results(lesson=lesson), self.select_lesson, lesson)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Categories", self.display_categories, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
