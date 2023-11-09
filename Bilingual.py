@@ -205,7 +205,7 @@ class Bilingual(tk.Tk):
     @log_calls
     def create_window(self):
         self.title("Go Bilingo")
-        self.iconbitmap('./assets/icons/icon.ico')
+        self.iconbitmap(CURRENT_DIRECTORY + '/assets/icons/megan.ico')
         self.configure(bg=COLOR_LIGHT_GREY)
 
         window_width = 800
@@ -576,6 +576,7 @@ class Bilingual(tk.Tk):
     @log_calls
     def select_profile(self, profile, event=None):
         self.current_profile = profile
+        self.iconbitmap(CURRENT_DIRECTORY + f'/assets/icons/{profile}.ico')
         self.load_profile()
         self.load_explainations()
         self.display_languages()
