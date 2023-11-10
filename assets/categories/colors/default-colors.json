@@ -1,4 +1,7 @@
-{    
+{
+    "id": "default-colors",  
+    "name": "Default Colors",
+    "icon": "default-colors",    
     "prerequisites": {},
     "questions": {
         "0": {

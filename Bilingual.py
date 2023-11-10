@@ -189,13 +189,13 @@ class Bilingual(tk.Tk):
 
         for file_path in json_files:
             folder_name = os.path.basename(os.path.dirname(file_path))
-            file_name = os.path.basename(file_path).replace(".json", "")
             json_content = json.loads(self.read_from_file(file_path))
+            category_name = json_content["id"]
 
             if folder_name not in self.categories.keys():
                 self.categories[folder_name] = {}
 
-            self.categories[folder_name][file_name] = json_content
+            self.categories[folder_name][category_name] = json_content
 
     # QUESTIONS
     @log_calls
@@ -787,7 +787,6 @@ class Bilingual(tk.Tk):
         if current_page < total_pages:
             self.create_button(self.window_container, "next", "Next", self.display_profiles, arguments=current_page +1, sound=SOUND_PAGE_FORWARDS, image_first=False, alone_in_row=False)
 
-
     @log_calls
     def display_new_profile(self, event=None):
         self.clear_window()
@@ -911,8 +910,8 @@ class Bilingual(tk.Tk):
         for lesson in lessons[start_index:end_index]:
             lesson_locked = self.is_lesson_locked(lesson=lesson)
             self.create_progress_frame(parent=self.window_container, 
-                image=lesson, 
-                text=lesson, 
+                image=self.categories[self.current_category][lesson]["icon"], 
+                text=self.categories[self.current_category][lesson]["name"], 
                 progress=self.get_lesson_overview(lesson=lesson), 
                 stars=self.get_stars(self.current_category, lesson), 
                 action=self.select_lesson, 

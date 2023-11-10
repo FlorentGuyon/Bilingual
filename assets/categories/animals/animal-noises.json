@@ -1,4 +1,7 @@
-{    
+{
+    "id": "animal-noises",
+    "name": "Animal Noises",
+    "icon": "animal-noises",       
     "prerequisites": {
         "animals": {
             "animal-habitats": 2

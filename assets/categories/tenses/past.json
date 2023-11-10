@@ -1,4 +1,7 @@
-{    
+{
+    "id": "past",   
+    "name": "Past",
+    "icon": "past",   
     "prerequisites": {},
     "questions": {
         "0": {

@@ -1,4 +1,7 @@
 {
+    "id": "animal-habitats",  
+    "name": "Animal Habitats",
+    "icon": "animal-habitats",   
     "prerequisites": {},
     "questions": {
         "0": {

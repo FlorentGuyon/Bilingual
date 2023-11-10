@@ -1,4 +1,7 @@
-{    
+{
+    "id": "future",   
+    "name": "Future",
+    "icon": "future",   
     "prerequisites": {},
     "questions": {
         "0": {

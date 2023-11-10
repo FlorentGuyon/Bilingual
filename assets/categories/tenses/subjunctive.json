@@ -1,4 +1,7 @@
 {    
+    "id": "subjunctive",
+    "name": "Subjunctive",
+    "icon": "subjunctive",
     "prerequisites": {
         "tenses": {
             "present": 2,

@@ -1,4 +1,7 @@
-{    
+{   
+    "id": "conditional",    
+    "name": "Conditional",
+    "icon": "conditional",    
     "prerequisites": {
         "tenses": {
             "present": 2,

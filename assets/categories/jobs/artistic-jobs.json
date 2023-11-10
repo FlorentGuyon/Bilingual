@@ -1,4 +1,7 @@
 {    
+    "id": "arts",   
+    "name": "Artistic Jobs",
+    "icon": "arts",   
     "prerequisites": {
         "colors": {
             "default-colors": 2
