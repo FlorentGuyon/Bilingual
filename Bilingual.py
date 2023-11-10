@@ -18,7 +18,7 @@ from threading import Thread
 ##################################################################### CONSTANTS
 
 # ENVIRONMENT
-DEBUG_MODE = True
+DEBUG_MODE = False
 CURRENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 FILES_ENCODING = "utf8"
 
@@ -245,9 +245,15 @@ class Bilingual(tk.Tk):
                 for question_id in self.categories[category][lesson]["questions"].keys():
                     for data in ["success_rate", "tries"]:
                         value = self.categories[category][lesson]["questions"][question_id][self.learned_language][data]
+                        if category not in profile["categories"].keys():
+                            profile["categories"][category] = {}
+                        if lesson not in profile["categories"][category].keys():
+                            profile["categories"][category][lesson] = {}
+                        if question_id not in profile["categories"][category][lesson].keys():
+                            profile["categories"][category][lesson][question_id] = {}
+                        if self.learned_language not in profile["categories"][category][lesson][question_id].keys():
+                            profile["categories"][category][lesson][question_id][self.learned_language] = {}
                         profile["categories"][category][lesson][question_id][self.learned_language][data] = value
-
-                        print(category, lesson, question_id, data, value)
 
         file_content = json.dumps(profile, indent=4)
         self.write_in_file(profile_path, file_content)   
@@ -398,6 +404,22 @@ class Bilingual(tk.Tk):
         self.categories[category][lesson]["questions"][question_id][language]["tries"] = tries
 
     ################################################################ VALIDATORS
+
+    # PROFILES
+    @log_calls
+    def validate_new_profile(self, name, icon, event=None):
+        name = name.get().lower()
+        if name == "":
+            self.display_new_profile()
+            return
+        profile = {
+            "icon": icon,
+            "categories": {}
+        }
+        file_path = os.path.join(PATH_PROFILES, name + ".json")
+        file_content = json.dumps(profile)
+        self.write_in_file(file_path, file_content)
+        self.display_profiles()
 
     # LANGUAGES
     @log_calls
@@ -671,13 +693,20 @@ class Bilingual(tk.Tk):
 
         side = tk.LEFT if image_first else tk.RIGHT
         
-        anchor = tk.E if image_first else tk.W
+        if not text:
+            anchor = tk.CENTER
+        elif image_first:
+            anchor = tk.E 
+        else:
+            anchor = tk.W
+
         new_image = ttk.Label(new_frame, image=self.load_image(image, 25, 25), anchor=anchor, style="Default.TLabel")
         new_image.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
 
-        anchor = tk.W if image_first else tk.E
-        new_label = ttk.Label(new_frame, text=text, anchor=anchor, style="Default.TLabel")
-        new_label.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
+        if text:
+            anchor = tk.W if image_first else tk.E
+            new_label = ttk.Label(new_frame, text=text, anchor=anchor, style="Default.TLabel")
+            new_label.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
         
         self.bind_widget(new_frame, partial(self.click_button, action, arguments, sound))
 
@@ -687,7 +716,7 @@ class Bilingual(tk.Tk):
 
     # ENTRIES
     @log_calls
-    def create_speakable_entry(self, parent, language, animate=True):
+    def create_entry(self, parent):
         new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
         new_frame.pack(expand=True, fill=tk.X, pady=10)
         
@@ -697,6 +726,13 @@ class Bilingual(tk.Tk):
         new_entry.pack(side=tk.LEFT, expand=True, fill=tk.BOTH, padx=5, pady=5)
         new_entry.focus()
 
+        return new_frame, new_Stringvar
+
+    @log_calls
+    def create_speakable_entry(self, parent, language):
+
+        new_frame, new_Stringvar = self.create_entry(parent)
+
         if language in ["english", "french"]:
             tts_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
             tts_frame.pack(side=tk.LEFT)
@@ -705,10 +741,6 @@ class Bilingual(tk.Tk):
             tts.pack(padx=10, pady=5)
 
             self.bind_widget(tts, partial(self.click_button, self.tell_text, [new_Stringvar, language], None))
-
-            if animate:
-                self.bind_widget(tts_frame, partial(self.enter_widget, tts_frame), EVENT_ENTER_WIDGET, recursive=False)
-                self.bind_widget(tts_frame, partial(self.leave_widget, tts_frame), EVENT_LEAVE_WIDGET, recursive=False)
 
         return new_frame, new_Stringvar
 
@@ -736,7 +768,27 @@ class Bilingual(tk.Tk):
             self.create_image_frame(self.window_container, icon, profile, self.select_profile, profile)
 
         # QUIT BUTTON
-        self.create_button(self.window_container, "arrow_left", "Quit", self.close_app)
+        self.create_button(self.window_container, "arrow_left", "Quit", self.close_app, alone_in_row=False)
+        
+        # NEW PROFILE BUTTON
+        self.create_button(self.window_container, "plus", "New Profile", self.display_new_profile, image_first=False, alone_in_row=False)
+
+    @log_calls
+    def display_new_profile(self, event=None):
+        self.clear_window()
+        self.title("Write your name !")
+        entry, stringvar = self.create_entry(self.window_container)
+
+        images = self.get_files(PATH_ICONS, "png")
+        bunnies = []
+        for image in images:
+            image = os.path.basename(image)
+            image = image.replace(".png", "")
+            if image[:7] == "rabbit-":
+                bunnies.append(image)
+
+        for bunny in bunnies:
+            self.create_button(self.window_container, bunny, None, self.validate_new_profile, [stringvar, bunny], alone_in_row=False)
 
     # LANGUAGES
     @log_calls
@@ -817,11 +869,11 @@ class Bilingual(tk.Tk):
         
         # PREVIOUS BUTTON
         if current_page > 1:
-            self.create_button(self.window_container, "previous", "Previous", self.display_categories, arguments=current_page -1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=False)
+            self.create_button(self.window_container, "previous", "Previous", self.display_categories, arguments=current_page -1, sound=SOUND_PAGE_BACKWARDS, image_first=False, alone_in_row=False)
         
         # NEXT BUTTON
         if current_page < total_pages:
-            self.create_button(self.window_container, "next", "Next", self.display_categories, arguments=current_page +1, sound=SOUND_PAGE_FORWARDS, alone_in_row=False)
+            self.create_button(self.window_container, "next", "Next", self.display_categories, arguments=current_page +1, sound=SOUND_PAGE_FORWARDS, image_first=False, alone_in_row=False)
 
     # LESSONS
     @log_calls
@@ -858,11 +910,11 @@ class Bilingual(tk.Tk):
         
         # PREVIOUS BUTTON
         if current_page > 1:
-            self.create_button(self.window_container, "previous", "Previous", self.display_lessons, arguments=current_page -1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=False)
+            self.create_button(self.window_container, "previous", "Previous", self.display_lessons, arguments=current_page -1, sound=SOUND_PAGE_BACKWARDS, image_first=False, alone_in_row=False)
         
         # NEXT BUTTON
         if current_page < total_pages:
-            self.create_button(self.window_container, "next", "Next", self.display_lessons, arguments=current_page +1, sound=SOUND_PAGE_FORWARDS, alone_in_row=False)
+            self.create_button(self.window_container, "next", "Next", self.display_lessons, arguments=current_page +1, sound=SOUND_PAGE_FORWARDS, image_first=False, alone_in_row=False)
 
     # QUESTIONS
     @log_calls
