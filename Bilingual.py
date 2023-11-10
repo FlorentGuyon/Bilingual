@@ -26,6 +26,7 @@ FILES_ENCODING = "utf8"
 COLOR_WHITE = "#FFFFFF"
 COLOR_LIGHT_GREY = "#eae5e5"
 COLOR_MID_GREY = "#d3c9c9"
+COLOR_DARK_GREY = "#c8bbbb"
 COLOR_LIGHT_PINK = "#edcbc5"
 COLOR_MID_PINK = "#e1a99f"
 COLOR_DARK_PINK = "#c39792"
@@ -59,6 +60,7 @@ SOUND_WRITING = "write.wav"
 SOUND_CORRECT = "correct.wav"
 SOUND_INCORRECT = "incorrect.wav"
 SOUND_NEW_STAR = "new-star.wav"
+SOUND_BLOCKED = "blocked.wav"
 
 # PATHS
 PATH_CATEGORIES = os.path.join(CURRENT_DIRECTORY, "assets", "categories")
@@ -98,8 +100,8 @@ class Bilingual(tk.Tk):
         self.learned_language = None
         self.current_profile = None
         self.current_icon = None
-        self.current_category = None
-        self.current_lesson = None
+        self.current_category_id = None
+        self.current_lesson_id = None
         self.current_question_id = None
         self.current_question = None
         self.load_categories()
@@ -163,23 +165,23 @@ class Bilingual(tk.Tk):
         self.current_icon = profile["icon"]
         self.set_window_icon(self.current_icon)
 
-        for category in self.categories.keys():
-            for lesson in self.categories[category].keys():
-                for question_id in self.categories[category][lesson]["questions"].keys():
-                    for language in self.categories[category][lesson]["questions"][question_id].keys():
+        for category_id in self.categories.keys():
+            for lesson_id in self.categories[category_id].keys():
+                for question_id in self.categories[category_id][lesson_id]["questions"].keys():
+                    for language in self.categories[category_id][lesson_id]["questions"][question_id].keys():
                         for data in ["success_rate", "tries"]:
-                            if category not in profile["categories"].keys():
+                            if category_id not in profile["categories"].keys():
                                 continue
-                            if lesson not in profile["categories"][category].keys():
+                            if lesson_id not in profile["categories"][category_id].keys():
                                 continue
-                            if question_id not in profile["categories"][category][lesson].keys():
+                            if question_id not in profile["categories"][category_id][lesson_id].keys():
                                 continue
-                            if self.learned_language not in profile["categories"][category][lesson][question_id].keys():
+                            if language not in profile["categories"][category_id][lesson_id][question_id].keys():
                                 continue
-                            if data not in profile["categories"][category][lesson][question_id][self.learned_language].keys():
+                            if data not in profile["categories"][category_id][lesson_id][question_id][language].keys():
                                 continue
-                            value = profile["categories"][category][lesson][question_id][self.learned_language][data]
-                            self.categories[category][lesson]["questions"][question_id][self.learned_language][data] = value
+                            value = profile["categories"][category_id][lesson_id][question_id][language][data]
+                            self.categories[category_id][lesson_id]["questions"][question_id][language][data] = value
 
     # CATEGORIES
     @log_calls
@@ -247,20 +249,20 @@ class Bilingual(tk.Tk):
         profile_content = self.read_from_file(profile_path)
         profile = json.loads(profile_content)
 
-        for category in self.categories.keys():
-            for lesson in self.categories[category].keys():
-                for question_id in self.categories[category][lesson]["questions"].keys():
+        for category_id in self.categories.keys():
+            for lesson_id in self.categories[category_id].keys():
+                for question_id in self.categories[category_id][lesson_id]["questions"].keys():
                     for data in ["success_rate", "tries"]:
-                        value = self.categories[category][lesson]["questions"][question_id][self.learned_language][data]
-                        if category not in profile["categories"].keys():
-                            profile["categories"][category] = {}
-                        if lesson not in profile["categories"][category].keys():
-                            profile["categories"][category][lesson] = {}
-                        if question_id not in profile["categories"][category][lesson].keys():
-                            profile["categories"][category][lesson][question_id] = {}
-                        if self.learned_language not in profile["categories"][category][lesson][question_id].keys():
-                            profile["categories"][category][lesson][question_id][self.learned_language] = {}
-                        profile["categories"][category][lesson][question_id][self.learned_language][data] = value
+                        value = self.categories[category_id][lesson_id]["questions"][question_id][self.learned_language][data]
+                        if category_id not in profile["categories"].keys():
+                            profile["categories"][category_id] = {}
+                        if lesson_id not in profile["categories"][category_id].keys():
+                            profile["categories"][category_id][lesson_id] = {}
+                        if question_id not in profile["categories"][category_id][lesson_id].keys():
+                            profile["categories"][category_id][lesson_id][question_id] = {}
+                        if self.learned_language not in profile["categories"][category_id][lesson_id][question_id].keys():
+                            profile["categories"][category_id][lesson_id][question_id][self.learned_language] = {}
+                        profile["categories"][category_id][lesson_id][question_id][self.learned_language][data] = value
 
         file_content = json.dumps(profile, indent=4)
         self.write_in_file(profile_path, file_content)   
@@ -288,9 +290,9 @@ class Bilingual(tk.Tk):
     @log_calls
     def get_all_languages(self):
         languages = []
-        for category in self.categories.keys():
-            for lesson in self.categories[category].keys():
-                for question in self.categories[category][lesson]["questions"].values():
+        for category_id in self.categories.keys():
+            for lesson_id in self.categories[category_id].keys():
+                for question in self.categories[category_id][lesson_id]["questions"].values():
                     for language in question.keys():
                         if language not in languages:
                             languages.append(language)
@@ -298,11 +300,11 @@ class Bilingual(tk.Tk):
 
     # STARS
     @log_calls
-    def get_stars(self, category=None, lesson=None):
-        if (category) and (not lesson):
-            success = self.get_category_success(category)
+    def get_stars(self, category_id=None, lesson_id=None):
+        if (category_id) and (not lesson_id):
+            success = self.get_category_success(category_id)
         else:
-            success = self.get_lesson_success(category, lesson)
+            success = self.get_lesson_success(category_id, lesson_id)
         return len([i for i, value in enumerate(VALUE_STARS) if value <= success])
 
     # CATEGORIES
@@ -311,60 +313,67 @@ class Bilingual(tk.Tk):
         return list(self.categories.keys())
 
     @log_calls
-    def get_category_success(self, category=None):
-        category = category if category else self.current_category
-        success_rates = [self.get_lesson_success(category, lesson) for lesson in self.get_all_lessons(category)]
+    def get_category_success(self, category_id=None):
+        category_id = category_id if category_id else self.current_category_id
+        success_rates = [self.get_lesson_success(category_id, lesson_id) for lesson_id in self.get_all_lessons(category_id)]
         success_rate = sum(success_rates) / len(success_rates)
         return success_rate
 
     @log_calls
-    def get_category_overview(self, category=None):
-        category = category if category else self.current_category
-        overviews = [self.get_lesson_overview(category, lesson) for lesson in self.get_all_lessons(category)]
+    def get_category_overview(self, category_id=None):
+        category_id = category_id if category_id else self.current_category_id
+        overviews = [self.get_lesson_overview(category_id, lesson_id) for lesson_id in self.get_all_lessons(category_id)]
         overview = sum(overviews) / len(overviews)
         return overview
 
     # LESSONS
     @log_calls
-    def get_all_lessons(self, category=None):
-        if category is None:
-            category = self.current_category
-        return list(self.categories[category].keys())
+    def get_all_lessons(self, category_id=None):
+        category_id = category_id if category_id else self.current_category_id
+        return list(self.categories[category_id].keys())
 
     @log_calls
-    def get_lesson_success(self, category=None, lesson=None):
-        category = category if category else self.current_category
-        lesson = lesson if lesson else self.current_lesson
-        lesson_overview = self.get_lesson_overview(category, lesson)
-        success_rates = [question[self.learned_language]["success_rate"] for question in self.categories[category][lesson]["questions"].values()]
+    def get_lesson_success(self, category_id=None, lesson_id=None):
+        category_id = category_id if category_id else self.current_category_id
+        lesson_id = lesson_id if lesson_id else self.current_lesson_id
+        lesson_overview = self.get_lesson_overview(category_id, lesson_id)
+        success_rates = [question[self.learned_language]["success_rate"] for question in self.categories[category_id][lesson_id]["questions"].values()]
         success_rate = sum(success_rates) / len(success_rates) * lesson_overview
         return success_rate
 
     @log_calls
-    def get_lesson_overview(self, category=None, lesson=None):
-        category = category if category else self.current_category
-        lesson = lesson if lesson else self.current_lesson
+    def get_lesson_overview(self, category_id=None, lesson_id=None):
+        category_id = category_id if category_id else self.current_category_id
+        lesson_id = lesson_id if lesson_id else self.current_lesson_id
         views = 0
-        for question in self.categories[category][lesson]["questions"].values():
+        for question in self.categories[category_id][lesson_id]["questions"].values():
             if question[self.learned_language]["tries"] > 0:
                 views += 1
-        questions = len(self.categories[category][lesson]["questions"].values()) 
+        questions = len(self.categories[category_id][lesson_id]["questions"].values()) 
         overview = views / questions
         return overview
 
     # QUESTIONS
     @log_calls
-    def get_question_data(self, data, category=None, lesson=None, question_id=None, language=None):
-        category = category if category else self.current_category
-        lesson = lesson if lesson else self.current_lesson
+    def get_question_data(self, data, category_id=None, lesson_id=None, question_id=None, language=None):
+        category_id = category_id if category_id else self.current_category_id
+        lesson_id = lesson_id if lesson_id else self.current_lesson_id
         question_id = question_id if question_id else self.current_question_id
         language = language if language else self.learned_language
-        return self.categories[category][lesson]["questions"][question_id][language][data]
+        return self.categories[category_id][lesson_id]["questions"][question_id][language][data]
 
     @log_calls
-    def get_question_answer(self, question=None):
-        question = question if question else self.current_question
-        return question[self.learned_language]["sentence"]
+    def get_question_success_rate(self, category_id=None, lesson_id=None, question_id=None, language=None):
+        return self.get_question_data("success_rate", category_id, lesson_id, question_id, language)
+
+    @log_calls
+    def get_question_tries(self, category_id=None, lesson_id=None, question_id=None, language=None):
+        return self.get_question_data("tries", category_id, lesson_id, question_id, language)
+
+    @log_calls
+    def get_question_answer(self, question_id=None):
+        question_id = question_id if question_id else self.current_question_id
+        return self.categories[self.current_category_id][self.current_lesson_id]["questions"][question_id][self.learned_language]["sentence"]
     
     @log_calls
     def get_question_explainations(self, question=None):
@@ -374,7 +383,7 @@ class Bilingual(tk.Tk):
         if self.learned_language in self.explainations.keys():
             for item in self.explainations[self.learned_language]:
                 for patern in item["paterns"]:
-                    if patern in self.current_question[self.learned_language]["sentence"]:
+                    if patern in self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.learned_language]["sentence"]:
                         if self.spoken_language in item["explainations"].keys():
                             explaination_text.append(item["explainations"][self.spoken_language])
 
@@ -395,20 +404,20 @@ class Bilingual(tk.Tk):
 
     # QUESTIONS
     @log_calls
-    def set_question_success(self, success, category=None, lesson=None, question_id=None, language=None):
-        category = category if category else self.current_category
-        lesson = lesson if lesson else self.current_lesson
+    def set_question_success(self, success, category_id=None, lesson_id=None, question_id=None, language=None):
+        category_id = category_id if category_id else self.current_category_id
+        lesson_id = lesson_id if lesson_id else self.current_lesson_id
         question_id = question_id if question_id else self.current_question_id
         language = language if language else self.learned_language
-        self.categories[category][lesson]["questions"][question_id][language]["success_rate"] = success
+        self.categories[category_id][lesson_id]["questions"][question_id][language]["success_rate"] = success
     
     @log_calls
-    def set_question_tries(self, tries, category=None, lesson=None, question_id=None, language=None):
-        category = category if category else self.current_category
-        lesson = lesson if lesson else self.current_lesson
+    def set_question_tries(self, tries, category_id=None, lesson_id=None, question_id=None, language=None):
+        category_id = category_id if category_id else self.current_category_id
+        lesson_id = lesson_id if lesson_id else self.current_lesson_id
         question_id = question_id if question_id else self.current_question_id
         language = language if language else self.learned_language
-        self.categories[category][lesson]["questions"][question_id][language]["tries"] = tries
+        self.categories[category_id][lesson_id]["questions"][question_id][language]["tries"] = tries
 
     ################################################################ VALIDATORS
 
@@ -499,7 +508,11 @@ class Bilingual(tk.Tk):
 
     @log_calls
     def click_button(self, action, args=[], sound=SOUND_PAGE_FORWARDS, event=None):
-        if isinstance(args, tk.Event):
+        if isinstance(action, tk.Event):
+            event = action
+            action = None
+
+        elif isinstance(args, tk.Event):
             event = args
             args = []
 
@@ -513,15 +526,16 @@ class Bilingual(tk.Tk):
         if type(args) != list:
             args = [args]
 
-        action(*args)        
+        if action:
+            action(*args)        
     
     @log_calls
-    def enter_widget(self, widget, sound=None, event=None):
+    def enter_widget(self, widget, event=None, sound=SOUND_POP):
         if sound:
-            self.playsound(SOUND_POP)
+            self.playsound(sound)
         widget.configure(style=f'Active.{widget["style"]}')
         for child in widget.winfo_children():
-            self.enter_widget(child)
+            self.enter_widget(child, sound=None)
 
     @log_calls
     def leave_widget(self, widget, event=None):
@@ -669,7 +683,8 @@ class Bilingual(tk.Tk):
 
         stars_image = ttk.Label(title_frame, image=image, style=label_style)
         stars_image.pack(padx=15, pady=5, side=tk.LEFT)
-
+    
+        frame_style = "Disabled.CustomDarkFrame.TFrame" if locked else "CustomMidFrame.TFrame"
         progressbar_frame = ttk.Frame(new_frame, style=frame_style)
         progressbar_frame.pack(expand=True, fill=tk.X)
 
@@ -679,6 +694,7 @@ class Bilingual(tk.Tk):
         progressbar_frame_left = ttk.Frame(progressbar_frame, height=5, width=progressbar_frame_left_width, style=frame_style)
         progressbar_frame_left.pack(side=tk.LEFT)
         
+        frame_style = "Disabled.CustomDarkFrame.TFrame" if locked else "CustomLightFrame.TFrame"
         progressbar_frame_right = ttk.Frame(progressbar_frame, height=5, style=frame_style)
         progressbar_frame_right.pack(expand=True, fill=tk.X, side=tk.LEFT)
 
@@ -686,6 +702,9 @@ class Bilingual(tk.Tk):
             self.bind_widget(new_frame, partial(self.click_button, action, arguments))
 
         if animate:
+            if locked:
+                self.bind_widget(new_frame, partial(self.click_button, sound=SOUND_BLOCKED), EVENT_LEFT_CLICK, recursive=True)
+
             self.bind_widget(new_frame, partial(self.enter_widget, new_frame), EVENT_ENTER_WIDGET, recursive=False)
             self.bind_widget(new_frame, partial(self.leave_widget, new_frame), EVENT_LEAVE_WIDGET, recursive=False)
 
@@ -851,9 +870,9 @@ class Bilingual(tk.Tk):
     # CATEGORIES
     @log_calls
     def display_categories(self, page=1, event=None):
-        categories = sorted(self.get_all_categories(), key=lambda category: self.is_category_locked(category))
+        categories_id = sorted(self.get_all_categories(), key=lambda category_id: self.is_category_locked(category_id))
         item_by_page = 4
-        total_pages = ceil(len(categories) / item_by_page)
+        total_pages = ceil(len(categories_id) / item_by_page)
         current_page = 1 if (page < 1) or (page > total_pages) else page
 
         # Configure page grid
@@ -863,20 +882,19 @@ class Bilingual(tk.Tk):
 
         # Initialize variables
         start_index = (current_page - 1) * item_by_page
-        end_index = (start_index + item_by_page) if (len(categories) >= (start_index + item_by_page)) else len(categories)
+        end_index = (start_index + item_by_page) if (len(categories_id) >= (start_index + item_by_page)) else len(categories_id)
 
         # Iterate through categories
-        for category in categories[start_index:end_index]:
-            category_locked = self.is_category_locked(category)
+        for category_id in categories_id[start_index:end_index]:
+            category_locked = self.is_category_locked(category_id)
             self.create_progress_frame(parent=self.window_container, 
-                image=category, 
-                text=category, 
-                progress=self.get_category_overview(category), 
-                stars=self.get_stars(category), 
+                image=category_id, 
+                text=category_id, 
+                progress=self.get_category_overview(category_id), 
+                stars=self.get_stars(category_id), 
                 action=self.select_category, 
-                arguments=category,
-                locked=category_locked,
-                animate=(not category_locked))
+                arguments=category_id,
+                locked=category_locked)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Languages", self.display_languages, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
@@ -892,9 +910,9 @@ class Bilingual(tk.Tk):
     # LESSONS
     @log_calls
     def display_lessons(self, page=1, event=None):
-        lessons = sorted(self.get_all_lessons(), key=lambda lessons: self.is_lesson_locked(lesson=lessons))
+        lessons_id = sorted(self.get_all_lessons(), key=lambda lesson_id: self.is_lesson_locked(lesson_id=lesson_id))
         item_by_page = 4
-        total_pages = ceil(len(lessons) / item_by_page)
+        total_pages = ceil(len(lessons_id) / item_by_page)
         current_page = 1 if (page < 1) or (page > total_pages) else page
 
         # Configure page grid
@@ -904,20 +922,19 @@ class Bilingual(tk.Tk):
 
         # Initialize variables
         start_index = (current_page - 1) * item_by_page
-        end_index = (start_index + item_by_page) if (len(lessons) >= (start_index + item_by_page)) else len(lessons)
+        end_index = (start_index + item_by_page) if (len(lessons_id) >= (start_index + item_by_page)) else len(lessons_id)
 
         # Iterate through lessons
-        for lesson in lessons[start_index:end_index]:
-            lesson_locked = self.is_lesson_locked(lesson=lesson)
+        for lesson_id in lessons_id[start_index:end_index]:
+            lesson_locked = self.is_lesson_locked(lesson_id=lesson_id)
             self.create_progress_frame(parent=self.window_container, 
-                image=self.categories[self.current_category][lesson]["icon"], 
-                text=self.categories[self.current_category][lesson]["name"], 
-                progress=self.get_lesson_overview(lesson=lesson), 
-                stars=self.get_stars(self.current_category, lesson), 
+                image=self.categories[self.current_category_id][lesson_id]["icon"], 
+                text=self.categories[self.current_category_id][lesson_id]["name"], 
+                progress=self.get_lesson_overview(lesson_id=lesson_id), 
+                stars=self.get_stars(self.current_category_id, lesson_id), 
                 action=self.select_lesson, 
-                arguments=lesson,
-                locked=lesson_locked,
-                animate=(not lesson_locked))
+                arguments=lesson_id,
+                locked=lesson_locked)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Categories", self.display_categories, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
@@ -964,18 +981,18 @@ class Bilingual(tk.Tk):
         lesson_success_text = f'{ceil(self.get_lesson_success() * 100)}%'
         self.create_stat_frame(stat_frame, text="Lesson Success", stat=lesson_success_text, alone_in_row=False)
 
-        question_tries = self.current_question[self.learned_language]["tries"]
+        question_tries = self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.learned_language]["tries"]
         self.create_stat_frame(stat_frame, text="Question Attempts", stat=question_tries, alone_in_row=False)
 
-        question_success = f'{ceil(self.current_question[self.learned_language]["success_rate"] * 100)}%'
+        question_success = f'{ceil(self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.learned_language]["success_rate"] * 100)}%'
         self.create_stat_frame(stat_frame, text="Question Success", stat=question_success, alone_in_row=False)
 
         # SENTENCE
-        self.create_speakable_frame(self.window_container, self.current_question[self.spoken_language]["sentence"].capitalize(), self.spoken_language)
+        self.create_speakable_frame(self.window_container, self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.spoken_language]["sentence"].capitalize(), self.spoken_language)
 
         # HINTS
-        if "hints" in self.current_question[self.spoken_language].keys() :
-            self.create_frame(self.window_container, f'PS : {self.current_question[self.spoken_language]["hints"].capitalize()}')
+        if "hints" in self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.spoken_language].keys() :
+            self.create_frame(self.window_container, f'PS : {self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.spoken_language]["hints"].capitalize()}')
 
         # ANSWER
         speakable_entry, response_Stringvar = self.create_speakable_entry(self.window_container, self.learned_language)
@@ -998,7 +1015,7 @@ class Bilingual(tk.Tk):
         explainations = self.get_question_explainations()
         
         # SENTENCE
-        self.create_speakable_frame(self.window_container, self.current_question[self.spoken_language]["sentence"].capitalize(), self.spoken_language)
+        self.create_speakable_frame(self.window_container, self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.spoken_language]["sentence"].capitalize(), self.spoken_language)
 
         # RESONSE
         new_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
@@ -1006,10 +1023,10 @@ class Bilingual(tk.Tk):
 
         new_text = tk.Text(new_frame, width=40, height=1, relief="flat", background=COLOR_DARK_PINK, foreground=COLOR_WHITE, font=('Calibri', 12))
         new_text.insert("1.0", response.capitalize())
-        self.color_differences(new_text, self.current_question[self.learned_language]["sentence"].capitalize(), response.capitalize())
+        self.color_differences(new_text, self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.learned_language]["sentence"].capitalize(), response.capitalize())
 
         # ANSWER
-        self.create_speakable_frame(self.window_container, self.current_question[self.learned_language]["sentence"].capitalize(), self.learned_language)                
+        self.create_speakable_frame(self.window_container, self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.learned_language]["sentence"].capitalize(), self.learned_language)                
 
         # EXPLAINATIONS
         if len(explainations) > 0 :
@@ -1039,11 +1056,13 @@ class Bilingual(tk.Tk):
 
         style.configure("CustomDarkFrame.TFrame", background=COLOR_DARK_PINK)
         style.configure("Active.CustomDarkFrame.TFrame", background=COLOR_MID_PINK)
-        style.configure("Disabled.CustomDarkFrame.TFrame", background=COLOR_MID_GREY)
+        style.configure("Disabled.CustomDarkFrame.TFrame", background=COLOR_DARK_GREY)
+        style.configure("Active.Disabled.CustomDarkFrame.TFrame", background=COLOR_MID_GREY)
 
         style.configure("Default.TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE)
         style.configure("Active.Default.TLabel", background=COLOR_MID_PINK)
-        style.configure("Disabled.Default.TLabel", background=COLOR_MID_GREY)
+        style.configure("Disabled.Default.TLabel", background=COLOR_DARK_GREY)
+        style.configure("Active.Disabled.Default.TLabel", background=COLOR_MID_GREY)
         style.configure("Small.Default.TLabel", font=('Calibri', 8))
         style.configure("Big.Default.TLabel", font=('Calibri', 16))
 
@@ -1081,23 +1100,23 @@ class Bilingual(tk.Tk):
     
     # CATEGORIES
     @log_calls
-    def select_category(self, category, event=None):
-        self.current_category = category
+    def select_category(self, category_id, event=None):
+        self.current_category_id = category_id
         self.display_lessons()
 
     @log_calls
-    def is_category_locked(self, category=None):
-        category = category if category else self.current_category
-        for lesson in self.get_all_lessons(category):
-            if not self.is_lesson_locked(category, lesson):
+    def is_category_locked(self, category_id=None):
+        category_id = category_id if category_id else self.current_category_id
+        for lesson_id in self.get_all_lessons(category_id):
+            if not self.is_lesson_locked(category_id, lesson_id):
                 return False
         return True
 
     @log_calls
-    def is_lesson_locked(self, category=None, lesson=None):
-        category = category if category else self.current_category
-        lesson = lesson if lesson else self.current_lesson
-        prerequisites = self.categories[category][lesson]["prerequisites"]
+    def is_lesson_locked(self, category_id=None, lesson_id=None):
+        category_id = category_id if category_id else self.current_category_id
+        lesson_id = lesson_id if lesson_id else self.current_lesson_id
+        prerequisites = self.categories[category_id][lesson_id]["prerequisites"]
         for needed_category in prerequisites:
             for needed_lesson, needed_stars in prerequisites[needed_category].items():
                 if self.get_stars(needed_category, needed_lesson) < needed_stars:
@@ -1106,55 +1125,52 @@ class Bilingual(tk.Tk):
 
     # LESSONS
     @log_calls
-    def select_lesson(self, lesson, event=None):
-        self.current_lesson = lesson
+    def select_lesson(self, lesson_id, event=None):
+        self.current_lesson_id = lesson_id
         self.current_lesson_stars = self.get_stars()
         self.display_questions()
 
     # QUESTIONS
     @log_calls
-    def is_remembered(self, question):
-        return random.random() < question[self.learned_language]["success_rate"] * 0.95
+    def is_remembered(self, question_id):
+        return random.random() < self.get_question_success_rate(question_id=question_id) * 0.95
     
     @log_calls
     def choose_random_question(self):
         deep_copy = deepcopy(self.categories)
-        questions_id = list(deep_copy[self.current_category][self.current_lesson]["questions"].keys())
+        questions_id = list(deep_copy[self.current_category_id][self.current_lesson_id]["questions"].keys())
         random.shuffle(questions_id)
         
         for question_id in questions_id:
-            question = deep_copy[self.current_category][self.current_lesson]["questions"][question_id]
-            if (self.current_question) and (self.current_question[self.learned_language]["sentence"] == question[self.learned_language]["sentence"]):
+            if (self.current_question_id) and (self.current_question_id == question_id):
                 continue
-            if self.is_remembered(question):
+            if self.is_remembered(question_id):
                 continue
             self.current_question_id = question_id
-            self.current_question = question
             return
 
-        self.current_question_id = random.choice(deep_copy[self.current_category][self.current_lesson]["questions"].keys())
-        self.current_question = deep_copy[self.current_category][self.current_lesson]["questions"][self.current_question_id]
+        self.current_question_id = random.choice(deep_copy[self.current_category_id][self.current_lesson_id]["questions"].keys())
     
     @log_calls
-    def increase_question_success(self, question=None):
-        question = question if question else self.current_question
-        success_rate = self.get_question_data("success_rate")
-        tries = self.get_question_data("tries")
+    def increase_question_success(self, question_id=None):
+        question_id = question_id if question_id else self.current_question_id
+        success_rate = self.get_question_success_rate(question_id=question_id)
+        tries = self.get_question_tries(question_id=question_id)
         new_success_rate = ((success_rate * (tries -1)) +1) / tries
         self.set_question_success(new_success_rate)
 
     @log_calls
-    def decrease_question_success(self, question=None):
-        question = question if question else self.current_question
-        success_rate = self.get_question_data("success_rate")
-        tries = self.get_question_data("tries")
+    def decrease_question_success(self, question_id=None):
+        question_id = question_id if question_id else self.current_question_id
+        success_rate = self.get_question_success_rate(question_id=question_id)
+        tries = self.get_question_tries(question_id=question_id)
         new_success_rate = (success_rate * (tries -1)) / tries
         self.set_question_success(new_success_rate)
 
     @log_calls
-    def increase_question_tries(self, question=None):
-        question = question if question else self.current_question
-        new_tries = question[self.learned_language]["tries"] = 1
+    def increase_question_tries(self, question_id=None):
+        question_id = question_id if question_id else self.current_question_id
+        new_tries = self.categories[self.current_category_id][self.current_lesson_id]["questions"][question_id][self.learned_language]["tries"] + 1
         self.set_question_tries(new_tries)
 
     # DIFFERENCES

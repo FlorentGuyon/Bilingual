@@ -3,8 +3,8 @@
     "name": "Artistic Jobs",
     "icon": "arts",   
     "prerequisites": {
-        "colors": {
-            "default-colors": 2
+        "jobs": {
+            "basic-jobs": 2
         }
     },
     "questions": {
