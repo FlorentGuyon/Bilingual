@@ -33586,7 +33586,7 @@ O9ci10000H0ucf&qyPYpoF4!H00
 if __name__ == "__main__":
     
     this_python = sys.version_info[:2]
-    min_version = (3, 11)
+    min_version = (3, 7)
 
     if this_python < min_version:
         message_parts = [

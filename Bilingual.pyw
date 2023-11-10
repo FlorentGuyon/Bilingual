@@ -1,19 +1,58 @@
-import tkinter as tk
-import json
-import random
-import os
+from sys import version_info
 
-from math import ceil
-from tkinter import ttk
-from tkinter.scrolledtext import ScrolledText
-from PIL import Image, ImageTk
-from functools import partial
-from copy import deepcopy
-from gtts import gTTS
-from playsound import playsound
-from time import sleep
-from diff_match_patch import diff_match_patch
-from threading import Thread
+current_python_version = version_info[:2]
+minimal_python_version = (3, 11)
+
+if current_python_version < minimal_python_version:
+    print(f"Warning : This program has not been tested with a Python version lower than {minimal_python_version}.")
+    print(f"The current Python version is {current_python_version}.")
+    print("It can be impossible to meet the requirements of this program with this version of Python.")
+    execute = input("Do you still want to execute this program ? (y/N) : ")
+    if execute not in ["y", "Y"] :
+        exit()
+
+start_sucess = False
+start_tries = 0
+
+while not start_sucess:
+    try:
+        import tkinter as tk
+        import json
+        import random
+        import os
+
+        from math import ceil
+        from tkinter import ttk
+        from tkinter.scrolledtext import ScrolledText
+        from PIL import Image, ImageTk
+        from functools import partial
+        from copy import deepcopy
+        from gtts import gTTS
+        from playsound import playsound
+        from time import sleep
+        from diff_match_patch import diff_match_patch
+        from threading import Thread
+
+        start_sucess = True
+    except:
+        if start_tries == 1:
+            print(f"Error : Still impossible to import the requirements.")
+            exit()
+        install = input("Error : The requirements for the exection of this program are not met.\nDo you want to start the installer program that downloads and installs the requirements now ? (y/N) : ")
+        if install in ["y", "Y"] :
+            try:
+                from os import path
+                from sys import executable
+                from subprocess import Popen
+                script_directory = os.path.dirname(os.path.abspath(__file__))
+                arguments = [executable, os.path.join(script_directory, "installer.py")]
+                output = Popen(arguments).wait()
+            except Exception as e:
+                print(f"Error : Impossible to start the installer. ({e})")
+                exit()
+        else:
+            exit()
+    start_tries +=1
 
 ##################################################################### CONSTANTS
 
