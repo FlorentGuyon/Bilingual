@@ -409,17 +409,15 @@ class Bilingual(tk.Tk):
     @log_calls
     def validate_new_profile(self, name, icon, event=None):
         name = name.get().lower()
-        if name == "":
-            self.display_new_profile()
-            return
-        profile = {
-            "icon": icon,
-            "categories": {}
-        }
-        file_path = os.path.join(PATH_PROFILES, name + ".json")
-        file_content = json.dumps(profile)
-        self.write_in_file(file_path, file_content)
-        self.display_profiles()
+        if (name != "") and (name not in self.get_all_profiles()):
+            profile = {
+                "icon": icon,
+                "categories": {}
+            }
+            file_path = os.path.join(PATH_PROFILES, name + ".json")
+            file_content = json.dumps(profile)
+            self.write_in_file(file_path, file_content)
+            self.display_profiles()
 
     # LANGUAGES
     @log_calls
@@ -750,7 +748,7 @@ class Bilingual(tk.Tk):
     @log_calls
     def display_profiles(self, page=1, event=None):
         profiles = self.get_all_profiles()
-        item_by_page = 5
+        item_by_page = 4
         total_pages = ceil(len(profiles) / item_by_page)
         current_page = 1 if (page < 1) or (page > total_pages) else page
 
@@ -761,17 +759,27 @@ class Bilingual(tk.Tk):
 
         # Initialize variables
         start_index = (current_page - 1) * item_by_page
+        end_index = (start_index + item_by_page) if (len(profiles) >= (start_index + item_by_page)) else len(profiles)
 
         # Iterate through profiles
-        for profile in profiles[start_index:]:
+        for profile in profiles[start_index:end_index]:
             icon = json.loads(self.read_from_file(os.path.join(PATH_PROFILES, profile + ".json")))["icon"]
             self.create_image_frame(self.window_container, icon, profile, self.select_profile, profile)
 
+        # NEW PROFILE BUTTON
+        self.create_button(self.window_container, "plus", "New Profile", self.display_new_profile)
+
         # QUIT BUTTON
         self.create_button(self.window_container, "arrow_left", "Quit", self.close_app, alone_in_row=False)
+
+        # PREVIOUS BUTTON
+        if current_page > 1:
+            self.create_button(self.window_container, "previous", "Previous", self.display_profiles, arguments=current_page -1, sound=SOUND_PAGE_BACKWARDS, image_first=False, alone_in_row=False)
         
-        # NEW PROFILE BUTTON
-        self.create_button(self.window_container, "plus", "New Profile", self.display_new_profile, image_first=False, alone_in_row=False)
+        # NEXT BUTTON
+        if current_page < total_pages:
+            self.create_button(self.window_container, "next", "Next", self.display_profiles, arguments=current_page +1, sound=SOUND_PAGE_FORWARDS, image_first=False, alone_in_row=False)
+
 
     @log_calls
     def display_new_profile(self, event=None):
