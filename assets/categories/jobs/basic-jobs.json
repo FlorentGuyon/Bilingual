@@ -11,7 +11,7 @@
                 "tries": 0
             },
             "french": {
-                "sentence": "L'écrivain'",
+                "sentence": "L'écrivain",
                 "success_rate": 0,
                 "tries": 0
             }
