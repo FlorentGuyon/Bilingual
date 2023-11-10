@@ -1,818 +1,821 @@
-[
-    {
-        "english": {
-            "sentence": "the bird is red",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est rouge",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is red",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est rouge",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are red",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont rouges",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are red",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont rouges",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is blue",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est bleu",
-            "success_rate": 0.0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is blue",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est bleue",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are blue",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont bleus",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are blue",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont bleues",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is green",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est vert",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is green",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est verte",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are green",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont verts",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are green",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont vertes",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is yellow",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est jaune",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is yellow",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est jaune",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are yellow",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont jaunes",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are yellow",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont jaunes",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is orange",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est orange",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is orange",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est orange",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are orange",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont orange",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are orange",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont orange",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is pink",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est rose",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is pink",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est rose",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are pink",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont roses",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are pink",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont roses",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is purple",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est violet",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is purple",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est violette",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are purple",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont violets",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are purple",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont violette",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is brown",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est marron",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is brown",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est marron",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are brown",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont marron",
-            "success_rate": 0.0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are brown",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont marron",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is black",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est noir",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is black",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est noire",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are black",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont noirs",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are black",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont noires",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is white",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est blanc",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is white",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est blanche",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are white",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont blancs",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are white",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont blanches",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is grey",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est gris",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is grey",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est grise",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are grey",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont gris",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are grey",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont grises",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is maroon",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est bordeaux",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is maroon",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est bordeaux",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are maroon",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont bordeaux",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are maroon",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont bordeaux",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is cyan",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est cyan",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is cyan",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est cyan",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are cyan",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont cyans",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are cyan",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont cyans",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is silver",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est argent\u00e9",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is silver",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est argent\u00e9e",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are silver",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont argent\u00e9s",
-            "success_rate": 0.0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are silver",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont argent\u00e9es",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is golden",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est dor\u00e9",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is golden",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est dor\u00e9e",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are golden",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont dor\u00e9s",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are golden",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont dor\u00e9es",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is magenta",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est magenta",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is magenta",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est magenta",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are magenta",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont magenta",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are magenta",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont magenta",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the bird is beige",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "l'oiseau est beige",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the car is beige",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "la voiture est beige",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the birds are beige",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les oiseaux sont beiges",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "the cars are beige",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "les voitures sont beiges",
-            "success_rate": 0,
-            "tries": 0
+{    
+    "prerequisites": {},
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "the bird is red",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est rouge",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "1": {
+            "english": {
+                "sentence": "the car is red",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est rouge",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "2": {
+            "english": {
+                "sentence": "the birds are red",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont rouges",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "3": {
+            "english": {
+                "sentence": "the cars are red",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont rouges",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "4": {
+            "english": {
+                "sentence": "the bird is blue",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est bleu",
+                "success_rate": 0.0,
+                "tries": 0
+            }
+        },
+        "5": {
+            "english": {
+                "sentence": "the car is blue",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est bleue",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "6": {
+            "english": {
+                "sentence": "the birds are blue",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont bleus",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "7": {
+            "english": {
+                "sentence": "the cars are blue",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont bleues",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "8": {
+            "english": {
+                "sentence": "the bird is green",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est vert",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "9": {
+            "english": {
+                "sentence": "the car is green",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est verte",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "10": {
+            "english": {
+                "sentence": "the birds are green",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont verts",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "11": {
+            "english": {
+                "sentence": "the cars are green",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont vertes",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "12": {
+            "english": {
+                "sentence": "the bird is yellow",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est jaune",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "13": {
+            "english": {
+                "sentence": "the car is yellow",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est jaune",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "14": {
+            "english": {
+                "sentence": "the birds are yellow",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont jaunes",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "15": {
+            "english": {
+                "sentence": "the cars are yellow",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont jaunes",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "16": {
+            "english": {
+                "sentence": "the bird is orange",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est orange",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "17": {
+            "english": {
+                "sentence": "the car is orange",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est orange",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "18": {
+            "english": {
+                "sentence": "the birds are orange",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont orange",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "19": {
+            "english": {
+                "sentence": "the cars are orange",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont orange",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "20": {
+            "english": {
+                "sentence": "the bird is pink",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est rose",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "21": {
+            "english": {
+                "sentence": "the car is pink",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est rose",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "22": {
+            "english": {
+                "sentence": "the birds are pink",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont roses",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "23": {
+            "english": {
+                "sentence": "the cars are pink",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont roses",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "24": {
+            "english": {
+                "sentence": "the bird is purple",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est violet",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "25": {
+            "english": {
+                "sentence": "the car is purple",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est violette",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "26": {
+            "english": {
+                "sentence": "the birds are purple",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont violets",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "27": {
+            "english": {
+                "sentence": "the cars are purple",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont violette",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "28": {
+            "english": {
+                "sentence": "the bird is brown",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est marron",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "29": {
+            "english": {
+                "sentence": "the car is brown",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est marron",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "30": {
+            "english": {
+                "sentence": "the birds are brown",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont marron",
+                "success_rate": 0.0,
+                "tries": 0
+            }
+        },
+        "31": {
+            "english": {
+                "sentence": "the cars are brown",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont marron",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "32": {
+            "english": {
+                "sentence": "the bird is black",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est noir",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "33": {
+            "english": {
+                "sentence": "the car is black",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est noire",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "34": {
+            "english": {
+                "sentence": "the birds are black",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont noirs",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "35": {
+            "english": {
+                "sentence": "the cars are black",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont noires",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "36": {
+            "english": {
+                "sentence": "the bird is white",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est blanc",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "37": {
+            "english": {
+                "sentence": "the car is white",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est blanche",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "38": {
+            "english": {
+                "sentence": "the birds are white",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont blancs",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "39": {
+            "english": {
+                "sentence": "the cars are white",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont blanches",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "40": {
+            "english": {
+                "sentence": "the bird is grey",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est gris",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "41": {
+            "english": {
+                "sentence": "the car is grey",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est grise",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "42": {
+            "english": {
+                "sentence": "the birds are grey",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont gris",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "43": {
+            "english": {
+                "sentence": "the cars are grey",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont grises",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "44": {
+            "english": {
+                "sentence": "the bird is maroon",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est bordeaux",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "45": {
+            "english": {
+                "sentence": "the car is maroon",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est bordeaux",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "46": {
+            "english": {
+                "sentence": "the birds are maroon",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont bordeaux",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "47": {
+            "english": {
+                "sentence": "the cars are maroon",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont bordeaux",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "48": {
+            "english": {
+                "sentence": "the bird is cyan",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est cyan",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "49": {
+            "english": {
+                "sentence": "the car is cyan",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est cyan",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "50": {
+            "english": {
+                "sentence": "the birds are cyan",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont cyans",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "51": {
+            "english": {
+                "sentence": "the cars are cyan",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont cyans",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "52": {
+            "english": {
+                "sentence": "the bird is silver",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est argent\u00e9",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "53": {
+            "english": {
+                "sentence": "the car is silver",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est argent\u00e9e",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "54": {
+            "english": {
+                "sentence": "the birds are silver",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont argent\u00e9s",
+                "success_rate": 0.0,
+                "tries": 0
+            }
+        },
+        "55": {
+            "english": {
+                "sentence": "the cars are silver",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont argent\u00e9es",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "56": {
+            "english": {
+                "sentence": "the bird is golden",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est dor\u00e9",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "57": {
+            "english": {
+                "sentence": "the car is golden",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est dor\u00e9e",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "58": {
+            "english": {
+                "sentence": "the birds are golden",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont dor\u00e9s",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "59": {
+            "english": {
+                "sentence": "the cars are golden",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont dor\u00e9es",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "60": {
+            "english": {
+                "sentence": "the bird is magenta",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est magenta",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "61": {
+            "english": {
+                "sentence": "the car is magenta",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est magenta",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "62": {
+            "english": {
+                "sentence": "the birds are magenta",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont magenta",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "63": {
+            "english": {
+                "sentence": "the cars are magenta",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont magenta",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "64": {
+            "english": {
+                "sentence": "the bird is beige",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "l'oiseau est beige",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "65": {
+            "english": {
+                "sentence": "the car is beige",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "la voiture est beige",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "66": {
+            "english": {
+                "sentence": "the birds are beige",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les oiseaux sont beiges",
+                "success_rate": 0,
+                "tries": 0
+            }
+        },
+        "67": {
+            "english": {
+                "sentence": "the cars are beige",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "les voitures sont beiges",
+                "success_rate": 0,
+                "tries": 0
+            }
         }
     }
-]
+}

@@ -1,296 +1,299 @@
-[
-    {
-        "english": {
-            "sentence": "I will speak French",
-            "success_rate": 0,
-            "tries": 0
+{    
+    "prerequisites": {},
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "I will speak French",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Je parlerai fran\u00e7ais",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Je parlerai français",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "You will speak well",
-            "success_rate": 0,
-            "tries": 0
+        "1": {
+            "english": {
+                "sentence": "You will speak well",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Tu parleras bien",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Tu parleras bien",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "He will speak English",
-            "success_rate": 0,
-            "tries": 0
+        "2": {
+            "english": {
+                "sentence": "He will speak English",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Il parlera anglais",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Il parlera anglais",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "She will speak English",
-            "success_rate": 0,
-            "tries": 0
+        "3": {
+            "english": {
+                "sentence": "She will speak English",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Elle parlera anglais",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Elle parlera anglais",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "We will speak Spanish",
-            "success_rate": 0,
-            "tries": 0
+        "4": {
+            "english": {
+                "sentence": "We will speak Spanish",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Nous parlerons espagnol",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Nous parlerons espagnol",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "You will speak German",
-            "success_rate": 0,
-            "tries": 0
+        "5": {
+            "english": {
+                "sentence": "You will speak German",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Vous parlerez allemand",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Vous parlerez allemand",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "They will speak Italian",
-            "hints": "they are males",
-            "success_rate": 0,
-            "tries": 0
+        "6": {
+            "english": {
+                "sentence": "They will speak Italian",
+                "hints": "they are males",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Ils parleront italien",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Ils parleront italien",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "They will speak Italian",
-            "hints": "they are females",
-            "success_rate": 0,
-            "tries": 0
+        "7": {
+            "english": {
+                "sentence": "They will speak Italian",
+                "hints": "they are females",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Elles parleront italien",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Elles parleront italien",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "I will finish my work",
-            "success_rate": 0,
-            "tries": 0
+        "8": {
+            "english": {
+                "sentence": "I will finish my work",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Je finirai mon travail",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Je finirai mon travail",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "You will finish quickly",
-            "success_rate": 0,
-            "tries": 0
+        "9": {
+            "english": {
+                "sentence": "You will finish quickly",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Tu finiras rapidement",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Tu finiras rapidement",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "He will finish the book",
-            "success_rate": 0,
-            "tries": 0
+        "10": {
+            "english": {
+                "sentence": "He will finish the book",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Il finira le livre",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Il finira le livre",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "She will finish the book",
-            "success_rate": 0,
-            "tries": 0
+        "11": {
+            "english": {
+                "sentence": "She will finish the book",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Elle finira le livre",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Elle finira le livre",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "We will finish our homework",
-            "success_rate": 0,
-            "tries": 0
+        "12": {
+            "english": {
+                "sentence": "We will finish our homework",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Nous finirons nos devoirs",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Nous finirons nos devoirs",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "You will finish early",
-            "success_rate": 0,
-            "tries": 0
+        "13": {
+            "english": {
+                "sentence": "You will finish early",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Vous finirez t\u00f4t",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Vous finirez tôt",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "They will finish the race",
-            "hints": "they are males",
-            "success_rate": 0,
-            "tries": 0
+        "14": {
+            "english": {
+                "sentence": "They will finish the race",
+                "hints": "they are males",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Ils finiront la course",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Ils finiront la course",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "They will finish the race",
-            "hints": "they are females",
-            "success_rate": 0,
-            "tries": 0
+        "15": {
+            "english": {
+                "sentence": "They will finish the race",
+                "hints": "they are females",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Elles finiront la course",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Elles finiront la course",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "I will take a coffee",
-            "success_rate": 0,
-            "tries": 0
+        "16": {
+            "english": {
+                "sentence": "I will take a coffee",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Je prendrai un caf\u00e9",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Je prendrai un café",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "You will take the bus",
-            "success_rate": 0,
-            "tries": 0
+        "17": {
+            "english": {
+                "sentence": "You will take the bus",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Tu prendras le bus",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Tu prendras le bus",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "He will take the subway",
-            "success_rate": 0,
-            "tries": 0
+        "18": {
+            "english": {
+                "sentence": "He will take the subway",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Il prendra le m\u00e9tro",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Il prendra le métro",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "She will take the subway",
-            "success_rate": 0,
-            "tries": 0
+        "19": {
+            "english": {
+                "sentence": "She will take the subway",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Elle prendra le m\u00e9tro",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Elle prendra le métro",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "We will have breakfast",
-            "success_rate": 0,
-            "tries": 0
+        "20": {
+            "english": {
+                "sentence": "We will have breakfast",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Nous prendrons le petit-d\u00e9jeuner",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Nous prendrons le petit-déjeuner",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "You will take the train",
-            "success_rate": 0,
-            "tries": 0
+        "21": {
+            "english": {
+                "sentence": "You will take the train",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Vous prendrez le train",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Vous prendrez le train",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "They will take photos",
-            "hints": "they are males",
-            "success_rate": 0,
-            "tries": 0
+        "22": {
+            "english": {
+                "sentence": "They will take photos",
+                "hints": "they are males",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Ils prendront des photos",
+                "success_rate": 0,
+                "tries": 0
+            }
         },
-        "french": {
-            "sentence": "Ils prendront des photos",
-            "success_rate": 0,
-            "tries": 0
-        }
-    },
-    {
-        "english": {
-            "sentence": "They will take photos",
-            "hints": "they are females",
-            "success_rate": 0,
-            "tries": 0
-        },
-        "french": {
-            "sentence": "Elles prendront des photos",
-            "success_rate": 0,
-            "tries": 0
+        "23": {
+            "english": {
+                "sentence": "They will take photos",
+                "hints": "they are females",
+                "success_rate": 0,
+                "tries": 0
+            },
+            "french": {
+                "sentence": "Elles prendront des photos",
+                "success_rate": 0,
+                "tries": 0
+            }
         }
     }
-]
+}

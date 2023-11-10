@@ -17,6 +17,11 @@ from threading import Thread
 
 ##################################################################### CONSTANTS
 
+# ENVIRONMENT
+DEBUG_MODE = True
+CURRENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
+FILES_ENCODING = "utf8"
+
 # COLORS
 COLOR_WHITE = "#FFFFFF"
 COLOR_LIGHT_GREY = "#eae5e5"
@@ -54,9 +59,19 @@ SOUND_CORRECT = "correct.wav"
 SOUND_INCORRECT = "incorrect.wav"
 SOUND_NEW_STAR = "new-star.wav"
 
-# ENVIRONMENT
-DEBUG_MODE = False
-CURRENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
+# PATHS
+PATH_CATEGORIES = os.path.join(CURRENT_DIRECTORY, "assets", "categories")
+PATH_ICONS = os.path.join(CURRENT_DIRECTORY, "assets", "icons")
+PATH_EXPLAINATIONS = os.path.join(CURRENT_DIRECTORY, "assets", "explainations")
+PATH_PROFILES = os.path.join(CURRENT_DIRECTORY, "assets", "profiles")
+PATH_SOUNDS = os.path.join(CURRENT_DIRECTORY, "assets", "sounds")
+PATH_TEMPORARY_FILES = os.path.join(CURRENT_DIRECTORY, "assets", "temp")
+
+# ICONS
+DEFAULT_ICON = "rabbit-female-pink"
+
+# VALUES
+VALUE_STARS = [0.6, 0.8, 0.9] # 60% of success to earn the 1st star, then 80% and 90%
 
 ###################################################################### WRAPPERS
 
@@ -76,91 +91,23 @@ class Bilingual(tk.Tk):
         self.protocol("WM_DELETE_WINDOW", self.close_app)
         self.debug_mode = True
         self.icons = {}
-        self.data = None
+        self.categories = None
         self.explainations = None
         self.spoken_language = None
         self.learned_language = None
         self.current_profile = None
         self.current_category = None
         self.current_lesson = None
+        self.current_question_id = None
         self.current_question = None
-        self.configure_style()
+        self.load_categories()
+        self.set_styles()
         self.create_window()
         self.display_profiles()
 
-    @log_calls
-    def close_app(self, event=None):
-        self.remove_temp_files()
-        self.destroy()
+    ################################################################### READERS
 
-    @log_calls
-    def remove_temp_files(self):
-        folder_path = CURRENT_DIRECTORY + "/assets/temp"
-
-        # Check if the folder exists
-        if os.path.exists(folder_path) and os.path.isdir(folder_path):
-            # List all files and subdirectories in the folder
-            for filename in os.listdir(folder_path):
-                file_path = os.path.join(folder_path, filename)
-
-                # Check if it's a file (not a subdirectory) and delete it
-                if os.path.isfile(file_path):
-                    os.remove(file_path)
-
-    @log_calls
-    def save_profile(self):
-        for folder_name in self.data.keys():
-            for file_name in self.data[folder_name].keys():
-                file_path = f"{CURRENT_DIRECTORY}/assets/profiles/{self.current_profile}/{folder_name}/{file_name}.json"
-                with open(file_path, 'w', encoding='utf-8') as json_file:
-                    try:
-                        json_data = json.dumps(self.data[folder_name][file_name], indent=4)
-                        json_file.write(json_data)
-                    except json.JSONDecodeError:
-                        print(f"Error decoding JSON in {file_path}")
-
-    @log_calls
-    def load_explainations(self):
-        self.explainations = {}  # Dictionary to store the result
-
-        for subdir, _, files in os.walk(CURRENT_DIRECTORY + "/assets/explainations/"):
-            json_files = [f for f in files if f.endswith('.json')]
-
-            for json_file in json_files:
-                file_name = os.path.splitext(json_file)[0]  # Remove the .json extension
-                file_path = os.path.join(subdir, json_file)
-
-                with open(file_path, 'r', encoding='utf-8') as json_file:
-                    try:
-                        file_content = json.load(json_file)
-                        self.explainations[file_name] = file_content
-                    except json.JSONDecodeError:
-                        print(f"Error decoding JSON in {file_path}")
-                        exit()                
-
-    @log_calls
-    def load_profile(self):
-        self.data = {}  # Dictionary to store the result
-
-        for subdir, _, files in os.walk(CURRENT_DIRECTORY + f"/assets/profiles/{self.current_profile}"):
-            folder_name = os.path.basename(subdir)
-            json_files = [f for f in files if f.endswith('.json')]
-
-            if json_files:
-                self.data[folder_name] = {}
-
-                for json_file in json_files:
-                    file_name = os.path.splitext(json_file)[0]  # Remove the .json extension
-                    file_path = os.path.join(subdir, json_file)
-
-                    with open(file_path, 'r', encoding='utf-8') as json_file:
-                        try:
-                            file_content = json.load(json_file)
-                            self.data[folder_name][file_name] = file_content
-                        except json.JSONDecodeError:
-                            print(f"Error decoding JSON in {file_path}")
-                            exit()                
-
+    # IMAGES
     @log_calls
     def load_image(self, name, width, height):
         if name in self.icons.keys():
@@ -168,10 +115,12 @@ class Bilingual(tk.Tk):
                 if height in self.icons[name][width].keys():
                     return self.icons[name][width][height]
 
-        resized_image = self.resize_image(f'./assets/icons/{name}.png', width, height)
+        image_name = name + ".png"
+        image_path = os.path.join(PATH_ICONS, image_name)
+        resized_image = self.resize_image(image_path, width, height)
         
         if not resized_image:
-            return self.load_image("missing", width, height)
+            return None
         
         self.icons[name] = {}
         self.icons[name][width] = {}
@@ -179,36 +128,369 @@ class Bilingual(tk.Tk):
         return resized_image
 
     @log_calls
-    def resize_image(self, path, width, height):
-        try:
-            raw_image = Image.open(path)
-        except Exception as e:
-            print(f'Error: Impossible to resize the image at "{path}" to {width}x{height}.')
-            return None
-        resize_img = raw_image.resize((width, height))
-        image = ImageTk.PhotoImage(resize_img)
-        return image
+    def read_from_file(self, file_path, critical=True):
+        with open(file_path, 'r', encoding=FILES_ENCODING) as file:
+            try:
+                return file.read()
+            except json.JSONDecodeError:
+                print(f"Error while reading at {file_path}.")
+                if critical:
+                    exit()   
+
+    # PROFILES
+    @log_calls
+    def load_profile(self):
+        profile_path = os.path.join(PATH_PROFILES, self.current_profile + ".json")
+        profile_content = self.read_from_file(profile_path)
+        profile = json.loads(profile_content)
+
+        self.set_window_icon(profile["icon"])
+
+        for category in profile["categories"].keys():
+            for lesson in profile["categories"][category].keys():
+                for question in profile["categories"][category][lesson].keys():
+                    for language in profile["categories"][category][lesson][question].keys():
+
+                        success_rate = profile["categories"][category][lesson][question][language]["success_rate"]
+                        self.set_question_success(success_rate, category, lesson, question, language)
+                        
+                        tries = profile["categories"][category][lesson][question][language]["tries"]
+                        self.set_question_tries(tries, category, lesson, question, language)
+
+    # CATEGORIES
+    @log_calls
+    def load_categories(self):
+        self.categories = {}  # Dictionary to store the result
+        json_files = self.get_files(PATH_CATEGORIES, "json")
+
+        for file_path in json_files:
+            folder_name = os.path.basename(os.path.dirname(file_path))
+            file_name = os.path.basename(file_path).replace(".json", "")
+            json_content = json.loads(self.read_from_file(file_path))
+
+            if folder_name not in self.categories.keys():
+                self.categories[folder_name] = {}
+
+            self.categories[folder_name][file_name] = json_content
+
+    # QUESTIONS
+    @log_calls
+    def load_explainations(self):
+        self.explainations = {}  # Dictionary to store the result
+
+        for subdir, _, files in os.walk(PATH_EXPLAINATIONS):
+            json_files = [f for f in files if f.endswith('.json')]
+
+            for json_file in json_files:
+                file_name = os.path.splitext(json_file)[0]  # Remove the .json extension
+                file_path = os.path.join(subdir, json_file)
+
+                with open(file_path, 'r', encoding=FILES_ENCODING) as json_file:
+                    try:
+                        file_content = json.load(json_file)
+                        self.explainations[file_name] = file_content
+                    except json.JSONDecodeError:
+                        print(f"Error decoding JSON in {file_path}")
+                        exit()                
+
+    ################################################################### WRITERS
+    
+    @log_calls
+    def write_in_file(self, file_path, content):
+        with open(file_path, 'w', encoding=FILES_ENCODING) as file:
+            try:
+                file.write(content)
+            except json.JSONDecodeError:
+                print(f"Error while writing {content[:15]}... in {file_path}.")   
+    
+    # TEMP
+    @log_calls
+    def remove_temp_files(self):
+        # Check if the folder exists
+        if os.path.exists(PATH_TEMPORARY_FILES) and os.path.isdir(PATH_TEMPORARY_FILES):
+            # List all files and subdirectories in the folder
+            for filename in os.listdir(PATH_TEMPORARY_FILES):
+                file_path = os.path.join(PATH_TEMPORARY_FILES, filename)
+
+                # Check if it's a file (not a subdirectory) and delete it
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+
+    # PROFILES
+    @log_calls
+    def save_profile(self):
+        profile_path = os.path.join(PATH_PROFILES, self.current_profile + ".json")
+        profile_content = self.read_from_file(profile_path)
+        profile = json.loads(profile_content)
+
+        for category in self.categories.keys():
+            for lesson in self.categories[category].keys():
+                for question_id in self.categories[category][lesson]["questions"].keys():
+                    for data in ["success_rate", "tries"]:
+                        value = self.categories[category][lesson]["questions"][question_id][self.learned_language][data]
+                        profile["categories"][category][lesson][question_id][self.learned_language][data] = value
+
+                        print(category, lesson, question_id, data, value)
+
+        file_content = json.dumps(profile, indent=4)
+        self.write_in_file(profile_path, file_content)   
+
+    ################################################################### GETTERS
+    
+    # FILES
+    @log_calls
+    def get_files(self, parent, extension=None):
+        files_list = []
+        for subdir, _, files in os.walk(parent):
+            if extension:
+                files_list += [os.path.join(subdir, f) for f in files if f.endswith(extension)]
+            else:
+                files_list += [os.path.join(subdir, f) for f in files]
+        return files_list
+
+    # PROFILES
+    @log_calls
+    def get_all_profiles(self):
+        profiles = self.get_files(PATH_PROFILES, "json")
+        return [os.path.basename(profile).replace(".json", "") for profile in profiles]
+
+    # LANGUAGES
+    @log_calls
+    def get_all_languages(self):
+        languages = []
+        for category in self.categories.keys():
+            for lesson in self.categories[category].keys():
+                for question in self.categories[category][lesson]["questions"].values():
+                    for language in question.keys():
+                        if language not in languages:
+                            languages.append(language)
+        return languages
+
+    # STARS
+    @log_calls
+    def get_stars(self, category=None, lesson=None):
+        if (category) and (not lesson):
+            success = self.get_category_success(category)
+        else:
+            success = self.get_lesson_success(category, lesson)
+        return len([i for i, value in enumerate(VALUE_STARS) if value <= success])
+
+    # CATEGORIES
+    @log_calls
+    def get_all_categories(self):
+        return list(self.categories.keys())
 
     @log_calls
-    def configure_style(self):
-        style = ttk.Style(self) 
-        style.configure(".", background=COLOR_LIGHT_GREY, font=('Calibri', 12))
+    def get_category_success(self, category=None):
+        category = category if category else self.current_category
+        success_rates = [self.get_lesson_success(category, lesson) for lesson in self.get_all_lessons(category)]
+        success_rate = sum(success_rates) / len(success_rates)
+        return success_rate
 
-        style.configure("CustomLightFrame.TFrame", background=COLOR_LIGHT_PINK)
-        style.configure("CustomMidFrame.TFrame", background=COLOR_MID_PINK)
+    @log_calls
+    def get_category_overview(self, category=None):
+        category = category if category else self.current_category
+        overviews = [self.get_lesson_overview(category, lesson) for lesson in self.get_all_lessons(category)]
+        overview = sum(overviews) / len(overviews)
+        return overview
 
-        style.configure("CustomDarkFrame.TFrame", background=COLOR_DARK_PINK)
-        style.configure("Active.CustomDarkFrame.TFrame", background=COLOR_MID_PINK)
+    # LESSONS
+    @log_calls
+    def get_all_lessons(self, category=None):
+        if category is None:
+            category = self.current_category
+        return list(self.categories[category].keys())
 
-        style.configure("Default.TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE)
-        style.configure("Active.Default.TLabel", background=COLOR_MID_PINK)
-        style.configure("Small.Default.TLabel", font=('Calibri', 8))
-        style.configure("Big.Default.TLabel", font=('Calibri', 16))
+    @log_calls
+    def get_lesson_success(self, category=None, lesson=None):
+        category = category if category else self.current_category
+        lesson = lesson if lesson else self.current_lesson
+        lesson_overview = self.get_lesson_overview(category, lesson)
+        success_rates = [question[self.learned_language]["success_rate"] for question in self.categories[category][lesson]["questions"].values()]
+        success_rate = sum(success_rates) / len(success_rates) * lesson_overview
+        return success_rate
 
+    @log_calls
+    def get_lesson_overview(self, category=None, lesson=None):
+        category = category if category else self.current_category
+        lesson = lesson if lesson else self.current_lesson
+        views = 0
+        for question in self.categories[category][lesson]["questions"].values():
+            if question[self.learned_language]["tries"] > 0:
+                views += 1
+        questions = len(self.categories[category][lesson]["questions"].values()) 
+        overview = views / questions
+        return overview
+
+    # QUESTIONS
+    @log_calls
+    def get_question_data(self, data, category=None, lesson=None, question_id=None, language=None):
+        category = category if category else self.current_category
+        lesson = lesson if lesson else self.current_lesson
+        question_id = question_id if question_id else self.current_question_id
+        language = language if language else self.learned_language
+        return self.categories[category][lesson]["questions"][question_id][language][data]
+
+    @log_calls
+    def get_question_answer(self, question=None):
+        question = question if question else self.current_question
+        return question[self.learned_language]["sentence"]
+    
+    @log_calls
+    def get_question_explainations(self, question=None):
+        question = question if question else self.current_question
+        explaination_text = []
+ 
+        if self.learned_language in self.explainations.keys():
+            for item in self.explainations[self.learned_language]:
+                for patern in item["paterns"]:
+                    if patern in self.current_question[self.learned_language]["sentence"]:
+                        if self.spoken_language in item["explainations"].keys():
+                            explaination_text.append(item["explainations"][self.spoken_language])
+
+        return explaination_text
+
+    ################################################################### SETTERS
+
+    # WINDOW
+    @log_calls
+    def set_window_icon(self, icon=DEFAULT_ICON):
+        file_name = icon + ".ico"
+        file_path = os.path.join(PATH_ICONS, file_name)
+        self.iconbitmap(file_path)
+
+    @log_calls
+    def set_window_title(self, title):
+        self.title(title)
+
+    # QUESTIONS
+    @log_calls
+    def set_question_success(self, success, category=None, lesson=None, question_id=None, language=None):
+        category = category if category else self.current_category
+        lesson = lesson if lesson else self.current_lesson
+        question_id = question_id if question_id else self.current_question_id
+        language = language if language else self.learned_language
+        self.categories[category][lesson]["questions"][question_id][language]["success_rate"] = success
+    
+    @log_calls
+    def set_question_tries(self, tries, category=None, lesson=None, question_id=None, language=None):
+        category = category if category else self.current_category
+        lesson = lesson if lesson else self.current_lesson
+        question_id = question_id if question_id else self.current_question_id
+        language = language if language else self.learned_language
+        self.categories[category][lesson]["questions"][question_id][language]["tries"] = tries
+
+    ################################################################ VALIDATORS
+
+    # LANGUAGES
+    @log_calls
+    def validate_languages(self, spoken_language, learned_language, event=None):
+        if (spoken_language == "") or (learned_language == ""):
+            self.display_languages()
+        elif spoken_language == learned_language:
+            self.display_languages()
+        else:
+            self.spoken_language = spoken_language
+            self.learned_language = learned_language
+            self.display_categories()
+
+    # QUESTIONS
+    @log_calls
+    def validate_response(self, response, event=None):
+        response = response.replace('.', '')
+        answer = self.get_question_answer()
+        self.increase_question_tries()
+
+        # If the response is right
+        if response.lower().strip() == answer.lower().strip():
+            self.playsound(SOUND_CORRECT)
+            self.increase_question_success()
+            self.save_profile()
+            self.display_questions()
+
+        # If the response is wrong
+        else:
+            self.playsound(SOUND_INCORRECT)
+            self.decrease_question_success()
+            self.save_profile()
+            self.display_answer(response)
+
+    ################################################################# LISTENERS
+
+    # WINDOW
+    @log_calls
+    def close_app(self, event=None):
+        self.remove_temp_files()
+        self.destroy()
+
+    # WIDGET
+    @log_calls
+    def tell_text(self, text, language, event=None):
+        file_path = os.path.join(PATH_TEMPORARY_FILES, "tts.mp3")
+        languages = {
+            "english": {
+                "language_code": "en",
+                "accent_code": "co.uk"
+            },
+            "french": {
+                "language_code": "fr",
+                "accent_code": "fr"
+            }
+        }
+
+        if isinstance(text, tk.StringVar):
+            text = text.get()
+
+        tts = gTTS(text=text, lang=languages[language]["language_code"], tld=languages[language]["accent_code"])
+
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+
+        tts.save(file_path)
+
+        while not os.path.isfile(file_path):
+            sleep(0.1)
+
+        self.playsound(file_path, False)
+
+    @log_calls
+    def click_button(self, action, args=[], sound=SOUND_PAGE_FORWARDS, event=None):
+        if isinstance(args, tk.Event):
+            event = args
+            args = []
+
+        elif isinstance(sound, tk.Event):
+            event = sound
+            sound = SOUND_PAGE_FORWARDS
+
+        if sound:
+            self.playsound(sound)
+
+        if type(args) != list:
+            args = [args]
+
+        action(*args)        
+    
+    @log_calls
+    def enter_widget(self, widget, sound=None, event=None):
+        if sound:
+            self.playsound(SOUND_POP)
+        widget.configure(style=f'Active.{widget["style"]}')
+        for child in widget.winfo_children():
+            self.enter_widget(child)
+
+    @log_calls
+    def leave_widget(self, widget, event=None):
+        widget.configure(style=widget["style"].replace("Active.", ""))
+        for child in widget.winfo_children():
+            self.leave_widget(child)
+    
+    ################################################################## BUILDERS
+
+    # WINDOW
     @log_calls
     def create_window(self):
-        self.title("Go Bilingo")
-        self.iconbitmap(CURRENT_DIRECTORY + '/assets/icons/megan.ico')
+        self.set_window_icon()
         self.configure(bg=COLOR_LIGHT_GREY)
 
         window_width = 800
@@ -241,185 +523,16 @@ class Bilingual(tk.Tk):
         self.window_container.grid(column=0, row=0)
         self.window_container.columnconfigure(0, weight=1)
         self.window_container.rowconfigure(0, weight=1)
+
+    # FRAMES
+    @log_calls
+    def create_frame(self, parent, text):
+        new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
+        new_frame.pack(expand=True, fill=tk.X, pady=10)
+
+        new_label = ttk.Label(new_frame, text=text, style="Default.TLabel")
+        new_label.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
     
-    @log_calls
-    def clear_window(self):
-        for widget in self.window_container.winfo_children():
-            widget.destroy()
-   
-    @log_calls
-    def is_remembered(self, question):
-        return random.random() < question[self.learned_language]["success_rate"] * 0.95
-
-    @log_calls
-    def get_all_profiles(self):
-        return [profile for profile in os.listdir(CURRENT_DIRECTORY + "/assets/profiles") if os.path.isdir(os.path.join(CURRENT_DIRECTORY + "/assets/profiles", profile))]
-
-    @log_calls
-    def get_all_languages(self):
-        languages = []
-        for folder_name in self.data.keys():
-            for file_name in self.data[folder_name].keys():
-                for question in self.data[folder_name][file_name]:
-                    for language in question.keys():
-                        if language not in languages:
-                            languages.append(language)
-        return languages
-
-    @log_calls
-    def get_all_categories(self):
-        return list(self.data.keys())
-
-    @log_calls
-    def get_all_lessons(self, category=None):
-        if category is None:
-            category = self.current_category
-        return list(self.data[category].keys())
-
-    @log_calls
-    def get_category_success(self, category=None):
-        if category is None:
-            category = self.current_category
-        success = [self.get_lesson_success(category=category, lesson=lesson) for lesson in self.get_all_lessons(category=category)]
-        return sum(success) / len(success)
-
-    @log_calls
-    def get_category_overview(self, category=None):
-        if category is None:
-            category = self.current_category
-        overview = [self.get_lesson_overview(category=category, lesson=lesson) for lesson in self.get_all_lessons(category=category)]
-        return sum(overview) / len(overview)
-
-    @log_calls
-    def get_lesson_success(self, category=None, lesson=None):
-        if category is None:
-            category = self.current_category
-        if lesson is None:
-            lesson = self.current_lesson
-        success = [question[self.learned_language]["success_rate"] for question in self.data[category][lesson]]
-        return sum(success) / len(success) * self.get_lesson_overview(category, lesson)
-
-    @log_calls
-    def get_lesson_overview(self, category=None, lesson=None):
-        if category is None:
-            category = self.current_category
-        if lesson is None:
-            lesson = self.current_lesson
-        overview = 0
-        for question in self.data[category][lesson]:
-            if (question[self.learned_language]["tries"] > 0):
-                overview += 1
-        return overview / len(self.data[category][lesson])
-
-    @log_calls
-    def choose_random_question(self):
-        deep_copy = deepcopy(self.data)
-        random.shuffle(deep_copy[self.current_category][self.current_lesson])
-        for question in deep_copy[self.current_category][self.current_lesson]:
-            if (self.current_question) and (self.current_question[self.learned_language]["sentence"] == question[self.learned_language]["sentence"]):
-                    continue
-            if not self.is_remembered(question):
-                self.current_question = question
-                return
-        self.current_question = random.choice(deep_copy[self.current_category][self.current_lesson])
-    
-    @log_calls
-    def scroll_widget(self, widget, event):
-        widget.configure(scrollregion=widget.bbox("all"))
-
-    @log_calls
-    def playsound(self, sound, wait=False):
-        file_path = CURRENT_DIRECTORY + f"/assets/sounds/{sound}"
-
-        if os.path.isfile(file_path):
-            Thread(target=playsound, args=(file_path, wait), daemon=True).start()
-    
-    @log_calls
-    def tell_text(self, text, language, event=None):
-        file_path = CURRENT_DIRECTORY + "/assets/temp/tts.mp3"
-        languages = {
-            "english": {
-                "language_code": "en",
-                "accent_code": "co.uk"
-            },
-            "french": {
-                "language_code": "fr",
-                "accent_code": "fr"
-            }
-        }
-
-        if isinstance(text, tk.StringVar):
-            text = text.get()
-
-        tts = gTTS(text=text, lang=languages[language]["language_code"], tld=languages[language]["accent_code"])
-
-        if os.path.isfile(file_path):
-            os.remove(file_path)
-
-        tts.save(file_path)
-
-        while not os.path.isfile(file_path):
-            sleep(0.1)
-
-        playsound(file_path, False)
-
-    @log_calls
-    def bind_widget(self, widget, command, event=EVENT_LEFT_CLICK, recursive=True):
-        widget.bind(event, command)
-        if recursive:
-            for child in widget.winfo_children():
-                self.bind_widget(child, command, event)
-
-    @log_calls
-    def click_button(self, action, args=[], sound=SOUND_PAGE_FORWARDS, event=None):
-        if isinstance(args, tk.Event):
-            event = args
-            args = []
-
-        elif isinstance(sound, tk.Event):
-            event = sound
-            sound = SOUND_PAGE_FORWARDS
-
-        if sound:
-            self.playsound(sound)
-
-        if type(args) != list:
-            args = [args]
-
-        action(*args)
-
-    @log_calls
-    def find_differences(self, reference, text, missing_letters=True):
-        color_mapping = {-1: "red", 0: COLOR_WHITE, 1: "blue"}
-        dmp = diff_match_patch()
-        differences = dmp.diff_main(reference, text)
-        dmp.diff_cleanupSemantic(differences)
-        return differences
-
-    @log_calls
-    def enter_widget(self, widget, sound=True, event=None):
-        if sound:
-            self.playsound(SOUND_POP)
-        widget.configure(style=f'Active.{widget["style"]}')
-        for child in widget.winfo_children():
-            self.enter_widget(child, False)
-
-    @log_calls
-    def leave_widget(self, widget, event=None):
-        widget.configure(style=widget["style"].replace("Active.", ""))
-        for child in widget.winfo_children():
-            self.leave_widget(child)
-
-    @log_calls
-    def get_stars(self, category=None, lesson=None):
-        if (category) and (not lesson):
-            success = self.get_category_success(category)
-        else:
-            success = self.get_lesson_success(category, lesson)
-        # % of success to achieve to earn each start
-        stars = [0.6, 0.8, 0.9]
-        return len([i for i, value in enumerate(stars) if value <= success])
-
     @log_calls
     def create_stat_frame(self, parent, text, stat, alone_in_row=True):
         side = tk.TOP if alone_in_row else tk.LEFT
@@ -431,14 +544,6 @@ class Bilingual(tk.Tk):
 
         text_label = ttk.Label(frame, text=text, wraplength=650, style="Small.Default.TLabel", anchor="center")
         text_label.pack(expand=True, fill=tk.X, padx=5, pady=5)
-
-    @log_calls
-    def create_frame(self, parent, text):
-        new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
-        new_frame.pack(expand=True, fill=tk.X, pady=10)
-
-        new_label = ttk.Label(new_frame, text=text, style="Default.TLabel")
-        new_label.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
 
     @log_calls
     def create_scrollable_frame(self, parent, text):
@@ -471,54 +576,6 @@ class Bilingual(tk.Tk):
             if animate:
                 self.bind_widget(tts_frame, partial(self.enter_widget, tts_frame), EVENT_ENTER_WIDGET, recursive=False)
                 self.bind_widget(tts_frame, partial(self.leave_widget, tts_frame), EVENT_LEAVE_WIDGET, recursive=False)
-
-    @log_calls
-    def create_speakable_entry(self, parent, language, animate=True):
-        new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
-        new_frame.pack(expand=True, fill=tk.X, pady=10)
-        
-        new_Stringvar = tk.StringVar()
-        # The Entry widget from ttk does not support the "background" argument
-        new_entry = tk.Entry(new_frame, width=45, textvariable=new_Stringvar, background=COLOR_DARK_PINK, foreground=COLOR_WHITE, relief="flat", insertbackground=COLOR_WHITE, font=('Calibri', 12))
-        new_entry.pack(side=tk.LEFT, expand=True, fill=tk.BOTH, padx=5, pady=5)
-        new_entry.focus()
-
-        if language in ["english", "french"]:
-            tts_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
-            tts_frame.pack(side=tk.LEFT)
-
-            tts = ttk.Label(tts_frame, image=self.load_image("speak", 25, 25), style="Default.TLabel")
-            tts.pack(padx=10, pady=5)
-
-            self.bind_widget(tts, partial(self.click_button, self.tell_text, [new_Stringvar, language], None))
-
-            if animate:
-                self.bind_widget(tts_frame, partial(self.enter_widget, tts_frame), EVENT_ENTER_WIDGET, recursive=False)
-                self.bind_widget(tts_frame, partial(self.leave_widget, tts_frame), EVENT_LEAVE_WIDGET, recursive=False)
-
-        return new_frame, new_Stringvar
-
-    @log_calls
-    def create_button(self, parent, image, text, action, arguments=[], sound=None, image_first=True, alone_in_row=True, animate=True):
-        side = tk.TOP if alone_in_row else tk.LEFT
-        new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
-        new_frame.pack(padx=10, pady=10, expand=True, fill=tk.X, side=side)
-
-        side = tk.LEFT if image_first else tk.RIGHT
-        
-        anchor = tk.E if image_first else tk.W
-        new_image = ttk.Label(new_frame, image=self.load_image(image, 25, 25), anchor=anchor, style="Default.TLabel")
-        new_image.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
-
-        anchor = tk.W if image_first else tk.E
-        new_label = ttk.Label(new_frame, text=text, anchor=anchor, style="Default.TLabel")
-        new_label.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
-        
-        self.bind_widget(new_frame, partial(self.click_button, action, arguments, sound))
-
-        if animate:
-            self.bind_widget(new_frame, partial(self.enter_widget, new_frame), EVENT_ENTER_WIDGET, recursive=False)
-            self.bind_widget(new_frame, partial(self.leave_widget, new_frame), EVENT_LEAVE_WIDGET, recursive=False)
 
     @log_calls
     def create_image_frame(self, parent, image, text, action, arguments, sound=None, animate=True):
@@ -577,68 +634,61 @@ class Bilingual(tk.Tk):
             self.bind_widget(new_frame, partial(self.enter_widget, new_frame), EVENT_ENTER_WIDGET, recursive=False)
             self.bind_widget(new_frame, partial(self.leave_widget, new_frame), EVENT_LEAVE_WIDGET, recursive=False)
 
+    # BUTTONS
     @log_calls
-    def validate_languages(self, spoken_language, learned_language, event=None):
-        if (spoken_language == "") or (learned_language == ""):
-            self.display_languages()
-        elif spoken_language == learned_language:
-            self.display_languages()
-        else:
-            self.spoken_language = spoken_language
-            self.learned_language = learned_language
-            self.display_categories()
+    def create_button(self, parent, image, text, action, arguments=[], sound=None, image_first=True, alone_in_row=True, animate=True):
+        side = tk.TOP if alone_in_row else tk.LEFT
+        new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
+        new_frame.pack(padx=10, pady=10, expand=True, fill=tk.X, side=side)
 
+        side = tk.LEFT if image_first else tk.RIGHT
+        
+        anchor = tk.E if image_first else tk.W
+        new_image = ttk.Label(new_frame, image=self.load_image(image, 25, 25), anchor=anchor, style="Default.TLabel")
+        new_image.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
+
+        anchor = tk.W if image_first else tk.E
+        new_label = ttk.Label(new_frame, text=text, anchor=anchor, style="Default.TLabel")
+        new_label.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
+        
+        self.bind_widget(new_frame, partial(self.click_button, action, arguments, sound))
+
+        if animate:
+            self.bind_widget(new_frame, partial(self.enter_widget, new_frame), EVENT_ENTER_WIDGET, recursive=False)
+            self.bind_widget(new_frame, partial(self.leave_widget, new_frame), EVENT_LEAVE_WIDGET, recursive=False)
+
+    # ENTRIES
     @log_calls
-    def validate_response(self, response, event=None):
-        response_is_right = None
-        response = response
-        answer = self.current_question[self.learned_language]["sentence"]
-        question = None
+    def create_speakable_entry(self, parent, language, animate=True):
+        new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
+        new_frame.pack(expand=True, fill=tk.X, pady=10)
+        
+        new_Stringvar = tk.StringVar()
+        # The Entry widget from ttk does not support the "background" argument
+        new_entry = tk.Entry(new_frame, width=45, textvariable=new_Stringvar, background=COLOR_DARK_PINK, foreground=COLOR_WHITE, relief="flat", insertbackground=COLOR_WHITE, font=('Calibri', 12))
+        new_entry.pack(side=tk.LEFT, expand=True, fill=tk.BOTH, padx=5, pady=5)
+        new_entry.focus()
 
-        for question in self.data[self.current_category][self.current_lesson]:
-            if question == self.current_question:
-                question[self.learned_language]["tries"] += 1
-                break
+        if language in ["english", "french"]:
+            tts_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
+            tts_frame.pack(side=tk.LEFT)
 
-        if (response != "") and (response[-1] == "."):
-            response = response[:-1]
+            tts = ttk.Label(tts_frame, image=self.load_image("speak", 25, 25), style="Default.TLabel")
+            tts.pack(padx=10, pady=5)
 
-        # If the response is right
-        if response.lower().strip() == answer.lower().strip():
-            self.playsound(SOUND_CORRECT)
-            question[self.learned_language]["success_rate"] = ((question[self.learned_language]["success_rate"] * (question[self.learned_language]["tries"] -1)) +1) / question[self.learned_language]["tries"]
-            self.save_profile()
-            self.display_questions()
+            self.bind_widget(tts, partial(self.click_button, self.tell_text, [new_Stringvar, language], None))
 
-        # If the response is wrong
-        else:
-            self.playsound(SOUND_INCORRECT)
-            question[self.learned_language]["success_rate"] = (question[self.learned_language]["success_rate"] * (question[self.learned_language]["tries"] -1)) / question[self.learned_language]["tries"]
-            self.save_profile()
-            self.display_answer(response)
+            if animate:
+                self.bind_widget(tts_frame, partial(self.enter_widget, tts_frame), EVENT_ENTER_WIDGET, recursive=False)
+                self.bind_widget(tts_frame, partial(self.leave_widget, tts_frame), EVENT_LEAVE_WIDGET, recursive=False)
 
-    @log_calls
-    def select_profile(self, profile, event=None):
-        self.current_profile = profile
-        self.iconbitmap(CURRENT_DIRECTORY + f'/assets/icons/{profile}.ico')
-        self.load_profile()
-        self.load_explainations()
-        self.display_languages()
-    
-    @log_calls
-    def select_category(self, category, event=None):
-        self.current_category = category
-        self.display_lessons()
+        return new_frame, new_Stringvar
 
-    @log_calls
-    def select_lesson(self, lesson, event=None):
-        self.current_lesson = lesson
-        self.current_lesson_stars = self.get_stars()
-        self.display_questions()
-    
+    ################################################################ DISPLAYERS
+   
+    # PROFILES
     @log_calls
     def display_profiles(self, page=1, event=None):
-
         profiles = self.get_all_profiles()
         item_by_page = 5
         total_pages = ceil(len(profiles) / item_by_page)
@@ -646,7 +696,7 @@ class Bilingual(tk.Tk):
 
         # Configure page grid
         self.clear_window()
-        self.title("Pick your profile !")
+        self.set_window_title("Pick your profile !")
         self.window_container.grid(column=1, row=1)
 
         # Initialize variables
@@ -659,13 +709,14 @@ class Bilingual(tk.Tk):
         # QUIT BUTTON
         self.create_button(self.window_container, "arrow_left", "Quit", self.close_app)
 
+    # LANGUAGES
     @log_calls
     def display_languages(self, page=1, event=None):
         languages = self.get_all_languages()
 
         # Configure page grid
         self.clear_window()
-        self.title("Pick a language to learn !")
+        self.set_window_title("Pick a language to learn !")
         self.window_container.grid(column=1, row=1)
 
         for spoken_language_index, spoken_language in enumerate(languages):
@@ -692,6 +743,17 @@ class Bilingual(tk.Tk):
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Profiles", self.display_profiles, arguments=1, sound=SOUND_PAGE_BACKWARDS)
 
+    # STARS
+    @log_calls
+    def display_new_star(self, parent, max_height, height=1):
+        for child in parent.winfo_children()[1:]:
+            child.destroy()
+        ttk.Label(parent, image=self.load_image(f'{self.get_stars()}-star', int(height * 2.09), height), anchor="center").pack(side="left", expand=True, fill=tk.X)
+        ttk.Label(parent, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=tk.X)
+        if height < max_height:
+            self.after(15, partial(self.display_new_star, parent, max_height, height+7))
+    
+    # CATEGORIES
     @log_calls
     def display_categories(self, page=1, event=None):
 
@@ -702,7 +764,7 @@ class Bilingual(tk.Tk):
 
         # Configure page grid
         self.clear_window()
-        self.title("Pick a category !")
+        self.set_window_title("Pick a category !")
         self.window_container.grid(column=1, row=1)
 
         # Initialize variables
@@ -724,6 +786,7 @@ class Bilingual(tk.Tk):
         if current_page < total_pages:
             self.create_button(self.window_container, "next", "Next", self.display_categories, arguments=current_page +1, sound=SOUND_PAGE_FORWARDS, alone_in_row=False)
 
+    # LESSONS
     @log_calls
     def display_lessons(self, page=1, event=None):
 
@@ -734,7 +797,7 @@ class Bilingual(tk.Tk):
 
         # Configure page grid
         self.clear_window()
-        self.title("Pick a lesson !")
+        self.set_window_title("Pick a lesson !")
         self.window_container.grid(column=1, row=1)
 
         # Initialize variables
@@ -756,22 +819,14 @@ class Bilingual(tk.Tk):
         if current_page < total_pages:
             self.create_button(self.window_container, "next", "Next", self.display_lessons, arguments=current_page +1, sound=SOUND_PAGE_FORWARDS, alone_in_row=False)
 
-    @log_calls
-    def display_new_star(self, parent, max_height, height=1):
-        for child in parent.winfo_children()[1:]:
-            child.destroy()
-        ttk.Label(parent, image=self.load_image(f'{self.get_stars()}-star', int(height * 2.09), height), anchor="center").pack(side="left", expand=True, fill=tk.X)
-        ttk.Label(parent, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=tk.X)
-        if height < max_height:
-            self.after(15, partial(self.display_new_star, parent, max_height, height+7))
-
+    # QUESTIONS
     @log_calls
     def display_questions(self):
         self.choose_random_question()
 
         # Configure page grid
         self.clear_window()
-        self.title("Translate this sentence !")
+        self.set_window_title("Translate this sentence !")
         self.window_container.grid(column=1, row=1)
 
         # STARS
@@ -827,10 +882,10 @@ class Bilingual(tk.Tk):
     def display_answer(self, response):
         # Configure page grid
         self.clear_window()
-        self.title("Nice Try !")
+        self.set_window_title("Nice Try !")
         self.window_container.grid(column=1, row=1)
-        differences = self.find_differences(self.current_question[self.learned_language]["sentence"].capitalize(), response.capitalize())
-
+        explainations = self.get_question_explainations()
+        
         # SENTENCE
         self.create_speakable_frame(self.window_container, self.current_question[self.spoken_language]["sentence"].capitalize(), self.spoken_language)
 
@@ -840,42 +895,163 @@ class Bilingual(tk.Tk):
 
         new_text = tk.Text(new_frame, width=40, height=1, relief="flat", background=COLOR_DARK_PINK, foreground=COLOR_WHITE, font=('Calibri', 12))
         new_text.insert("1.0", response.capitalize())
-        new_text.tag_configure("red", background="#b30000")
-        new_text.tag_configure("green", background="#009900")
-
-        char_index = 0
-
-        for difference in differences:
-            if difference[0] == 1:
-                new_text.tag_add("red", f"1.{char_index}", f"1.{char_index + len(difference[1])}")
-            if difference[0] == -1:
-                new_text.insert(f"1.{char_index}", difference[1])
-                new_text.tag_add("green", f"1.{char_index}", f"1.{char_index + len(difference[1])}")
-            char_index += len(difference[1])
-
-        new_text.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
-        new_text.configure(state="disabled")
+        self.color_differences(new_text, self.current_question[self.learned_language]["sentence"].capitalize(), response.capitalize())
 
         # ANSWER
-        self.create_speakable_frame(self.window_container, self.current_question[self.learned_language]["sentence"].capitalize(), self.learned_language)        
+        self.create_speakable_frame(self.window_container, self.current_question[self.learned_language]["sentence"].capitalize(), self.learned_language)                
 
-        explaination_text = []
- 
-        if self.learned_language in self.explainations.keys():
-            for item in self.explainations[self.learned_language]:
-                for patern in item["paterns"]:
-                    if patern in self.current_question[self.learned_language]["sentence"]:
-                        if self.spoken_language in item["explainations"].keys():
-                            explaination_text.append(item["explainations"][self.spoken_language])
-
-        if len(explaination_text) > 0 :
-            self.create_scrollable_frame(self.window_container, f"\n\n{'-' * 72}\n\n".join(explaination_text))
+        # EXPLAINATIONS
+        if len(explainations) > 0 :
+            self.create_scrollable_frame(self.window_container, f"\n\n{'-' * 72}\n\n".join(explainations))
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Lessons", self.display_lessons, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=False)
         
         # VALIDATE BUTTON
         self.create_button(self.window_container, "arrow_right", "Next Question", self.display_questions, image_first=False, alone_in_row=False)
+    
+    ##################################################################### OTHER
+
+    # WINDOW
+    @log_calls
+    def clear_window(self):
+        for widget in self.window_container.winfo_children():
+            widget.destroy()
+    
+    @log_calls
+    def set_styles(self):
+        style = ttk.Style(self) 
+        style.configure(".", background=COLOR_LIGHT_GREY, font=('Calibri', 12))
+
+        style.configure("CustomLightFrame.TFrame", background=COLOR_LIGHT_PINK)
+        style.configure("CustomMidFrame.TFrame", background=COLOR_MID_PINK)
+
+        style.configure("CustomDarkFrame.TFrame", background=COLOR_DARK_PINK)
+        style.configure("Active.CustomDarkFrame.TFrame", background=COLOR_MID_PINK)
+
+        style.configure("Default.TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE)
+        style.configure("Active.Default.TLabel", background=COLOR_MID_PINK)
+        style.configure("Small.Default.TLabel", font=('Calibri', 8))
+        style.configure("Big.Default.TLabel", font=('Calibri', 16))
+
+    @log_calls
+    def playsound(self, sound, wait=False):
+        if not os.path.isfile(sound):
+            sound = os.path.join(PATH_SOUNDS, sound)
+        if os.path.isfile(sound):
+            Thread(target=playsound, args=(sound, wait), daemon=True).start()
+    
+    # WIDGETS
+    @log_calls
+    def bind_widget(self, widget, command, event=EVENT_LEFT_CLICK, recursive=True):
+        widget.bind(event, command)
+        if recursive:
+            for child in widget.winfo_children():
+                self.bind_widget(child, command, event)
+
+    @log_calls
+    def resize_image(self, path, width, height):
+        try:
+            raw_image = Image.open(path)
+        except Exception as e:
+            print(f'Error: Impossible to resize the image at "{path}" to {width}x{height}.')
+            return None
+        resize_img = raw_image.resize((width, height))
+        image = ImageTk.PhotoImage(resize_img)
+        return image
+
+    # PROFILES
+    @log_calls
+    def select_profile(self, profile, event=None):
+        self.current_profile = profile
+        self.load_profile()
+        self.load_explainations()
+        self.display_languages()
+    
+    # CATEGORIES
+    @log_calls
+    def select_category(self, category, event=None):
+        self.current_category = category
+        self.display_lessons()
+
+    # LESSONS
+    @log_calls
+    def select_lesson(self, lesson, event=None):
+        self.current_lesson = lesson
+        self.current_lesson_stars = self.get_stars()
+        self.display_questions()
+
+    # QUESTIONS
+    @log_calls
+    def is_remembered(self, question):
+        return random.random() < question[self.learned_language]["success_rate"] * 0.95
+    
+    @log_calls
+    def choose_random_question(self):
+        deep_copy = deepcopy(self.categories)
+        questions_id = list(deep_copy[self.current_category][self.current_lesson]["questions"].keys())
+        random.shuffle(questions_id)
+        
+        for question_id in questions_id:
+            question = deep_copy[self.current_category][self.current_lesson]["questions"][question_id]
+            if (self.current_question) and (self.current_question[self.learned_language]["sentence"] == question[self.learned_language]["sentence"]):
+                continue
+            if self.is_remembered(question):
+                continue
+            self.current_question_id = question_id
+            self.current_question = question
+            return
+
+        self.current_question_id = random.choice(deep_copy[self.current_category][self.current_lesson]["questions"].keys())
+        self.current_question = deep_copy[self.current_category][self.current_lesson]["questions"][self.current_question_id]
+    
+    @log_calls
+    def increase_question_success(self, question=None):
+        question = question if question else self.current_question
+        success_rate = self.get_question_data("success_rate")
+        tries = self.get_question_data("tries")
+        new_success_rate = ((success_rate * (tries -1)) +1) / tries
+        self.set_question_success(new_success_rate)
+
+    @log_calls
+    def decrease_question_success(self, question=None):
+        question = question if question else self.current_question
+        success_rate = self.get_question_data("success_rate")
+        tries = self.get_question_data("tries")
+        new_success_rate = (success_rate * (tries -1)) / tries
+        self.set_question_success(new_success_rate)
+
+    @log_calls
+    def increase_question_tries(self, question=None):
+        question = question if question else self.current_question
+        new_tries = question[self.learned_language]["tries"] = 1
+        self.set_question_tries(new_tries)
+
+    # DIFFERENCES
+    @log_calls
+    def find_differences(self, reference, text, missing_letters=True):
+        dmp = diff_match_patch()
+        differences = dmp.diff_main(reference, text)
+        dmp.diff_cleanupSemantic(differences)
+        return differences
+   
+    @log_calls
+    def color_differences(self, text_widget, reference, text):
+        differences = self.find_differences(reference, text)
+        text_widget.tag_configure("red", background="#b30000")
+        text_widget.tag_configure("green", background="#009900")
+
+        char_index = 0
+        for difference in differences:
+            if difference[0] == 1:
+                text_widget.tag_add("red", f"1.{char_index}", f"1.{char_index + len(difference[1])}")
+            if difference[0] == -1:
+                text_widget.insert(f"1.{char_index}", difference[1])
+                text_widget.tag_add("green", f"1.{char_index}", f"1.{char_index + len(difference[1])}")
+            char_index += len(difference[1])
+
+        text_widget.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
+        text_widget.configure(state="disabled")
 
 ##################################################################### MAIN CODE
 
