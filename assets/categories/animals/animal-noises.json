@@ -1,7 +1,7 @@
 {    
     "prerequisites": {
         "animals": {
-            "animal-habitat": 2
+            "animal-habitats": 2
         }
     },
     "questions": {

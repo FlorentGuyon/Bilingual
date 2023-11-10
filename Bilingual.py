@@ -25,6 +25,7 @@ FILES_ENCODING = "utf8"
 # COLORS
 COLOR_WHITE = "#FFFFFF"
 COLOR_LIGHT_GREY = "#eae5e5"
+COLOR_MID_GREY = "#d3c9c9"
 COLOR_LIGHT_PINK = "#edcbc5"
 COLOR_MID_PINK = "#e1a99f"
 COLOR_DARK_PINK = "#c39792"
@@ -68,7 +69,7 @@ PATH_SOUNDS = os.path.join(CURRENT_DIRECTORY, "assets", "sounds")
 PATH_TEMPORARY_FILES = os.path.join(CURRENT_DIRECTORY, "assets", "temp")
 
 # ICONS
-DEFAULT_ICON = "rabbit-female-pink"
+DEFAULT_ICON = "rabbit-pink"
 
 # VALUES
 VALUE_STARS = [0.6, 0.8, 0.9] # 60% of success to earn the 1st star, then 80% and 90%
@@ -96,6 +97,7 @@ class Bilingual(tk.Tk):
         self.spoken_language = None
         self.learned_language = None
         self.current_profile = None
+        self.current_icon = None
         self.current_category = None
         self.current_lesson = None
         self.current_question_id = None
@@ -109,23 +111,37 @@ class Bilingual(tk.Tk):
 
     # IMAGES
     @log_calls
-    def load_image(self, name, width, height):
+    def load_image(self, name, width, height, grey=False):
         if name in self.icons.keys():
             if width in self.icons[name].keys():
                 if height in self.icons[name][width].keys():
-                    return self.icons[name][width][height]
+                    if grey in self.icons[name][width][height].keys():
+                        return self.icons[name][width][height][grey]
 
         image_name = name + ".png"
         image_path = os.path.join(PATH_ICONS, image_name)
-        resized_image = self.resize_image(image_path, width, height)
-        
-        if not resized_image:
+
+        try:
+            image = Image.open(image_path)
+        except Exception as e:
+            print(f'Error: Impossible to resize the image at "{image_path}" to {width}x{height}.')
             return None
+
+        if grey:
+            image = self.color_image(image)
+
+        image = self.resize_image(image, width, height)
+        image = ImageTk.PhotoImage(image)
+
+        if name not in self.icons.keys():
+            self.icons[name] = {}
+        if width not in self.icons[name].keys():
+            self.icons[name][width] = {}
+        if height not in self.icons[name][width].keys():
+            self.icons[name][width][height] = {}
+        self.icons[name][width][height][grey] = image
         
-        self.icons[name] = {}
-        self.icons[name][width] = {}
-        self.icons[name][width][height] = resized_image
-        return resized_image
+        return image
 
     @log_calls
     def read_from_file(self, file_path, critical=True):
@@ -144,7 +160,8 @@ class Bilingual(tk.Tk):
         profile_content = self.read_from_file(profile_path)
         profile = json.loads(profile_content)
 
-        self.set_window_icon(profile["icon"])
+        self.current_icon = profile["icon"]
+        self.set_window_icon(self.current_icon)
 
         for category in profile["categories"].keys():
             for lesson in profile["categories"][category].keys():
@@ -599,36 +616,47 @@ class Bilingual(tk.Tk):
             self.bind_widget(new_frame, partial(self.leave_widget, new_frame), EVENT_LEAVE_WIDGET, recursive=False)
 
     @log_calls
-    def create_progress_frame(self, parent, image, text, progress, stars, action, arguments, sound=None, animate=True):
-        new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
+    def create_progress_frame(self, parent, image, text, progress, stars, action=None, arguments=None, locked=False, animate=True):
+
+        frame_style = "Disabled.CustomDarkFrame.TFrame" if locked else "CustomDarkFrame.TFrame"
+        label_style = "Disabled.Default.TLabel" if locked else "Default.TLabel"
+
+        new_frame = ttk.Frame(parent, style=frame_style)
         new_frame.pack(pady=5, expand=True, fill=tk.X)
 
-        title_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
+        title_frame = ttk.Frame(new_frame, style=frame_style)
         title_frame.pack(expand=True, fill=tk.BOTH)
 
-        title_frame_picture = ttk.Label(title_frame, image=self.load_image(image, 35, 35), style="Default.TLabel")
+        image = self.load_image(image, 35, 35, grey=locked)
+        title_frame_picture = ttk.Label(title_frame, image=image, style=label_style)
         title_frame_picture.pack(padx=15, pady=5, side=tk.LEFT)
 
         title_frame_text_text = text.replace("-", " ").title()
-        title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="Default.TLabel")
+        title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style=label_style)
         title_frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
 
-        stars_image = ttk.Label(title_frame, image=self.load_image(f'{stars}-star', 53, 25), style="Default.TLabel")
+        if locked:
+            image = self.load_image("lock", 25, 25, True)
+        else:
+            image = self.load_image(f'{stars}-star', 53, 25)            
+
+        stars_image = ttk.Label(title_frame, image=image, style=label_style)
         stars_image.pack(padx=15, pady=5, side=tk.LEFT)
 
-        progressbar_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
+        progressbar_frame = ttk.Frame(new_frame, style=frame_style)
         progressbar_frame.pack(expand=True, fill=tk.X)
 
         self.update()
 
         progressbar_frame_left_width = new_frame.winfo_width() * progress
-        progressbar_frame_left = ttk.Frame(progressbar_frame, height=5, width=progressbar_frame_left_width, style="CustomMidFrame.TFrame")
+        progressbar_frame_left = ttk.Frame(progressbar_frame, height=5, width=progressbar_frame_left_width, style=frame_style)
         progressbar_frame_left.pack(side=tk.LEFT)
         
-        progressbar_frame_right = ttk.Frame(progressbar_frame, height=5, style="CustomLightFrame.TFrame")
+        progressbar_frame_right = ttk.Frame(progressbar_frame, height=5, style=frame_style)
         progressbar_frame_right.pack(expand=True, fill=tk.X, side=tk.LEFT)
 
-        self.bind_widget(new_frame, partial(self.click_button, action, arguments))
+        if action and not locked:
+            self.bind_widget(new_frame, partial(self.click_button, action, arguments))
 
         if animate:
             self.bind_widget(new_frame, partial(self.enter_widget, new_frame), EVENT_ENTER_WIDGET, recursive=False)
@@ -704,7 +732,8 @@ class Bilingual(tk.Tk):
 
         # Iterate through profiles
         for profile in profiles[start_index:]:
-            self.create_image_frame(self.window_container, profile, profile, self.select_profile, profile)
+            icon = json.loads(self.read_from_file(os.path.join(PATH_PROFILES, profile + ".json")))["icon"]
+            self.create_image_frame(self.window_container, icon, profile, self.select_profile, profile)
 
         # QUIT BUTTON
         self.create_button(self.window_container, "arrow_left", "Quit", self.close_app)
@@ -756,8 +785,7 @@ class Bilingual(tk.Tk):
     # CATEGORIES
     @log_calls
     def display_categories(self, page=1, event=None):
-
-        categories = self.get_all_categories()
+        categories = sorted(self.get_all_categories(), key=lambda category: self.is_category_locked(category))
         item_by_page = 4
         total_pages = ceil(len(categories) / item_by_page)
         current_page = 1 if (page < 1) or (page > total_pages) else page
@@ -773,7 +801,16 @@ class Bilingual(tk.Tk):
 
         # Iterate through categories
         for category in categories[start_index:end_index]:
-            self.create_progress_frame(self.window_container, category, category, self.get_category_overview(category), self.get_stars(category), self.select_category, category)
+            category_locked = self.is_category_locked(category)
+            self.create_progress_frame(parent=self.window_container, 
+                image=category, 
+                text=category, 
+                progress=self.get_category_overview(category), 
+                stars=self.get_stars(category), 
+                action=self.select_category, 
+                arguments=category,
+                locked=category_locked,
+                animate=(not category_locked))
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Languages", self.display_languages, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
@@ -789,8 +826,7 @@ class Bilingual(tk.Tk):
     # LESSONS
     @log_calls
     def display_lessons(self, page=1, event=None):
-
-        lessons = self.get_all_lessons()
+        lessons = sorted(self.get_all_lessons(), key=lambda lessons: self.is_lesson_locked(lesson=lessons))
         item_by_page = 4
         total_pages = ceil(len(lessons) / item_by_page)
         current_page = 1 if (page < 1) or (page > total_pages) else page
@@ -806,7 +842,16 @@ class Bilingual(tk.Tk):
 
         # Iterate through lessons
         for lesson in lessons[start_index:end_index]:
-            self.create_progress_frame(self.window_container, lesson, lesson, self.get_lesson_overview(lesson=lesson), self.get_stars(self.current_category, lesson), self.select_lesson, lesson)
+            lesson_locked = self.is_lesson_locked(lesson=lesson)
+            self.create_progress_frame(parent=self.window_container, 
+                image=lesson, 
+                text=lesson, 
+                progress=self.get_lesson_overview(lesson=lesson), 
+                stars=self.get_stars(self.current_category, lesson), 
+                action=self.select_lesson, 
+                arguments=lesson,
+                locked=lesson_locked,
+                animate=(not lesson_locked))
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Categories", self.display_categories, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
@@ -928,9 +973,11 @@ class Bilingual(tk.Tk):
 
         style.configure("CustomDarkFrame.TFrame", background=COLOR_DARK_PINK)
         style.configure("Active.CustomDarkFrame.TFrame", background=COLOR_MID_PINK)
+        style.configure("Disabled.CustomDarkFrame.TFrame", background=COLOR_MID_GREY)
 
         style.configure("Default.TLabel", background=COLOR_DARK_PINK, foreground=COLOR_WHITE)
         style.configure("Active.Default.TLabel", background=COLOR_MID_PINK)
+        style.configure("Disabled.Default.TLabel", background=COLOR_MID_GREY)
         style.configure("Small.Default.TLabel", font=('Calibri', 8))
         style.configure("Big.Default.TLabel", font=('Calibri', 16))
 
@@ -950,15 +997,13 @@ class Bilingual(tk.Tk):
                 self.bind_widget(child, command, event)
 
     @log_calls
-    def resize_image(self, path, width, height):
-        try:
-            raw_image = Image.open(path)
-        except Exception as e:
-            print(f'Error: Impossible to resize the image at "{path}" to {width}x{height}.')
-            return None
-        resize_img = raw_image.resize((width, height))
-        image = ImageTk.PhotoImage(resize_img)
-        return image
+    def resize_image(self, raw_image, width, height):
+        return raw_image.resize((width, height))
+    
+    @log_calls
+    def color_image(self, image):
+        image = image.convert("LA")
+        return image.convert("RGBA")
 
     # PROFILES
     @log_calls
@@ -973,6 +1018,25 @@ class Bilingual(tk.Tk):
     def select_category(self, category, event=None):
         self.current_category = category
         self.display_lessons()
+
+    @log_calls
+    def is_category_locked(self, category=None):
+        category = category if category else self.current_category
+        for lesson in self.get_all_lessons(category):
+            if not self.is_lesson_locked(category, lesson):
+                return False
+        return True
+
+    @log_calls
+    def is_lesson_locked(self, category=None, lesson=None):
+        category = category if category else self.current_category
+        lesson = lesson if lesson else self.current_lesson
+        prerequisites = self.categories[category][lesson]["prerequisites"]
+        for needed_category in prerequisites:
+            for needed_lesson, needed_stars in prerequisites[needed_category].items():
+                if self.get_stars(needed_category, needed_lesson) < needed_stars:
+                    return True
+        return False
 
     # LESSONS
     @log_calls

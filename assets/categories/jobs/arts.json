@@ -1,5 +1,9 @@
 {    
-    "prerequisites": {},
+    "prerequisites": {
+        "colors": {
+            "default-colors": 2
+        }
+    },
     "questions": {
         "0": {
             "english": {
