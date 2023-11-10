@@ -163,16 +163,23 @@ class Bilingual(tk.Tk):
         self.current_icon = profile["icon"]
         self.set_window_icon(self.current_icon)
 
-        for category in profile["categories"].keys():
-            for lesson in profile["categories"][category].keys():
-                for question in profile["categories"][category][lesson].keys():
-                    for language in profile["categories"][category][lesson][question].keys():
-
-                        success_rate = profile["categories"][category][lesson][question][language]["success_rate"]
-                        self.set_question_success(success_rate, category, lesson, question, language)
-                        
-                        tries = profile["categories"][category][lesson][question][language]["tries"]
-                        self.set_question_tries(tries, category, lesson, question, language)
+        for category in self.categories.keys():
+            for lesson in self.categories[category].keys():
+                for question_id in self.categories[category][lesson]["questions"].keys():
+                    for language in self.categories[category][lesson]["questions"][question_id].keys():
+                        for data in ["success_rate", "tries"]:
+                            if category not in profile["categories"].keys():
+                                continue
+                            if lesson not in profile["categories"][category].keys():
+                                continue
+                            if question_id not in profile["categories"][category][lesson].keys():
+                                continue
+                            if self.learned_language not in profile["categories"][category][lesson][question_id].keys():
+                                continue
+                            if data not in profile["categories"][category][lesson][question_id][self.learned_language].keys():
+                                continue
+                            value = profile["categories"][category][lesson][question_id][self.learned_language][data]
+                            self.categories[category][lesson]["questions"][question_id][self.learned_language][data] = value
 
     # CATEGORIES
     @log_calls
@@ -442,15 +449,15 @@ class Bilingual(tk.Tk):
         if response.lower().strip() == answer.lower().strip():
             self.playsound(SOUND_CORRECT)
             self.increase_question_success()
-            self.save_profile()
             self.display_questions()
 
         # If the response is wrong
         else:
             self.playsound(SOUND_INCORRECT)
             self.decrease_question_success()
-            self.save_profile()
             self.display_answer(response)
+
+        self.save_profile()
 
     ################################################################# LISTENERS
 
