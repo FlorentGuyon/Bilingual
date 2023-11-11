@@ -1,64 +1,24 @@
-from sys import version_info
-
-current_python_version = version_info[:2]
-minimal_python_version = (3, 11)
-
-if current_python_version < minimal_python_version:
-    print(f"Warning : This program has not been tested with a Python version lower than {minimal_python_version}.")
-    print(f"The current Python version is {current_python_version}.")
-    print("It can be impossible to meet the requirements of this program with this version of Python.")
-    execute = input("Do you still want to execute this program ? (y/N) : ")
-    if execute not in ["y", "Y"] :
-        exit()
-
-start_sucess = False
-start_tries = 0
-
-while not start_sucess:
-    try:
-        import tkinter as tk
-        import json
-        import random
-        import os
-
-        from math import ceil
-        from tkinter import ttk
-        from tkinter.scrolledtext import ScrolledText
-        from PIL import Image, ImageTk
-        from functools import partial
-        from copy import deepcopy
-        from gtts import gTTS
-        from playsound import playsound
-        from time import sleep
-        from diff_match_patch import diff_match_patch
-        from threading import Thread
-
-        start_sucess = True
-    except:
-        if start_tries == 1:
-            print(f"Error : Still impossible to import the requirements.")
-            exit()
-        install = input("Error : The requirements for the exection of this program are not met.\nDo you want to start the installer program that downloads and installs the requirements now ? (y/N) : ")
-        if install in ["y", "Y"] :
-            try:
-                from os import path
-                from sys import executable
-                from subprocess import Popen
-                script_directory = os.path.dirname(os.path.abspath(__file__))
-                arguments = [executable, os.path.join(script_directory, "installer.py")]
-                output = Popen(arguments).wait()
-            except Exception as e:
-                print(f"Error : Impossible to start the installer. ({e})")
-                exit()
-        else:
-            exit()
-    start_tries +=1
+from copy import deepcopy
+from functools import partial
+from json import load, loads, dumps, JSONDecodeError
+from math import ceil
+from os import path, walk, listdir, remove
+from os.path import join, isfile, dirname, isdir, exists, basename, abspath
+from random import random, shuffle, choice
+from subprocess import Popen
+from sys import version_info, executable
+from threading import Thread
+from time import sleep
+from tkinter import Tk, X, Y, E, W, CENTER, LEFT, BOTH, RIGHT, Text, StringVar, Event, TOP, FLAT, INSERT, Text, Entry
+from tkinter.scrolledtext import ScrolledText
+from tkinter.ttk import Label, Frame, Style
+# MORE REQUIREMENTS BELOW
 
 ##################################################################### CONSTANTS
 
 # ENVIRONMENT
 DEBUG_MODE = False
-CURRENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
+CURRENT_DIRECTORY = dirname(abspath(__file__))
 FILES_ENCODING = "utf8"
 
 # COLORS
@@ -100,20 +60,62 @@ SOUND_CORRECT = "correct.wav"
 SOUND_INCORRECT = "incorrect.wav"
 SOUND_NEW_STAR = "new-star.wav"
 SOUND_BLOCKED = "blocked.wav"
+SOUND_UNLOCK = "unlock.wav"
 
 # PATHS
-PATH_CATEGORIES = os.path.join(CURRENT_DIRECTORY, "assets", "categories")
-PATH_ICONS = os.path.join(CURRENT_DIRECTORY, "assets", "icons")
-PATH_EXPLAINATIONS = os.path.join(CURRENT_DIRECTORY, "assets", "explainations")
-PATH_PROFILES = os.path.join(CURRENT_DIRECTORY, "assets", "profiles")
-PATH_SOUNDS = os.path.join(CURRENT_DIRECTORY, "assets", "sounds")
-PATH_TEMPORARY_FILES = os.path.join(CURRENT_DIRECTORY, "assets", "temp")
+PATH_CATEGORIES = join(CURRENT_DIRECTORY, "assets", "categories")
+PATH_ICONS = join(CURRENT_DIRECTORY, "assets", "icons")
+PATH_EXPLAINATIONS = join(CURRENT_DIRECTORY, "assets", "explainations")
+PATH_PROFILES = join(CURRENT_DIRECTORY, "assets", "profiles")
+PATH_SOUNDS = join(CURRENT_DIRECTORY, "assets", "sounds")
+PATH_TEMPORARY_FILES = join(CURRENT_DIRECTORY, "assets", "temp")
 
 # ICONS
 DEFAULT_ICON = "rabbit-pink"
 
-# VALUES
-VALUE_STARS = [0.6, 0.8, 0.9] # 60% of success to earn the 1st star, then 80% and 90%
+# STARS
+VALUE_STARS = [0.6, 0.8, 0.9] # 60% of success in a lesson to earn the first star, then 80% and 90%
+
+########################################################################### INIT
+
+# CHECK PYTHON VERSION
+current_python_version = version_info[:2]
+minimal_python_version = (3, 11)
+if current_python_version < minimal_python_version:
+    print(f"Warning : This program has been developed for the version {minimal_python_version} of Python.")
+    print(f"This program has been executed with the Python version {current_python_version}.")
+    print("It can be impossible to meet the requirements for this program or the program can disfunction.")
+    execute = input("Do you still want to execute this program ? (y/N) : ")
+    if execute not in ["y", "Y"] :
+        exit()
+
+# IMPORT REQUIREMENTS
+import_successful = False
+import_attemps = 0
+while not import_successful:
+    try:
+        import_attemps += 1
+        from PIL import Image, ImageTk
+        from gtts import gTTS
+        from diff_match_patch import diff_match_patch
+        from playsound import playsound
+    except:
+        if import_attemps == 1:
+            print("Error : The requirements for the exection of this program are not met.")
+            install_requirements = input("Do you want to start the installer program that downloads and installs the requirements now ? (y/N) : ")
+            if install_requirements in ["y", "Y"] :
+                try:
+                    command = [executable, join(CURRENT_DIRECTORY, "installer.py")]
+                    Popen(command).wait()
+                except Exception as e:
+                    print(f"Error : Impossible to start the installer. ({e})")
+                    exit()
+            else:
+                exit()
+        else:
+            print(f"Error : Still impossible to import the requirements.")
+            exit()
+    import_successful = True
 
 ###################################################################### WRAPPERS
 
@@ -126,7 +128,7 @@ def log_calls(method):
 
 ####################################################################### CLASSES
 
-class Bilingual(tk.Tk):
+class Bilingual(Tk):
 
     def __init__(self):
         super().__init__()
@@ -160,12 +162,12 @@ class Bilingual(tk.Tk):
                         return self.icons[name][width][height][grey]
 
         image_name = name + ".png"
-        image_path = os.path.join(PATH_ICONS, image_name)
+        image_path = join(PATH_ICONS, image_name)
 
         try:
             image = Image.open(image_path)
         except Exception as e:
-            print(f'Error: Impossible to resize the image at "{image_path}" to {width}x{height}.')
+            print(f'Error: Impossible to resize the image at "{image_path}" to {width}x{height}. ({e})')
             return None
 
         if grey:
@@ -189,7 +191,7 @@ class Bilingual(tk.Tk):
         with open(file_path, 'r', encoding=FILES_ENCODING) as file:
             try:
                 return file.read()
-            except json.JSONDecodeError:
+            except JSONDecodeError:
                 print(f"Error while reading at {file_path}.")
                 if critical:
                     exit()   
@@ -197,9 +199,9 @@ class Bilingual(tk.Tk):
     # PROFILES
     @log_calls
     def load_profile(self):
-        profile_path = os.path.join(PATH_PROFILES, self.current_profile + ".json")
+        profile_path = join(PATH_PROFILES, self.current_profile + ".json")
         profile_content = self.read_from_file(profile_path)
-        profile = json.loads(profile_content)
+        profile = loads(profile_content)
 
         self.current_icon = profile["icon"]
         self.set_window_icon(self.current_icon)
@@ -229,8 +231,8 @@ class Bilingual(tk.Tk):
         json_files = self.get_files(PATH_CATEGORIES, "json")
 
         for file_path in json_files:
-            folder_name = os.path.basename(os.path.dirname(file_path))
-            json_content = json.loads(self.read_from_file(file_path))
+            folder_name = basename(dirname(file_path))
+            json_content = loads(self.read_from_file(file_path))
             category_name = json_content["id"]
 
             if folder_name not in self.categories.keys():
@@ -243,18 +245,18 @@ class Bilingual(tk.Tk):
     def load_explainations(self):
         self.explainations = {}  # Dictionary to store the result
 
-        for subdir, _, files in os.walk(PATH_EXPLAINATIONS):
+        for subdir, _, files in walk(PATH_EXPLAINATIONS):
             json_files = [f for f in files if f.endswith('.json')]
 
             for json_file in json_files:
-                file_name = os.path.splitext(json_file)[0]  # Remove the .json extension
-                file_path = os.path.join(subdir, json_file)
+                file_name = json_file.replace(".json", "")
+                file_path = join(subdir, json_file)
 
                 with open(file_path, 'r', encoding=FILES_ENCODING) as json_file:
                     try:
-                        file_content = json.load(json_file)
+                        file_content = load(json_file)
                         self.explainations[file_name] = file_content
-                    except json.JSONDecodeError:
+                    except JSONDecodeError:
                         print(f"Error decoding JSON in {file_path}")
                         exit()                
 
@@ -265,28 +267,28 @@ class Bilingual(tk.Tk):
         with open(file_path, 'w', encoding=FILES_ENCODING) as file:
             try:
                 file.write(content)
-            except json.JSONDecodeError:
+            except JSONDecodeError:
                 print(f"Error while writing {content[:15]}... in {file_path}.")   
     
     # TEMP
     @log_calls
     def remove_temp_files(self):
         # Check if the folder exists
-        if os.path.exists(PATH_TEMPORARY_FILES) and os.path.isdir(PATH_TEMPORARY_FILES):
+        if exists(PATH_TEMPORARY_FILES) and isdir(PATH_TEMPORARY_FILES):
             # List all files and subdirectories in the folder
-            for filename in os.listdir(PATH_TEMPORARY_FILES):
-                file_path = os.path.join(PATH_TEMPORARY_FILES, filename)
+            for filename in listdir(PATH_TEMPORARY_FILES):
+                file_path = join(PATH_TEMPORARY_FILES, filename)
 
                 # Check if it's a file (not a subdirectory) and delete it
-                if os.path.isfile(file_path):
-                    os.remove(file_path)
+                if isfile(file_path):
+                    remove(file_path)
 
     # PROFILES
     @log_calls
     def save_profile(self):
-        profile_path = os.path.join(PATH_PROFILES, self.current_profile + ".json")
+        profile_path = join(PATH_PROFILES, self.current_profile + ".json")
         profile_content = self.read_from_file(profile_path)
-        profile = json.loads(profile_content)
+        profile = loads(profile_content)
 
         for category_id in self.categories.keys():
             for lesson_id in self.categories[category_id].keys():
@@ -303,7 +305,7 @@ class Bilingual(tk.Tk):
                             profile["categories"][category_id][lesson_id][question_id][self.learned_language] = {}
                         profile["categories"][category_id][lesson_id][question_id][self.learned_language][data] = value
 
-        file_content = json.dumps(profile, indent=4)
+        file_content = dumps(profile, indent=4)
         self.write_in_file(profile_path, file_content)   
 
     ################################################################### GETTERS
@@ -312,18 +314,18 @@ class Bilingual(tk.Tk):
     @log_calls
     def get_files(self, parent, extension=None):
         files_list = []
-        for subdir, _, files in os.walk(parent):
+        for subdir, _, files in walk(parent):
             if extension:
-                files_list += [os.path.join(subdir, f) for f in files if f.endswith(extension)]
+                files_list += [join(subdir, f) for f in files if f.endswith(extension)]
             else:
-                files_list += [os.path.join(subdir, f) for f in files]
+                files_list += [join(subdir, f) for f in files]
         return files_list
 
     # PROFILES
     @log_calls
     def get_all_profiles(self):
         profiles = self.get_files(PATH_PROFILES, "json")
-        return [os.path.basename(profile).replace(".json", "") for profile in profiles]
+        return [basename(profile).replace(".json", "") for profile in profiles]
 
     # LANGUAGES
     @log_calls
@@ -434,7 +436,7 @@ class Bilingual(tk.Tk):
     @log_calls
     def set_window_icon(self, icon=DEFAULT_ICON):
         file_name = icon + ".ico"
-        file_path = os.path.join(PATH_ICONS, file_name)
+        file_path = join(PATH_ICONS, file_name)
         self.iconbitmap(file_path)
 
     @log_calls
@@ -469,8 +471,8 @@ class Bilingual(tk.Tk):
                 "icon": icon,
                 "categories": {}
             }
-            file_path = os.path.join(PATH_PROFILES, name + ".json")
-            file_content = json.dumps(profile)
+            file_path = join(PATH_PROFILES, name + ".json")
+            file_content = dumps(profile)
             self.write_in_file(file_path, file_content)
             self.display_profiles()
 
@@ -518,7 +520,7 @@ class Bilingual(tk.Tk):
     # WIDGET
     @log_calls
     def tell_text(self, text, language, event=None):
-        file_path = os.path.join(PATH_TEMPORARY_FILES, "tts.mp3")
+        file_path = join(PATH_TEMPORARY_FILES, "tts.mp3")
         languages = {
             "english": {
                 "language_code": "en",
@@ -530,32 +532,32 @@ class Bilingual(tk.Tk):
             }
         }
 
-        if isinstance(text, tk.StringVar):
+        if isinstance(text, StringVar):
             text = text.get()
 
         tts = gTTS(text=text, lang=languages[language]["language_code"], tld=languages[language]["accent_code"])
 
-        if os.path.isfile(file_path):
-            os.remove(file_path)
+        if isfile(file_path):
+            remove(file_path)
 
         tts.save(file_path)
 
-        while not os.path.isfile(file_path):
+        while not isfile(file_path):
             sleep(0.1)
 
         self.playsound(file_path, False)
 
     @log_calls
     def click_button(self, action, args=[], sound=SOUND_PAGE_FORWARDS, event=None):
-        if isinstance(action, tk.Event):
+        if isinstance(action, Event):
             event = action
             action = None
 
-        elif isinstance(args, tk.Event):
+        elif isinstance(args, Event):
             event = args
             args = []
 
-        elif isinstance(sound, tk.Event):
+        elif isinstance(sound, Event):
             event = sound
             sound = SOUND_PAGE_FORWARDS
 
@@ -616,7 +618,7 @@ class Bilingual(tk.Tk):
         self.rowconfigure(1, weight=8)
         self.rowconfigure(2, weight=1)
 
-        self.window_container = ttk.Frame(self)
+        self.window_container = Frame(self)
         self.window_container.grid(column=0, row=0)
         self.window_container.columnconfigure(0, weight=1)
         self.window_container.rowconfigure(0, weight=1)
@@ -624,48 +626,48 @@ class Bilingual(tk.Tk):
     # FRAMES
     @log_calls
     def create_frame(self, parent, text):
-        new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
-        new_frame.pack(expand=True, fill=tk.X, pady=10)
+        new_frame = Frame(parent, style="CustomDarkFrame.TFrame")
+        new_frame.pack(expand=True, fill=X, pady=10)
 
-        new_label = ttk.Label(new_frame, text=text, style="Default.TLabel")
-        new_label.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
+        new_label = Label(new_frame, text=text, style="Default.TLabel")
+        new_label.pack(side=LEFT, expand=True, fill=X, padx=5, pady=5)
     
     @log_calls
     def create_stat_frame(self, parent, text, stat, alone_in_row=True):
-        side = tk.TOP if alone_in_row else tk.LEFT
-        frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
-        frame.pack(expand=True, fill=tk.BOTH, padx=5, pady=10, side=side)
+        side = TOP if alone_in_row else LEFT
+        frame = Frame(parent, style="CustomDarkFrame.TFrame")
+        frame.pack(expand=True, fill=BOTH, padx=5, pady=10, side=side)
 
-        stat_label = ttk.Label(frame, text=stat, style="Big.Default.TLabel", anchor="center")
-        stat_label.pack(expand=True, fill=tk.Y, padx=5, pady=5)
+        stat_label = Label(frame, text=stat, style="Big.Default.TLabel", anchor="center")
+        stat_label.pack(expand=True, fill=Y, padx=5, pady=5)
 
-        text_label = ttk.Label(frame, text=text, wraplength=650, style="Small.Default.TLabel", anchor="center")
-        text_label.pack(expand=True, fill=tk.X, padx=5, pady=5)
+        text_label = Label(frame, text=text, wraplength=650, style="Small.Default.TLabel", anchor="center")
+        text_label.pack(expand=True, fill=X, padx=5, pady=5)
 
     @log_calls
     def create_scrollable_frame(self, parent, text):
-        frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
+        frame = Frame(parent, style="CustomDarkFrame.TFrame")
         frame.pack(pady=10)
 
-        scrolledtext = ScrolledText(frame, width=45, height=10, background=COLOR_DARK_PINK, foreground=COLOR_WHITE, font=('Calibri', 12), relief=tk.FLAT)
-        scrolledtext.pack(fill=tk.BOTH, expand=True)
-        scrolledtext.insert(tk.INSERT, text)
+        scrolledtext = ScrolledText(frame, width=45, height=10, background=COLOR_DARK_PINK, foreground=COLOR_WHITE, font=('Calibri', 12), relief=FLAT)
+        scrolledtext.pack(fill=BOTH, expand=True)
+        scrolledtext.insert(INSERT, text)
         scrolledtext.configure(state="disabled")
         scrolledtext.vbar.configure(width=0)
 
     @log_calls
     def create_speakable_frame(self, parent, text, language, animate=True):
-        new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
-        new_frame.pack(expand=True, fill=tk.X, pady=10)
+        new_frame = Frame(parent, style="CustomDarkFrame.TFrame")
+        new_frame.pack(expand=True, fill=X, pady=10)
 
-        new_label = ttk.Label(new_frame, text=text, style="Default.TLabel")
-        new_label.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
+        new_label = Label(new_frame, text=text, style="Default.TLabel")
+        new_label.pack(side=LEFT, expand=True, fill=X, padx=5, pady=5)
 
         if language in ["english", "french"]:
-            tts_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
-            tts_frame.pack(side=tk.LEFT)
+            tts_frame = Frame(new_frame, style="CustomDarkFrame.TFrame")
+            tts_frame.pack(side=LEFT)
 
-            tts = ttk.Label(tts_frame, image=self.load_image("speak", 25, 25), style="Default.TLabel")
+            tts = Label(tts_frame, image=self.load_image("speak", 25, 25), style="Default.TLabel")
             tts.pack(padx=10, pady=5)
 
             self.bind_widget(tts, partial(self.click_button, self.tell_text, [text, language], None))
@@ -676,18 +678,18 @@ class Bilingual(tk.Tk):
 
     @log_calls
     def create_image_frame(self, parent, image, text, action, arguments, sound=None, animate=True):
-        new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
-        new_frame.pack(pady=5, expand=True, fill=tk.X)
+        new_frame = Frame(parent, style="CustomDarkFrame.TFrame")
+        new_frame.pack(pady=5, expand=True, fill=X)
 
-        title_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
-        title_frame.pack(expand=True, fill=tk.BOTH)
+        title_frame = Frame(new_frame, style="CustomDarkFrame.TFrame")
+        title_frame.pack(expand=True, fill=BOTH)
 
-        title_frame_picture = ttk.Label(title_frame, image=self.load_image(image, 35, 35), style="Default.TLabel")
-        title_frame_picture.pack(padx=15, pady=5, side=tk.LEFT)
+        title_frame_picture = Label(title_frame, image=self.load_image(image, 35, 35), style="Default.TLabel")
+        title_frame_picture.pack(padx=15, pady=5, side=LEFT)
 
         title_frame_text_text = text.replace("-", " ").title()
-        title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style="Default.TLabel")
-        title_frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
+        title_frame_text = Label(title_frame, text=title_frame_text_text, style="Default.TLabel")
+        title_frame_text.pack(ipadx=15, ipady=5, side=LEFT, expand=True, fill=X)
 
         self.bind_widget(new_frame, partial(self.click_button, action, arguments))
 
@@ -701,41 +703,41 @@ class Bilingual(tk.Tk):
         frame_style = "Disabled.CustomDarkFrame.TFrame" if locked else "CustomDarkFrame.TFrame"
         label_style = "Disabled.Default.TLabel" if locked else "Default.TLabel"
 
-        new_frame = ttk.Frame(parent, style=frame_style)
-        new_frame.pack(pady=5, expand=True, fill=tk.X)
+        new_frame = Frame(parent, style=frame_style)
+        new_frame.pack(pady=5, expand=True, fill=X)
 
-        title_frame = ttk.Frame(new_frame, style=frame_style)
-        title_frame.pack(expand=True, fill=tk.BOTH)
+        title_frame = Frame(new_frame, style=frame_style)
+        title_frame.pack(expand=True, fill=BOTH)
 
         image = self.load_image(image, 35, 35, grey=locked)
-        title_frame_picture = ttk.Label(title_frame, image=image, style=label_style)
-        title_frame_picture.pack(padx=15, pady=5, side=tk.LEFT)
+        title_frame_picture = Label(title_frame, image=image, style=label_style)
+        title_frame_picture.pack(padx=15, pady=5, side=LEFT)
 
         title_frame_text_text = text.replace("-", " ").title()
-        title_frame_text = ttk.Label(title_frame, text=title_frame_text_text, style=label_style)
-        title_frame_text.pack(ipadx=15, ipady=5, side=tk.LEFT, expand=True, fill=tk.X)
+        title_frame_text = Label(title_frame, text=title_frame_text_text, style=label_style)
+        title_frame_text.pack(ipadx=15, ipady=5, side=LEFT, expand=True, fill=X)
 
         if locked:
             image = self.load_image("lock", 25, 25, True)
         else:
             image = self.load_image(f'{stars}-star', 53, 25)            
 
-        stars_image = ttk.Label(title_frame, image=image, style=label_style)
-        stars_image.pack(padx=15, pady=5, side=tk.LEFT)
+        stars_image = Label(title_frame, image=image, style=label_style)
+        stars_image.pack(padx=15, pady=5, side=LEFT)
     
         frame_style = "Disabled.CustomDarkFrame.TFrame" if locked else "CustomMidFrame.TFrame"
-        progressbar_frame = ttk.Frame(new_frame, style=frame_style)
-        progressbar_frame.pack(expand=True, fill=tk.X)
+        progressbar_frame = Frame(new_frame, style=frame_style)
+        progressbar_frame.pack(expand=True, fill=X)
 
         self.update()
 
         progressbar_frame_left_width = new_frame.winfo_width() * progress
-        progressbar_frame_left = ttk.Frame(progressbar_frame, height=5, width=progressbar_frame_left_width, style=frame_style)
-        progressbar_frame_left.pack(side=tk.LEFT)
+        progressbar_frame_left = Frame(progressbar_frame, height=5, width=progressbar_frame_left_width, style=frame_style)
+        progressbar_frame_left.pack(side=LEFT)
         
         frame_style = "Disabled.CustomDarkFrame.TFrame" if locked else "CustomLightFrame.TFrame"
-        progressbar_frame_right = ttk.Frame(progressbar_frame, height=5, style=frame_style)
-        progressbar_frame_right.pack(expand=True, fill=tk.X, side=tk.LEFT)
+        progressbar_frame_right = Frame(progressbar_frame, height=5, style=frame_style)
+        progressbar_frame_right.pack(expand=True, fill=X, side=LEFT)
 
         if action and not locked:
             self.bind_widget(new_frame, partial(self.click_button, action, arguments))
@@ -750,26 +752,26 @@ class Bilingual(tk.Tk):
     # BUTTONS
     @log_calls
     def create_button(self, parent, image, text, action, arguments=[], sound=None, image_first=True, alone_in_row=True, animate=True):
-        side = tk.TOP if alone_in_row else tk.LEFT
-        new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
-        new_frame.pack(padx=10, pady=10, expand=True, fill=tk.X, side=side)
+        side = TOP if alone_in_row else LEFT
+        new_frame = Frame(parent, style="CustomDarkFrame.TFrame")
+        new_frame.pack(padx=10, pady=10, expand=True, fill=X, side=side)
 
-        side = tk.LEFT if image_first else tk.RIGHT
+        side = LEFT if image_first else RIGHT
         
         if not text:
-            anchor = tk.CENTER
+            anchor = CENTER
         elif image_first:
-            anchor = tk.E 
+            anchor = E 
         else:
-            anchor = tk.W
+            anchor = W
 
-        new_image = ttk.Label(new_frame, image=self.load_image(image, 25, 25), anchor=anchor, style="Default.TLabel")
-        new_image.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
+        new_image = Label(new_frame, image=self.load_image(image, 25, 25), anchor=anchor, style="Default.TLabel")
+        new_image.pack(side=side, padx=5, expand=True, fill=BOTH)
 
         if text:
-            anchor = tk.W if image_first else tk.E
-            new_label = ttk.Label(new_frame, text=text, anchor=anchor, style="Default.TLabel")
-            new_label.pack(side=side, padx=5, expand=True, fill=tk.BOTH)
+            anchor = W if image_first else E
+            new_label = Label(new_frame, text=text, anchor=anchor, style="Default.TLabel")
+            new_label.pack(side=side, padx=5, expand=True, fill=BOTH)
         
         self.bind_widget(new_frame, partial(self.click_button, action, arguments, sound))
 
@@ -780,13 +782,13 @@ class Bilingual(tk.Tk):
     # ENTRIES
     @log_calls
     def create_entry(self, parent):
-        new_frame = ttk.Frame(parent, style="CustomDarkFrame.TFrame")
-        new_frame.pack(expand=True, fill=tk.X, pady=10)
+        new_frame = Frame(parent, style="CustomDarkFrame.TFrame")
+        new_frame.pack(expand=True, fill=X, pady=10)
         
-        new_Stringvar = tk.StringVar()
+        new_Stringvar = StringVar()
         # The Entry widget from ttk does not support the "background" argument
-        new_entry = tk.Entry(new_frame, width=45, textvariable=new_Stringvar, background=COLOR_DARK_PINK, foreground=COLOR_WHITE, relief="flat", insertbackground=COLOR_WHITE, font=('Calibri', 12))
-        new_entry.pack(side=tk.LEFT, expand=True, fill=tk.BOTH, padx=5, pady=5)
+        new_entry = Entry(new_frame, width=45, textvariable=new_Stringvar, background=COLOR_DARK_PINK, foreground=COLOR_WHITE, relief="flat", insertbackground=COLOR_WHITE, font=('Calibri', 12))
+        new_entry.pack(side=LEFT, expand=True, fill=BOTH, padx=5, pady=5)
         new_entry.focus()
 
         return new_frame, new_Stringvar
@@ -797,10 +799,10 @@ class Bilingual(tk.Tk):
         new_frame, new_Stringvar = self.create_entry(parent)
 
         if language in ["english", "french"]:
-            tts_frame = ttk.Frame(new_frame, style="CustomDarkFrame.TFrame")
-            tts_frame.pack(side=tk.LEFT)
+            tts_frame = Frame(new_frame, style="CustomDarkFrame.TFrame")
+            tts_frame.pack(side=LEFT)
 
-            tts = ttk.Label(tts_frame, image=self.load_image("speak", 25, 25), style="Default.TLabel")
+            tts = Label(tts_frame, image=self.load_image("speak", 25, 25), style="Default.TLabel")
             tts.pack(padx=10, pady=5)
 
             self.bind_widget(tts, partial(self.click_button, self.tell_text, [new_Stringvar, language], None))
@@ -828,7 +830,7 @@ class Bilingual(tk.Tk):
 
         # Iterate through profiles
         for profile in profiles[start_index:end_index]:
-            icon = json.loads(self.read_from_file(os.path.join(PATH_PROFILES, profile + ".json")))["icon"]
+            icon = loads(self.read_from_file(join(PATH_PROFILES, profile + ".json")))["icon"]
             self.create_image_frame(self.window_container, icon, profile, self.select_profile, profile)
 
         # NEW PROFILE BUTTON
@@ -854,7 +856,7 @@ class Bilingual(tk.Tk):
         images = self.get_files(PATH_ICONS, "png")
         bunnies = []
         for image in images:
-            image = os.path.basename(image)
+            image = basename(image)
             image = image.replace(".png", "")
             if image[:7] == "rabbit-":
                 bunnies.append(image)
@@ -877,17 +879,17 @@ class Bilingual(tk.Tk):
                 if spoken_language == learned_language:
                     continue
 
-                frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
-                frame.pack(pady=5, expand=True, fill=tk.X)
+                frame = Frame(self.window_container, style="CustomDarkFrame.TFrame")
+                frame.pack(pady=5, expand=True, fill=X)
 
-                spoken_language_picture = ttk.Label(frame, image=self.load_image(spoken_language, 35, 35), style="Default.TLabel", anchor=tk.CENTER)
-                spoken_language_picture.pack(padx=10, pady=5, side=tk.LEFT, expand=True, fill=tk.X)
+                spoken_language_picture = Label(frame, image=self.load_image(spoken_language, 35, 35), style="Default.TLabel", anchor=CENTER)
+                spoken_language_picture.pack(padx=10, pady=5, side=LEFT, expand=True, fill=X)
 
-                arrow_picture = ttk.Label(frame, image=self.load_image("next", 35, 35), style="Default.TLabel", anchor=tk.CENTER)
-                arrow_picture.pack(padx=10, pady=5, side=tk.LEFT)
+                arrow_picture = Label(frame, image=self.load_image("next", 35, 35), style="Default.TLabel", anchor=CENTER)
+                arrow_picture.pack(padx=10, pady=5, side=LEFT)
 
-                learned_language_picture = ttk.Label(frame, image=self.load_image(learned_language, 35, 35), style="Default.TLabel", anchor=tk.CENTER)
-                learned_language_picture.pack(padx=10, pady=5, side=tk.LEFT, expand=True, fill=tk.X)
+                learned_language_picture = Label(frame, image=self.load_image(learned_language, 35, 35), style="Default.TLabel", anchor=CENTER)
+                learned_language_picture.pack(padx=10, pady=5, side=LEFT, expand=True, fill=X)
 
                 self.bind_widget(frame, partial(self.click_button, self.validate_languages, [spoken_language, learned_language]))
                 self.bind_widget(frame, partial(self.enter_widget, frame), EVENT_ENTER_WIDGET, recursive=False)
@@ -901,8 +903,8 @@ class Bilingual(tk.Tk):
     def display_new_star(self, parent, max_height, height=1):
         for child in parent.winfo_children()[1:]:
             child.destroy()
-        ttk.Label(parent, image=self.load_image(f'{self.get_stars()}-star', int(height * 2.09), height), anchor="center").pack(side="left", expand=True, fill=tk.X)
-        ttk.Label(parent, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=tk.X)
+        Label(parent, image=self.load_image(f'{self.get_stars()}-star', int(height * 2.09), height), anchor="center").pack(side="left", expand=True, fill=X)
+        Label(parent, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=X)
         if height < max_height:
             self.after(15, partial(self.display_new_star, parent, max_height, height+7))
     
@@ -997,22 +999,22 @@ class Bilingual(tk.Tk):
         self.window_container.grid(column=1, row=1)
 
         # STARS
-        stars_frame = ttk.Frame(self.window_container)
-        stars_frame.pack(expand=True, fill=tk.BOTH, pady=10) 
+        stars_frame = Frame(self.window_container)
+        stars_frame.pack(expand=True, fill=BOTH, pady=10) 
 
-        ttk.Label(stars_frame, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=tk.X)
+        Label(stars_frame, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=X)
         
         if self.get_stars() > self.current_lesson_stars:
             self.current_lesson_stars = self.get_stars()
             self.after(350, partial(self.playsound, SOUND_NEW_STAR))
             self.after(250, partial(self.display_new_star, stars_frame, 50))
         else:
-            ttk.Label(stars_frame, image=self.load_image(f'{self.current_lesson_stars}-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=tk.X)
-            ttk.Label(stars_frame, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=tk.X)
+            Label(stars_frame, image=self.load_image(f'{self.current_lesson_stars}-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=X)
+            Label(stars_frame, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=X)
 
         # STATS
-        stat_frame = ttk.Frame(self.window_container)
-        stat_frame.pack(expand=True, fill=tk.X, pady=10) 
+        stat_frame = Frame(self.window_container)
+        stat_frame.pack(expand=True, fill=X, pady=10) 
 
         lesson_overview = f'{ceil(self.get_lesson_overview() * 100)}%'
         self.create_stat_frame(stat_frame, text="Lesson Overview", stat=lesson_overview, alone_in_row=False)
@@ -1057,10 +1059,10 @@ class Bilingual(tk.Tk):
         self.create_speakable_frame(self.window_container, self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.spoken_language]["sentence"].capitalize(), self.spoken_language)
 
         # RESONSE
-        new_frame = ttk.Frame(self.window_container, style="CustomDarkFrame.TFrame")
-        new_frame.pack(expand=True, fill=tk.X, pady=10)
+        new_frame = Frame(self.window_container, style="CustomDarkFrame.TFrame")
+        new_frame.pack(expand=True, fill=X, pady=10)
 
-        new_text = tk.Text(new_frame, width=40, height=1, relief="flat", background=COLOR_DARK_PINK, foreground=COLOR_WHITE, font=('Calibri', 12))
+        new_text = Text(new_frame, width=40, height=1, relief="flat", background=COLOR_DARK_PINK, foreground=COLOR_WHITE, font=('Calibri', 12))
         new_text.insert("1.0", response.capitalize())
         self.color_differences(new_text, self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.learned_language]["sentence"].capitalize(), response.capitalize())
 
@@ -1087,7 +1089,7 @@ class Bilingual(tk.Tk):
     
     @log_calls
     def set_styles(self):
-        style = ttk.Style(self) 
+        style = Style(self) 
         style.configure(".", background=COLOR_LIGHT_GREY, font=('Calibri', 12))
 
         style.configure("CustomLightFrame.TFrame", background=COLOR_LIGHT_PINK)
@@ -1107,9 +1109,9 @@ class Bilingual(tk.Tk):
 
     @log_calls
     def playsound(self, sound, wait=False):
-        if not os.path.isfile(sound):
-            sound = os.path.join(PATH_SOUNDS, sound)
-        if os.path.isfile(sound):
+        if not isfile(sound):
+            sound = join(PATH_SOUNDS, sound)
+        if isfile(sound):
             Thread(target=playsound, args=(sound, wait), daemon=True).start()
     
     # WIDGETS
@@ -1172,13 +1174,13 @@ class Bilingual(tk.Tk):
     # QUESTIONS
     @log_calls
     def is_remembered(self, question_id):
-        return random.random() < self.get_question_success_rate(question_id=question_id) * 0.95
+        return random() < self.get_question_success_rate(question_id=question_id) * 0.95
     
     @log_calls
     def choose_random_question(self):
         deep_copy = deepcopy(self.categories)
         questions_id = list(deep_copy[self.current_category_id][self.current_lesson_id]["questions"].keys())
-        random.shuffle(questions_id)
+        shuffle(questions_id)
         
         for question_id in questions_id:
             if (self.current_question_id) and (self.current_question_id == question_id):
@@ -1188,7 +1190,7 @@ class Bilingual(tk.Tk):
             self.current_question_id = question_id
             return
 
-        self.current_question_id = random.choice(deep_copy[self.current_category_id][self.current_lesson_id]["questions"].keys())
+        self.current_question_id = choice(deep_copy[self.current_category_id][self.current_lesson_id]["questions"].keys())
     
     @log_calls
     def increase_question_success(self, question_id=None):
@@ -1235,11 +1237,10 @@ class Bilingual(tk.Tk):
                 text_widget.tag_add("green", f"1.{char_index}", f"1.{char_index + len(difference[1])}")
             char_index += len(difference[1])
 
-        text_widget.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5, pady=5)
+        text_widget.pack(side=LEFT, expand=True, fill=X, padx=5, pady=5)
         text_widget.configure(state="disabled")
 
 ##################################################################### MAIN CODE
 
 if __name__ == "__main__":
-    app = Bilingual()
-    app.mainloop()
+    Bilingual().mainloop()
