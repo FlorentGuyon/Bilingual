@@ -4,308 +4,212 @@
     "icon": "arts",   
     "prerequisites": {
         "jobs": {
-            "basic-jobs": 2
+            "basic-jobs": 0
         }
     },
     "questions": {
         "0": {
             "english": {
-                "sentence": "The painter sells his canvas",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The painter sells his canvas"
             },
             "french": {
-                "sentence": "Le peintre vend sa toile",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le peintre vend sa toile"
             }
         },
         "1": {
             "english": {
                 "sentence": "The painter sells her canvas",
-                "hints": "The painter is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The painter is female"
             },
             "french": {
-                "sentence": "La peintre vend sa toile",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La peintre vend sa toile"
             }
         },
         "2": {
             "english": {
-                "sentence": "The painters sell their canvases",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The painters sell their canvases"
             },
             "french": {
-                "sentence": "Les peintres vendent leur toiles",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les peintres vendent leur toiles"
             }
         },
         "3": {
             "english": {
                 "sentence": "The painters sell their canvases",
-                "hints": "The painters are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The painters are female"
             },
             "french": {
-                "sentence": "Les peintres vendent leur toiles",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les peintres vendent leur toiles"
             }
         },
         "4": {
             "english": {
-                "sentence": "The musician plays the guitar",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The musician plays the guitar"
             },
             "french": {
-                "sentence": "Le musicien joue de la guitare",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le musicien joue de la guitare"
             }
         },
         "5": {
             "english": {
                 "sentence": "The musician plays the guitar",
-                "hints": "The musician is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The musician is female"
             },
             "french": {
-                "sentence": "La musicienne joue de la guitare",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La musicienne joue de la guitare"
             }
         },
         "6": {
             "english": {
-                "sentence": "The musicians play their instruments",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The musicians play their instruments"
             },
             "french": {
-                "sentence": "Les musiciens jouent de leurs instruments",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les musiciens jouent de leurs instruments"
             }
         },
         "7": {
             "english": {
                 "sentence": "The musicians play their instruments",
-                "hints": "The musicians are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The musicians are female"
             },
             "french": {
-                "sentence": "Les musiciennes jouent de leurs instruments",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les musiciennes jouent de leurs instruments"
             }
         },
         "8": {
             "english": {
-                "sentence": "The carver crafts a sculpture",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The carver crafts a sculpture"
             },
             "french": {
-                "sentence": "Le sculpteur cr\u00e9e une sculpture",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le sculpteur cr\u00e9e une sculpture"
             }
         },
         "9": {
             "english": {
                 "sentence": "The carver crafts a sculpture",
-                "hints": "The carver is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The carver is female"
             },
             "french": {
-                "sentence": "La sculptrice cr\u00e9e une sculpture",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La sculptrice cr\u00e9e une sculpture"
             }
         },
         "10": {
             "english": {
-                "sentence": "The carvers carve into wood",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The carvers carve into wood"
             },
             "french": {
-                "sentence": "Les sculpteurs gravent dans du bois",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les sculpteurs gravent dans du bois"
             }
         },
         "11": {
             "english": {
                 "sentence": "The carvers carve into wood",
-                "hints": "The carvers are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The carvers are female"
             },
             "french": {
-                "sentence": "Les sculptrices gravent dans du bois",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les sculptrices gravent dans du bois"
             }
         },
         "12": {
             "english": {
-                "sentence": "The sewer is sewing a new dress",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The sewer is sewing a new dress"
             },
             "french": {
-                "sentence": "Le couturier coud une nouvelle robe",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le couturier coud une nouvelle robe"
             }
         },
         "13": {
             "english": {
                 "sentence": "The sewer is sewing a new dress",
-                "hints": "The sewer is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The sewer is female"
             },
             "french": {
-                "sentence": "La couturi\u00e8re coud une nouvelle robe",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La couturi\u00e8re coud une nouvelle robe"
             }
         },
         "14": {
             "english": {
-                "sentence": "The sewers are creating unique designs",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The sewers are creating unique designs"
             },
             "french": {
-                "sentence": "Les couturiers cr\u00e9ent des designs uniques",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les couturiers cr\u00e9ent des designs uniques"
             }
         },
         "15": {
             "english": {
                 "sentence": "The sewers are creating unique designs",
-                "hints": "The sewers are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The sewers are female"
             },
             "french": {
-                "sentence": "Les couturi\u00e8res cr\u00e9ent des designs uniques",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les couturi\u00e8res cr\u00e9ent des designs uniques"
             }
         },
         "16": {
             "english": {
-                "sentence": "The baker makes fresh bread",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The baker makes fresh bread"
             },
             "french": {
-                "sentence": "Le boulanger fait du pain frais",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le boulanger fait du pain frais"
             }
         },
         "17": {
             "english": {
                 "sentence": "The baker makes fresh bread",
-                "hints": "The baker is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The baker is female"
             },
             "french": {
-                "sentence": "La boulang\u00e8re fait du pain frais",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La boulang\u00e8re fait du pain frais"
             }
         },
         "18": {
             "english": {
-                "sentence": "The bakers are kneading the dough",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The bakers are kneading the dough"
             },
             "french": {
-                "sentence": "Les boulangers p\u00e9trissent la p\u00e2te",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les boulangers p\u00e9trissent la p\u00e2te"
             }
         },
         "19": {
             "english": {
                 "sentence": "The bakers are kneading the dough",
-                "hints": "The bakers are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The bakers are female"
             },
             "french": {
-                "sentence": "Les boulang\u00e8res p\u00e9trissent la p\u00e2te",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les boulang\u00e8res p\u00e9trissent la p\u00e2te"
             }
         },
         "20": {
             "english": {
-                "sentence": "The writer is working on a new novel",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The writer is working on a new novel"
             },
             "french": {
-                "sentence": "L'\u00e9crivain travaille sur un nouveau roman",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'\u00e9crivain travaille sur un nouveau roman"
             }
         },
         "21": {
             "english": {
                 "sentence": "The writer is working on a new book",
-                "hints": "The writer is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The writer is female"
             },
             "french": {
-                "sentence": "L'\u00e9crivaine travaille sur un nouveau livre",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'\u00e9crivaine travaille sur un nouveau livre"
             }
         },
         "22": {
             "english": {
-                "sentence": "The writers are collaborating on a new book",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The writers are collaborating on a new book"
             },
             "french": {
-                "sentence": "Les \u00e9crivains collaborent sur un nouveau livre",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les \u00e9crivains collaborent sur un nouveau livre"
             }
         },
         "23": {
             "english": {
                 "sentence": "The writers are collaborating on a new book",
-                "hints": "The writers are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The writers are female"
             },
             "french": {
-                "sentence": "Les \u00e9crivaines collaborent sur un nouveau livre",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les \u00e9crivaines collaborent sur un nouveau livre"
             }
         }
     }

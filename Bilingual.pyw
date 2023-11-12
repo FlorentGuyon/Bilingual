@@ -21,6 +21,10 @@ DEBUG_MODE = False
 CURRENT_DIRECTORY = dirname(abspath(__file__))
 FILES_ENCODING = "utf8"
 
+# LANGUAGES
+LEARNED_LANGUAGE = "french"
+SPOKEN_LANGUAGE = "english"
+
 # COLORS
 COLOR_WHITE = "#FFFFFF"
 COLOR_LIGHT_GREY = "#eae5e5"
@@ -128,27 +132,558 @@ def log_calls(method):
 
 ####################################################################### CLASSES
 
-class Bilingual(Tk):
+class Language:
+    def __init__(self, name=None, sentence=None, hints=None, success=0, tries=0):
+        self._name = name
+        self._sentence = sentence
+        self._hints = hints
+        self._success = success
+        self._tries = tries
 
+    ################################################################### GETTERS
+    @property
+    def name(self):
+        return self._name
+
+    # Getter for sentence
+    @property
+    def sentence(self):
+        return self._sentence
+
+    # Getter for hints
+    @property
+    def hints(self):
+        return self._hints
+
+    # Getter for success
+    @property
+    def success(self):
+        return self._success
+
+    # Getter for tries
+    @property
+    def tries(self):
+        return self._tries
+
+    ################################################################### SETTERS
+
+    # Setter for name
+    @name.setter
+    def name(self, name):
+        self._name = name
+
+    # Setter for sentence
+    @sentence.setter
+    def sentence(self, sentence):
+        self._sentence = sentence
+
+    # Setter for hints
+    @hints.setter
+    def hints(self, hints):
+        self._hints = hints
+
+    # Setter for success
+    @success.setter
+    def success(self, success):
+        self._success = success
+
+    # Setter for tries
+    @tries.setter
+    def tries(self, tries):
+        self._tries = tries
+
+
+class Question:
+    def __init__(self, uid=None, languages=None):
+        self._uid = uid
+        self._languages = languages if languages else {}
+        self._sentence = None
+        self._answer = None
+        self._hints = None
+        self._success = None
+        self._tries = None
+
+    ################################################################### GETTERS
+
+    @property
+    def uid(self):
+        return self._uid
+
+    @property
+    def languages(self):
+        return self._languages
+
+    @property
+    def sentence(self):
+        return self.languages[SPOKEN_LANGUAGE].sentence
+
+    @property
+    def answer(self):
+        return self.languages[LEARNED_LANGUAGE].sentence
+
+    @property
+    def hints(self):
+        return self.languages[SPOKEN_LANGUAGE].hints
+
+    @property
+    def success(self):
+        return self.languages[LEARNED_LANGUAGE].success
+
+    @property
+    def tries(self):
+        return self.languages[LEARNED_LANGUAGE].tries
+
+
+    ################################################################### SETTERS
+
+    @uid.setter
+    def uid(self, uid):
+        self._uid = uid
+
+    @languages.setter
+    def languages(self, languages):
+        self._languages = languages
+
+    @tries.setter
+    def tries(self, tries):
+        self.languages[LEARNED_LANGUAGE].tries = tries
+
+    @success.setter
+    def success(self, success):
+        self.languages[LEARNED_LANGUAGE].success = success
+
+    ################################################################### METHODS
+
+    def add_language(self, language):
+        self._languages[language.name] = language
+
+    def propose(self, response):
+        self.tries += 1
+        correct = (response.lower().strip() == self.answer.lower().strip())
+        if correct:
+            self.success = ((self.success * (self.tries -1)) +1) / self.tries
+        else:
+            self.success = (self.success * (self.tries -1)) / self.tries
+        return correct
+
+
+class Lesson:
+    def __init__(self, uid=None, name=None, icon=None, prerequisites=None, questions=None, is_locked=None):
+        self._uid = uid
+        self._name = name
+        self._icon = icon
+        self._prerequisites = prerequisites
+        self._questions = questions if questions else {}
+        self._is_locked = is_locked
+        self._question = None
+        self._progress = None
+        self._success = None
+        self._stars = None
+        self._languages = None
+
+    ################################################################### GETTERS
+
+    @property
+    def uid(self):
+        return self._uid
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def icon(self):
+        return self._icon
+
+    @property
+    def prerequisites(self):
+        return self._prerequisites
+
+    @property
+    def questions(self):
+        return self._questions
+
+    @property
+    def question(self):
+        return self._question
+
+    @property
+    def is_locked(self):
+        return self._is_locked
+
+    @property
+    def progress(self):
+        return sum([1 for question in self.questions.values() if question.tries > 0]) / len(self.questions.keys())
+
+    @property
+    def success(self):
+        return sum([question.success for question in self.questions.values()]) / len(self.questions.keys())
+
+    @property
+    def languages(self):
+        languages = set()
+        for question in self.questions.values():
+            for language in question.languages.keys():
+                languages.add(language)
+        return list(languages)
+
+    @property
+    def stars(self):
+        return len([i for i, value in enumerate(VALUE_STARS) if value <= self.success])
+
+    ################################################################### SETTERS
+
+    @uid.setter
+    def uid(self, uid):
+        self._uid = uid
+
+    @name.setter
+    def name(self, name):
+        self._name = name
+
+    @icon.setter
+    def icon(self, icon):
+        self._icon = icon
+
+    @prerequisites.setter
+    def prerequisites(self, prerequisites):
+        self._prerequisites = prerequisites
+
+    @questions.setter
+    def questions(self, questions):
+        self._questions = questions
+
+    @question.setter
+    def question(self, question):
+        self._question = question
+
+    @is_locked.setter
+    def is_locked(self, is_locked):
+        self._is_locked = is_locked
+
+    @stars.setter
+    def stars(self, stars):
+        self._stars = stars
+
+    ################################################################### METHODS
+
+    def add_question(self, question):
+        self._questions[question.uid] = question
+
+    def next_question(self):
+        deep_copy = deepcopy(self.questions)
+        questions_id = list(deep_copy.keys())
+        shuffle(questions_id)
+        for question_id in questions_id:
+            if (self.question) and (self.question.uid == question_id):
+                continue
+            if random() < self.questions[question_id].success * 0.95:
+                continue
+            self.question = self.questions[question_id]
+            return self.question
+        self.question = choice(list(self.questions.values()))
+        return self.question
+
+
+
+class Category:
+
+    def __init__(self, uid=None, name=None, icon=None, lessons=None, lesson=None):
+        self._uid = uid
+        self._name = name
+        self._icon = icon
+        self._lessons = lessons if lessons else {}
+        self._lesson = None
+        self._is_locked = None
+        self._progress = None
+        self._success = None
+        self._stars = None
+        self._languages = None
+
+    ################################################################### GETTERS
+
+    @property
+    def uid(self):
+        return self._uid
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def icon(self):
+        return self._icon
+
+    @property
+    def lessons(self):
+        return self._lessons
+
+    @property
+    def lesson(self):
+        return self._lesson
+
+    @property
+    def is_locked(self):
+        for lesson in self.lessons.values():
+            if not lesson.is_locked:
+                return False
+        return True
+
+    @property
+    def progress(self):
+        return sum([lesson.progress for lesson in self.lessons.values()]) / len(self.lessons.keys())
+
+    @property
+    def success(self):
+        return sum([lesson.success for lesson in self.lessons.values()]) / len(self.lessons.keys())
+
+    @property
+    def stars(self):
+        return len([i for i, value in enumerate(VALUE_STARS) if value <= self.success])
+
+    @property
+    def languages(self):
+        languages = set()
+        for lesson in self.lessons.values():
+            for language in lesson.languages:
+                languages.add(language)
+        return list(languages)
+
+
+    ################################################################### SETTERS
+
+    @uid.setter
+    def uid(self, uid):
+        self._uid = uid
+
+    @name.setter
+    def name(self, name):
+        self._name = name
+
+    @icon.setter
+    def icon(self, icon):
+        self._icon = icon
+
+    @lessons.setter
+    def lessons(self, lessons):
+        self._lessons = lessons
+
+    @lesson.setter
+    def lesson(self, lesson):
+        self._lesson = lesson
+
+    @is_locked.setter
+    def is_locked(self, is_locked):
+        self._is_locked = is_locked
+
+    ################################################################### METHODS
+
+    def add_lesson(self, lesson):
+        self.lessons[lesson.uid] = lesson
+
+    def next_question(self):
+        return self.lesson.next_question()
+
+
+class Profile:
+
+    def __init__(self, uid=None, name=None, icon=None):
+        self._uid = uid
+        self._name = name
+        self._icon = icon
+
+    ################################################################### GETTERS
+
+    @property
+    def uid(self):
+        return self._uid
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def icon(self):
+        return self._icon
+
+    ################################################################### SETTERS
+
+    @uid.setter
+    def uid(self, uid):
+        self._uid = uid
+
+    @name.setter
+    def name(self, new_name):
+        self._name = new_name
+
+    @icon.setter
+    def icon(self, new_icon):
+        self._icon = new_icon
+
+
+class Bilingual(Tk):
     def __init__(self):
         super().__init__()
         self.protocol("WM_DELETE_WINDOW", self.close_app)
-        self.debug_mode = True
-        self.icons = {}
-        self.categories = None
-        self.explainations = None
-        self.spoken_language = None
-        self.learned_language = None
-        self.current_profile = None
-        self.current_icon = None
-        self.current_category_id = None
-        self.current_lesson_id = None
-        self.current_question_id = None
-        self.current_question = None
+        self._icons = {}
+        self._icon = None
+        self._profiles = {}
+        self._profile = None
+        self._categories = {}
+        self._category = None
+        self._lessons = None
+        self._lesson = None
+        self._languages = None
+        self._questions = None
+        self._question = None
+        self._last_lesson_stars = None
+        self._explainations = None
+        self.load_profiles()
         self.load_categories()
         self.set_styles()
         self.create_window()
         self.display_profiles()
+
+    ################################################################### GETTERS
+    
+    # FILES
+    @log_calls
+    def get_files(self, parent, extension=None):
+        files_list = []
+        for subdir, _, files in walk(parent):
+            if extension:
+                files_list += [join(subdir, f) for f in files if f.endswith(extension)]
+            else:
+                files_list += [join(subdir, f) for f in files]
+        return files_list
+
+    # ICONS
+    @property
+    def icons(self):
+        return self._icons
+
+    @property
+    def icon(self):
+        return self._icon
+
+    # PROFILES
+    @property
+    def profile(self):
+        return self._profile
+
+    @property
+    def profiles(self):
+        return self._profiles
+
+    @log_calls
+    def get_profiles_count(self):
+        return len(self.profiles.keys())
+
+    # LANGUAGES
+    @property
+    def languages(self):
+        languages = set()
+        for category in self.categories.values():
+            for language in category.languages:
+                languages.add(language)
+        return list(languages)
+
+    # STARS
+    @property
+    def last_lesson_stars(self):
+        return self._last_lesson_stars
+
+    # CATEGORIES
+    @property
+    def category(self):
+        return self._category
+
+    @property
+    def categories(self):
+        return self._categories
+
+    # LESSONS
+    @property
+    def lesson(self):
+        return self._lesson
+
+    @property
+    def lessons(self):
+        lessons = []
+        for category in self.categories.values():
+            for lesson in category.lessons.values():
+                lessons.append(lesson)
+        return lessons
+
+    # QUESTION
+    @property
+    def question(self):
+        return self._question
+
+    @property
+    def explainations(self):
+        return self._explainations
+
+    @log_calls 
+    def get_question_explainations(self): 
+        explaination_text = [] 
+        if LEARNED_LANGUAGE in self.explainations.keys(): 
+            for item in self.explainations[LEARNED_LANGUAGE]: 
+                for patern in item["paterns"]: 
+                    if patern in self.question.answer: 
+                        if SPOKEN_LANGUAGE in item["explainations"].keys(): 
+                            explaination_text.append(item["explainations"][SPOKEN_LANGUAGE]) 
+ 
+        return explaination_text 
+ 
+    ################################################################### SETTERS
+
+    # WINDOW
+    @log_calls
+    def set_window_icon(self, icon=DEFAULT_ICON):
+        file_name = icon + ".ico"
+        file_path = join(PATH_ICONS, file_name)
+        self.iconbitmap(file_path)
+
+    @log_calls
+    def set_window_title(self, title):
+        self.title(title)
+
+    # ICONS
+    @icon.setter
+    def icon(self, icon):
+        self._icon = icon
+        self.set_window_icon(icon)
+
+    # PROFILE
+    @profile.setter
+    def profile(self, profile):
+        self._profile = profile
+
+    # STARS
+    @last_lesson_stars.setter
+    def last_lesson_stars(self, last_lesson_stars):
+        self._last_lesson_stars = last_lesson_stars
+
+    # CATEGORY
+    @category.setter
+    def category(self, category):
+        self._category = category
+
+    # QUESTION
+    @question.setter
+    def question(self, question):
+        self._question = question
+
+    @explainations.setter
+    def explainations(self, explainations):
+        self._explainations = explainations
+
+    # LESSON
+    @lesson.setter
+    def lesson(self, lesson):
+        self._lesson = lesson
+        self.category.lesson = lesson
 
     ################################################################### READERS
 
@@ -198,47 +733,79 @@ class Bilingual(Tk):
 
     # PROFILES
     @log_calls
+    def load_profiles(self):
+        json_files = self.get_files(PATH_PROFILES, "json")
+        for file_path in json_files:
+            file_name = basename(file_path).replace(".json", "")
+            if file_name not in self.profiles.keys():
+                json_content = loads(self.read_from_file(file_path))
+                new_profile = Profile()
+                new_profile.uid = file_name
+                new_profile.name = file_name.title()
+                new_profile.icon = json_content["icon"]
+                self.add_profile(new_profile)
+
+    @log_calls
     def load_profile(self):
-        profile_path = join(PATH_PROFILES, self.current_profile + ".json")
+        profile_path = join(PATH_PROFILES, self.profile.uid + ".json")
         profile_content = self.read_from_file(profile_path)
         profile = loads(profile_content)
-
-        self.current_icon = profile["icon"]
-        self.set_window_icon(self.current_icon)
-
-        for category_id in self.categories.keys():
-            for lesson_id in self.categories[category_id].keys():
-                for question_id in self.categories[category_id][lesson_id]["questions"].keys():
-                    for language in self.categories[category_id][lesson_id]["questions"][question_id].keys():
-                        for data in ["success_rate", "tries"]:
-                            if category_id not in profile["categories"].keys():
-                                continue
-                            if lesson_id not in profile["categories"][category_id].keys():
-                                continue
-                            if question_id not in profile["categories"][category_id][lesson_id].keys():
-                                continue
-                            if language not in profile["categories"][category_id][lesson_id][question_id].keys():
-                                continue
-                            if data not in profile["categories"][category_id][lesson_id][question_id][language].keys():
-                                continue
-                            value = profile["categories"][category_id][lesson_id][question_id][language][data]
-                            self.categories[category_id][lesson_id]["questions"][question_id][language][data] = value
+        self.icon = profile["icon"]
+        for category in self.categories.values():
+            for lesson in category.lessons.values():
+                for question in lesson.questions.values():
+                    for language in question.languages.keys():
+                        try:
+                            value = profile["categories"][category.uid][lesson.uid][question.uid][language]["success"]
+                            self.categories[category.uid].lessons[lesson.uid].questions[question.uid].languages[language].success = value
+                        except:
+                            pass
+                        try:
+                            value = profile["categories"][category.uid][lesson.uid][question.uid][language]["tries"]
+                            self.categories[category.uid].lessons[lesson.uid].questions[question.uid].languages[language].tries = value
+                        except:
+                            pass
+        self.check_prerequisites()
 
     # CATEGORIES
     @log_calls
     def load_categories(self):
-        self.categories = {}  # Dictionary to store the result
         json_files = self.get_files(PATH_CATEGORIES, "json")
 
         for file_path in json_files:
             folder_name = basename(dirname(file_path))
-            json_content = loads(self.read_from_file(file_path))
-            category_name = json_content["id"]
 
             if folder_name not in self.categories.keys():
-                self.categories[folder_name] = {}
+                new_category = Category()
+                new_category.uid = folder_name
+                new_category.icon = folder_name
+                new_category.name = folder_name.title()
+                self.add_category(new_category)
+            
+            category = self.categories[folder_name] 
 
-            self.categories[folder_name][category_name] = json_content
+            json_content = loads(self.read_from_file(file_path))
+
+            new_lesson = Lesson()
+            new_lesson.uid = json_content["id"]
+            new_lesson.name = json_content["name"]
+            new_lesson.icon = json_content["icon"]
+            new_lesson.prerequisites = json_content["prerequisites"]
+
+            for uid, languages in json_content["questions"].items():
+                new_question = Question()
+                new_question.uid = uid
+
+                for name, data in languages.items():
+                    new_language = Language()
+                    new_language.name = name
+                    new_language.sentence = data["sentence"]
+                    if "hints" in data.keys():
+                        new_language.hints = data["hints"]
+                    new_question.add_language(new_language)
+
+                new_lesson.add_question(new_question)
+            category.add_lesson(new_lesson)
 
     # QUESTIONS
     @log_calls
@@ -286,179 +853,24 @@ class Bilingual(Tk):
     # PROFILES
     @log_calls
     def save_profile(self):
-        profile_path = join(PATH_PROFILES, self.current_profile + ".json")
+        profile_path = join(PATH_PROFILES, self.profile.uid + ".json")
         profile_content = self.read_from_file(profile_path)
         profile = loads(profile_content)
-
-        for category_id in self.categories.keys():
-            for lesson_id in self.categories[category_id].keys():
-                for question_id in self.categories[category_id][lesson_id]["questions"].keys():
-                    for data in ["success_rate", "tries"]:
-                        value = self.categories[category_id][lesson_id]["questions"][question_id][self.learned_language][data]
-                        if category_id not in profile["categories"].keys():
-                            profile["categories"][category_id] = {}
-                        if lesson_id not in profile["categories"][category_id].keys():
-                            profile["categories"][category_id][lesson_id] = {}
-                        if question_id not in profile["categories"][category_id][lesson_id].keys():
-                            profile["categories"][category_id][lesson_id][question_id] = {}
-                        if self.learned_language not in profile["categories"][category_id][lesson_id][question_id].keys():
-                            profile["categories"][category_id][lesson_id][question_id][self.learned_language] = {}
-                        profile["categories"][category_id][lesson_id][question_id][self.learned_language][data] = value
-
+        for category in self.categories.values():
+            for lesson in category.lessons.values():
+                for question in lesson.questions.values():
+                    if category.uid not in profile["categories"].keys():
+                        profile["categories"][category.uid] = {}
+                    if lesson.uid not in profile["categories"][category.uid].keys():
+                        profile["categories"][category.uid][lesson.uid] = {}
+                    if question.uid not in profile["categories"][category.uid][lesson.uid].keys():
+                        profile["categories"][category.uid][lesson.uid][question.uid] = {}
+                    if LEARNED_LANGUAGE not in profile["categories"][category.uid][lesson.uid][question.uid].keys():
+                        profile["categories"][category.uid][lesson.uid][question.uid][LEARNED_LANGUAGE] = {}
+                    profile["categories"][category.uid][lesson.uid][question.uid][LEARNED_LANGUAGE]["success"] = question.success
+                    profile["categories"][category.uid][lesson.uid][question.uid][LEARNED_LANGUAGE]["tries"] = question.tries
         file_content = dumps(profile, indent=4)
         self.write_in_file(profile_path, file_content)   
-
-    ################################################################### GETTERS
-    
-    # FILES
-    @log_calls
-    def get_files(self, parent, extension=None):
-        files_list = []
-        for subdir, _, files in walk(parent):
-            if extension:
-                files_list += [join(subdir, f) for f in files if f.endswith(extension)]
-            else:
-                files_list += [join(subdir, f) for f in files]
-        return files_list
-
-    # PROFILES
-    @log_calls
-    def get_all_profiles(self):
-        profiles = self.get_files(PATH_PROFILES, "json")
-        return [basename(profile).replace(".json", "") for profile in profiles]
-
-    # LANGUAGES
-    @log_calls
-    def get_all_languages(self):
-        languages = []
-        for category_id in self.categories.keys():
-            for lesson_id in self.categories[category_id].keys():
-                for question in self.categories[category_id][lesson_id]["questions"].values():
-                    for language in question.keys():
-                        if language not in languages:
-                            languages.append(language)
-        return languages
-
-    # STARS
-    @log_calls
-    def get_stars(self, category_id=None, lesson_id=None):
-        if (category_id) and (not lesson_id):
-            success = self.get_category_success(category_id)
-        else:
-            success = self.get_lesson_success(category_id, lesson_id)
-        return len([i for i, value in enumerate(VALUE_STARS) if value <= success])
-
-    # CATEGORIES
-    @log_calls
-    def get_all_categories(self):
-        return list(self.categories.keys())
-
-    @log_calls
-    def get_category_success(self, category_id=None):
-        category_id = category_id if category_id else self.current_category_id
-        success_rates = [self.get_lesson_success(category_id, lesson_id) for lesson_id in self.get_all_lessons(category_id)]
-        success_rate = sum(success_rates) / len(success_rates)
-        return success_rate
-
-    @log_calls
-    def get_category_overview(self, category_id=None):
-        category_id = category_id if category_id else self.current_category_id
-        overviews = [self.get_lesson_overview(category_id, lesson_id) for lesson_id in self.get_all_lessons(category_id)]
-        overview = sum(overviews) / len(overviews)
-        return overview
-
-    # LESSONS
-    @log_calls
-    def get_all_lessons(self, category_id=None):
-        category_id = category_id if category_id else self.current_category_id
-        return list(self.categories[category_id].keys())
-
-    @log_calls
-    def get_lesson_success(self, category_id=None, lesson_id=None):
-        category_id = category_id if category_id else self.current_category_id
-        lesson_id = lesson_id if lesson_id else self.current_lesson_id
-        lesson_overview = self.get_lesson_overview(category_id, lesson_id)
-        success_rates = [question[self.learned_language]["success_rate"] for question in self.categories[category_id][lesson_id]["questions"].values()]
-        success_rate = sum(success_rates) / len(success_rates) * lesson_overview
-        return success_rate
-
-    @log_calls
-    def get_lesson_overview(self, category_id=None, lesson_id=None):
-        category_id = category_id if category_id else self.current_category_id
-        lesson_id = lesson_id if lesson_id else self.current_lesson_id
-        views = 0
-        for question in self.categories[category_id][lesson_id]["questions"].values():
-            if question[self.learned_language]["tries"] > 0:
-                views += 1
-        questions = len(self.categories[category_id][lesson_id]["questions"].values()) 
-        overview = views / questions
-        return overview
-
-    # QUESTIONS
-    @log_calls
-    def get_question_data(self, data, category_id=None, lesson_id=None, question_id=None, language=None):
-        category_id = category_id if category_id else self.current_category_id
-        lesson_id = lesson_id if lesson_id else self.current_lesson_id
-        question_id = question_id if question_id else self.current_question_id
-        language = language if language else self.learned_language
-        return self.categories[category_id][lesson_id]["questions"][question_id][language][data]
-
-    @log_calls
-    def get_question_success_rate(self, category_id=None, lesson_id=None, question_id=None, language=None):
-        return self.get_question_data("success_rate", category_id, lesson_id, question_id, language)
-
-    @log_calls
-    def get_question_tries(self, category_id=None, lesson_id=None, question_id=None, language=None):
-        return self.get_question_data("tries", category_id, lesson_id, question_id, language)
-
-    @log_calls
-    def get_question_answer(self, question_id=None):
-        question_id = question_id if question_id else self.current_question_id
-        return self.categories[self.current_category_id][self.current_lesson_id]["questions"][question_id][self.learned_language]["sentence"]
-    
-    @log_calls
-    def get_question_explainations(self, question=None):
-        question = question if question else self.current_question
-        explaination_text = []
- 
-        if self.learned_language in self.explainations.keys():
-            for item in self.explainations[self.learned_language]:
-                for patern in item["paterns"]:
-                    if patern in self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.learned_language]["sentence"]:
-                        if self.spoken_language in item["explainations"].keys():
-                            explaination_text.append(item["explainations"][self.spoken_language])
-
-        return explaination_text
-
-    ################################################################### SETTERS
-
-    # WINDOW
-    @log_calls
-    def set_window_icon(self, icon=DEFAULT_ICON):
-        file_name = icon + ".ico"
-        file_path = join(PATH_ICONS, file_name)
-        self.iconbitmap(file_path)
-
-    @log_calls
-    def set_window_title(self, title):
-        self.title(title)
-
-    # QUESTIONS
-    @log_calls
-    def set_question_success(self, success, category_id=None, lesson_id=None, question_id=None, language=None):
-        category_id = category_id if category_id else self.current_category_id
-        lesson_id = lesson_id if lesson_id else self.current_lesson_id
-        question_id = question_id if question_id else self.current_question_id
-        language = language if language else self.learned_language
-        self.categories[category_id][lesson_id]["questions"][question_id][language]["success_rate"] = success
-    
-    @log_calls
-    def set_question_tries(self, tries, category_id=None, lesson_id=None, question_id=None, language=None):
-        category_id = category_id if category_id else self.current_category_id
-        lesson_id = lesson_id if lesson_id else self.current_lesson_id
-        question_id = question_id if question_id else self.current_question_id
-        language = language if language else self.learned_language
-        self.categories[category_id][lesson_id]["questions"][question_id][language]["tries"] = tries
 
     ################################################################ VALIDATORS
 
@@ -466,7 +878,7 @@ class Bilingual(Tk):
     @log_calls
     def validate_new_profile(self, name, icon, event=None):
         name = name.get().lower()
-        if (name != "") and (name not in self.get_all_profiles()):
+        if (name != "") and (name not in self.profiles.keys()):
             profile = {
                 "icon": icon,
                 "categories": {}
@@ -474,6 +886,7 @@ class Bilingual(Tk):
             file_path = join(PATH_PROFILES, name + ".json")
             file_content = dumps(profile)
             self.write_in_file(file_path, file_content)
+            self.load_profiles()
             self.display_profiles()
 
     # LANGUAGES
@@ -484,30 +897,23 @@ class Bilingual(Tk):
         elif spoken_language == learned_language:
             self.display_languages()
         else:
-            self.spoken_language = spoken_language
-            self.learned_language = learned_language
+            global SPOKEN_LANGUAGE
+            global LEARNED_LANGUAGE
+            SPOKEN_LANGUAGE = spoken_language
+            LEARNED_LANGUAGE = learned_language
             self.display_categories()
 
     # QUESTIONS
     @log_calls
     def validate_response(self, response, event=None):
-        response = response.replace('.', '')
-        answer = self.get_question_answer()
-        self.increase_question_tries()
-
-        # If the response is right
-        if response.lower().strip() == answer.lower().strip():
+        if self.question.propose(response):
             self.playsound(SOUND_CORRECT)
-            self.increase_question_success()
             self.display_questions()
-
-        # If the response is wrong
         else:
             self.playsound(SOUND_INCORRECT)
-            self.decrease_question_success()
             self.display_answer(response)
-
         self.save_profile()
+        self.check_prerequisites()
 
     ################################################################# LISTENERS
 
@@ -534,6 +940,9 @@ class Bilingual(Tk):
 
         if isinstance(text, StringVar):
             text = text.get()
+
+        if text == "":
+            return
 
         tts = gTTS(text=text, lang=languages[language]["language_code"], tld=languages[language]["accent_code"])
 
@@ -814,9 +1223,8 @@ class Bilingual(Tk):
     # PROFILES
     @log_calls
     def display_profiles(self, page=1, event=None):
-        profiles = self.get_all_profiles()
         item_by_page = 4
-        total_pages = ceil(len(profiles) / item_by_page)
+        total_pages = ceil(self.get_profiles_count() / item_by_page)
         current_page = 1 if (page < 1) or (page > total_pages) else page
 
         # Configure page grid
@@ -826,12 +1234,15 @@ class Bilingual(Tk):
 
         # Initialize variables
         start_index = (current_page - 1) * item_by_page
-        end_index = (start_index + item_by_page) if (len(profiles) >= (start_index + item_by_page)) else len(profiles)
+        end_index = (start_index + item_by_page) if (self.get_profiles_count() >= (start_index + item_by_page)) else self.get_profiles_count()
 
         # Iterate through profiles
-        for profile in profiles[start_index:end_index]:
-            icon = loads(self.read_from_file(join(PATH_PROFILES, profile + ".json")))["icon"]
-            self.create_image_frame(self.window_container, icon, profile, self.select_profile, profile)
+        for profile in list(self.profiles.values())[start_index:end_index]:
+            self.create_image_frame(parent=self.window_container, 
+                image=profile.icon, 
+                text=profile.name,
+                action=self.select_profile,
+                arguments=profile)
 
         # NEW PROFILE BUTTON
         self.create_button(self.window_container, "plus", "New Profile", self.display_new_profile)
@@ -867,15 +1278,13 @@ class Bilingual(Tk):
     # LANGUAGES
     @log_calls
     def display_languages(self, page=1, event=None):
-        languages = self.get_all_languages()
-
         # Configure page grid
         self.clear_window()
         self.set_window_title("Pick a language to learn !")
         self.window_container.grid(column=1, row=1)
 
-        for spoken_language_index, spoken_language in enumerate(languages):
-            for learned_language_index, learned_language in enumerate(languages):
+        for spoken_language in self.languages:
+            for learned_language in self.languages:
                 if spoken_language == learned_language:
                     continue
 
@@ -903,7 +1312,7 @@ class Bilingual(Tk):
     def display_new_star(self, parent, max_height, height=1):
         for child in parent.winfo_children()[1:]:
             child.destroy()
-        Label(parent, image=self.load_image(f'{self.get_stars()}-star', int(height * 2.09), height), anchor="center").pack(side="left", expand=True, fill=X)
+        Label(parent, image=self.load_image(f'{self.lesson.stars}-star', int(height * 2.09), height), anchor="center").pack(side="left", expand=True, fill=X)
         Label(parent, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=X)
         if height < max_height:
             self.after(15, partial(self.display_new_star, parent, max_height, height+7))
@@ -911,9 +1320,10 @@ class Bilingual(Tk):
     # CATEGORIES
     @log_calls
     def display_categories(self, page=1, event=None):
-        categories_id = sorted(self.get_all_categories(), key=lambda category_id: self.is_category_locked(category_id))
+        # place the locked categories at the end
+        categories = list(sorted(self.categories.values(), key=lambda category: category.is_locked))
         item_by_page = 4
-        total_pages = ceil(len(categories_id) / item_by_page)
+        total_pages = ceil(len(categories) / item_by_page)
         current_page = 1 if (page < 1) or (page > total_pages) else page
 
         # Configure page grid
@@ -923,19 +1333,19 @@ class Bilingual(Tk):
 
         # Initialize variables
         start_index = (current_page - 1) * item_by_page
-        end_index = (start_index + item_by_page) if (len(categories_id) >= (start_index + item_by_page)) else len(categories_id)
+        end_index = (start_index + item_by_page) if (len(categories) >= (start_index + item_by_page)) else len(categories)
+
 
         # Iterate through categories
-        for category_id in categories_id[start_index:end_index]:
-            category_locked = self.is_category_locked(category_id)
+        for category in categories[start_index:end_index]:
             self.create_progress_frame(parent=self.window_container, 
-                image=category_id, 
-                text=category_id, 
-                progress=self.get_category_overview(category_id), 
-                stars=self.get_stars(category_id), 
+                image=category.icon, 
+                text=category.uid, 
+                progress=category.progress, 
+                stars=category.stars, 
                 action=self.select_category, 
-                arguments=category_id,
-                locked=category_locked)
+                arguments=category,
+                locked=category.is_locked)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Languages", self.display_languages, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
@@ -951,9 +1361,10 @@ class Bilingual(Tk):
     # LESSONS
     @log_calls
     def display_lessons(self, page=1, event=None):
-        lessons_id = sorted(self.get_all_lessons(), key=lambda lesson_id: self.is_lesson_locked(lesson_id=lesson_id))
+        # Place the locked lessons at the end
+        lessons = sorted(self.category.lessons.values(), key=lambda lesson: lesson.is_locked)
         item_by_page = 4
-        total_pages = ceil(len(lessons_id) / item_by_page)
+        total_pages = ceil(len(lessons) / item_by_page)
         current_page = 1 if (page < 1) or (page > total_pages) else page
 
         # Configure page grid
@@ -963,19 +1374,18 @@ class Bilingual(Tk):
 
         # Initialize variables
         start_index = (current_page - 1) * item_by_page
-        end_index = (start_index + item_by_page) if (len(lessons_id) >= (start_index + item_by_page)) else len(lessons_id)
+        end_index = (start_index + item_by_page) if (len(lessons) >= (start_index + item_by_page)) else len(lessons)
 
         # Iterate through lessons
-        for lesson_id in lessons_id[start_index:end_index]:
-            lesson_locked = self.is_lesson_locked(lesson_id=lesson_id)
+        for lesson in lessons[start_index:end_index]:
             self.create_progress_frame(parent=self.window_container, 
-                image=self.categories[self.current_category_id][lesson_id]["icon"], 
-                text=self.categories[self.current_category_id][lesson_id]["name"], 
-                progress=self.get_lesson_overview(lesson_id=lesson_id), 
-                stars=self.get_stars(self.current_category_id, lesson_id), 
+                image=lesson.icon, 
+                text=lesson.name, 
+                progress=lesson.progress, 
+                stars=lesson.stars,
                 action=self.select_lesson, 
-                arguments=lesson_id,
-                locked=lesson_locked)
+                arguments=lesson,
+                locked=lesson.is_locked)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Categories", self.display_categories, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
@@ -991,7 +1401,7 @@ class Bilingual(Tk):
     # QUESTIONS
     @log_calls
     def display_questions(self):
-        self.choose_random_question()
+        self.next_question()
 
         # Configure page grid
         self.clear_window()
@@ -1004,39 +1414,37 @@ class Bilingual(Tk):
 
         Label(stars_frame, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=X)
         
-        if self.get_stars() > self.current_lesson_stars:
-            self.current_lesson_stars = self.get_stars()
+        if self.lesson.stars > self.last_lesson_stars:
+            self.last_lesson_stars = self.lesson.stars
             self.after(350, partial(self.playsound, SOUND_NEW_STAR))
             self.after(250, partial(self.display_new_star, stars_frame, 50))
         else:
-            Label(stars_frame, image=self.load_image(f'{self.current_lesson_stars}-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=X)
+            Label(stars_frame, image=self.load_image(f'{self.lesson.stars}-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=X)
             Label(stars_frame, image=self.load_image(f'0-star', 105, 50), anchor="center").pack(side="left", expand=True, fill=X)
 
         # STATS
         stat_frame = Frame(self.window_container)
         stat_frame.pack(expand=True, fill=X, pady=10) 
 
-        lesson_overview = f'{ceil(self.get_lesson_overview() * 100)}%'
+        lesson_overview = f'{ceil(self.lesson.progress * 100)}%'
         self.create_stat_frame(stat_frame, text="Lesson Overview", stat=lesson_overview, alone_in_row=False)
 
-        lesson_success_text = f'{ceil(self.get_lesson_success() * 100)}%'
+        lesson_success_text = f'{ceil(self.lesson.success * 100)}%'
         self.create_stat_frame(stat_frame, text="Lesson Success", stat=lesson_success_text, alone_in_row=False)
+        self.create_stat_frame(stat_frame, text="Question Attempts", stat=self.question.tries, alone_in_row=False)
 
-        question_tries = self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.learned_language]["tries"]
-        self.create_stat_frame(stat_frame, text="Question Attempts", stat=question_tries, alone_in_row=False)
-
-        question_success = f'{ceil(self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.learned_language]["success_rate"] * 100)}%'
-        self.create_stat_frame(stat_frame, text="Question Success", stat=question_success, alone_in_row=False)
+        question_success_text = f'{ceil(self.question.success * 100)}%'
+        self.create_stat_frame(stat_frame, text="Question Success", stat=question_success_text, alone_in_row=False)
 
         # SENTENCE
-        self.create_speakable_frame(self.window_container, self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.spoken_language]["sentence"].capitalize(), self.spoken_language)
+        self.create_speakable_frame(self.window_container, self.question.sentence.capitalize(), SPOKEN_LANGUAGE)
 
         # HINTS
-        if "hints" in self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.spoken_language].keys() :
-            self.create_frame(self.window_container, f'PS : {self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.spoken_language]["hints"].capitalize()}')
+        if self.question.hints:
+            self.create_frame(self.window_container, f'PS : {self.question.hints.capitalize()}')
 
         # ANSWER
-        speakable_entry, response_Stringvar = self.create_speakable_entry(self.window_container, self.learned_language)
+        speakable_entry, response_Stringvar = self.create_speakable_entry(self.window_container, LEARNED_LANGUAGE)
 
         # ENTER KEY
         self.bind_widget(speakable_entry, lambda EVENT_KEY_PRESS: self.validate_response(response_Stringvar.get()) if (EVENT_KEY_PRESS.char == "\r") else None, EVENT_KEY_PRESS)
@@ -1053,10 +1461,9 @@ class Bilingual(Tk):
         self.clear_window()
         self.set_window_title("Nice Try !")
         self.window_container.grid(column=1, row=1)
-        explainations = self.get_question_explainations()
         
         # SENTENCE
-        self.create_speakable_frame(self.window_container, self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.spoken_language]["sentence"].capitalize(), self.spoken_language)
+        self.create_speakable_frame(self.window_container, self.question.sentence.capitalize(), SPOKEN_LANGUAGE)
 
         # RESONSE
         new_frame = Frame(self.window_container, style="CustomDarkFrame.TFrame")
@@ -1064,12 +1471,13 @@ class Bilingual(Tk):
 
         new_text = Text(new_frame, width=40, height=1, relief="flat", background=COLOR_DARK_PINK, foreground=COLOR_WHITE, font=('Calibri', 12))
         new_text.insert("1.0", response.capitalize())
-        self.color_differences(new_text, self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.learned_language]["sentence"].capitalize(), response.capitalize())
+        self.color_differences(new_text, self.question.answer.capitalize(), response.capitalize())
 
         # ANSWER
-        self.create_speakable_frame(self.window_container, self.categories[self.current_category_id][self.current_lesson_id]["questions"][self.current_question_id][self.learned_language]["sentence"].capitalize(), self.learned_language)                
+        self.create_speakable_frame(self.window_container, self.question.answer.capitalize(), LEARNED_LANGUAGE)                
 
         # EXPLAINATIONS
+        explainations = self.get_question_explainations()
         if len(explainations) > 0 :
             self.create_scrollable_frame(self.window_container, f"\n\n{'-' * 72}\n\n".join(explainations))
 
@@ -1086,7 +1494,7 @@ class Bilingual(Tk):
     def clear_window(self):
         for widget in self.window_container.winfo_children():
             widget.destroy()
-    
+
     @log_calls
     def set_styles(self):
         style = Style(self) 
@@ -1133,86 +1541,50 @@ class Bilingual(Tk):
 
     # PROFILES
     @log_calls
+    def add_profile(self, profile):
+        self.profiles[profile.uid] = profile
+
+    @log_calls
     def select_profile(self, profile, event=None):
-        self.current_profile = profile
+        self.profile = profile
         self.load_profile()
         self.load_explainations()
         self.display_languages()
     
     # CATEGORIES
     @log_calls
-    def select_category(self, category_id, event=None):
-        self.current_category_id = category_id
+    def add_category(self, category):
+        self.categories[category.uid] = category
+
+    @log_calls
+    def select_category(self, category, event=None):
+        self.category = category
         self.display_lessons()
-
-    @log_calls
-    def is_category_locked(self, category_id=None):
-        category_id = category_id if category_id else self.current_category_id
-        for lesson_id in self.get_all_lessons(category_id):
-            if not self.is_lesson_locked(category_id, lesson_id):
-                return False
-        return True
-
-    @log_calls
-    def is_lesson_locked(self, category_id=None, lesson_id=None):
-        category_id = category_id if category_id else self.current_category_id
-        lesson_id = lesson_id if lesson_id else self.current_lesson_id
-        prerequisites = self.categories[category_id][lesson_id]["prerequisites"]
-        for needed_category in prerequisites:
-            for needed_lesson, needed_stars in prerequisites[needed_category].items():
-                if self.get_stars(needed_category, needed_lesson) < needed_stars:
-                    return True
-        return False
 
     # LESSONS
     @log_calls
-    def select_lesson(self, lesson_id, event=None):
-        self.current_lesson_id = lesson_id
-        self.current_lesson_stars = self.get_stars()
+    def select_lesson(self, lesson, event=None):
+        self.lesson = lesson
+        self.last_lesson_stars = self.lesson.stars
         self.display_questions()
+
+    @log_calls
+    def check_prerequisites(self):
+        for category in self.categories.values():
+            for lesson in category.lessons.values():
+                lesson.is_locked = False
+                for req_category_id in lesson.prerequisites:
+                    for req_lesson_id, required_stars in lesson.prerequisites[req_category_id].items():
+                        if self.categories[req_category_id].lessons[req_lesson_id].stars < required_stars:
+                            lesson.is_locked = True
+                            break
+                    if lesson.is_locked:
+                        break
 
     # QUESTIONS
     @log_calls
-    def is_remembered(self, question_id):
-        return random() < self.get_question_success_rate(question_id=question_id) * 0.95
-    
-    @log_calls
-    def choose_random_question(self):
-        deep_copy = deepcopy(self.categories)
-        questions_id = list(deep_copy[self.current_category_id][self.current_lesson_id]["questions"].keys())
-        shuffle(questions_id)
-        
-        for question_id in questions_id:
-            if (self.current_question_id) and (self.current_question_id == question_id):
-                continue
-            if self.is_remembered(question_id):
-                continue
-            self.current_question_id = question_id
-            return
-
-        self.current_question_id = choice(deep_copy[self.current_category_id][self.current_lesson_id]["questions"].keys())
-    
-    @log_calls
-    def increase_question_success(self, question_id=None):
-        question_id = question_id if question_id else self.current_question_id
-        success_rate = self.get_question_success_rate(question_id=question_id)
-        tries = self.get_question_tries(question_id=question_id)
-        new_success_rate = ((success_rate * (tries -1)) +1) / tries
-        self.set_question_success(new_success_rate)
-
-    @log_calls
-    def decrease_question_success(self, question_id=None):
-        question_id = question_id if question_id else self.current_question_id
-        success_rate = self.get_question_success_rate(question_id=question_id)
-        tries = self.get_question_tries(question_id=question_id)
-        new_success_rate = (success_rate * (tries -1)) / tries
-        self.set_question_success(new_success_rate)
-
-    @log_calls
-    def increase_question_tries(self, question_id=None):
-        question_id = question_id if question_id else self.current_question_id
-        new_tries = self.categories[self.current_category_id][self.current_lesson_id]["questions"][question_id][self.learned_language]["tries"] + 1
-        self.set_question_tries(new_tries)
+    def next_question(self):
+        self.question = self.category.next_question()
 
     # DIFFERENCES
     @log_calls

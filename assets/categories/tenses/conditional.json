@@ -12,296 +12,200 @@
     "questions": {
         "0": {
             "english": {
-                "sentence": "I would speak French",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "I would speak French"
             },
             "french": {
-                "sentence": "Je parlerais fran\u00e7ais",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Je parlerais fran\u00e7ais"
             }
         },
         "1": {
             "english": {
-                "sentence": "You would speak well",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "You would speak well"
             },
             "french": {
-                "sentence": "Tu parlerais bien",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Tu parlerais bien"
             }
         },
         "2": {
             "english": {
-                "sentence": "He would speak English",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "He would speak English"
             },
             "french": {
-                "sentence": "Il parlerait anglais",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Il parlerait anglais"
             }
         },
         "3": {
             "english": {
-                "sentence": "She would speak English",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "She would speak English"
             },
             "french": {
-                "sentence": "Elle parlerait anglais",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Elle parlerait anglais"
             }
         },
         "4": {
             "english": {
-                "sentence": "We would speak Spanish",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "We would speak Spanish"
             },
             "french": {
-                "sentence": "Nous parlerions espagnol",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Nous parlerions espagnol"
             }
         },
         "5": {
             "english": {
-                "sentence": "You would speak German",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "You would speak German"
             },
             "french": {
-                "sentence": "Vous parleriez allemand",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Vous parleriez allemand"
             }
         },
         "6": {
             "english": {
                 "sentence": "They would speak Italian",
-                "hints": "they are males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "they are males"
             },
             "french": {
-                "sentence": "Ils parleraient italien",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Ils parleraient italien"
             }
         },
         "7": {
             "english": {
                 "sentence": "They would speak Italian",
-                "hints": "they are females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "they are females"
             },
             "french": {
-                "sentence": "Elles parleraient italien",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Elles parleraient italien"
             }
         },
         "8": {
             "english": {
-                "sentence": "I would finish my work",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "I would finish my work"
             },
             "french": {
-                "sentence": "Je finirais mon travail",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Je finirais mon travail"
             }
         },
         "9": {
             "english": {
-                "sentence": "You would finish quickly",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "You would finish quickly"
             },
             "french": {
-                "sentence": "Tu finirais rapidement",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Tu finirais rapidement"
             }
         },
         "10": {
             "english": {
-                "sentence": "He would finish the book",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "He would finish the book"
             },
             "french": {
-                "sentence": "Il finirait le livre",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Il finirait le livre"
             }
         },
         "11": {
             "english": {
-                "sentence": "She would finish the book",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "She would finish the book"
             },
             "french": {
-                "sentence": "Elle finirait le livre",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Elle finirait le livre"
             }
         },
         "12": {
             "english": {
-                "sentence": "We would finish our homework",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "We would finish our homework"
             },
             "french": {
-                "sentence": "Nous finirions nos devoirs",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Nous finirions nos devoirs"
             }
         },
         "13": {
             "english": {
-                "sentence": "You would finish early",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "You would finish early"
             },
             "french": {
-                "sentence": "Vous finiriez t\u00f4t",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Vous finiriez t\u00f4t"
             }
         },
         "14": {
             "english": {
                 "sentence": "They would finish the race",
-                "hints": "they are males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "they are males"
             },
             "french": {
-                "sentence": "Ils finiraient la course",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Ils finiraient la course"
             }
         },
         "15": {
             "english": {
                 "sentence": "They would finish the race",
-                "hints": "they are females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "they are females"
             },
             "french": {
-                "sentence": "Elles finiraient la course",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Elles finiraient la course"
             }
         },
         "16": {
             "english": {
-                "sentence": "I would take a coffee",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "I would take a coffee"
             },
             "french": {
-                "sentence": "Je prendrais un caf\u00e9",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Je prendrais un caf\u00e9"
             }
         },
         "17": {
             "english": {
-                "sentence": "You would take the bus",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "You would take the bus"
             },
             "french": {
-                "sentence": "Tu prendrais le bus",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Tu prendrais le bus"
             }
         },
         "18": {
             "english": {
-                "sentence": "He would take the subway",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "He would take the subway"
             },
             "french": {
-                "sentence": "Il prendrait le m\u00e9tro",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Il prendrait le m\u00e9tro"
             }
         },
         "19": {
             "english": {
-                "sentence": "She would take the subway",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "She would take the subway"
             },
             "french": {
-                "sentence": "Elle prendrait le m\u00e9tro",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Elle prendrait le m\u00e9tro"
             }
         },
         "20": {
             "english": {
-                "sentence": "We would have breakfast",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "We would have breakfast"
             },
             "french": {
-                "sentence": "Nous prendrions le petit-d\u00e9jeuner",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Nous prendrions le petit-d\u00e9jeuner"
             }
         },
         "21": {
             "english": {
-                "sentence": "You would take the train",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "You would take the train"
             },
             "french": {
-                "sentence": "Vous prendriez le train",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Vous prendriez le train"
             }
         },
         "22": {
             "english": {
                 "sentence": "They would take photos",
-                "hints": "they are males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "they are males"
             },
             "french": {
-                "sentence": "Ils prendraient des photos",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Ils prendraient des photos"
             }
         },
         "23": {
             "english": {
                 "sentence": "They would take photos",
-                "hints": "they are females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "they are females"
             },
             "french": {
-                "sentence": "Elles prendraient des photos",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Elles prendraient des photos"
             }
         }
     }

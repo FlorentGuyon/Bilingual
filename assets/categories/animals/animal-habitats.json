@@ -6,933 +6,645 @@
     "questions": {
         "0": {
             "english": {
-                "sentence": "the bird is in the sky",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the bird is in the sky"
             },
             "french": {
-                "sentence": "l'oiseau est dans le ciel",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "l'oiseau est dans le ciel"
             }
         },
         "1": {
             "english": {
                 "sentence": "the bird is in the tree",
-                "hints": "The bird is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The bird is female"
             },
             "french": {
                 "sentence": "l'oiseau est dans l'arbre",
-                "hints": "l'oiseau est une femelle",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "l'oiseau est une femelle"
             }
         },
         "2": {
             "english": {
-                "sentence": "the baby bird is in the nest",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the baby bird is in the nest"
             },
             "french": {
-                "sentence": "l'oisillon est dans le nid",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "l'oisillon est dans le nid"
             }
         },
         "3": {
             "english": {
                 "sentence": "the baby bird is in the nest",
-                "hints": "The baby bird is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The baby bird is female"
             },
             "french": {
-                "sentence": "l'oiselle est dans le nid",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "l'oiselle est dans le nid"
             }
         },
         "4": {
             "english": {
-                "sentence": "the birds are in the forest",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the birds are in the forest"
             },
             "french": {
-                "sentence": "les oiseaux sont dans la for\u00eat",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les oiseaux sont dans la for\u00eat"
             }
         },
         "5": {
             "english": {
                 "sentence": "the birds are in the park",
-                "hints": "The birds are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The birds are female"
             },
             "french": {
                 "sentence": "les oiseaux sont dans le parc",
-                "hints": "Les oiseaux sont des females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "Les oiseaux sont des females"
             }
         },
         "6": {
             "english": {
-                "sentence": "the baby birds are in the nest",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the baby birds are in the nest"
             },
             "french": {
-                "sentence": "les oisillons sont dans le nid",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les oisillons sont dans le nid"
             }
         },
         "7": {
             "english": {
                 "sentence": "the baby birds are in the nest",
-                "hints": "The baby birds are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The baby birds are female"
             },
             "french": {
-                "sentence": "les oiselles sont dans le nid",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les oiselles sont dans le nid"
             }
         },
         "8": {
             "english": {
-                "sentence": "the dog is in the yard",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the dog is in the yard"
             },
             "french": {
-                "sentence": "le chien est dans la cour",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le chien est dans la cour"
             }
         },
         "9": {
             "english": {
                 "sentence": "the dog is in the house",
-                "hints": "The dog is a female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The dog is a female"
             },
             "french": {
-                "sentence": "la chienne est dans la maison",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la chienne est dans la maison"
             }
         },
         "10": {
             "english": {
-                "sentence": "the puppy is in the basket",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the puppy is in the basket"
             },
             "french": {
-                "sentence": "le chiot est dans le panier",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le chiot est dans le panier"
             }
         },
         "11": {
             "english": {
                 "sentence": "the puppy is in the basket",
-                "hints": "The puppy is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The puppy is female"
             },
             "french": {
-                "sentence": "la chiotte est dans le panier",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la chiotte est dans le panier"
             }
         },
         "12": {
             "english": {
-                "sentence": "the dogs are in the park",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the dogs are in the park"
             },
             "french": {
-                "sentence": "les chiens sont dans le parc",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chiens sont dans le parc"
             }
         },
         "13": {
             "english": {
                 "sentence": "the dogs are in the garden",
-                "hints": "The dogs are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The dogs are female"
             },
             "french": {
                 "sentence": "les chiennes sont dans le jardin",
-                "hints": "Les chiennes sont des femelles",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "Les chiennes sont des femelles"
             }
         },
         "14": {
             "english": {
-                "sentence": "the puppies are in the doghouse",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the puppies are in the doghouse"
             },
             "french": {
-                "sentence": "les chiots sont dans la niche",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chiots sont dans la niche"
             }
         },
         "15": {
             "english": {
                 "sentence": "the puppies are in the doghouse",
-                "hints": "The puppies are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The puppies are female"
             },
             "french": {
-                "sentence": "les chiottes sont dans la niche",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chiottes sont dans la niche"
             }
         },
         "16": {
             "english": {
                 "sentence": "the cat is in the yard",
-                "hints": "The cat is a male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The cat is a male"
             },
             "french": {
-                "sentence": "le chat est dans la cour",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le chat est dans la cour"
             }
         },
         "17": {
             "english": {
                 "sentence": "the cat is in the house",
-                "hints": "The cat is a female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The cat is a female"
             },
             "french": {
-                "sentence": "la chatte est dans la maison",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la chatte est dans la maison"
             }
         },
         "18": {
             "english": {
                 "sentence": "the kitten is in the basket",
-                "hints": "The kitten is a male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The kitten is a male"
             },
             "french": {
-                "sentence": "le chaton est dans le panier",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le chaton est dans le panier"
             }
         },
         "19": {
             "english": {
                 "sentence": "the kitten is in the basket",
-                "hints": "The kitten is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The kitten is female"
             },
             "french": {
-                "sentence": "la chatonne est dans le panier",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la chatonne est dans le panier"
             }
         },
         "20": {
             "english": {
                 "sentence": "the cats are in the park",
-                "hints": "The cats are male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The cats are male"
             },
             "french": {
-                "sentence": "les chats sont dans le parc",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chats sont dans le parc"
             }
         },
         "21": {
             "english": {
                 "sentence": "the cats are in the garden",
-                "hints": "The cats are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The cats are female"
             },
             "french": {
-                "sentence": "les chattes sont dans le jardin",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chattes sont dans le jardin"
             }
         },
         "22": {
             "english": {
                 "sentence": "the kittens are in the cat tree",
-                "hints": "The kittens are male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The kittens are male"
             },
             "french": {
-                "sentence": "les chatons sont dans l'arbre \u00e0 chat",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chatons sont dans l'arbre \u00e0 chat"
             }
         },
         "23": {
             "english": {
                 "sentence": "the kittens are in the cat tree",
-                "hints": "The kittens are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The kittens are female"
             },
             "french": {
-                "sentence": "les chatonnes sont dans l'arbre \u00e0 chat",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chatonnes sont dans l'arbre \u00e0 chat"
             }
         },
         "24": {
             "english": {
                 "sentence": "The fish is in the water",
-                "hints": "The fish is an adult male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The fish is an adult male"
             },
             "french": {
-                "sentence": "Le poisson est dans l'eau",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le poisson est dans l'eau"
             }
         },
         "25": {
             "english": {
                 "sentence": "The fish is in the pond",
-                "hints": "The fish is an adult female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The fish is an adult female"
             },
             "french": {
-                "sentence": "La poissonne est dans l'\u00e9tang",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La poissonne est dans l'\u00e9tang"
             }
         },
         "26": {
             "english": {
                 "sentence": "The fry is in the tank",
-                "hints": "The fry is a baby male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The fry is a baby male"
             },
             "french": {
-                "sentence": "Le alevin est dans l'aquarium",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le alevin est dans l'aquarium"
             }
         },
         "27": {
             "english": {
                 "sentence": "The fry is in the tank",
-                "hints": "The fry is a baby female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The fry is a baby female"
             },
             "french": {
-                "sentence": "La alevine est dans l'aquarium",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La alevine est dans l'aquarium"
             }
         },
         "28": {
             "english": {
                 "sentence": "The fishes are in the sea",
-                "hints": "The fishes are adult males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The fishes are adult males"
             },
             "french": {
-                "sentence": "Les poissons sont dans la mer",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les poissons sont dans la mer"
             }
         },
         "29": {
             "english": {
                 "sentence": "The fishes are in the ocean",
-                "hints": "The fishes are adult females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The fishes are adult females"
             },
             "french": {
-                "sentence": "Les poissonnes sont dans l'oc\u00e9an",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les poissonnes sont dans l'oc\u00e9an"
             }
         },
         "30": {
             "english": {
                 "sentence": "The fry are in the hatchery",
-                "hints": "The fry are baby males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The fry are baby males"
             },
             "french": {
-                "sentence": "Les alevins sont dans l'\u00e9closerie",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les alevins sont dans l'\u00e9closerie"
             }
         },
         "31": {
             "english": {
                 "sentence": "The fry are in the hatchery",
-                "hints": "The fry are baby females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The fry are baby females"
             },
             "french": {
-                "sentence": "Les alevines sont dans l'\u00e9closerie",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les alevines sont dans l'\u00e9closerie"
             }
         },
         "32": {
             "english": {
                 "sentence": "The rabbit is in the burrow",
-                "hints": "The rabbit is an adult male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The rabbit is an adult male"
             },
             "french": {
-                "sentence": "Le lapin est dans le terrier",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le lapin est dans le terrier"
             }
         },
         "33": {
             "english": {
                 "sentence": "The rabbit is in the hole",
-                "hints": "The rabbit is an adult female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The rabbit is an adult female"
             },
             "french": {
-                "sentence": "La lapine est dans le trou",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La lapine est dans le trou"
             }
         },
         "34": {
             "english": {
                 "sentence": "The bunny is in the nest",
-                "hints": "The bunny is a baby male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The bunny is a baby male"
             },
             "french": {
-                "sentence": "Le lapereau est dans le nid",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le lapereau est dans le nid"
             }
         },
         "35": {
             "english": {
                 "sentence": "The bunny is in the nest",
-                "hints": "The bunny is a baby female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The bunny is a baby female"
             },
             "french": {
-                "sentence": "La lapereau est dans le nid",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La lapereau est dans le nid"
             }
         },
         "36": {
             "english": {
                 "sentence": "The rabbits are in the field",
-                "hints": "The rabbits are adult males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The rabbits are adult males"
             },
             "french": {
-                "sentence": "Les lapins sont dans le champ",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les lapins sont dans le champ"
             }
         },
         "37": {
             "english": {
                 "sentence": "The rabbits are in the meadow",
-                "hints": "The rabbits are adult females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The rabbits are adult females"
             },
             "french": {
-                "sentence": "Les lapines sont dans la prairie",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les lapines sont dans la prairie"
             }
         },
         "38": {
             "english": {
                 "sentence": "The bunnies are in the warren",
-                "hints": "The bunnies are baby males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The bunnies are baby males"
             },
             "french": {
-                "sentence": "Les lapereaux sont dans le garenne",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les lapereaux sont dans le garenne"
             }
         },
         "39": {
             "english": {
                 "sentence": "The bunnies are in the warren",
-                "hints": "The bunnies are baby females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The bunnies are baby females"
             },
             "french": {
-                "sentence": "Les lapereaux sont dans le garenne",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les lapereaux sont dans le garenne"
             }
         },
         "40": {
             "english": {
                 "sentence": "The frog is in the pond",
-                "hints": "The frog is an adult male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The frog is an adult male"
             },
             "french": {
-                "sentence": "La grenouille est dans l'\u00e9tang",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La grenouille est dans l'\u00e9tang"
             }
         },
         "41": {
             "english": {
                 "sentence": "The frog is in the swamp",
-                "hints": "The frog is an adult female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The frog is an adult female"
             },
             "french": {
-                "sentence": "La grenouille est dans le marais",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La grenouille est dans le marais"
             }
         },
         "42": {
             "english": {
                 "sentence": "The tadpole is in the puddle",
-                "hints": "The tadpole is a baby male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The tadpole is a baby male"
             },
             "french": {
-                "sentence": "Le t\u00eatard est dans la flaque",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le t\u00eatard est dans la flaque"
             }
         },
         "43": {
             "english": {
                 "sentence": "The tadpole is in the puddle",
-                "hints": "The tadpole is a baby female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The tadpole is a baby female"
             },
             "french": {
-                "sentence": "La t\u00eatarde est dans la flaque",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La t\u00eatarde est dans la flaque"
             }
         },
         "44": {
             "english": {
                 "sentence": "The frogs are in the river",
-                "hints": "The frogs are adult males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The frogs are adult males"
             },
             "french": {
-                "sentence": "Les grenouilles sont dans la rivi\u00e8re",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les grenouilles sont dans la rivi\u00e8re"
             }
         },
         "45": {
             "english": {
                 "sentence": "The frogs are in the swamp",
-                "hints": "The frogs are adult females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The frogs are adult females"
             },
             "french": {
-                "sentence": "Les grenouilles sont dans le marais",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les grenouilles sont dans le marais"
             }
         },
         "46": {
             "english": {
                 "sentence": "The tadpoles are in the pond",
-                "hints": "The tadpoles are baby males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The tadpoles are baby males"
             },
             "french": {
-                "sentence": "Les t\u00eatards sont dans l'\u00e9tang",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les t\u00eatards sont dans l'\u00e9tang"
             }
         },
         "47": {
             "english": {
                 "sentence": "The tadpoles are in the puddle",
-                "hints": "The tadpoles are baby females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The tadpoles are baby females"
             },
             "french": {
-                "sentence": "Les t\u00eatardes sont dans la flaque",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les t\u00eatardes sont dans la flaque"
             }
         },
         "48": {
             "english": {
                 "sentence": "The squirrel is in the tree",
-                "hints": "The squirrel is an adult male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The squirrel is an adult male"
             },
             "french": {
-                "sentence": "L'\u00e9cureuil est dans l'arbre",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'\u00e9cureuil est dans l'arbre"
             }
         },
         "49": {
             "english": {
                 "sentence": "The squirrel is in the forest",
-                "hints": "The squirrel is an adult female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The squirrel is an adult female"
             },
             "french": {
-                "sentence": "L'\u00e9cureuil est dans la for\u00eat",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'\u00e9cureuil est dans la for\u00eat"
             }
         },
         "50": {
             "english": {
                 "sentence": "The squirrel kit is in the nest",
-                "hints": "The squirrel kit is a baby male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The squirrel kit is a baby male"
             },
             "french": {
-                "sentence": "Le jeune \u00e9cureuil est dans le nid",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le jeune \u00e9cureuil est dans le nid"
             }
         },
         "51": {
             "english": {
                 "sentence": "The squirrel kit is in the nest",
-                "hints": "The squirrel kit is a baby female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The squirrel kit is a baby female"
             },
             "french": {
-                "sentence": "La jeune \u00e9cureuil est dans le nid",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La jeune \u00e9cureuil est dans le nid"
             }
         },
         "52": {
             "english": {
                 "sentence": "The squirrels are in the park",
-                "hints": "The squirrels are adult males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The squirrels are adult males"
             },
             "french": {
-                "sentence": "Les \u00e9cureuils sont dans le parc",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les \u00e9cureuils sont dans le parc"
             }
         },
         "53": {
             "english": {
                 "sentence": "The squirrels are in the garden",
-                "hints": "The squirrels are adult females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The squirrels are adult females"
             },
             "french": {
-                "sentence": "Les \u00e9cureuilles sont dans le jardin",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les \u00e9cureuilles sont dans le jardin"
             }
         },
         "54": {
             "english": {
                 "sentence": "The squirrel kits are in the tree hollow",
-                "hints": "The squirrel kits are baby males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The squirrel kits are baby males"
             },
             "french": {
-                "sentence": "Les jeunes \u00e9cureuils sont dans le creux de l'arbre",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les jeunes \u00e9cureuils sont dans le creux de l'arbre"
             }
         },
         "55": {
             "english": {
                 "sentence": "The squirrel kits are in the tree hollow",
-                "hints": "The squirrel kits are baby females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The squirrel kits are baby females"
             },
             "french": {
-                "sentence": "Les jeunes \u00e9cureuilles sont dans le creux de l'arbre",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les jeunes \u00e9cureuilles sont dans le creux de l'arbre"
             }
         },
         "56": {
             "english": {
                 "sentence": "The snake is in the grass",
-                "hints": "The snake is an adult male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The snake is an adult male"
             },
             "french": {
-                "sentence": "Le serpent est dans l'herbe",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le serpent est dans l'herbe"
             }
         },
         "57": {
             "english": {
                 "sentence": "The snake is in the jungle",
-                "hints": "The snake is an adult female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The snake is an adult female"
             },
             "french": {
-                "sentence": "La serpent est dans la jungle",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La serpent est dans la jungle"
             }
         },
         "58": {
             "english": {
                 "sentence": "The snakelet is in the sand",
-                "hints": "The snakelet is a baby male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The snakelet is a baby male"
             },
             "french": {
-                "sentence": "Le serpenton est dans le sable",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le serpenton est dans le sable"
             }
         },
         "59": {
             "english": {
                 "sentence": "The snakelet is in the sand",
-                "hints": "The snakelet is a baby female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The snakelet is a baby female"
             },
             "french": {
-                "sentence": "La serpentonne est dans le sable",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La serpentonne est dans le sable"
             }
         },
         "60": {
             "english": {
                 "sentence": "The snakes are in the desert",
-                "hints": "The snakes are adult males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The snakes are adult males"
             },
             "french": {
-                "sentence": "Les serpents sont dans le d\u00e9sert",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les serpents sont dans le d\u00e9sert"
             }
         },
         "61": {
             "english": {
                 "sentence": "The snakes are in the rainforest",
-                "hints": "The snakes are adult females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The snakes are adult females"
             },
             "french": {
-                "sentence": "Les serpentesses sont dans la for\u00eat tropicale",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les serpentesses sont dans la for\u00eat tropicale"
             }
         },
         "62": {
             "english": {
                 "sentence": "The snakelets are in the burrow",
-                "hints": "The snakelets are baby males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The snakelets are baby males"
             },
             "french": {
-                "sentence": "Les serpentons sont dans le terrier",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les serpentons sont dans le terrier"
             }
         },
         "63": {
             "english": {
                 "sentence": "The snakelets are in the nest",
-                "hints": "The snakelets are baby females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The snakelets are baby females"
             },
             "french": {
-                "sentence": "Les serpentonnes sont dans le nid",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les serpentonnes sont dans le nid"
             }
         },
         "64": {
             "english": {
                 "sentence": "The crab is on the beach",
-                "hints": "The crab is an adult male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The crab is an adult male"
             },
             "french": {
-                "sentence": "Le crabe est sur la plage",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le crabe est sur la plage"
             }
         },
         "65": {
             "english": {
                 "sentence": "The crab is in the cave",
-                "hints": "The crab is an adult female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The crab is an adult female"
             },
             "french": {
-                "sentence": "La crabe est dans la grotte",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La crabe est dans la grotte"
             }
         },
         "66": {
             "english": {
                 "sentence": "The crab larva is in the sand",
-                "hints": "The crab larva is a baby male",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The crab larva is a baby male"
             },
             "french": {
-                "sentence": "La larve de crabe est dans le sable",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La larve de crabe est dans le sable"
             }
         },
         "67": {
             "english": {
                 "sentence": "The crab larva is in the sand",
-                "hints": "The crab larva is a baby female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The crab larva is a baby female"
             },
             "french": {
-                "sentence": "La larve de crabe est dans le sable",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La larve de crabe est dans le sable"
             }
         },
         "68": {
             "english": {
                 "sentence": "The crabs are on the rocks",
-                "hints": "The crabs are adult males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The crabs are adult males"
             },
             "french": {
-                "sentence": "Les crabes sont sur les rochers",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les crabes sont sur les rochers"
             }
         },
         "69": {
             "english": {
                 "sentence": "The crabs are in the tide pool",
-                "hints": "The crabs are adult females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The crabs are adult females"
             },
             "french": {
-                "sentence": "Les crabesses sont dans la mare",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les crabesses sont dans la mare"
             }
         },
         "70": {
             "english": {
                 "sentence": "The crab larvae are in the water",
-                "hints": "The crab larvae are baby males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The crab larvae are baby males"
             },
             "french": {
-                "sentence": "Les larves de crabes sont dans l'eau",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les larves de crabes sont dans l'eau"
             }
         },
         "71": {
             "english": {
                 "sentence": "The crab larvae are in the pond",
-                "hints": "The crab larvae are baby females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The crab larvae are baby females"
             },
             "french": {
-                "sentence": "Les larves de crabes sont dans l'\u00e9tang",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les larves de crabes sont dans l'\u00e9tang"
             }
         }
     }

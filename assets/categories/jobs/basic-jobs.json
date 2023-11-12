@@ -6,959 +6,655 @@
     "questions": {
         "0": {
             "english": {
-                "sentence": "The writer",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The writer"
             },
             "french": {
-                "sentence": "L'écrivain",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'écrivain"
             }
         },
         "1": {
             "english": {
                 "sentence": "The writer",
-                "hints": "The writer is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The writer is female"
             },
             "french": {
-                "sentence": "L'écrivaine",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'écrivaine"
             }
         },
         "2": {
             "english": {
-                "sentence": "The writers",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The writers"
             },
             "french": {
-                "sentence": "Les écrivains",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les écrivains"
             }
         },
         "3": {
             "english": {
                 "sentence": "The writers",
-                "hints": "The writers are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The writers are female"
             },
             "french": {
-                "sentence": "Les écrivaines",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les écrivaines"
             }
         },
         "4": {
             "english": {
-                "sentence": "The doctor",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The doctor"
             },
             "french": {
-                "sentence": "Le médecin",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le médecin"
             }
         },
         "5": {
             "english": {
                 "sentence": "The doctor",
-                "hints": "The doctor is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The doctor is female"
             },
             "french": {
-                "sentence": "La médecin",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La médecin"
             }
         },
         "6": {
             "english": {
-                "sentence": "The doctors",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The doctors"
             },
             "french": {
-                "sentence": "Les médecins",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les médecins"
             }
         },
         "7": {
             "english": {
                 "sentence": "The doctors",
-                "hints": "The doctors are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The doctors are female"
             },
             "french": {
                 "sentence": "Les médecins",
-                "hints": "Les médecins sont des femmes",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "Les médecins sont des femmes"
             }
         },
         "8": {
             "english": {
-                "sentence": "The engineer",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The engineer"
             },
             "french": {
-                "sentence": "L'ingénieur",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'ingénieur"
             }
         },
         "9": {
             "english": {
                 "sentence": "The engineer",
-                "hints": "The engineer is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The engineer is female"
             },
             "french": {
-                "sentence": "L'ingénieure",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'ingénieure"
             }
         },
         "10": {
             "english": {
-                "sentence": "The engineers",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The engineers"
             },
             "french": {
-                "sentence": "Les ingénieurs",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les ingénieurs"
             }
         },
         "11": {
             "english": {
                 "sentence": "The engineers",
-                "hints": "The engineers are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The engineers are female"
             },
             "french": {
-                "sentence": "Les ingénieures",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les ingénieures"
             }
         },
         "12": {
             "english": {
-                "sentence": "The teacher",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The teacher"
             },
             "french": {
-                "sentence": "L'enseignant",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'enseignant"
             }
         },
         "13": {
             "english": {
                 "sentence": "The teacher",
-                "hints": "The teacher is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The teacher is female"
             },
             "french": {
-                "sentence": "L'enseignante",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'enseignante"
             }
         },
         "14": {
             "english": {
-                "sentence": "The teachers",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The teachers"
             },
             "french": {
-                "sentence": "Les enseignants",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les enseignants"
             }
         },
         "15": {
             "english": {
                 "sentence": "The teachers",
-                "hints": "The teachers are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The teachers are female"
             },
             "french": {
-                "sentence": "Les enseignantes",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les enseignantes"
             }
         },
         "16": {
             "english": {
-                "sentence": "The programmer",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The programmer"
             },
             "french": {
-                "sentence": "Le programmeur",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le programmeur"
             }
         },
         "17": {
             "english": {
                 "sentence": "The programmer",
-                "hints": "The programmer is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The programmer is female"
             },
             "french": {
-                "sentence": "La programmeuse",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La programmeuse"
             }
         },
         "18": {
             "english": {
-                "sentence": "The programmers",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The programmers"
             },
             "french": {
-                "sentence": "Les programmeurs",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les programmeurs"
             }
         },
         "19": {
             "english": {
                 "sentence": "The programmers",
-                "hints": "The programmers are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The programmers are female"
             },
             "french": {
-                "sentence": "Les programmeuses",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les programmeuses"
             }
         },
         "20": {
             "english": {
-                "sentence": "The chef",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The chef"
             },
             "french": {
-                "sentence": "Le chef",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le chef"
             }
         },
         "21": {
             "english": {
                 "sentence": "The chef",
-                "hints": "The chef is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The chef is female"
             },
             "french": {
-                "sentence": "La chef",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La chef"
             }
         },
         "22": {
             "english": {
-                "sentence": "The chefs",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The chefs"
             },
             "french": {
-                "sentence": "Les chefs",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les chefs"
             }
         },
         "23": {
             "english": {
                 "sentence": "The chefs",
-                "hints": "The chefs are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The chefs are female"
             },
             "french": {
                 "sentence": "Les chefs",
-                "hints": "Les chefs sont des femmes",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "Les chefs sont des femmes"
             }
         },
         "24": {
             "english": {
-                "sentence": "The scientist",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The scientist"
             },
             "french": {
-                "sentence": "Le scientifique",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le scientifique"
             }
         },
         "25": {
             "english": {
                 "sentence": "The scientist",
-                "hints": "The scientist is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The scientist is female"
             },
             "french": {
-                "sentence": "La scientifique",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La scientifique"
             }
         },
         "26": {
             "english": {
-                "sentence": "The scientists",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The scientists"
             },
             "french": {
-                "sentence": "Les scientifiques",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les scientifiques"
             }
         },
         "27": {
             "english": {
                 "sentence": "The scientists",
-                "hints": "The scientists are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The scientists are female"
             },
             "french": {
                 "sentence": "Les scientifiques",
-                "hints": "Les scientifiques sont des femmes",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "Les scientifiques sont des femmes"
             }
         },
         "28": {
             "english": {
-                "sentence": "The architect",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The architect"
             },
             "french": {
-                "sentence": "L'architecte",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'architecte"
             }
         },
         "29": {
             "english": {
                 "sentence": "The architect",
-                "hints": "The architect is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The architect is female"
             },
             "french": {
-                "sentence": "L'architecte",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'architecte"
             }
         },
         "30": {
             "english": {
-                "sentence": "The architects",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The architects"
             },
             "french": {
-                "sentence": "Les architectes",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les architectes"
             }
         },
         "31": {
             "english": {
                 "sentence": "The architects",
-                "hints": "The architects are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The architects are female"
             },
             "french": {
                 "sentence": "Les architectes",
-                "hints": "Les architectes sont des femmes",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "Les architectes sont des femmes"
             }
         },
         "32": {
             "english": {
-                "sentence": "The musician",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The musician"
             },
             "french": {
-                "sentence": "Le musicien",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le musicien"
             }
         },
         "33": {
             "english": {
                 "sentence": "The musician",
-                "hints": "The musician is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The musician is female"
             },
             "french": {
-                "sentence": "La musicienne",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La musicienne"
             }
         },
         "34": {
             "english": {
-                "sentence": "The musicians",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The musicians"
             },
             "french": {
-                "sentence": "Les musiciens",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les musiciens"
             }
         },
         "35": {
             "english": {
                 "sentence": "The musicians",
-                "hints": "The musicians are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The musicians are female"
             },
             "french": {
-                "sentence": "Les musiciennes",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les musiciennes"
             }
         },
         "36": {
             "english": {
-                "sentence": "The farmer",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The farmer"
             },
             "french": {
-                "sentence": "Le fermier",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le fermier"
             }
         },
         "37": {
             "english": {
                 "sentence": "The farmer",
-                "hints": "The farmer is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The farmer is female"
             },
             "french": {
-                "sentence": "La fermière",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La fermière"
             }
         },
         "38": {
             "english": {
-                "sentence": "The farmers",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The farmers"
             },
             "french": {
-                "sentence": "Les fermiers",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les fermiers"
             }
         },
         "39": {
             "english": {
                 "sentence": "The farmers",
-                "hints": "The farmers are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The farmers are female"
             },
             "french": {
-                "sentence": "Les fermières",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les fermières"
             }
         },
         "40": {
             "english": {
-                "sentence": "The journalist",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The journalist"
             },
             "french": {
-                "sentence": "Le journaliste",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le journaliste"
             }
         },
         "41": {
             "english": {
                 "sentence": "The journalist",
-                "hints": "The journalist is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The journalist is female"
             },
             "french": {
-                "sentence": "La journaliste",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La journaliste"
             }
         },
         "42": {
             "english": {
-                "sentence": "The journalists",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The journalists"
             },
             "french": {
-                "sentence": "Les journalistes",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les journalistes"
             }
         },
         "43": {
             "english": {
                 "sentence": "The journalists",
-                "hints": "The journalists are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The journalists are female"
             },
             "french": {
                 "sentence": "Les journalistes",
-                "hints": "Les journalistes sont des femmes",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "Les journalistes sont des femmes"
             }
         },
         "44": {
             "english": {
-                "sentence": "The electrician",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The electrician"
             },
             "french": {
-                "sentence": "L'électricien",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'électricien"
             }
         },
         "45": {
             "english": {
                 "sentence": "The electrician",
-                "hints": "The electrician is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The electrician is female"
             },
             "french": {
-                "sentence": "L'électricienne",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "L'électricienne"
             }
         },
         "46": {
             "english": {
-                "sentence": "The electricians",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The electricians"
             },
             "french": {
-                "sentence": "Les électriciens",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les électriciens"
             }
         },
         "47": {
             "english": {
                 "sentence": "The electricians",
-                "hints": "The electricians are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The electricians are female"
             },
             "french": {
-                "sentence": "Les électriciennes",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les électriciennes"
             }
         },
         "48": {
             "english": {
-                "sentence": "The pharmacist",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The pharmacist"
             },
             "french": {
-                "sentence": "Le pharmacien",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le pharmacien"
             }
         },
         "49": {
             "english": {
                 "sentence": "The pharmacist",
-                "hints": "The pharmacist is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The pharmacist is female"
             },
             "french": {
-                "sentence": "La pharmacienne",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La pharmacienne"
             }
         },
         "50": {
             "english": {
-                "sentence": "The pharmacists",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The pharmacists"
             },
             "french": {
-                "sentence": "Les pharmaciens",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les pharmaciens"
             }
         },
         "51": {
             "english": {
                 "sentence": "The pharmacists",
-                "hints": "The pharmacists are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The pharmacists are female"
             },
             "french": {
-                "sentence": "Les pharmaciennes",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les pharmaciennes"
             }
         },
         "52": {
             "english": {
-                "sentence": "The firefighter",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The firefighter"
             },
             "french": {
-                "sentence": "Le pompier",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le pompier"
             }
         },
         "53": {
             "english": {
                 "sentence": "The firefighter",
-                "hints": "The firefighter is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The firefighter is female"
             },
             "french": {
-                "sentence": "La pompière",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La pompière"
             }
         },
         "54": {
             "english": {
-                "sentence": "The firefighters",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The firefighters"
             },
             "french": {
-                "sentence": "Les pompiers",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les pompiers"
             }
         },
         "55": {
             "english": {
                 "sentence": "The firefighters",
-                "hints": "The firefighters are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The firefighters are female"
             },
             "french": {
-                "sentence": "Les pompières",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les pompières"
             }
         },
         "56": {
             "english": {
-                "sentence": "The dentist",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The dentist"
             },
             "french": {
-                "sentence": "Le dentiste",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le dentiste"
             }
         },
         "57": {
             "english": {
                 "sentence": "The dentist",
-                "hints": "The dentist is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The dentist is female"
             },
             "french": {
-                "sentence": "La dentiste",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La dentiste"
             }
         },
         "58": {
             "english": {
-                "sentence": "The dentists",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The dentists"
             },
             "french": {
-                "sentence": "Les dentistes",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les dentistes"
             }
         },
         "59": {
             "english": {
                 "sentence": "The dentists",
-                "hints": "The dentists are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The dentists are female"
             },
             "french": {
                 "sentence": "Les dentistes",
-                "hints": "Les dentistes sont des femmes",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "Les dentistes sont des femmes"
             }
         },
         "60": {
             "english": {
-                "sentence": "The librarian",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The librarian"
             },
             "french": {
-                "sentence": "Le bibliothécaire",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le bibliothécaire"
             }
         },
         "61": {
             "english": {
                 "sentence": "The librarian",
-                "hints": "The librarian is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The librarian is female"
             },
             "french": {
-                "sentence": "La bibliothécaire",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La bibliothécaire"
             }
         },
         "62": {
             "english": {
-                "sentence": "The librarians",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The librarians"
             },
             "french": {
-                "sentence": "Les bibliothécaires",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les bibliothécaires"
             }
         },
         "63": {
             "english": {
                 "sentence": "The librarians",
-                "hints": "The librarians are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The librarians are female"
             },
             "french": {
                 "sentence": "Les bibliothécaires",
-                "hints": "Les bibliothécaires sont des femmes",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "Les bibliothécaires sont des femmes"
             }
         },
         "64": {
             "english": {
-                "sentence": "The policeman",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The policeman"
             },
             "french": {
-                "sentence": "Le policier",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le policier"
             }
         },
         "65": {
             "english": {
-                "sentence": "The policewoman",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The policewoman"
             },
             "french": {
-                "sentence": "La policière",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La policière"
             }
         },
         "66": {
             "english": {
-                "sentence": "The policemen",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The policemen"
             },
             "french": {
-                "sentence": "Les policiers",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les policiers"
             }
         },
         "67": {
             "english": {
-                "sentence": "The policewomen",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The policewomen"
             },
             "french": {
-                "sentence": "Les policières",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les policières"
             }
         },
         "68": {
             "english": {
-                "sentence": "The pilot",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The pilot"
             },
             "french": {
-                "sentence": "Le pilote",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le pilote"
             }
         },
         "69": {
             "english": {
                 "sentence": "The pilot",
-                "hints": "The pilot is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The pilot is female"
             },
             "french": {
-                "sentence": "La pilote",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La pilote"
             }
         },
         "70": {
             "english": {
-                "sentence": "The pilots",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The pilots"
             },
             "french": {
-                "sentence": "Les pilotes",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les pilotes"
             }
         },
         "71": {
             "english": {
                 "sentence": "The pilots",
-                "hints": "The pilots are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The pilots are female"
             },
             "french": {
                 "sentence": "Les pilotes",
-                "hints": "Les pilotes sont des femmes",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "Les pilotes sont des femmes"
             }
         },
         "72": {
             "english": {
-                "sentence": "The veterinarian",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The veterinarian"
             },
             "french": {
-                "sentence": "Le vétérinaire",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Le vétérinaire"
             }
         },
         "73": {
             "english": {
                 "sentence": "The veterinarian",
-                "hints": "The veterinarian is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The veterinarian is female"
             },
             "french": {
-                "sentence": "La vétérinaire",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "La vétérinaire"
             }
         },
         "74": {
             "english": {
-                "sentence": "The veterinarians",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "The veterinarians"
             },
             "french": {
-                "sentence": "Les vétérinaires",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Les vétérinaires"
             }
         },
         "75": {
             "english": {
                 "sentence": "The veterinarians",
-                "hints": "The veterinarians are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The veterinarians are female"
             },
             "french": {
                 "sentence": "Les vétérinaires",
-                "hints": "Les vétérinaires sont des femmes",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "Les vétérinaires sont des femmes"
             }
         }
     }

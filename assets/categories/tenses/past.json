@@ -6,296 +6,200 @@
     "questions": {
         "0": {
             "english": {
-                "sentence": "I spoke French",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "I spoke French"
             },
             "french": {
-                "sentence": "Je parlais fran\u00e7ais",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Je parlais fran\u00e7ais"
             }
         },
         "1": {
             "english": {
-                "sentence": "You spoke well",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "You spoke well"
             },
             "french": {
-                "sentence": "Tu parlais bien",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Tu parlais bien"
             }
         },
         "2": {
             "english": {
-                "sentence": "He spoke English",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "He spoke English"
             },
             "french": {
-                "sentence": "Il parlait anglais",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Il parlait anglais"
             }
         },
         "3": {
             "english": {
-                "sentence": "She spoke English",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "She spoke English"
             },
             "french": {
-                "sentence": "Elle parlait anglais",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Elle parlait anglais"
             }
         },
         "4": {
             "english": {
-                "sentence": "We spoke Spanish",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "We spoke Spanish"
             },
             "french": {
-                "sentence": "Nous parlions espagnol",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Nous parlions espagnol"
             }
         },
         "5": {
             "english": {
-                "sentence": "You spoke German",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "You spoke German"
             },
             "french": {
-                "sentence": "Vous parliez allemand",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Vous parliez allemand"
             }
         },
         "6": {
             "english": {
                 "sentence": "They spoke Italian",
-                "hints": "they were males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "they were males"
             },
             "french": {
-                "sentence": "Ils parlaient italien",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Ils parlaient italien"
             }
         },
         "7": {
             "english": {
                 "sentence": "They spoke Italian",
-                "hints": "they were females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "they were females"
             },
             "french": {
-                "sentence": "Elles parlaient italien",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Elles parlaient italien"
             }
         },
         "8": {
             "english": {
-                "sentence": "I finished my work",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "I finished my work"
             },
             "french": {
-                "sentence": "Je finissais mon travail",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Je finissais mon travail"
             }
         },
         "9": {
             "english": {
-                "sentence": "You finished quickly",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "You finished quickly"
             },
             "french": {
-                "sentence": "Tu finissais rapidement",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Tu finissais rapidement"
             }
         },
         "10": {
             "english": {
-                "sentence": "He finished the book",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "He finished the book"
             },
             "french": {
-                "sentence": "Il finissait le livre",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Il finissait le livre"
             }
         },
         "11": {
             "english": {
-                "sentence": "She finished the book",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "She finished the book"
             },
             "french": {
-                "sentence": "Elle finissait le livre",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Elle finissait le livre"
             }
         },
         "12": {
             "english": {
-                "sentence": "We finished our homework",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "We finished our homework"
             },
             "french": {
-                "sentence": "Nous finissions nos devoirs",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Nous finissions nos devoirs"
             }
         },
         "13": {
             "english": {
-                "sentence": "You finished early",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "You finished early"
             },
             "french": {
-                "sentence": "Vous finissiez t\u00f4t",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Vous finissiez t\u00f4t"
             }
         },
         "14": {
             "english": {
                 "sentence": "They finished the race",
-                "hints": "they were males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "they were males"
             },
             "french": {
-                "sentence": "Ils finissaient la course",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Ils finissaient la course"
             }
         },
         "15": {
             "english": {
                 "sentence": "They finished the race",
-                "hints": "they were females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "they were females"
             },
             "french": {
-                "sentence": "Elles finissaient la course",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Elles finissaient la course"
             }
         },
         "16": {
             "english": {
-                "sentence": "I took a coffee",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "I took a coffee"
             },
             "french": {
-                "sentence": "Je prenais un caf\u00e9",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Je prenais un caf\u00e9"
             }
         },
         "17": {
             "english": {
-                "sentence": "You took the bus",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "You took the bus"
             },
             "french": {
-                "sentence": "Tu prenais le bus",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Tu prenais le bus"
             }
         },
         "18": {
             "english": {
-                "sentence": "He took the subway",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "He took the subway"
             },
             "french": {
-                "sentence": "Il prenait le m\u00e9tro",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Il prenait le m\u00e9tro"
             }
         },
         "19": {
             "english": {
-                "sentence": "She took the subway",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "She took the subway"
             },
             "french": {
-                "sentence": "Elle prenait le m\u00e9tro",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Elle prenait le m\u00e9tro"
             }
         },
         "20": {
             "english": {
-                "sentence": "We had breakfast",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "We had breakfast"
             },
             "french": {
-                "sentence": "Nous prenions le petit-d\u00e9jeuner",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Nous prenions le petit-d\u00e9jeuner"
             }
         },
         "21": {
             "english": {
-                "sentence": "You took the train",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "You took the train"
             },
             "french": {
-                "sentence": "Vous preniez le train",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Vous preniez le train"
             }
         },
         "22": {
             "english": {
                 "sentence": "They took photos",
-                "hints": "they were males",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "they were males"
             },
             "french": {
-                "sentence": "Ils prenaient des photos",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Ils prenaient des photos"
             }
         },
         "23": {
             "english": {
                 "sentence": "They took photos",
-                "hints": "they were females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "they were females"
             },
             "french": {
-                "sentence": "Elles prenaient des photos",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "Elles prenaient des photos"
             }
         }
     }

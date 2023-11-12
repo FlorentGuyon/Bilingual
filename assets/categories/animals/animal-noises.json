@@ -10,999 +10,679 @@
     "questions": {
         "0": {
             "english": {
-                "sentence": "the cat meows",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the cat meows"
             },
             "french": {
-                "sentence": "le chat miaule",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le chat miaule"
             }
         },
         "1": {
             "english": {
                 "sentence": "the cat meows",
-                "hints": "The cat is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The cat is female"
             },
             "french": {
-                "sentence": "la chatte miaule",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la chatte miaule"
             }
         },
         "2": {
             "english": {
-                "sentence": "the kitten meows",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the kitten meows"
             },
             "french": {
-                "sentence": "le chatton miaule",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le chatton miaule"
             }
         },
         "3": {
             "english": {
                 "sentence": "the kitten meows",
-                "hints": "The kitten is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The kitten is female"
             },
             "french": {
                 "sentence": "le chatton miaule",
-                "hints": "le chatton est une femelle",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "le chatton est une femelle"
             }
         },
         "4": {
             "english": {
-                "sentence": "the cats meow",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the cats meow"
             },
             "french": {
-                "sentence": "les chats miaulent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chats miaulent"
             }
         },
         "5": {
             "english": {
                 "sentence": "the cats meow",
-                "hints": "The cat is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The cat is female"
             },
             "french": {
-                "sentence": "les chattes miaulent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chattes miaulent"
             }
         },
         "6": {
             "english": {
-                "sentence": "the kittens meow",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the kittens meow"
             },
             "french": {
-                "sentence": "les chattons miaulent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chattons miaulent"
             }
         },
         "7": {
             "english": {
                 "sentence": "the kittens meow",
-                "hints": "The kittens are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The kittens are female"
             },
             "french": {
                 "sentence": "les chattons miaulent",
-                "hints": "les chattons sont des females",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "les chattons sont des females"
             }
         },
         "8": {
             "english": {
-                "sentence": "the bull moos",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the bull moos"
             },
             "french": {
-                "sentence": "le taureau meugle",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le taureau meugle"
             }
         },
         "9": {
             "english": {
-                "sentence": "the cow moos",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the cow moos"
             },
             "french": {
-                "sentence": "la vache meugle",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la vache meugle"
             }
         },
         "10": {
             "english": {
-                "sentence": "the calf moos",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the calf moos"
             },
             "french": {
-                "sentence": "le veau meugle",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le veau meugle"
             }
         },
         "11": {
             "english": {
                 "sentence": "the calf moos",
-                "hints": "The calf is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The calf is female"
             },
             "french": {
-                "sentence": "la g\u00e9nisse meugle",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la g\u00e9nisse meugle"
             }
         },
         "12": {
             "english": {
-                "sentence": "the bulls moo",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the bulls moo"
             },
             "french": {
-                "sentence": "les taueaux meuglent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les taueaux meuglent"
             }
         },
         "13": {
             "english": {
-                "sentence": "the cows moo",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the cows moo"
             },
             "french": {
-                "sentence": "les vaches meuglent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les vaches meuglent"
             }
         },
         "14": {
             "english": {
-                "sentence": "the calves moo",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the calves moo"
             },
             "french": {
-                "sentence": "les veaux meuglent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les veaux meuglent"
             }
         },
         "15": {
             "english": {
                 "sentence": "the calves moo",
-                "hints": "The calves are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The calves are female"
             },
             "french": {
-                "sentence": "les g\u00e9nisses meuglent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les g\u00e9nisses meuglent"
             }
         },
         "16": {
             "english": {
-                "sentence": "the pig oinks",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the pig oinks"
             },
             "french": {
-                "sentence": "le cochon grogne",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le cochon grogne"
             }
         },
         "17": {
             "english": {
                 "sentence": "the pig oinks",
-                "hints": "The pig is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The pig is female"
             },
             "french": {
-                "sentence": "la truie grogne",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la truie grogne"
             }
         },
         "18": {
             "english": {
-                "sentence": "the piglet oinks",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the piglet oinks"
             },
             "french": {
-                "sentence": "le porcelet grogne",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le porcelet grogne"
             }
         },
         "19": {
             "english": {
                 "sentence": "the piglet oinks",
-                "hints": "The piglet is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The piglet is female"
             },
             "french": {
-                "sentence": "la porcelette grogne",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la porcelette grogne"
             }
         },
         "20": {
             "english": {
-                "sentence": "the pigs oink",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the pigs oink"
             },
             "french": {
-                "sentence": "les cochons grognent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les cochons grognent"
             }
         },
         "21": {
             "english": {
                 "sentence": "the pigs oink",
-                "hints": "The pigs are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The pigs are female"
             },
             "french": {
-                "sentence": "les truies grognent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les truies grognent"
             }
         },
         "22": {
             "english": {
-                "sentence": "the piglets oink",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the piglets oink"
             },
             "french": {
-                "sentence": "les porcelets grognent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les porcelets grognent"
             }
         },
         "23": {
             "english": {
                 "sentence": "the piglets oink",
-                "hints": "The piglets are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The piglets are female"
             },
             "french": {
-                "sentence": "les porcelettes grognent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les porcelettes grognent"
             }
         },
         "24": {
             "english": {
-                "sentence": "the rooster crows",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the rooster crows"
             },
             "french": {
-                "sentence": "le coq chante",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le coq chante"
             }
         },
         "25": {
             "english": {
-                "sentence": "the hen crows",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the hen crows"
             },
             "french": {
-                "sentence": "la poule chante",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la poule chante"
             }
         },
         "26": {
             "english": {
-                "sentence": "the chick peeps",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the chick peeps"
             },
             "french": {
-                "sentence": "le poussin p\u00e9pie",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le poussin p\u00e9pie"
             }
         },
         "27": {
             "english": {
                 "sentence": "the chick peeps",
-                "hints": "The chick is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The chick is female"
             },
             "french": {
-                "sentence": "la poussine p\u00e9pie",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la poussine p\u00e9pie"
             }
         },
         "28": {
             "english": {
-                "sentence": "the roosters crow",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the roosters crow"
             },
             "french": {
-                "sentence": "les coqs chantent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les coqs chantent"
             }
         },
         "29": {
             "english": {
-                "sentence": "the hens crow",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the hens crow"
             },
             "french": {
-                "sentence": "les poules chantent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les poules chantent"
             }
         },
         "30": {
             "english": {
-                "sentence": "the chicks peep",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the chicks peep"
             },
             "french": {
-                "sentence": "les poussins p\u00e9pient",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les poussins p\u00e9pient"
             }
         },
         "31": {
             "english": {
                 "sentence": "the chicks peep",
-                "hints": "The chicks are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The chicks are female"
             },
             "french": {
-                "sentence": "les poussines p\u00e9pient",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les poussines p\u00e9pient"
             }
         },
         "32": {
             "english": {
-                "sentence": "the dog barks",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the dog barks"
             },
             "french": {
-                "sentence": "le chien aboie",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le chien aboie"
             }
         },
         "33": {
             "english": {
                 "sentence": "the dog barks",
-                "hints": "The dog is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The dog is female"
             },
             "french": {
-                "sentence": "la chienne aboie",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la chienne aboie"
             }
         },
         "34": {
             "english": {
-                "sentence": "the puppy barks",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the puppy barks"
             },
             "french": {
-                "sentence": "le chiot aboie",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le chiot aboie"
             }
         },
         "35": {
             "english": {
                 "sentence": "the puppy barks",
-                "hints": "The puppy is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The puppy is female"
             },
             "french": {
                 "sentence": "le chiot aboie",
-                "hints": "le chiot est une femelle",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "le chiot est une femelle"
             }
         },
         "36": {
             "english": {
-                "sentence": "the dogs bark",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the dogs bark"
             },
             "french": {
-                "sentence": "les chiens aboient",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chiens aboient"
             }
         },
         "37": {
             "english": {
                 "sentence": "the dogs bark",
-                "hints": "The dogs are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The dogs are female"
             },
             "french": {
-                "sentence": "les chiennes aboient",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chiennes aboient"
             }
         },
         "38": {
             "english": {
-                "sentence": "the puppies bark",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the puppies bark"
             },
             "french": {
-                "sentence": "les chiots aboient",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chiots aboient"
             }
         },
         "39": {
             "english": {
                 "sentence": "the puppies bark",
-                "hints": "The puppies are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The puppies are female"
             },
             "french": {
                 "sentence": "les chiots aboient",
-                "hints": "les chiots sont des femelles",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "les chiots sont des femelles"
             }
         },
         "40": {
             "english": {
-                "sentence": "the duck quacks",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the duck quacks"
             },
             "french": {
-                "sentence": "le canard cancane",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le canard cancane"
             }
         },
         "41": {
             "english": {
                 "sentence": "the duck quacks",
-                "hints": "The duck is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The duck is female"
             },
             "french": {
-                "sentence": "la cane cancane",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la cane cancane"
             }
         },
         "42": {
             "english": {
-                "sentence": "the duckling peeps",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the duckling peeps"
             },
             "french": {
-                "sentence": "le caneton p\u00e9pie",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le caneton p\u00e9pie"
             }
         },
         "43": {
             "english": {
                 "sentence": "the duckling peeps",
-                "hints": "The duckling is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The duckling is female"
             },
             "french": {
-                "sentence": "la canette p\u00e9pie",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la canette p\u00e9pie"
             }
         },
         "44": {
             "english": {
-                "sentence": "the ducks quack",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the ducks quack"
             },
             "french": {
-                "sentence": "les canards cancanent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les canards cancanent"
             }
         },
         "45": {
             "english": {
                 "sentence": "the ducks quack",
-                "hints": "The ducks are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The ducks are female"
             },
             "french": {
-                "sentence": "les canes cancanent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les canes cancanent"
             }
         },
         "46": {
             "english": {
-                "sentence": "the ducklings peep",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the ducklings peep"
             },
             "french": {
-                "sentence": "les canetons p\u00e9pient",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les canetons p\u00e9pient"
             }
         },
         "47": {
             "english": {
                 "sentence": "the ducklings peep",
-                "hints": "The ducklings are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The ducklings are female"
             },
             "french": {
-                "sentence": "les canettes p\u00e9pient",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les canettes p\u00e9pient"
             }
         },
         "48": {
             "english": {
-                "sentence": "the billy goat bleats",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the billy goat bleats"
             },
             "french": {
-                "sentence": "le bouc b\u00eale",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le bouc b\u00eale"
             }
         },
         "49": {
             "english": {
-                "sentence": "the nanny goat bleats",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the nanny goat bleats"
             },
             "french": {
-                "sentence": "la ch\u00e8vre b\u00eale",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la ch\u00e8vre b\u00eale"
             }
         },
         "50": {
             "english": {
                 "sentence": "the kid bleats",
-                "hints": "A kid is a baby goat",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "A kid is a baby goat"
             },
             "french": {
-                "sentence": "le chevreau b\u00eale",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le chevreau b\u00eale"
             }
         },
         "51": {
             "english": {
                 "sentence": "the kid bleats",
-                "hints": "A kid is a baby goat. The kid is female.",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "A kid is a baby goat. The kid is female."
             },
             "french": {
-                "sentence": "la chevrette b\u00eale",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la chevrette b\u00eale"
             }
         },
         "52": {
             "english": {
-                "sentence": "the billy goats bleat",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the billy goats bleat"
             },
             "french": {
-                "sentence": "les boucs b\u00ealent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les boucs b\u00ealent"
             }
         },
         "53": {
             "english": {
-                "sentence": "the nanny goats bleat",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the nanny goats bleat"
             },
             "french": {
-                "sentence": "les ch\u00e8vres b\u00ealent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les ch\u00e8vres b\u00ealent"
             }
         },
         "54": {
             "english": {
                 "sentence": "the kids bleat",
-                "hints": "A kid is a baby goat.",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "A kid is a baby goat."
             },
             "french": {
-                "sentence": "les chevreaux b\u00ealent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chevreaux b\u00ealent"
             }
         },
         "55": {
             "english": {
                 "sentence": "the kids bleat",
-                "hints": "A kid is a baby goat. The kids are female.",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "A kid is a baby goat. The kids are female."
             },
             "french": {
-                "sentence": "les chevrettes b\u00ealent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les chevrettes b\u00ealent"
             }
         },
         "56": {
             "english": {
-                "sentence": "the buck rabbit thumps",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the buck rabbit thumps"
             },
             "french": {
-                "sentence": "le lapin tape du pied",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le lapin tape du pied"
             }
         },
         "57": {
             "english": {
-                "sentence": "the doe rabbit thumps",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the doe rabbit thumps"
             },
             "french": {
-                "sentence": "la lapine tape du pied",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la lapine tape du pied"
             }
         },
         "58": {
             "english": {
-                "sentence": "the kit rabbit thumps",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the kit rabbit thumps"
             },
             "french": {
-                "sentence": "le lapereau tape du pied",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le lapereau tape du pied"
             }
         },
         "59": {
             "english": {
                 "sentence": "the kit rabbit thumps",
-                "hints": "The kit is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The kit is female"
             },
             "french": {
                 "sentence": "le lapereau tape du pied",
-                "hints": "le lapearau est une femelle",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "le lapearau est une femelle"
             }
         },
         "60": {
             "english": {
-                "sentence": "the buck rabbits thump",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the buck rabbits thump"
             },
             "french": {
-                "sentence": "les lapins tapent du pied",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les lapins tapent du pied"
             }
         },
         "61": {
             "english": {
-                "sentence": "the doe rabbits thump",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the doe rabbits thump"
             },
             "french": {
-                "sentence": "les lapines tapent du pied",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les lapines tapent du pied"
             }
         },
         "62": {
             "english": {
-                "sentence": "the kit rabbits thump",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the kit rabbits thump"
             },
             "french": {
-                "sentence": "les lapereaux tapent du pied",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les lapereaux tapent du pied"
             }
         },
         "63": {
             "english": {
                 "sentence": "the kit rabbits thump",
-                "hints": "The kits are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The kits are female"
             },
             "french": {
-                "sentence": "les lapereaux tapent du pied",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les lapereaux tapent du pied"
             }
         },
         "64": {
             "english": {
-                "sentence": "the stallion neighs",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the stallion neighs"
             },
             "french": {
-                "sentence": "l'\u00e9talon hennit",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "l'\u00e9talon hennit"
             }
         },
         "65": {
             "english": {
-                "sentence": "the mare neighs",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the mare neighs"
             },
             "french": {
-                "sentence": "la jument hennit",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la jument hennit"
             }
         },
         "66": {
             "english": {
-                "sentence": "the foal neighs",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the foal neighs"
             },
             "french": {
-                "sentence": "le poulain hennit",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le poulain hennit"
             }
         },
         "67": {
             "english": {
                 "sentence": "the foal neighs",
-                "hints": "The foal is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The foal is female"
             },
             "french": {
-                "sentence": "la pouliche hennit",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la pouliche hennit"
             }
         },
         "68": {
             "english": {
-                "sentence": "the stallions neigh",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the stallions neigh"
             },
             "french": {
-                "sentence": "les \u00e9talons hennissent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les \u00e9talons hennissent"
             }
         },
         "69": {
             "english": {
-                "sentence": "the mares neigh",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the mares neigh"
             },
             "french": {
-                "sentence": "les juments hennissent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les juments hennissent"
             }
         },
         "70": {
             "english": {
-                "sentence": "the foals neigh",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the foals neigh"
             },
             "french": {
-                "sentence": "les poulains hennissent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les poulains hennissent"
             }
         },
         "71": {
             "english": {
                 "sentence": "the foals neigh",
-                "hints": "The foals are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The foals are female"
             },
             "french": {
-                "sentence": "les pouliches hennissent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les pouliches hennissent"
             }
         },
         "72": {
             "english": {
-                "sentence": "the ram bleats",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the ram bleats"
             },
             "french": {
-                "sentence": "le b\u00e9lier b\u00eale",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "le b\u00e9lier b\u00eale"
             }
         },
         "73": {
             "english": {
-                "sentence": "the ewe bleats",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the ewe bleats"
             },
             "french": {
-                "sentence": "la brebis b\u00eale",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "la brebis b\u00eale"
             }
         },
         "74": {
             "english": {
-                "sentence": "the lamb bleats",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the lamb bleats"
             },
             "french": {
-                "sentence": "l'agneau b\u00eale",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "l'agneau b\u00eale"
             }
         },
         "75": {
             "english": {
                 "sentence": "the lamb bleats",
-                "hints": "The lamb is female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The lamb is female"
             },
             "french": {
                 "sentence": "l'agneau b\u00eale",
-                "hints": "l'agneau est une femelle.",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "l'agneau est une femelle."
             }
         },
         "76": {
             "english": {
-                "sentence": "the rams bleat",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the rams bleat"
             },
             "french": {
-                "sentence": "les b\u00e9liers b\u00ealent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les b\u00e9liers b\u00ealent"
             }
         },
         "77": {
             "english": {
-                "sentence": "the ewes bleat",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the ewes bleat"
             },
             "french": {
-                "sentence": "les brebis b\u00ealent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les brebis b\u00ealent"
             }
         },
         "78": {
             "english": {
-                "sentence": "the lambs bleat",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "the lambs bleat"
             },
             "french": {
-                "sentence": "les agneaux b\u00ealent",
-                "success_rate": 0,
-                "tries": 0
+                "sentence": "les agneaux b\u00ealent"
             }
         },
         "79": {
             "english": {
                 "sentence": "the lambs bleat",
-                "hints": "The lambs are female",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "The lambs are female"
             },
             "french": {
                 "sentence": "les agneaux b\u00ealent",
-                "hints": "les agneaux sont des femelles",
-                "success_rate": 0,
-                "tries": 0
+                "hints": "les agneaux sont des femelles"
             }
         }
     }
