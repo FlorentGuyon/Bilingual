@@ -1,0 +1,203 @@
+{
+    "id": "present",  
+    "name": "Present Simple",
+    "icon": "present",       
+    "prerequisites": {},
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "I speak French well"
+            },
+            "french": {
+                "sentence": "Je parle bien fran\u00e7ais"
+            }
+        },
+        "1": {
+            "english": {
+                "sentence": "You speak French well"
+            },
+            "french": {
+                "sentence": "Tu parles bien français"
+            }
+        },
+        "2": {
+            "english": {
+                "sentence": "He speaks English well"
+            },
+            "french": {
+                "sentence": "Il parle bien anglais"
+            }
+        },
+        "3": {
+            "english": {
+                "sentence": "She speaks English well"
+            },
+            "french": {
+                "sentence": "Elle parle bien anglais"
+            }
+        },
+        "4": {
+            "english": {
+                "sentence": "We speak Spanish everyday"
+            },
+            "french": {
+                "sentence": "Nous parlons espagnol tous les jours"
+            }
+        },
+        "5": {
+            "english": {
+                "sentence": "You speak German everyday"
+            },
+            "french": {
+                "sentence": "Vous parlez allemand tous les jours"
+            }
+        },
+        "6": {
+            "english": {
+                "sentence": "They speak Italian everyday"
+            },
+            "french": {
+                "sentence": "Ils parlent italien tous les jours"
+            }
+        },
+        "7": {
+            "english": {
+                "sentence": "They speak Italian everyday",
+                "hints": "they are females"
+            },
+            "french": {
+                "sentence": "Elles parlent italien tous les jours"
+            }
+        },
+        "8": {
+            "english": {
+                "sentence": "I finish my work at midnight"
+            },
+            "french": {
+                "sentence": "Je finis mon travail à minuit"
+            }
+        },
+        "9": {
+            "english": {
+                "sentence": "You finish quickly every time"
+            },
+            "french": {
+                "sentence": "Tu finis rapidement à chaque fois"
+            }
+        },
+        "10": {
+            "english": {
+                "sentence": "He finishes at noon everyday"
+            },
+            "french": {
+                "sentence": "Il finit à midi tous les jours"
+            }
+        },
+        "11": {
+            "english": {
+                "sentence": "She finishes at noon everyday"
+            },
+            "french": {
+                "sentence": "Elle finit à midi tous les jours"
+            }
+        },
+        "12": {
+            "english": {
+                "sentence": "We always finish our homework at midnight"
+            },
+            "french": {
+                "sentence": "Nous finissons toujours nos devoirs à minuit"
+            }
+        },
+        "13": {
+            "english": {
+                "sentence": "You always finish early"
+            },
+            "french": {
+                "sentence": "Vous finissez toujours t\u00f4t"
+            }
+        },
+        "14": {
+            "english": {
+                "sentence": "They always finish the race"
+            },
+            "french": {
+                "sentence": "Ils finissent toujours la course"
+            }
+        },
+        "15": {
+            "english": {
+                "sentence": "They always finish the race",
+                "hints": "they are females"
+            },
+            "french": {
+                "sentence": "Elles finissent toujours la course"
+            }
+        },
+        "16": {
+            "english": {
+                "sentence": "I take a coffee everyday"
+            },
+            "french": {
+                "sentence": "Je prends un caf\u00e9 tous les jours"
+            }
+        },
+        "17": {
+            "english": {
+                "sentence": "You take the bus every week"
+            },
+            "french": {
+                "sentence": "Tu prends le bus toutes les semaines"
+            }
+        },
+        "18": {
+            "english": {
+                "sentence": "He takes the subway every month"
+            },
+            "french": {
+                "sentence": "Il prend le m\u00e9tro tous les mois"
+            }
+        },
+        "19": {
+            "english": {
+                "sentence": "She takes the subway everyday"
+            },
+            "french": {
+                "sentence": "Elle prend le m\u00e9tro tous les jours"
+            }
+        },
+        "20": {
+            "english": {
+                "sentence": "We have breakfast every morning"
+            },
+            "french": {
+                "sentence": "Nous prenons le petit-d\u00e9jeuner tous les matins"
+            }
+        },
+        "21": {
+            "english": {
+                "sentence": "You take the train every month"
+            },
+            "french": {
+                "sentence": "Vous prenez le train tous les mois"
+            }
+        },
+        "22": {
+            "english": {
+                "sentence": "They take photos everyday"
+            },
+            "french": {
+                "sentence": "Ils prennent des photos tous les jours"
+            }
+        },
+        "23": {
+            "english": {
+                "sentence": "They take photos everyday",
+                "hints": "they are females"
+            },
+            "french": {
+                "sentence": "Elles prennent des photos tous les jours"
+            }
+        }
+    }
+}

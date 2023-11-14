@@ -4,7 +4,7 @@
     "icon": "arts",   
     "prerequisites": {
         "jobs": {
-            "basic-jobs": 0
+            "basic-jobs": 1
         }
     },
     "questions": {

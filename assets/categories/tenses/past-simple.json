@@ -1,10 +1,10 @@
 {
     "id": "past",   
-    "name": "Past",
+    "name": "Past Simple",
     "icon": "past",   
     "prerequisites": {
         "tenses": {
-            "present": 1
+            "present-continuous": 1
         }
     },
     "questions": {

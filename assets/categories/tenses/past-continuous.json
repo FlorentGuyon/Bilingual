@@ -1,0 +1,20 @@
+{
+    "id": "past-continuous",  
+    "name": "Past Continuous",
+    "icon": "past-continuous",       
+    "prerequisites": {
+        "tenses": {
+            "past": 1
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "He was studying when I called him"
+            },
+            "french": {
+                "sentence": "Il était entrain d'étudier quand je l'ai appelé"
+            }
+        }
+    }
+}

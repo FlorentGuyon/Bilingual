@@ -1,0 +1,20 @@
+{
+    "id": "future-continuous",  
+    "name": "Future Continuous",
+    "icon": "future-continuous",       
+    "prerequisites": {
+        "tenses": {
+            "future": 1
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "Tomorrow, at noon, I will be watching a movie"
+            },
+            "french": {
+                "sentence": "Demain, à midi, je serai en train de regarder un film"
+            }
+        }
+    }
+}

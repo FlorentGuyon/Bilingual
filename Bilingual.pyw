@@ -540,6 +540,7 @@ class Bilingual(Tk):
         self._explainations = None
         self.load_profiles()
         self.load_categories()
+        self.load_explainations()
         self.set_styles()
         self.create_window()
         self.display_profiles()
@@ -906,6 +907,7 @@ class Bilingual(Tk):
             global LEARNED_LANGUAGE
             SPOKEN_LANGUAGE = spoken_language
             LEARNED_LANGUAGE = learned_language
+            self.load_profile()
             self.display_categories()
 
     # QUESTIONS
@@ -1167,7 +1169,7 @@ class Bilingual(Tk):
             self.bind_widget(new_frame, partial(self.enter_widget, new_frame), EVENT_ENTER_WIDGET, recursive=False)
             self.bind_widget(new_frame, partial(self.leave_widget, new_frame), EVENT_LEAVE_WIDGET, recursive=False)
 
-        if over_title:                
+        if over_title and locked:                
             self.bind_widget(new_frame, partial(self.set_window_title, over_title), EVENT_ENTER_WIDGET, recursive=False)
             self.bind_widget(new_frame, partial(self.set_window_title, self.title()), EVENT_LEAVE_WIDGET, recursive=False)
 
@@ -1568,8 +1570,6 @@ class Bilingual(Tk):
     @log_calls
     def select_profile(self, profile, event=None):
         self.profile = profile
-        self.load_profile()
-        self.load_explainations()
         self.display_languages()
     
     # CATEGORIES

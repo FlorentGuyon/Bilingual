@@ -1,0 +1,93 @@
+{
+    "id": "present-continuous",  
+    "name": "Present Continuous",
+    "icon": "present-continuous",       
+    "prerequisites": {
+        "tenses": {
+            "present": 1
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "Listen, I am speaking to you"
+            },
+            "french": {
+                "sentence": "Ecoute, Je suis en train de te parler"
+            }
+        },
+        "1": {
+            "english": {
+                "sentence": "We are discussing the plans for the event"
+            },
+            "french": {
+                "sentence": "Nous sommes en train de discuter des plans pour l'événement"
+            }
+        },
+        "2": {
+            "english": {
+                "sentence": "We are watching a movie at the cinema"
+            },
+            "french": {
+                "sentence": "Nous sommes en train de regarder un film au cinéma"
+            }
+        },
+        "3": {
+            "english": {
+                "sentence": "They are studying for their exams"
+            },
+            "french": {
+                "sentence": "Ils sont en train d'étudier pour leurs examens"
+            }
+        },
+        "4": {
+            "english": {
+                "sentence": "I am reading a book in the library"
+            },
+            "french": {
+                "sentence": "Je suis en train de lire un livre à la bibliothèque"
+            }
+        },
+        "5": {
+            "english": {
+                "sentence": "The kids are playing in the garden"
+            },
+            "french": {
+                "sentence": "Les enfants sont en train de jouer dans le jardin"
+            }
+        },
+        "6": {
+            "english": {
+                "sentence": "I am working on a project for my class"
+            },
+            "french": {
+                "sentence": "Je suis en train de travailler sur un projet pour ma classe"
+            }
+        },
+        "7": {
+            "english": {
+                "sentence": "The chef is preparing a special dish in the kitchen"
+            },
+            "french": {
+                "sentence": "Le chef est en train de préparer un plat spécial dans la cuisine"
+            }
+        },
+        "8": {
+            "english": {
+                "sentence": "They are building a new house in our neighborhood",
+                "hints": "They are females"
+            },
+            "french": {
+                "sentence": "Ils sont en train de construire une nouvelle maison dans notre quartier"
+            }
+        },
+        "9": {
+            "english": {
+                "sentence": "My sister is playing the piano for her recital"
+            },
+            "french": {
+                "sentence": "Ma sœur est en train de jouer au piano pour son récital"
+            }
+        }
+    }
+}

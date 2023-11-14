@@ -1,10 +1,10 @@
 {
     "id": "future",   
-    "name": "Future",
+    "name": "Future Simple",
     "icon": "future",   
     "prerequisites": {
         "tenses": {
-            "present": 1
+            "present-continuous": 1
         }
     },
     "questions": {
