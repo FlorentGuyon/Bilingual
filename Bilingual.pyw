@@ -385,7 +385,6 @@ class Lesson:
         return self.question
 
 
-
 class Category:
 
     def __init__(self, uid=None, name=None, icon=None, lessons=None, lesson=None):
@@ -522,6 +521,7 @@ class Profile:
 
 
 class Bilingual(Tk):
+
     def __init__(self):
         super().__init__()
         self.protocol("WM_DELETE_WINDOW", self.close_app)
@@ -609,10 +609,10 @@ class Bilingual(Tk):
 
     @property
     def lessons(self):
-        lessons = []
+        lessons = {}
         for category in self.categories.values():
             for lesson in category.lessons.values():
-                lessons.append(lesson)
+                lessons[lesson.uid] = lesson
         return lessons
 
     # QUESTION
@@ -646,7 +646,7 @@ class Bilingual(Tk):
         self.iconbitmap(file_path)
 
     @log_calls
-    def set_window_title(self, title):
+    def set_window_title(self, title, event=None):
         self.title(title)
 
     # ICONS
@@ -678,6 +678,11 @@ class Bilingual(Tk):
     @explainations.setter
     def explainations(self, explainations):
         self._explainations = explainations
+
+    # LESSON
+    @lessons.setter
+    def lessons(self, lessons):
+        self._lessons = lessons
 
     # LESSON
     @lesson.setter
@@ -1086,7 +1091,7 @@ class Bilingual(Tk):
                 self.bind_widget(tts_frame, partial(self.leave_widget, tts_frame), EVENT_LEAVE_WIDGET, recursive=False)
 
     @log_calls
-    def create_image_frame(self, parent, image, text, action, arguments, sound=None, animate=True):
+    def create_image_frame(self, parent, image, text, action, arguments, sound=None, animate=True, over_title=None):
         new_frame = Frame(parent, style="CustomDarkFrame.TFrame")
         new_frame.pack(pady=5, expand=True, fill=X)
 
@@ -1106,8 +1111,12 @@ class Bilingual(Tk):
             self.bind_widget(new_frame, partial(self.enter_widget, new_frame), EVENT_ENTER_WIDGET, recursive=False)
             self.bind_widget(new_frame, partial(self.leave_widget, new_frame), EVENT_LEAVE_WIDGET, recursive=False)
 
+        if over_title:                
+            self.bind_widget(new_frame, partial(self.set_window_title, over_title), EVENT_ENTER_WIDGET, recursive=False)
+            self.bind_widget(new_frame, partial(self.set_window_title, self.title()), EVENT_LEAVE_WIDGET, recursive=False)
+
     @log_calls
-    def create_progress_frame(self, parent, image, text, progress, stars, action=None, arguments=None, locked=False, animate=True):
+    def create_progress_frame(self, parent, image, text, progress, stars, action=None, arguments=None, locked=False, animate=True, over_title=None):
 
         frame_style = "Disabled.CustomDarkFrame.TFrame" if locked else "CustomDarkFrame.TFrame"
         label_style = "Disabled.Default.TLabel" if locked else "Default.TLabel"
@@ -1157,6 +1166,10 @@ class Bilingual(Tk):
 
             self.bind_widget(new_frame, partial(self.enter_widget, new_frame), EVENT_ENTER_WIDGET, recursive=False)
             self.bind_widget(new_frame, partial(self.leave_widget, new_frame), EVENT_LEAVE_WIDGET, recursive=False)
+
+        if over_title:                
+            self.bind_widget(new_frame, partial(self.set_window_title, over_title), EVENT_ENTER_WIDGET, recursive=False)
+            self.bind_widget(new_frame, partial(self.set_window_title, self.title()), EVENT_LEAVE_WIDGET, recursive=False)
 
     # BUTTONS
     @log_calls
@@ -1303,6 +1316,8 @@ class Bilingual(Tk):
                 self.bind_widget(frame, partial(self.click_button, self.validate_languages, [spoken_language, learned_language]))
                 self.bind_widget(frame, partial(self.enter_widget, frame), EVENT_ENTER_WIDGET, recursive=False)
                 self.bind_widget(frame, partial(self.leave_widget, frame), EVENT_LEAVE_WIDGET, recursive=False)
+                self.bind_widget(frame, partial(self.set_window_title, f"From {spoken_language.title()} to {learned_language.title()}"), EVENT_ENTER_WIDGET, recursive=False)
+                self.bind_widget(frame, partial(self.set_window_title, self.title()), EVENT_LEAVE_WIDGET, recursive=False)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Profiles", self.display_profiles, arguments=1, sound=SOUND_PAGE_BACKWARDS)
@@ -1378,6 +1393,11 @@ class Bilingual(Tk):
 
         # Iterate through lessons
         for lesson in lessons[start_index:end_index]:
+            prerequisites_text = []
+            for category, lessons in self.lessons[lesson.uid].prerequisites.items():
+                for lesson_uid, stars in lessons.items():
+                    prerequisites_text.append(f"{self.lessons[lesson_uid].name} {'⭐' * stars}")
+            over_title = f"Requirements: " + ", ".join(prerequisites_text)
             self.create_progress_frame(parent=self.window_container, 
                 image=lesson.icon, 
                 text=lesson.name, 
@@ -1385,7 +1405,8 @@ class Bilingual(Tk):
                 stars=lesson.stars,
                 action=self.select_lesson, 
                 arguments=lesson,
-                locked=lesson.is_locked)
+                locked=lesson.is_locked,
+                over_title=over_title)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Categories", self.display_categories, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))

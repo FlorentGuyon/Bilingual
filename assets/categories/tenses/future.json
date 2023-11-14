@@ -2,7 +2,11 @@
     "id": "future",   
     "name": "Future",
     "icon": "future",   
-    "prerequisites": {},
+    "prerequisites": {
+        "tenses": {
+            "present": 1
+        }
+    },
     "questions": {
         "0": {
             "english": {

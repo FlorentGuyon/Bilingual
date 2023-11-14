@@ -2,7 +2,11 @@
     "id": "past",   
     "name": "Past",
     "icon": "past",   
-    "prerequisites": {},
+    "prerequisites": {
+        "tenses": {
+            "present": 1
+        }
+    },
     "questions": {
         "0": {
             "english": {

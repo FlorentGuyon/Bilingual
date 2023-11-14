@@ -6,7 +6,8 @@
         "tenses": {
             "present": 2,
             "past": 2,
-            "future": 2
+            "future": 2,
+            "conditional": 1
         }
     },
     "questions": {

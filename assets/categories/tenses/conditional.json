@@ -5,8 +5,8 @@
     "prerequisites": {
         "tenses": {
             "present": 2,
-            "past": 2,
-            "future": 2
+            "past": 1,
+            "future": 1
         }
     },
     "questions": {
