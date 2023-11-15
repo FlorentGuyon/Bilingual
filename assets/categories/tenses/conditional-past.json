@@ -1,0 +1,23 @@
+{   
+    "id": "conditional-past",    
+    "name": {
+        "english": "The Conditional Past",
+        "french": "Le Conditionnel Passé"
+    },
+    "icon": "conditional-past",    
+    "prerequisites": {
+        "tenses": {
+            "conditional": 1
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "I would have spoken French"
+            },
+            "french": {
+                "sentence": "J'aurais parlé fran\u00e7ais"
+            }
+        }
+    }
+}

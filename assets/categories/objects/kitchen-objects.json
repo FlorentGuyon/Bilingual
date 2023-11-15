@@ -1,0 +1,188 @@
+{   
+    "id": "kitchen-objects",    
+    "name": {
+        "english": "The Kitchen Objects",
+        "french": "Les Objets De Cuisine"
+    },
+    "icon": "kitchen-objects",    
+    "prerequisites": {
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "the spoon"
+            },
+            "french": {
+                "sentence": "la cuillère"
+            }
+        },
+        "1": {
+            "english": {
+                "sentence": "the freezer"
+            },
+            "french": {
+                "sentence": "le congélateur"
+            }
+        },
+        "2": {
+            "english": {
+                "sentence": "the knife"
+            },
+            "french": {
+                "sentence": "le couteau"
+            }
+        },
+        "3": {
+            "english": {
+                "sentence": "the cutting board"
+            },
+            "french": {
+                "sentence": "la planche à découper"
+            }
+        },
+        "4": {
+            "english": {
+                "sentence": "the pot"
+            },
+            "french": {
+                "sentence": "la casserole"
+            }
+        },
+        "5": {
+            "english": {
+                "sentence": "the refrigerator"
+            },
+            "french": {
+                "sentence": "le réfrigérateur"
+            }
+        },
+        "6": {
+            "english": {
+                "sentence": "the oven"
+            },
+            "french": {
+                "sentence": "le four"
+            }
+        },
+        "7": {
+            "english": {
+                "sentence": "the fork"
+            },
+            "french": {
+                "sentence": "la fourchette"
+            }
+        },
+        "8": {
+            "english": {
+                "sentence": "the plate"
+            },
+            "french": {
+                "sentence": "l'assiette"
+            }
+        },
+        "9": {
+            "english": {
+                "sentence": "the blender"
+            },
+            "french": {
+                "sentence": "le mixeur"
+            }
+        },
+        "10": {
+            "english": {
+                "sentence": "the toaster"
+            },
+            "french": {
+                "sentence": "le grille-pain"
+            }
+        },
+        "11": {
+            "english": {
+                "sentence": "the microwave"
+            },
+            "french": {
+                "sentence": "le micro-ondes"
+            }
+        },
+        "12": {
+            "english": {
+                "sentence": "the coffee maker"
+            },
+            "french": {
+                "sentence": "la cafetière"
+            }
+        },
+        "13": {
+            "english": {
+                "sentence": "the tea spoon"
+            },
+            "french": {
+                "sentence": "la cuillère à café"
+            }
+        },
+        "14": {
+            "english": {
+                "sentence": "the spatula"
+            },
+            "french": {
+                "sentence": "la spatule"
+            }
+        },
+        "15": {
+            "english": {
+                "sentence": "the colander"
+            },
+            "french": {
+                "sentence": "la passoire"
+            }
+        },
+        "16": {
+            "english": {
+                "sentence": "the baking sheet"
+            },
+            "french": {
+                "sentence": "la plaque de cuisson"
+            }
+        },
+        "17": {
+            "english": {
+                "sentence": "the dish soap"
+            },
+            "french": {
+                "sentence": "le liquide vaisselle"
+            }
+        },
+        "18": {
+            "english": {
+                "sentence": "the can opener"
+            },
+            "french": {
+                "sentence": "l'ouvre-boîte"
+            }
+        },
+        "19": {
+            "english": {
+                "sentence": "the mixing bowl"
+            },
+            "french": {
+                "sentence": "le saladier"
+            }
+        },
+        "20": {
+            "english": {
+                "sentence": "the tea kettle"
+            },
+            "french": {
+                "sentence": "la bouilloire"
+            }
+        },
+        "21": {
+            "english": {
+                "sentence": "the tablespoon"
+            },
+            "french": {
+                "sentence": "la cuillère à soupe"
+            }
+        }
+    }
+}

@@ -1,8 +1,8 @@
 {   
     "id": "conditional",    
     "name": {
-        "english": "The Conditional",
-        "french": "Le Conditionnel"
+        "english": "The Conditional Present",
+        "french": "Le Conditionnel Présent"
     },
     "icon": "conditional",    
     "prerequisites": {

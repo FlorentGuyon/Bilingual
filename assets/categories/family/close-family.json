@@ -1,0 +1,108 @@
+{   
+    "id": "close-family",    
+    "name": {
+        "english": "Close Family",
+        "french": "La Famille Proche"
+    },
+    "icon": "close-family",    
+    "prerequisites": {
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "the father"
+            },
+            "french": {
+                "sentence": "le père"
+            }
+        },
+        "1": {
+            "english": {
+                "sentence": "the mother"
+            },
+            "french": {
+                "sentence": "la mère"
+            }
+        },
+        "2": {
+            "english": {
+                "sentence": "the son"
+            },
+            "french": {
+                "sentence": "le fils"
+            }
+        },
+        "3": {
+            "english": {
+                "sentence": "the daughter"
+            },
+            "french": {
+                "sentence": "la fille"
+            }
+        },
+        "4": {
+            "english": {
+                "sentence": "the brother"
+            },
+            "french": {
+                "sentence": "le frère"
+            }
+        },
+        "5": {
+            "english": {
+                "sentence": "the sister"
+            },
+            "french": {
+                "sentence": "la sœur"
+            }
+        },
+        "6": {
+            "english": {
+                "sentence": "the grandfather"
+            },
+            "french": {
+                "sentence": "le grand-père"
+            }
+        },
+        "7": {
+            "english": {
+                "sentence": "the grandmother"
+            },
+            "french": {
+                "sentence": "la grand-mère"
+            }
+        },
+        "8": {
+            "english": {
+                "sentence": "the uncle"
+            },
+            "french": {
+                "sentence": "l'oncle"
+            }
+        },
+        "9": {
+            "english": {
+                "sentence": "the aunt"
+            },
+            "french": {
+                "sentence": "la tante"
+            }
+        },
+        "10": {
+            "english": {
+                "sentence": "the grandson"
+            },
+            "french": {
+                "sentence": "le petit-fils"
+            }
+        },
+        "11": {
+            "english": {
+                "sentence": "the granddaughter"
+            },
+            "french": {
+                "sentence": "la petite-fille"
+            }
+        }
+    }
+}

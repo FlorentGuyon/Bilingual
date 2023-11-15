@@ -1,0 +1,84 @@
+{   
+    "id": "simple-weather",    
+    "name": {
+        "english": "Simple Weather",
+        "french": "La Météo Simple"
+    },
+    "icon": "simple-weather",    
+    "prerequisites": {
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "the rain"
+            },
+            "french": {
+                "sentence": "la pluie"
+            }
+        },
+        "1": {
+            "english": {
+                "sentence": "the sun"
+            },
+            "french": {
+                "sentence": "le soleil"
+            }
+        },
+        "2": {
+            "english": {
+                "sentence": "the snow"
+            },
+            "french": {
+                "sentence": "la neige"
+            }
+        },
+        "3": {
+            "english": {
+                "sentence": "the wind"
+            },
+            "french": {
+                "sentence": "le vent"
+            }
+        },
+        "4": {
+            "english": {
+                "sentence": "the fog"
+            },
+            "french": {
+                "sentence": "le brouillard"
+            }
+        },
+        "5": {
+            "english": {
+                "sentence": "the thunder"
+            },
+            "french": {
+                "sentence": "le tonnerre"
+            }
+        },
+        "6": {
+            "english": {
+                "sentence": "the storm"
+            },
+            "french": {
+                "sentence": "la tempête"
+            }
+        },
+        "7": {
+            "english": {
+                "sentence": "the storm"
+            },
+            "french": {
+                "sentence": "la tempête"
+            }
+        },
+        "8": {
+            "english": {
+                "sentence": "the lightning"
+            },
+            "french": {
+                "sentence": "la foudre"
+            }
+        }
+    }
+}

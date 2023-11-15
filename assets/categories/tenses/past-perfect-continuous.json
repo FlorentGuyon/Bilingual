@@ -2,7 +2,7 @@
     "id": "past-perfect-continuous",  
     "name": {
         "english": "The Past Perfect Continuous",
-        "french": "Le Plus-Que-Parfait Progressif"
+        "french": "Le Plus-Que-Parfait \"Progressif\""
     },
     "icon": "past-perfect-continuous",       
     "prerequisites": {
@@ -17,7 +17,7 @@
                 "sentence": "By then, I had been waiting for an hour"
             },
             "french": {
-                "sentence": "D'ici là, j'avais été en train d'attendre pendant une heure"
+                "sentence": "À partir de là, j'avais attendu pendant une heure"
             }
         }
     }

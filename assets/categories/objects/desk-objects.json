@@ -1,0 +1,156 @@
+{   
+    "id": "desk-objects",    
+    "name": {
+        "english": "The Desk Objects",
+        "french": "Les Objets De Bureau"
+    },
+    "icon": "desk-objects",    
+    "prerequisites": {
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "the pen"
+            },
+            "french": {
+                "sentence": "le stylo"
+            }
+        },
+        "1": {
+            "english": {
+                "sentence": "the laptop"
+            },
+            "french": {
+                "sentence": "l'ordinateur portable"
+            }
+        },
+        "2": {
+            "english": {
+                "sentence": "the notebook"
+            },
+            "french": {
+                "sentence": "le cahier"
+            }
+        },
+        "3": {
+            "english": {
+                "sentence": "the pencil"
+            },
+            "french": {
+                "sentence": "le crayon"
+            }
+        },
+        "4": {
+            "english": {
+                "sentence": "the desk chair"
+            },
+            "french": {
+                "sentence": "la chaise de bureau"
+            }
+        },
+        "5": {
+            "english": {
+                "sentence": "the paperclip"
+            },
+            "french": {
+                "sentence": "le trombone"
+            }
+        },
+        "6": {
+            "english": {
+                "sentence": "the calculator"
+            },
+            "french": {
+                "sentence": "la calculatrice"
+            }
+        },
+        "7": {
+            "english": {
+                "sentence": "the desk lamp"
+            },
+            "french": {
+                "sentence": "la lampe de bureau"
+            }
+        },
+        "8": {
+            "english": {
+                "sentence": "the mouse pad"
+            },
+            "french": {
+                "sentence": "le tapis de souris"
+            }
+        },
+        "9": {
+            "english": {
+                "sentence": "the ruler"
+            },
+            "french": {
+                "sentence": "la règle"
+            }
+        },
+        "10": {
+            "english": {
+                "sentence": "the sticky notes"
+            },
+            "french": {
+                "sentence": "les post-it"
+            }
+        },
+        "11": {
+            "english": {
+                "sentence": "the book"
+            },
+            "french": {
+                "sentence": "le livre"
+            }
+        },
+        "12": {
+            "english": {
+                "sentence": "the stapler"
+            },
+            "french": {
+                "sentence": "l'agrafeuse"
+            }
+        },
+        "13": {
+            "english": {
+                "sentence": "the scissors"
+            },
+            "french": {
+                "sentence": "les ciseaux"
+            }
+        },
+        "14": {
+            "english": {
+                "sentence": "the USB drive"
+            },
+            "french": {
+                "sentence": "la clé USB"
+            }
+        },
+        "15": {
+            "english": {
+                "sentence": "the calendar"
+            },
+            "french": {
+                "sentence": "le calendrier"
+            }
+        },
+        "16": {
+            "english": {
+                "sentence": "the coffee mug"
+            },
+            "french": {
+                "sentence": "la tasse à café"
+            }
+        },
+        "17": {
+            "english": {
+                "sentence": "the computer mouse"
+            },
+            "french": {
+                "sentence": "la souris d'ordinateur"
+            }
+        }
+    }
+}
