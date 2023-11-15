@@ -1,6 +1,9 @@
 {
-    "id": "interrogative",  
-    "name": "Interrogative",
+    "id": "interrogative",
+    "name": {
+        "english": "The Interrogative",
+        "french": "L'interrogatif"
+    },
     "icon": "interrogative",       
     "prerequisites": {
         "tenses": {

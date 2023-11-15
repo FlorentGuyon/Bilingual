@@ -1,6 +1,9 @@
 {
     "id": "animal-noises",
-    "name": "Animal Noises",
+    "name":  {
+        "english": "The Animals Noise",
+        "french": "Le Cri Des Animaux"
+    }, 
     "icon": "animal-noises",       
     "prerequisites": {
         "animals": {

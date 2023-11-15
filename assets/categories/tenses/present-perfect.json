@@ -1,6 +1,9 @@
 {
     "id": "present-perfect",  
-    "name": "Present Perfect",
+    "name": {
+        "english": "The Present Perfect",
+        "french": "Le Passé Composé"
+    },
     "icon": "present-perfect",       
     "prerequisites": {
         "tenses": {

@@ -1,6 +1,9 @@
 {
     "id": "animal-habitats",  
-    "name": "Animal Habitats",
+    "name":  {
+        "english": "The Animals Habitat",
+        "french": "L'Habitât Des Animaux"
+    }, 
     "icon": "animal-habitats",   
     "prerequisites": {},
     "questions": {

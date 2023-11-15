@@ -1,6 +1,9 @@
 {
-    "id": "past-continuous",  
-    "name": "Past Continuous",
+    "id": "past-continuous",
+    "name": {
+        "english": "The Past Continuous",
+        "french": "L'Imparfait Continu"
+    },
     "icon": "past-continuous",       
     "prerequisites": {
         "tenses": {

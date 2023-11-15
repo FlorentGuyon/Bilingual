@@ -1,6 +1,9 @@
 {
     "id": "present-continuous",  
-    "name": "Present Continuous",
+    "name": {
+        "english": "The Present Continuous",
+        "french": "Le Présent Continu"
+    },
     "icon": "present-continuous",       
     "prerequisites": {
         "tenses": {

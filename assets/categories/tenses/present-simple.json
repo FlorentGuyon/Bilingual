@@ -1,6 +1,9 @@
 {
     "id": "present",  
-    "name": "Present Simple",
+    "name": {
+        "english": "The Present Simple",
+        "french": "Le Present Simple"
+    },
     "icon": "present",       
     "prerequisites": {},
     "questions": {

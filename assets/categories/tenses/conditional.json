@@ -1,6 +1,9 @@
 {   
     "id": "conditional",    
-    "name": "Conditional",
+    "name": {
+        "english": "The Conditional",
+        "french": "Le Conditionnel"
+    },
     "icon": "conditional",    
     "prerequisites": {
         "tenses": {

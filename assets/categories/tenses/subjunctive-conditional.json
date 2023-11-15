@@ -1,7 +1,10 @@
 {
     "id": "subjunctive-conditional",  
-    "name": "Subjunctive Conditional",
-    "icon": "ubjunctive-conditional",       
+    "name": {
+        "english": "The Subjunctive Conditional",
+        "french": "Le Subjunctif Conditionnel"
+    },
+    "icon": "subjunctive-conditional",       
     "prerequisites": {
         "tenses": {
             "present": 3,

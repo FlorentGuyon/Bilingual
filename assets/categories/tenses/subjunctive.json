@@ -1,6 +1,9 @@
 {    
     "id": "subjunctive",
-    "name": "Subjunctive",
+    "name": {
+        "english": "The Subjunctive",
+        "french": "Le Subjunctif"
+    },
     "icon": "subjunctive",
     "prerequisites": {
         "tenses": {

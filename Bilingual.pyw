@@ -289,7 +289,7 @@ class Lesson:
 
     @property
     def name(self):
-        return self._name
+        return self._name[SPOKEN_LANGUAGE]
 
     @property
     def icon(self):

@@ -1,6 +1,9 @@
 {
-    "id": "imperative",  
-    "name": "Imperative",
+    "id": "imperative",
+    "name": {
+        "english": "The Imperative",
+        "french": "L'impératif"
+    },
     "icon": "imperative",       
     "prerequisites": {
         "tenses": {

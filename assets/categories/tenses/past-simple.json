@@ -1,6 +1,9 @@
 {
-    "id": "past",   
-    "name": "Past Simple",
+    "id": "past",
+    "name": {
+        "english": "The Past Simple",
+        "french": "Le Passé Simple"
+    },
     "icon": "past",   
     "prerequisites": {
         "tenses": {

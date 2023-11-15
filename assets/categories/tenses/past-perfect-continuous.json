@@ -1,6 +1,9 @@
 {
     "id": "past-perfect-continuous",  
-    "name": "Past Perfect Continuous",
+    "name": {
+        "english": "The Past Perfect Continuous",
+        "french": "Le Plus-Que-Parfait Progressif"
+    },
     "icon": "past-perfect-continuous",       
     "prerequisites": {
         "tenses": {

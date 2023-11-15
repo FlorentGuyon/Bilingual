@@ -1,6 +1,9 @@
 {
     "id": "default-colors",  
-    "name": "Default Colors",
+    "name":  {
+        "english": "The Simple Colors",
+        "french": "Les Couleurs Simples"
+    }, 
     "icon": "default-colors",    
     "prerequisites": {},
     "questions": {

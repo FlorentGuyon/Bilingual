@@ -1,6 +1,9 @@
 {
     "id": "present-perfect-continuous",  
-    "name": "Present Perfect Continuous",
+    "name": {
+        "english": "The Present Perfect Continuous",
+        "french": "Le Passé Composé \"Continu\""
+    },
     "icon": "present-perfect-continuous",       
     "prerequisites": {
         "tenses": {
@@ -14,7 +17,7 @@
                 "sentence": "I have been working on this project for two hours"
             },
             "french": {
-                "sentence": "J'ai été en train de travailler sur ce projet pendant deux heures"
+                "sentence": "J'ai travaillé sur ce projet pendant deux heures"
             }
         }
     }

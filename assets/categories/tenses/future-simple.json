@@ -1,6 +1,9 @@
 {
     "id": "future",   
-    "name": "Future Simple",
+    "name": {
+        "english": "The Future Simple",
+        "french": "Le Futur Simple"
+    },
     "icon": "future-simple",   
     "prerequisites": {
         "tenses": {

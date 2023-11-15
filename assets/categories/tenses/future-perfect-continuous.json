@@ -1,6 +1,9 @@
 {
     "id": "future-perfect-continuous",  
-    "name": "Future Perfect Continuous",
+    "name": {
+        "english": "The Future Perfect Continuous",
+        "french": "Le Futur Antérieur Du Progressif"
+    },
     "icon": "future-perfect-continuous",       
     "prerequisites": {
         "tenses": {

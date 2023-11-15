@@ -1,6 +1,9 @@
 {    
-    "id": "basic-jobs",   
-    "name": "Basic Jobs",
+    "id": "basic-jobs",
+    "name":  {
+        "english": "The Commun Jobs",
+        "french": "Les Travails Communs"
+    }, 
     "icon": "basic-jobs",   
     "prerequisites": {},
     "questions": {

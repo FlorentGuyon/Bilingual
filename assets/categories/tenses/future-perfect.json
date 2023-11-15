@@ -1,6 +1,9 @@
 {
     "id": "future-perfect",  
-    "name": "Future Perfect",
+    "name": {
+        "english": "The Future Perfect",
+        "french": "Le Futur Antérieur"
+    },
     "icon": "future-perfect",       
     "prerequisites": {
         "tenses": {

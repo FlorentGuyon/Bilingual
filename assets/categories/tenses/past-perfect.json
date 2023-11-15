@@ -1,6 +1,9 @@
 {
     "id": "past-perfect",  
-    "name": "Past Perfect",
+    "name": {
+        "english": "The Past Perfect",
+        "french": "Le Plus-Que-Parfait"
+    },
     "icon": "past-perfect",       
     "prerequisites": {
         "tenses": {

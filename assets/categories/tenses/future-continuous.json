@@ -1,6 +1,9 @@
 {
     "id": "future-continuous",  
-    "name": "Future Continuous",
+    "name":  {
+        "english": "The Future Continuous",
+        "french": "Le Futur Continu"
+    },
     "icon": "future-continuous",       
     "prerequisites": {
         "tenses": {

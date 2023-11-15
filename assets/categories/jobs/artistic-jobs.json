@@ -1,6 +1,9 @@
 {    
     "id": "arts",   
-    "name": "Artistic Jobs",
+    "name":  {
+        "english": "The Artistic Jobs",
+        "french": "Les Travails Artistiques"
+    }, 
     "icon": "arts",   
     "prerequisites": {
         "jobs": {
