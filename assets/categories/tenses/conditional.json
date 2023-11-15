@@ -4,9 +4,9 @@
     "icon": "conditional",    
     "prerequisites": {
         "tenses": {
-            "present": 2,
-            "past": 1,
-            "future": 1
+            "present": 3,
+            "past": 3,
+            "future": 3
         }
     },
     "questions": {

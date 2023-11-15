@@ -1,0 +1,21 @@
+{
+    "id": "present-perfect-continuous",  
+    "name": "Present Perfect Continuous",
+    "icon": "present-perfect-continuous",       
+    "prerequisites": {
+        "tenses": {
+            "present-perfect": 1,
+            "present-continuous": 2
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "I have been working on this project for two hours"
+            },
+            "french": {
+                "sentence": "J'ai été en train de travailler sur ce projet pendant deux heures"
+            }
+        }
+    }
+}

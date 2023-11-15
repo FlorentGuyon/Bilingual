@@ -1,0 +1,20 @@
+{
+    "id": "past-perfect",  
+    "name": "Past Perfect",
+    "icon": "past-perfect",       
+    "prerequisites": {
+        "tenses": {
+            "past-continuous": 1
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "She had already eaten when I arrived"
+            },
+            "french": {
+                "sentence": "Elle avait déjà mangé quand je suis arrivé"
+            }
+        }
+    }
+}

@@ -4,10 +4,9 @@
     "icon": "subjunctive",
     "prerequisites": {
         "tenses": {
-            "present": 2,
-            "past": 2,
-            "future": 2,
-            "conditional": 1
+            "present": 3,
+            "past": 3,
+            "future": 3
         }
     },
     "questions": {

@@ -1,0 +1,22 @@
+{
+    "id": "imperative",  
+    "name": "Imperative",
+    "icon": "imperative",       
+    "prerequisites": {
+        "tenses": {
+            "present": 3,
+            "past": 3,
+            "future": 3
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "Close the door"
+            },
+            "french": {
+                "sentence": "Ferme la porte"
+            }
+        }
+    }
+}

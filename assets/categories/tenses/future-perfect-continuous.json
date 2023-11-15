@@ -1,0 +1,21 @@
+{
+    "id": "future-perfect-continuous",  
+    "name": "Future Perfect Continuous",
+    "icon": "future-perfect-continuous",       
+    "prerequisites": {
+        "tenses": {
+            "future-perfect": 1,
+            "future-continuous": 2
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "By then, I will have been studying for six hours"
+            },
+            "french": {
+                "sentence": "D'ici là, j'aurai été en train d'étudier pendant six heures"
+            }
+        }
+    }
+}

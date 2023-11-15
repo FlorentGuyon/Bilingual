@@ -1,7 +1,7 @@
 {
     "id": "future",   
     "name": "Future Simple",
-    "icon": "future",   
+    "icon": "future-simple",   
     "prerequisites": {
         "tenses": {
             "present-continuous": 1

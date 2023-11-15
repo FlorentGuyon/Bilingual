@@ -1,0 +1,22 @@
+{
+    "id": "interrogative",  
+    "name": "Interrogative",
+    "icon": "interrogative",       
+    "prerequisites": {
+        "tenses": {
+            "present": 3,
+            "past": 3,
+            "future": 3
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "Is she coming to the party?"
+            },
+            "french": {
+                "sentence": "Vient-elle à la fête ?"
+            }
+        }
+    }
+}

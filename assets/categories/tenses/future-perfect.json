@@ -1,0 +1,20 @@
+{
+    "id": "future-perfect",  
+    "name": "Future Perfect",
+    "icon": "future-perfect",       
+    "prerequisites": {
+        "tenses": {
+            "future-continuous": 1
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "By then, I will have done my work"
+            },
+            "french": {
+                "sentence": "D'ici là, j'aurai fait mon travail"
+            }
+        }
+    }
+}

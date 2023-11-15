@@ -1,0 +1,21 @@
+{
+    "id": "past-perfect-continuous",  
+    "name": "Past Perfect Continuous",
+    "icon": "past-perfect-continuous",       
+    "prerequisites": {
+        "tenses": {
+            "past-perfect": 1,
+            "past-continuous": 2
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "By then, I had been waiting for an hour"
+            },
+            "french": {
+                "sentence": "D'ici là, j'avais été en train d'attendre pendant une heure"
+            }
+        }
+    }
+}

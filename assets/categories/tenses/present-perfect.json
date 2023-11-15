@@ -1,0 +1,20 @@
+{
+    "id": "present-perfect",  
+    "name": "Present Perfect",
+    "icon": "present-perfect",       
+    "prerequisites": {
+        "tenses": {
+            "present-continuous": 1
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "I already have visited Paris"
+            },
+            "french": {
+                "sentence": "J'ai déjà visité Paris"
+            }
+        }
+    }
+}

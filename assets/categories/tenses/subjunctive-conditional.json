@@ -1,0 +1,22 @@
+{
+    "id": "subjunctive-conditional",  
+    "name": "Subjunctive Conditional",
+    "icon": "ubjunctive-conditional",       
+    "prerequisites": {
+        "tenses": {
+            "present": 3,
+            "past": 3,
+            "future": 3
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "If I were you, I would take the job"
+            },
+            "french": {
+                "sentence": "Si j'étais toi, je prendrais le travail"
+            }
+        }
+    }
+}
