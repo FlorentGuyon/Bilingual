@@ -1,0 +1,92 @@
+{   
+    "id": "simple-questions",    
+    "name": {
+        "english": "The Simple Questions",
+        "french": "Les Questions Simples"
+    },
+    "icon": "simple-questions",    
+    "prerequisites": {
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "who are you?"
+            },
+            "french": {
+                "sentence": "qui es-tu ?"
+            }
+        },
+        "1": {
+            "english": {
+                "sentence": "what is it?"
+            },
+            "french": {
+                "sentence": "qu'est-ce que c'est ?"
+            }
+        },
+        "2": {
+            "english": {
+                "sentence": "which one do you want?"
+            },
+            "french": {
+                "sentence": "lequel veux-tu ?"
+            }
+        },
+        "3": {
+            "english": {
+                "sentence": "which color do you prefer?"
+            },
+            "french": {
+                "sentence": "quelle couleur préfères-tu ?"
+            }
+        },
+        "4": {
+            "english": {
+                "sentence": "who is coming to the party?"
+            },
+            "french": {
+                "sentence": "qui vient à la fête ?"
+            }
+        },
+        "5": {
+            "english": {
+                "sentence": "when will you arrive?"
+            },
+            "french": {
+                "sentence": "quand arriveras-tu ?"
+            }
+        },
+        "6": {
+            "english": {
+                "sentence": "how do you do it?"
+            },
+            "french": {
+                "sentence": "comment fais-tu cela ?"
+            }
+        },
+        "7": {
+            "english": {
+                "sentence": "why did you do that?"
+            },
+            "french": {
+                "sentence": "pourquoi as-tu fait ça ?"
+            }
+        },
+        "8": {
+            "english": {
+                "sentence": "to whom does this belong?"
+            },
+            "french": {
+                "sentence": "à qui cela appartient-il ?"
+            }
+        },
+        "9": {
+            "english": {
+                "sentence": "to what extent can you go?"
+            },
+            "french": {
+                "sentence": "à quel point peux-tu aller ?"
+            }
+        }
+    }
+}
