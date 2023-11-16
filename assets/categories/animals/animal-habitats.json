@@ -6,7 +6,9 @@
     }, 
     "icon": "animal-habitats",   
     "prerequisites": {
+        "animals": { 
             "farm-animals": 1
+        }
     },
     "questions": {
         "0": {

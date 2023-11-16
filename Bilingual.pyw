@@ -17,7 +17,7 @@ from tkinter.ttk import Label, Frame, Style
 ##################################################################### CONSTANTS
 
 # ENVIRONMENT
-DEBUG_MODE = False
+DEBUG_MODE = True
 CURRENT_DIRECTORY = dirname(abspath(__file__))
 FILES_ENCODING = "utf8"
 
@@ -65,6 +65,7 @@ SOUND_INCORRECT = "incorrect.wav"
 SOUND_NEW_STAR = "new-star.wav"
 SOUND_BLOCKED = "blocked.wav"
 SOUND_UNLOCK = "unlock.wav"
+SOUND_BIP = "bip.wav"
 
 # PATHS
 PATH_CATEGORIES = join(CURRENT_DIRECTORY, "assets", "categories")
@@ -126,7 +127,7 @@ while not import_successful:
 def log_calls(method):
     def wrapper(*args, **kwargs):
         if DEBUG_MODE:
-            print(f'{method.__name__}({str(args[1:])}, {str(kwargs)})')
+            print(f'{method.__name__}()')#{str(args[1:])}, {str(kwargs)})')
         return method(*args, **kwargs)
     return wrapper
 
@@ -519,6 +520,72 @@ class Profile:
     def icon(self, new_icon):
         self._icon = new_icon
 
+class Timer:
+
+    def __init__(self, parent=None, action=None, time=None):
+        self.parent = parent
+        self.action = action
+        self.time = time
+        self.running = None
+        self.thread = None
+
+    @property
+    def action(self):
+        return self._action
+
+    @property
+    def time(self):
+        return self._time
+
+    @property
+    def running(self):
+        return self._running
+
+    @property
+    def thread(self):
+        return self._thread
+
+    @action.setter
+    def action(self, action):
+        self._action = action
+
+    @running.setter
+    def running(self, running):
+        self._running = running
+
+    @thread.setter
+    def thread(self, thread):
+        self._thread = thread
+
+    @time.setter
+    def time(self, time):
+        self._time = time
+
+    def start(self):
+        self.running = True
+        self.thread = Thread(target=self.count, daemon=True)
+        self.thread.start()
+
+    def count(self):
+        time_left = self.time * 1000
+        last_second = int(time_left / 1000)
+        while (self.running) and (time_left > 0):
+            time_left -= 1
+            second = int(time_left / 1000)
+            if second != last_second:
+                last_second = second
+                self.parent.set_window_title(f'{second}s left...')
+                if second <= 3:
+                    playsound(join(PATH_SOUNDS, SOUND_BIP), False)
+            if time_left <= 0:
+                self.action()
+            else:
+                sleep(0.001)
+
+    def stop(self):
+        if not self.running:
+            return
+        self.running = False
 
 class Bilingual(Tk):
 
@@ -538,6 +605,7 @@ class Bilingual(Tk):
         self._question = None
         self._last_lesson_stars = None
         self._explainations = None
+        self._timer = Timer(self)
         self.load_profiles()
         self.load_categories()
         self.load_explainations()
@@ -636,6 +704,10 @@ class Bilingual(Tk):
                             explaination_text.append(item["explainations"][SPOKEN_LANGUAGE]) 
  
         return explaination_text 
+
+    @property
+    def timer(self):
+        return self._timer
  
     ################################################################### SETTERS
 
@@ -690,6 +762,10 @@ class Bilingual(Tk):
     def lesson(self, lesson):
         self._lesson = lesson
         self.category.lesson = lesson
+
+    @timer.setter
+    def timer(self, timer):
+        self._timer = timer
 
     ################################################################### READERS
 
@@ -913,6 +989,7 @@ class Bilingual(Tk):
     # QUESTIONS
     @log_calls
     def validate_response(self, response, event=None):
+        self.timer.stop()
         if self.question.propose(response):
             self.playsound(SOUND_CORRECT)
             self.display_questions()
@@ -1378,6 +1455,7 @@ class Bilingual(Tk):
     # LESSONS
     @log_calls
     def display_lessons(self, page=1, event=None):
+        self.timer.stop()
         # Place the locked lessons at the end
         lessons = sorted(self.category.lessons.values(), key=lambda lesson: lesson.is_locked)
         item_by_page = 4
@@ -1477,6 +1555,11 @@ class Bilingual(Tk):
         
         # VALIDATE BUTTON
         self.create_button(self.window_container, "arrow_right", "Validate", lambda: self.validate_response(response_Stringvar.get()), image_first=False, alone_in_row=False)
+
+        # TIMER
+        self.timer.time = 15 # seconds
+        self.timer.action = lambda: self.validate_response(response_Stringvar.get())
+        self.timer.start()
 
     @log_calls
     def display_answer(self, response):
