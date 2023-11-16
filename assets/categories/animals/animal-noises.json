@@ -7,7 +7,7 @@
     "icon": "animal-noises",       
     "prerequisites": {
         "animals": {
-            "animal-habitats": 2
+            "farm-animals": 1
         }
     },
     "questions": {

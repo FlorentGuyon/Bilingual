@@ -5,7 +5,9 @@
         "french": "L'Habitât Des Animaux"
     }, 
     "icon": "animal-habitats",   
-    "prerequisites": {},
+    "prerequisites": {
+            "farm-animals": 1
+    },
     "questions": {
         "0": {
             "english": {

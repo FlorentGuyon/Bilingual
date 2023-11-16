@@ -1,0 +1,282 @@
+{   
+    "id": "farm-animals",    
+    "name": {
+        "english": "The Farm Animals",
+        "french": "Les Animaux De La Ferme"
+    },
+    "icon": "farm-animals",    
+    "prerequisites": {
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "the cat"
+            },
+            "french": {
+                "sentence": "le chat"
+            }
+        },
+        "1": {
+            "english": {
+                "sentence": "the cat",
+                "hints": "The cat is female"
+            },
+            "french": {
+                "sentence": "la chatte"
+            }
+        },
+        "2": {
+            "english": {
+                "sentence": "the kitten"
+            },
+            "french": {
+                "sentence": "le chatton"
+            }
+        },
+        "3": {
+            "english": {
+                "sentence": "the kitten",
+                "hints": "The kitten is female"
+            },
+            "french": {
+                "sentence": "le chatton",
+                "hints": "le chatton est une femelle"
+            }
+        },
+        "4": {
+            "english": {
+                "sentence": "the cats"
+            },
+            "french": {
+                "sentence": "les chats"
+            }
+        },
+        "5": {
+            "english": {
+                "sentence": "the cats",
+                "hints": "The cat is female"
+            },
+            "french": {
+                "sentence": "les chattes"
+            }
+        },
+        "6": {
+            "english": {
+                "sentence": "the kittens"
+            },
+            "french": {
+                "sentence": "les chattons"
+            }
+        },
+        "7": {
+            "english": {
+                "sentence": "the kittens",
+                "hints": "The kittens are female"
+            },
+            "french": {
+                "sentence": "les chattons",
+                "hints": "les chattons sont des females"
+            }
+        },
+        "8": {
+            "english": {
+                "sentence": "the bull"
+            },
+            "french": {
+                "sentence": "le taureau"
+            }
+        },
+        "9": {
+            "english": {
+                "sentence": "the cow"
+            },
+            "french": {
+                "sentence": "la vache"
+            }
+        },
+        "10": {
+            "english": {
+                "sentence": "the calf"
+            },
+            "french": {
+                "sentence": "le veau"
+            }
+        },
+        "11": {
+            "english": {
+                "sentence": "the calf",
+                "hints": "The calf is female"
+            },
+            "french": {
+                "sentence": "la g\u00e9nisse"
+            }
+        },
+        "12": {
+            "english": {
+                "sentence": "the bulls"
+            },
+            "french": {
+                "sentence": "les taueaux"
+            }
+        },
+        "13": {
+            "english": {
+                "sentence": "the cows"
+            },
+            "french": {
+                "sentence": "les vaches"
+            }
+        },
+        "14": {
+            "english": {
+                "sentence": "the calves"
+            },
+            "french": {
+                "sentence": "les veaux"
+            }
+        },
+        "15": {
+            "english": {
+                "sentence": "the calves",
+                "hints": "The calves are female"
+            },
+            "french": {
+                "sentence": "les g\u00e9nisses"
+            }
+        },
+        "16": {
+            "english": {
+                "sentence": "the pig"
+            },
+            "french": {
+                "sentence": "le cochon"
+            }
+        },
+        "17": {
+            "english": {
+                "sentence": "the pig",
+                "hints": "The pig is female"
+            },
+            "french": {
+                "sentence": "la truie"
+            }
+        },
+        "18": {
+            "english": {
+                "sentence": "the piglet"
+            },
+            "french": {
+                "sentence": "le porcelet"
+            }
+        },
+        "19": {
+            "english": {
+                "sentence": "the piglet",
+                "hints": "The piglet is female"
+            },
+            "french": {
+                "sentence": "la porcelette"
+            }
+        },
+        "20": {
+            "english": {
+                "sentence": "the pigs"
+            },
+            "french": {
+                "sentence": "les cochons"
+            }
+        },
+        "21": {
+            "english": {
+                "sentence": "the pigs",
+                "hints": "The pigs are female"
+            },
+            "french": {
+                "sentence": "les truies"
+            }
+        },
+        "22": {
+            "english": {
+                "sentence": "the piglets"
+            },
+            "french": {
+                "sentence": "les porcelets"
+            }
+        },
+        "23": {
+            "english": {
+                "sentence": "the piglets",
+                "hints": "The piglets are female"
+            },
+            "french": {
+                "sentence": "les porcelettes"
+            }
+        },
+        "24": {
+            "english": {
+                "sentence": "the rooster"
+            },
+            "french": {
+                "sentence": "le coq"
+            }
+        },
+        "25": {
+            "english": {
+                "sentence": "the hen"
+            },
+            "french": {
+                "sentence": "la poule"
+            }
+        },
+        "26": {
+            "english": {
+                "sentence": "the chick"
+            },
+            "french": {
+                "sentence": "le poussin"
+            }
+        },
+        "27": {
+            "english": {
+                "sentence": "the chick",
+                "hints": "The chick is female"
+            },
+            "french": {
+                "sentence": "la poussine"
+            }
+        },
+        "28": {
+            "english": {
+                "sentence": "the roosters"
+            },
+            "french": {
+                "sentence": "les coqs"
+            }
+        },
+        "29": {
+            "english": {
+                "sentence": "the hens"
+            },
+            "french": {
+                "sentence": "les poules"
+            }
+        },
+        "30": {
+            "english": {
+                "sentence": "the chicks"
+            },
+            "french": {
+                "sentence": "les poussins"
+            }
+        },
+        "31": {
+            "english": {
+                "sentence": "the chicks",
+                "hints": "The chicks are female"
+            },
+            "french": {
+                "sentence": "les poussines"
+            }
+        }
+    }
+}
