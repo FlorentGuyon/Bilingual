@@ -1,0 +1,507 @@
+{
+    "id": "harry-potter",
+    "name": {
+        "english": "Harry Potter",
+        "french": "Harry Potter"
+    },
+    "icon": "harry-potter",
+    "prerequisites": {},
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "the wizard"
+            },
+            "french": {
+                "sentence": "le sorcier"
+            }
+        },
+        "1": {
+            "english": {
+                "sentence": "the magic wand"
+            },
+            "french": {
+                "sentence": "la baguette magique"
+            }
+        },
+        "2": {
+            "english": {
+                "sentence": "the potion"
+            },
+            "french": {
+                "sentence": "la potion"
+            }
+        },
+        "3": {
+            "english": {
+                "sentence": "the spell"
+            },
+            "french": {
+                "sentence": "le sortilège"
+            }
+        },
+        "4": {
+            "english": {
+                "sentence": "the broomstick"
+            },
+            "french": {
+                "sentence": "le balai"
+            }
+        },
+        "5": {
+            "english": {
+                "sentence": "the Quidditch"
+            },
+            "french": {
+                "sentence": "le Quidditch"
+            }
+        },
+        "6": {
+            "english": {
+                "sentence": "Hogwarts"
+            },
+            "french": {
+                "sentence": "Poudlard"
+            }
+        },
+        "7": {
+            "english": {
+                "sentence": "the wizarding world"
+            },
+            "french": {
+                "sentence": "le monde des sorciers"
+            }
+        },
+        "8": {
+            "english": {
+                "sentence": "the magical creatures"
+            },
+            "french": {
+                "sentence": "les créatures magiques"
+            }
+        },
+        "9": {
+            "english": {
+                "sentence": "the Muggle"
+            },
+            "french": {
+                "sentence": "le Moldu"
+            }
+        },
+        "10": {
+            "english": {
+                "sentence": "Severus Snape"
+            },
+            "french": {
+                "sentence": "Severus Rogue"
+            }
+        },
+        "11": {
+            "english": {
+                "sentence": "The witch"
+            },
+            "french": {
+                "sentence": "La sorcière"
+            }
+        },
+        "12": {
+            "english": {
+                "sentence": "Slytherin"
+            },
+            "french": {
+                "sentence": "Serpentard"
+            }
+        },
+        "13": {
+            "english": {
+                "sentence": "Hufflepuff"
+            },
+            "french": {
+                "sentence": "Poufsouffle"
+            }
+        },
+        "14": {
+            "english": {
+                "sentence": "Ravenclaw"
+            },
+            "french": {
+                "sentence": "Serdaigle"
+            }
+        },
+        "15": {
+            "english": {
+                "sentence": "Gryffindor"
+            },
+            "french": {
+                "sentence": "Gryffondor"
+            }
+        },
+        "15": {
+            "english": {
+                "sentence": "Gryffindor"
+            },
+            "french": {
+                "sentence": "Gryffondor"
+            }
+        },
+        "16": {
+            "english": {
+                "sentence": "The Philosopher's Stone"
+            },
+            "french": {
+                "sentence": "La pierre philosophale"
+            }
+        },
+        "17": {
+            "english": {
+                "sentence": "The chamber of secrets"
+            },
+            "french": {
+                "sentence": "La chambre des secrets"
+            }
+        },
+        "18": {
+            "english": {
+                "sentence": "The prisoner of Azkaban"
+            },
+            "french": {
+                "sentence": "Le prisonnier d'Azkaban"
+            }
+        },
+        "19": {
+            "english": {
+                "sentence": "the goblet of fire"
+            },
+            "french": {
+                "sentence": "la coupe de feu"
+            }
+        },
+        "20": {
+            "english": {
+                "sentence": "the Order of the Phoenix"
+            },
+            "french": {
+                "sentence": "l'ordre du phénix"
+            }
+        },
+        "21": {
+            "english": {
+                "sentence": "the half blood prince"
+            },
+            "french": {
+                "sentence": "le prince de sang-mélé"
+            }
+        },
+        "22": {
+            "english": {
+                "sentence": "The Deathly Hallows"
+            },
+            "french": {
+                "sentence": "les reliques de la mort"
+            }
+        },
+        "23": {
+            "english": {
+                "sentence": "a House Elf"
+            },
+            "french": {
+                "sentence": "un elfe de maison"
+            }
+        },
+        "24": {
+            "english": {
+                "sentence": "newt scamander"
+            },
+            "french": {
+                "sentence": "Norbert Dragonneau"
+            }
+        },
+        "25": {
+            "english": {
+                "sentence": "Alastor Mad Eye Moody"
+            },
+            "french": {
+                "sentence": "Alastor Maugrey Fol Oeil"
+            }
+        },
+        "26": {
+            "english": {
+                "sentence": "Argus Filch"
+            },
+            "french": {
+                "sentence": "Argus Rusard"
+            }
+        },
+        "27": {
+            "english": {
+                "sentence": "the Gillyweed"
+            },
+            "french": {
+                "sentence": "la Branchiflore"
+            }
+        },
+        "28": {
+            "english": {
+                "sentence": "the dementor"
+            },
+            "french": {
+                "sentence": "le Détraqueur"
+            }
+        },
+        "29": {
+            "english": {
+                "sentence": "the Cornish Pixie"
+            },
+            "french": {
+                "sentence": "le lutin de Cornouailles"
+            }
+        },
+        "30": {
+            "english": {
+                "sentence": "the mandrake"
+            },
+            "french": {
+                "sentence": "la mandragore"
+            }
+        },
+        "31": {
+            "english": {
+                "sentence": "the whomping willow"
+            },
+            "french": {
+                "sentence": "le saule cogneur"
+            }
+        },
+        "32": {
+            "english": {
+                "sentence": "moaning myrtle"
+            },
+            "french": {
+                "sentence": "mimi geignarde"
+            }
+        },
+        "33": {
+            "english": {
+                "sentence": "tom marvolo riddle"
+            },
+            "french": {
+                "sentence": "tom elvis jedusor"
+            }
+        },
+        "34": {
+            "english": {
+                "sentence": "The knockturn alley"
+            },
+            "french": {
+                "sentence": "l'allée des embrumes"
+            }
+        },
+        "35": {
+            "english": {
+                "sentence": "the shrieking shack"
+            },
+            "french": {
+                "sentence": "la cabane hurlante"
+            }
+        },
+        "36": {
+            "english": {
+                "sentence": "diagon alley"
+            },
+            "french": {
+                "sentence": "le chemin de traverse"
+            }
+        },
+        "37": {
+            "english": {
+                "sentence": "Hogsmeade"
+            },
+            "french": {
+                "sentence": "pré-au-lard"
+            }
+        },
+        "38": {
+            "english": {
+                "sentence": "the muggle-born"
+            },
+            "french": {
+                "sentence": "le né-moldu"
+            }
+        },
+        "39": {
+            "english": {
+                "sentence": "the mudblood"
+            },
+            "french": {
+                "sentence": "le sang-de-bourbe"
+            }
+        },
+        "40": {
+            "english": {
+                "sentence": "the leaky cauldron"
+            },
+            "french": {
+                "sentence": "le chaudron baveur"
+            }
+        },
+        "41": {
+            "english": {
+                "sentence": "the daily prophet"
+            },
+            "french": {
+                "sentence": "la gazette du sorcier"
+            }
+        },
+        "42": {
+            "english": {
+                "sentence": "the portkey"
+            },
+            "french": {
+                "sentence": "le portoloin"
+            }
+        },
+        "43": {
+            "english": {
+                "sentence": "the knightbus"
+            },
+            "french": {
+                "sentence": "le magicobus"
+            }
+        },
+        "44": {
+            "english": {
+                "sentence": "the floo powder"
+            },
+            "french": {
+                "sentence": "la poudre de cheminette"
+            }
+        },
+        "45": {
+            "english": {
+                "sentence": "to apparate"
+            },
+            "french": {
+                "sentence": "transplaner"
+            }
+        },
+        "46": {
+            "english": {
+                "sentence": "the sorting hat"
+            },
+            "french": {
+                "sentence": "le choixpeau magique"
+            }
+        },
+        "47": {
+            "english": {
+                "sentence": "the butterbeer"
+            },
+            "french": {
+                "sentence": "la bièraubeurre"
+            }
+        },
+        "48": {
+            "english": {
+                "sentence": "the chocolate frog"
+            },
+            "french": {
+                "sentence": "la chocogrenouille"
+            }
+        },
+        "49": {
+            "english": {
+                "sentence": "the seeker"
+            },
+            "french": {
+                "sentence": "l'attrapeur"
+            }
+        },
+        "50": {
+            "english": {
+                "sentence": "the beater"
+            },
+            "french": {
+                "sentence": "le batteur"
+            }
+        },
+        "51": {
+            "english": {
+                "sentence": "the bludger"
+            },
+            "french": {
+                "sentence": "le cognard"
+            }
+        },
+        "52": {
+            "english": {
+                "sentence": "the firebolt"
+            },
+            "french": {
+                "sentence": "l'éclair de feu"
+            }
+        },
+        "53": {
+            "english": {
+                "sentence": "the golden snitch"
+            },
+            "french": {
+                "sentence": "le fiv d'or"
+            }
+        },
+        "54": {
+            "english": {
+                "sentence": "a howler"
+            },
+            "french": {
+                "sentence": "une beuglante"
+            }
+        },
+        "55": {
+            "english": {
+                "sentence": "the marauder's map"
+            },
+            "french": {
+                "sentence": "la carte du maraudeur"
+            }
+        },
+        "56": {
+            "english": {
+                "sentence": "the parseltongue"
+            },
+            "french": {
+                "sentence": "le fourchelang"
+            }
+        },
+        "57": {
+            "english": {
+                "sentence": "the polyjuice potion"
+            },
+            "french": {
+                "sentence": "la potion de polynectar"
+            }
+        },
+        "58": {
+            "english": {
+                "sentence": "the grim"
+            },
+            "french": {
+                "sentence": "le sinistros"
+            }
+        },
+        "59": {
+            "english": {
+                "sentence": "the time-turner"
+            },
+            "french": {
+                "sentence": "le retourneur de temps"
+            }
+        },
+        "60": {
+            "english": {
+                "sentence": "the quibbler"
+            },
+            "french": {
+                "sentence": "le chicaneur"
+            }
+        }
+    }
+}

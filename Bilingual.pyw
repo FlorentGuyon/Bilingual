@@ -1561,6 +1561,8 @@ class Bilingual(Tk):
         self.timer.action = lambda: self.validate_response(response_Stringvar.get())
         self.timer.start()
 
+        self.tell_text(self.question.sentence.capitalize(), SPOKEN_LANGUAGE)
+
     @log_calls
     def display_answer(self, response):
         # Configure page grid
@@ -1592,6 +1594,8 @@ class Bilingual(Tk):
         
         # VALIDATE BUTTON
         self.create_button(self.window_container, "arrow_right", "Next Question", self.display_questions, image_first=False, alone_in_row=False)
+
+        self.tell_text(self.question.answer.capitalize(), LEARNED_LANGUAGE)
     
     ##################################################################### OTHER
 
