@@ -1222,19 +1222,17 @@ class Bilingual(Tk):
         stars_image = Label(title_frame, image=image, style=label_style)
         stars_image.pack(padx=15, pady=5, side=LEFT)
     
-        frame_style = "Disabled.CustomDarkFrame.TFrame" if locked else "CustomMidFrame.TFrame"
+        frame_style = "Disabled.CustomDarkFrame.TFrame" if locked else "CustomLightFrame.TFrame"
         progressbar_frame = Frame(new_frame, style=frame_style)
         progressbar_frame.pack(expand=True, fill=X)
 
         self.update()
 
+        frame_style = "Disabled.CustomDarkFrame.TFrame" if locked else "CustomMidFrame.TFrame"
         progressbar_frame_left_width = new_frame.winfo_width() * progress
         progressbar_frame_left = Frame(progressbar_frame, height=5, width=progressbar_frame_left_width, style=frame_style)
         progressbar_frame_left.pack(side=LEFT)
-        
-        frame_style = "Disabled.CustomDarkFrame.TFrame" if locked else "CustomLightFrame.TFrame"
-        progressbar_frame_right = Frame(progressbar_frame, height=5, style=frame_style)
-        progressbar_frame_right.pack(expand=True, fill=X, side=LEFT)
+
 
         if action and not locked:
             self.bind_widget(new_frame, partial(self.click_button, action, arguments))
@@ -1425,21 +1423,8 @@ class Bilingual(Tk):
         self.set_window_title("Pick a category !")
         self.window_container.grid(column=1, row=1)
 
-        # Initialize variables
-        start_index = (current_page - 1) * item_by_page
-        end_index = (start_index + item_by_page) if (len(categories) >= (start_index + item_by_page)) else len(categories)
-
-
-        # Iterate through categories
-        for category in categories[start_index:end_index]:
-            self.create_progress_frame(parent=self.window_container, 
-                image=category.icon, 
-                text=category.uid, 
-                progress=category.progress, 
-                stars=category.stars, 
-                action=self.select_category, 
-                arguments=category,
-                locked=category.is_locked)
+        categories_frame = Frame(self.window_container)
+        categories_frame.pack(expand=True, fill=X)
 
         # RETURN BUTTON
         self.create_button(self.window_container, "arrow_left", "Languages", self.display_languages, arguments=1, sound=SOUND_PAGE_BACKWARDS, alone_in_row=(total_pages == 1))
@@ -1451,6 +1436,22 @@ class Bilingual(Tk):
         # NEXT BUTTON
         if current_page < total_pages:
             self.create_button(self.window_container, "next", "Next", self.display_categories, arguments=current_page +1, sound=SOUND_PAGE_FORWARDS, image_first=False, alone_in_row=False)
+
+        # Initialize variables
+        start_index = (current_page - 1) * item_by_page
+        end_index = (start_index + item_by_page) if (len(categories) >= (start_index + item_by_page)) else len(categories)
+
+        # Iterate through categories
+        for category in categories[start_index:end_index]:
+            self.create_progress_frame(parent=categories_frame, 
+                image=category.icon, 
+                text=category.uid, 
+                progress=category.progress, 
+                stars=category.stars, 
+                action=self.select_category, 
+                arguments=category,
+                locked=category.is_locked)
+
 
     # LESSONS
     @log_calls
