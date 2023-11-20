@@ -1,0 +1,215 @@
+{
+    "id": "bathroom-objects",
+    "name": {
+        "english": "The Bathroom Objects",
+        "french": "Les Objets De Salle De Bain"
+    },
+    "icon": "bathroom-objects",
+    "prerequisites": {
+        "objects":  {
+            "kitchen-objects": 1
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "the sink"
+            },
+            "french": {
+                "sentence": "le lavabo"
+            }
+        },
+        "1": {
+            "english": {
+                "sentence": "the bathtub"
+            },
+            "french": {
+                "sentence": "la baignoire"
+            }
+        },
+        "2": {
+            "english": {
+                "sentence": "the toilet"
+            },
+            "french": {
+                "sentence": "les toilettes"
+            }
+        },
+        "3": {
+            "english": {
+                "sentence": "the shower"
+            },
+            "french": {
+                "sentence": "la douche"
+            }
+        },
+        "4": {
+            "english": {
+                "sentence": "the mirror"
+            },
+            "french": {
+                "sentence": "le miroir"
+            }
+        },
+        "5": {
+            "english": {
+                "sentence": "the towel rack"
+            },
+            "french": {
+                "sentence": "le porte-serviettes"
+            }
+        },
+        "6": {
+            "english": {
+                "sentence": "the soap dispenser"
+            },
+            "french": {
+                "sentence": "le distributeur de savon"
+            }
+        },
+        "7": {
+            "english": {
+                "sentence": "the toothbrush holder"
+            },
+            "french": {
+                "sentence": "le porte-brosse à dents"
+            }
+        },
+        "8": {
+            "english": {
+                "sentence": "the bath mat"
+            },
+            "french": {
+                "sentence": "le tapis de bain"
+            }
+        },
+        "9": {
+            "english": {
+                "sentence": "the toilet paper holder"
+            },
+            "french": {
+                "sentence": "le porte-papier toilette"
+            }
+        },
+        "10": {
+            "english": {
+                "sentence": "the shower curtain"
+            },
+            "french": {
+                "sentence": "le rideau de douche"
+            }
+        },
+        "11": {
+            "english": {
+                "sentence": "the bathroom scales"
+            },
+            "french": {
+                "sentence": "la balance de salle de bain"
+            }
+        },
+        "12": {
+            "english": {
+                "sentence": "the hairdryer"
+            },
+            "french": {
+                "sentence": "le sèche-cheveux"
+            }
+        },
+        "13": {
+            "english": {
+                "sentence": "the toilet brush"
+            },
+            "french": {
+                "sentence": "la brosse de toilette"
+            }
+        },
+        "14": {
+            "english": {
+                "sentence": "the trash can"
+            },
+            "french": {
+                "sentence": "la poubelle"
+            }
+        },
+        "15": {
+            "english": {
+                "sentence": "the bathrobe"
+            },
+            "french": {
+                "sentence": "le peignoir"
+            }
+        },
+        "16": {
+            "english": {
+                "sentence": "the shampoo"
+            },
+            "french": {
+                "sentence": "le shampoing"
+            }
+        },
+        "17": {
+            "english": {
+                "sentence": "the hand soap"
+            },
+            "french": {
+                "sentence": "le savon pour les mains"
+            }
+        },
+        "18": {
+            "english": {
+                "sentence": "the toilet paper"
+            },
+            "french": {
+                "sentence": "le papier toilette"
+            }
+        },
+        "19": {
+            "english": {
+                "sentence": "the bath towel"
+            },
+            "french": {
+                "sentence": "la serviette de bain"
+            }
+        },
+        "20": {
+            "english": {
+                "sentence": "the bath salt"
+            },
+            "french": {
+                "sentence": "le sel de bain"
+            }
+        },
+        "21": {
+            "english": {
+                "sentence": "the dental floss"
+            },
+            "french": {
+                "sentence": "le fil dentaire"
+            }
+        },
+        "22": {
+            "english": {
+                "sentence": "the cotton swabs"
+            },
+            "french": {
+                "sentence": "les cotons-tiges"
+            }
+        },
+        "23": {
+            "english": {
+                "sentence": "the bath sponge"
+            },
+            "french": {
+                "sentence": "l'éponge de bain"
+            }
+        },
+        "24": {
+            "english": {
+                "sentence": "the razor"
+            },
+            "french": {
+                "sentence": "le rasoir"
+            }
+        }
+    }
+}

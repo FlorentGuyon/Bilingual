@@ -1,0 +1,159 @@
+{
+    "id": "bedroom-objects",
+    "name": {
+        "english": "The Bedroom Objects",
+        "french": "Les Objets De Chambre"
+    },
+    "icon": "bedroom-objects",
+    "prerequisites": {
+        "objects":  {
+            "desk-objects": 1
+        }
+    },
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "the bed"
+            },
+            "french": {
+                "sentence": "le lit"
+            }
+        },
+        "1": {
+            "english": {
+                "sentence": "the nightstand"
+            },
+            "french": {
+                "sentence": "la table de nuit"
+            }
+        },
+        "2": {
+            "english": {
+                "sentence": "the dresser"
+            },
+            "french": {
+                "sentence": "la commode"
+            }
+        },
+        "3": {
+            "english": {
+                "sentence": "the wardrobe"
+            },
+            "french": {
+                "sentence": "l'armoire"
+            }
+        },
+        "4": {
+            "english": {
+                "sentence": "the mattress"
+            },
+            "french": {
+                "sentence": "le matelas"
+            }
+        },
+        "5": {
+            "english": {
+                "sentence": "the pillows"
+            },
+            "french": {
+                "sentence": "les oreillers"
+            }
+        },
+        "6": {
+            "english": {
+                "sentence": "the blanket"
+            },
+            "french": {
+                "sentence": "la couverture"
+            }
+        },
+        "7": {
+            "english": {
+                "sentence": "the lamp"
+            },
+            "french": {
+                "sentence": "la lampe"
+            }
+        },
+        "8": {
+            "english": {
+                "sentence": "the alarm clock"
+            },
+            "french": {
+                "sentence": "le réveil"
+            }
+        },
+        "9": {
+            "english": {
+                "sentence": "the curtains"
+            },
+            "french": {
+                "sentence": "les rideaux"
+            }
+        },
+        "10": {
+            "english": {
+                "sentence": "the fan"
+            },
+            "french": {
+                "sentence": "le ventilateur"
+            }
+        },
+        "11": {
+            "english": {
+                "sentence": "the rug"
+            },
+            "french": {
+                "sentence": "le tapis"
+            }
+        },
+        "12": {
+            "english": {
+                "sentence": "the mirror"
+            },
+            "french": {
+                "sentence": "le miroir"
+            }
+        },
+        "13": {
+            "english": {
+                "sentence": "the desk"
+            },
+            "french": {
+                "sentence": "le bureau"
+            }
+        },
+        "14": {
+            "english": {
+                "sentence": "the chair"
+            },
+            "french": {
+                "sentence": "la chaise"
+            }
+        },
+        "15": {
+            "english": {
+                "sentence": "the closet"
+            },
+            "french": {
+                "sentence": "le placard"
+            }
+        },
+        "16": {
+            "english": {
+                "sentence": "the bedside rug"
+            },
+            "french": {
+                "sentence": "le tapis de chevet"
+            }
+        },
+        "17": {
+            "english": {
+                "sentence": "the hangers"
+            },
+            "french": {
+                "sentence": "les cintres"
+            }
+        }
+    }
+}
