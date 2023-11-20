@@ -6,6 +6,9 @@
     },
     "icon": "desk-objects",    
     "prerequisites": {
+        "objects":  {
+            "living-room-objects": 1
+        }
     },
     "questions": {
         "0": {

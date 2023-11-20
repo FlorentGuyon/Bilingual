@@ -1,0 +1,195 @@
+{
+    "id": "living-room-objects",
+    "name": {
+        "english": "The Living Room Objects",
+        "french": "Les Objets De Salon"
+    },
+    "icon": "living-room-objects",
+    "prerequisites": {},
+    "questions": {
+        "0": {
+            "english": {
+                "sentence": "the couch"
+            },
+            "french": {
+                "sentence": "le canapé"
+            }
+        },
+        "1": {
+            "english": {
+                "sentence": "the coffee table"
+            },
+            "french": {
+                "sentence": "la table basse"
+            }
+        },
+        "2": {
+            "english": {
+                "sentence": "the TV"
+            },
+            "french": {
+                "sentence": "la télévision"
+            }
+        },
+        "3": {
+            "english": {
+                "sentence": "the rug"
+            },
+            "french": {
+                "sentence": "le tapis"
+            }
+        },
+        "4": {
+            "english": {
+                "sentence": "the lamp"
+            },
+            "french": {
+                "sentence": "la lampe"
+            }
+        },
+        "5": {
+            "english": {
+                "sentence": "the sofa"
+            },
+            "french": {
+                "sentence": "le sofa"
+            }
+        },
+        "6": {
+            "english": {
+                "sentence": "the bookshelf"
+            },
+            "french": {
+                "sentence": "l'étagère"
+            }
+        },
+        "7": {
+            "english": {
+                "sentence": "the curtains"
+            },
+            "french": {
+                "sentence": "les rideaux"
+            }
+        },
+        "8": {
+            "english": {
+                "sentence": "the armchair"
+            },
+            "french": {
+                "sentence": "le fauteuil"
+            }
+        },
+        "9": {
+            "english": {
+                "sentence": "the side table"
+            },
+            "french": {
+                "sentence": "la table d'appoint"
+            }
+        },
+        "10": {
+            "english": {
+                "sentence": "the clock"
+            },
+            "french": {
+                "sentence": "l'horloge"
+            }
+        },
+        "11": {
+            "english": {
+                "sentence": "the picture frame"
+            },
+            "french": {
+                "sentence": "le cadre photo"
+            }
+        },
+        "12": {
+            "english": {
+                "sentence": "the remote control"
+            },
+            "french": {
+                "sentence": "la télécommande"
+            }
+        },
+        "13": {
+            "english": {
+                "sentence": "the throw pillows"
+            },
+            "french": {
+                "sentence": "les coussins"
+            }
+        },
+        "14": {
+            "english": {
+                "sentence": "the plant"
+            },
+            "french": {
+                "sentence": "la plante"
+            }
+        },
+        "15": {
+            "english": {
+                "sentence": "the fireplace"
+            },
+            "french": {
+                "sentence": "la cheminée"
+            }
+        },
+        "16": {
+            "english": {
+                "sentence": "the blanket"
+            },
+            "french": {
+                "sentence": "la couverture"
+            }
+        },
+        "17": {
+            "english": {
+                "sentence": "the fan"
+            },
+            "french": {
+                "sentence": "le ventilateur"
+            }
+        },
+        "18": {
+            "english": {
+                "sentence": "the mirror"
+            },
+            "french": {
+                "sentence": "le miroir"
+            }
+        },
+        "19": {
+            "english": {
+                "sentence": "the floor lamp"
+            },
+            "french": {
+                "sentence": "la lampe sur pied"
+            }
+        },
+        "20": {
+            "english": {
+                "sentence": "the throw blanket"
+            },
+            "french": {
+                "sentence": "la couverture"
+            }
+        },
+        "21": {
+            "english": {
+                "sentence": "the wall clock"
+            },
+            "french": {
+                "sentence": "l'horloge murale"
+            }
+        },
+        "22": {
+            "english": {
+                "sentence": "the rocking chair"
+            },
+            "french": {
+                "sentence": "la chaise à bascule"
+            }
+        }
+    }
+}
